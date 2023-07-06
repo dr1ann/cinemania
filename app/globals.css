@@ -21,7 +21,20 @@ body {
  
 } */
 .homepage {
-  background-size: cover;
-    background-image: linear-gradient(rgba(16, 16, 16, 0.4), rgba(16, 16, 16, 0.9)), url(https://image.tmdb.org/t/p/w1280/euFbK14mZe1lYOTiQF95tjyJlgL.jpg);
+ background: no-repeat;
+background-size: cover;
+
     background-position: center center;
+}
+
+body {
+  color: white;
+  background-color: #141414;
+}
+.fade-effect {
+  position: relative;
+    margin-top: -10rem;
+    height: 10rem;
+    background-image: linear-gradient(180deg,transparent,#141414);
+    z-index: 100;
 }
