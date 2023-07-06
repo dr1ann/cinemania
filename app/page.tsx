@@ -112,7 +112,7 @@ export default function Home() {
               }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 lg:mr-12 ">
-                <li className="text-white text-center">
+                <li className="text-white text-center font-bold">
                 <ScrollLink
   to="homepage"
   smooth={true}
@@ -123,7 +123,7 @@ export default function Home() {
   <a>Home</a>
 </ScrollLink>
                 </li>
-                <li className="text-white text-center ">
+                <li className="text-white text-center font-bold">
                 <ScrollLink
   to="aboutPage"
   smooth={true}
@@ -136,7 +136,7 @@ export default function Home() {
 </ScrollLink>
 
                 </li>
-                <li className="text-white text-center">
+                <li className="text-white text-center font-bold">
                 <ScrollLink
   to="projectsPage"
   smooth={true}
@@ -149,7 +149,7 @@ export default function Home() {
 </ScrollLink>
 
                 </li>
-                <li className="text-white text-center">
+                <li className="text-white text-center font-bold">
                 <ScrollLink
   to="contactPage"
   smooth={true}
