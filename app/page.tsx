@@ -1,8 +1,14 @@
 'use client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faGithub  } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image'
 import icon from './Images/icon.png'
 import star from './Images/star.png'
 import search from './Images/search.png'
+import nextjs from './Images/nextjs.png'
+import tailwind from './Images/tailwind.png'
+import popular from './Images/popular.png'
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
@@ -11,11 +17,16 @@ import { start } from 'repl';
 // Initialization for ES Users
 
 export default function Home() {
-  const [movies, setMovies] = useState<any[]>([]);
+  const [trendingmovies, setTrendingMovies] = useState<any[]>([]);
+  const [popularmovies, setPopularMovies] = useState<any[]>([]);
+  const [populartv, setPopulartv] = useState<any[]>([]);
+  const [trendingtv, setTrendingtv] = useState<any[]>([]);
   const [randomImage, setRandomImage] = useState<string>('');
   const [navbar, setNavbar] = useState(false);
+  const iconSize = "7x";
   useEffect(() => {
-    const options = {
+     // trending movies
+    const trendingmovies = {
       method: 'GET',
       headers: {
         accept: 'application/json',
@@ -24,14 +35,67 @@ export default function Home() {
     
     };
 
-    fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options)
+    fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingmovies)
       .then(response => response.json())
       .then(data => {
-        setMovies(data.results);
+        setTrendingMovies(data.results);
         generateRandomImage(data.results);
       })
       .catch(err => console.error(err));
+
+      //popular movies
+      const popularmovies = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
+        }
+      
+      };
+
+fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', popularmovies)
+.then(response => response.json())
+.then(data => {
+  setPopularMovies(data.results);
+
+})
+.catch(err => console.error(err));
+
+
+      // popular tv shows
+      const populartv = {method: 'GET', headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
+      }};
+
+fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv)
+.then(response => response.json())
+.then(data => {
+  setPopulartv(data.results);
+
+})
+.catch(err => console.error(err));
+
+//trending tv shows
+
+const trendingtv = {method: 'GET', headers: {
+  accept: 'application/json',
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
+}};
+
+fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
+.then(response => response.json())
+.then(data => {
+  setTrendingtv(data.results);
+
+})
+.catch(err => console.error(err));
+
+
+
   }, []);
+
+  console.log(trendingtv)
   const generateRandomImage = (movies: any[]) => {
     if (movies.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);
@@ -41,6 +105,8 @@ export default function Home() {
       setRandomImage(imageUrl);
     }
   };
+
+
 
 
   return (
@@ -167,21 +233,21 @@ export default function Home() {
         </div>
       </nav>
       </Headroom>
-      <div className='flex flex-col justify-center gap-2 items-center h-[100%] w-[60%] m-auto'>
+      <div className='flex flex-col justify-center gap-2 items-center h-[100%] w-[85%] sm:w-[70%] lg:w-[60%] 2xl:w-[50%] m-auto'>
         <Image
         src={icon}
         alt='home icon'
         width={600}
         height={100}
         />
-        <h2 className='text-[3rem] font-bold'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
+        <h2 className='text-center text-[3rem] font-bold'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
      
 <form className="flex items-center w-full">   
     <label className="sr-only">Search</label>
     <div className="relative w-full active">
        
-        <input type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="Search Movies, TV shows, People, etc..." required />
+        <input type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] input placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
+      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none " placeholder="Search Movies, TV shows, People, etc..." required />
     </div>
     <button type="submit" className="p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
         <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -194,11 +260,102 @@ export default function Home() {
         </div>
         </div>
         <div className='fade-effect'></div>
-      <h1 className='px-10 pt-10 text-3xl font-bold'>What's Trending?</h1>
+
+        <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'> Movies</h1>
+
+<h1 className='px-10 pt-10 text-2xl font-bold'>Popular</h1>
+
+<div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+
+{popularmovies.map(movie => (
+<div key={movie['id']}> 
+
+<div className='grid grid-cols-fit'>
+
+<div className='flex flex-col justify-center '>
+  <img
+  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+  src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
+  alt={movie['original_title']}
+
+
+  />
+ 
+    <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
+    <div className='flex  justify-between items-center py-[5px] '>
+     <div className=' flex flex-row items-center gap-2'>
+     <Image
+ className='h-[1rem] w-[1rem] object-contain'
+ src={star}
+ alt='home icon'
+ width={1}
+ height={100}
+
+  />
+   <p>{movie['vote_average'].toFixed(1)}</p>
+
+    </div>
+    <p>{new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
+
+    </div>
+    </div>     
+</div>
+</div>
+
+))
+
+}
+</div>
+ <h1 className='px-10 pt-10 text-2xl font-bold'>Trending</h1>
+
+<div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+
+{trendingmovies.map(movie => (
+<div key={movie['id']}> 
+
+<div className='grid grid-cols-fit'>
+
+<div className='flex flex-col justify-center '>
+  <img
+  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+  src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
+  alt={movie['original_title']}
+
+
+  />
+ 
+    <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
+    <div className='flex  justify-between items-center py-[5px] '>
+     <div className=' flex flex-row items-center gap-2'>
+     <Image
+ className='h-[1rem] w-[1rem] object-contain'
+ src={star}
+ alt='home icon'
+ width={1}
+ height={100}
+
+  />
+   <p>{movie['vote_average'].toFixed(1)}</p>
+
+    </div>
+    <p>{new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
+
+    </div>
+    </div>     
+</div>
+</div>
+
+))
+
+}
+</div>
+
+        <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'>TV Shows</h1>
+        <h1 className='px-10 pt-10 text-2xl font-bold'>Popular</h1>
       
       <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
     
-       {movies.map(movie => (
+       {populartv.map(movie => (
       <div key={movie['id']}> 
      
      <div className='grid grid-cols-fit'>
@@ -212,7 +369,7 @@ export default function Home() {
 
          />
         
-           <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
+           <p className='font-bold  mt-4 truncate '>{movie['original_name']}</p>
            <div className='flex  justify-between items-center py-[5px] '>
             <div className=' flex flex-row items-center gap-2'>
             <Image
@@ -226,7 +383,7 @@ export default function Home() {
           <p>{movie['vote_average'].toFixed(1)}</p>
 
            </div>
-           <p>{new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
+           <p>{new Date(movie['first_air_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
 
            </div>
            </div>     
@@ -237,6 +394,91 @@ export default function Home() {
        
        }
        </div>
+
+       <h1 className='px-10 pt-10 text-2xl font-bold'>Trending</h1>
+      
+      <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+    
+       {trendingtv.map(movie => (
+      <div key={movie['id']}> 
+     
+     <div className='grid grid-cols-fit'>
+
+    <div className='flex flex-col justify-center '>
+         <img
+         className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+         src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
+         alt={movie['original_title']}
+      
+
+         />
+        
+           <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
+           <div className='flex  justify-between items-center py-[5px] '>
+            <div className=' flex flex-row items-center gap-2'>
+            <Image
+        className='h-[1rem] w-[1rem] object-contain'
+        src={star}
+        alt='home icon'
+        width={1}
+        height={100}
+
+         />
+          <p>{movie['vote_average'].toFixed(1)}</p>
+
+           </div>
+           <p>{new Date(movie['first_air_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
+
+           </div>
+           </div>     
+   </div>
+      </div>
+
+       ))
+       
+       }
+       </div>
+       <footer className='p-14 flex flex-col justify-center items-center'>
+
+        <span>Copyright © 2023 Cinemania</span>
+        <div className=' flex flex-row justify-center items-center pt-6'>
+  <p className='text-white text-center text-[1rem]'>Created with 
+
+
+</p>
+<Image className='w-[30px] '
+ src={nextjs}
+      
+ alt="NEXT JS Icon"
+/>
+<Image className='w-[34px] '
+ src={tailwind}
+      
+ alt="NEXT JS Icon"
+/>
+<p className='text-white  text-[1rem]'>
+by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
+</p>
+    </div>
+    <div className='flex flex-row justify-center items-center pt-4'>
+<a href="https://web.facebook.com/jamesdenoy12/" target="_blank" rel="noopener noreferrer" className="icon-link" >
+  <FontAwesomeIcon icon={faFacebook} className="text-black m-2 text-xl animate-custom-bounce bg-gray-500 rounded-full p-2 "  />
+</a>
+
+    <a href="https://www.instagram.com/dr1annnnnnn/" target="_blank" rel="noopener noreferrer" className="icon-link" >
+    <FontAwesomeIcon icon={faInstagram} className="text-black m-2  text-[1.25rem] animate-custom-bounce  bg-gray-500  rounded-full p-2" />
+    </a>
+    <a href="https://github.com/dr1ann" target="_blank" rel="noopener noreferrer" className="icon-link"  >
+    <FontAwesomeIcon icon={faGithub} className="text-black m-2 text-xl animate-custom-bounce bg-gray-500  rounded-full p-2" />
+    </a>
+    <a href="mailto:jamesdenoy56@gmail.com" target="_blank" rel="noopener noreferrer" className="icon-link"  >
+    <FontAwesomeIcon icon={faEnvelope} className="text-black  text-[1.15rem] animate-custom-bounce  m-2 bg-gray-500 rounded-full p-2" />
+
+    </a>
+
+    </div>
+       </footer>
+      
     </div>
    
     

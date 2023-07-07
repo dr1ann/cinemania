@@ -20,6 +20,28 @@ body {
   color: rgb(var(--foreground-rgb));
  
 } */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  height: 0.5rem;
+  background: #e2b616;
+  transition: background-color 0.3s; /* Add transition property */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+
+}
+
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #e2b616; /* Set hover background color */
+}
+
+
 .homepage {
  background: no-repeat;
 background-size: cover;
@@ -30,6 +52,11 @@ background-size: cover;
 body {
   color: white;
   background-color: #141414;
+}
+.input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .fade-effect {
   position: relative;
