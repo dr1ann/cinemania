@@ -9,11 +9,14 @@ import search from './Images/search.png'
 import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import popular from './Images/popular.png'
+import { Suspense } from 'react'
+
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 
 import { start } from 'repl';
+import Loading from './loading,';
 // Initialization for ES Users
 
 export default function Home() {
@@ -113,9 +116,9 @@ fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
    
       <div >
          
+      
+       
         
-       
-       
       
          <div className=' h-screen homepage' style={{ backgroundImage: `linear-gradient(rgba(16, 16, 16, 0.4), rgba(16, 16, 16, 0.9)), url(${randomImage})` }}>
         <Headroom>
@@ -438,29 +441,29 @@ fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
        
        }
        </div>
-       <footer className='p-14 flex flex-col justify-center items-center'>
+       <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2'>
 
-        <span>Copyright © 2023 Cinemania</span>
-        <div className=' flex flex-row justify-center items-center pt-6'>
-  <p className='text-white text-center text-[1rem]'>Created with 
+        <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
+        <div className=' flex flex-row flex-wrap justify-center items-center'>
+  <p className='text-white text-center text-[0.9rem]'>Created with 
 
 
 </p>
-<Image className='w-[30px] '
+<Image className='w-[30px] object-contain'
  src={nextjs}
       
  alt="NEXT JS Icon"
 />
-<Image className='w-[34px] '
+<Image className='w-[34px] object-contain'
  src={tailwind}
       
  alt="NEXT JS Icon"
 />
-<p className='text-white  text-[1rem]'>
+<p className='text-white  text-[0.9rem] text-center'>
 by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 </p>
     </div>
-    <div className='flex flex-row justify-center items-center pt-4'>
+    <div className='flex flex-row justify-center items-center '>
 <a href="https://web.facebook.com/jamesdenoy12/" target="_blank" rel="noopener noreferrer" className="icon-link" >
   <FontAwesomeIcon icon={faFacebook} className="text-black m-2 text-xl animate-custom-bounce bg-gray-500 rounded-full p-2 "  />
 </a>
@@ -478,9 +481,10 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 
     </div>
        </footer>
-      
+
     </div>
    
     
   );
 }
+

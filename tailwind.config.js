@@ -19,6 +19,9 @@ module.exports = {
         // Complex site-specific row configuration
        
       },
+      screens: {
+        cpsize: '490px',
+      },
     },
   },
   plugins: [],
