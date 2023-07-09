@@ -4,13 +4,14 @@ import Image from 'next/image'
 import star from '../Images/star.png'
 
 
-
+import CardLoading from './CardLoading';
 
 
 const Popular = () => {
- 
+    const [isLoading, setIsLoading] = useState(true);
     const [popularmovies, setPopularMovies] = useState<any[]>([]);
     const [populartv, setPopulartv] = useState<any[]>([]);
+    
     useEffect(() => {
        //popular movies
        const popularmovies = {
@@ -26,7 +27,7 @@ fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', popula
 .then(response => response.json())
 .then(data => {
   setPopularMovies(data.results);
-
+  setIsLoading(false)
 })
 .catch(err => console.error(err));
 
@@ -87,7 +88,18 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
     
       </div>
       <div>
-        {selectedOption === 'Movies' && 
+      {isLoading &&  
+        
+        <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+
+{Array.from({ length: 21 }).map((_, index) => (
+  <CardLoading key={index} />
+))}
+    
+    </div> 
+    }
+
+  {selectedOption === 'Movies' && 
         <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
 
         {popularmovies.map(movie => (
@@ -95,7 +107,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
         
         <div className='grid grid-cols-fit'>
         
-        <div className='flex flex-col justify-center '>
+        <div className='flex flex-col justify-center  animate pop'>
           <img
           className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
@@ -139,7 +151,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
       
       <div className='grid grid-cols-fit'>
  
-     <div className='flex flex-col justify-center '>
+     <div className='flex flex-col justify-center  animate pop'>
           <img
           className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}

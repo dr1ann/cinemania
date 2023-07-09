@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect } from 'react';
 
 import Image from 'next/image'
 import star from '../Images/star.png'
-
+import CardLoading from './CardLoading';
 
 
 
@@ -11,6 +11,7 @@ const TopRated = () => {
  
     const [topratedmovies, setTopRatedMovies] = useState<any[]>([]);
     const [topratedtv, setTopRatedtv] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
        //top rated movies
        const topratedmovies = {
@@ -26,7 +27,7 @@ const TopRated = () => {
 .then(response => response.json())
 .then(data => {
     setTopRatedMovies(data.results);
-
+  setIsLoading(false)
 })
 .catch(err => console.error(err));
 
@@ -87,13 +88,24 @@ const TopRated = () => {
     
       </div>
       <div>
+
+      {isLoading &&  
+        
+        <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+
+{Array.from({ length: 21 }).map((_, index) => (
+  <CardLoading key={index} />
+))}
+    
+    </div> 
+    }
         {selectedOption === 'Movies' && 
         <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
 
         {topratedmovies.map(movie => (
         <div key={movie['id']}> 
         
-        <div className='grid grid-cols-fit'>
+        <div className='grid grid-cols-fit animate pop'>
         
         <div className='flex flex-col justify-center '>
           <img
@@ -137,7 +149,7 @@ const TopRated = () => {
         {topratedtv.map(movie => (
        <div key={movie['id']}> 
       
-      <div className='grid grid-cols-fit'>
+      <div className='grid grid-cols-fit animate pop'>
  
      <div className='flex flex-col justify-center '>
           <img
