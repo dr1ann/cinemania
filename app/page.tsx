@@ -10,25 +10,28 @@ import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import popular from './Images/popular.png'
 import { Suspense } from 'react'
-
+import Trending from './components/Trending';
+import Popular from './components/Popular';
+import TopRated from './components/TopRated';
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 
 import { start } from 'repl';
-import Loading from './loading,';
+
 // Initialization for ES Users
 
 export default function Home() {
   const [trendingmovies, setTrendingMovies] = useState<any[]>([]);
-  const [popularmovies, setPopularMovies] = useState<any[]>([]);
-  const [populartv, setPopulartv] = useState<any[]>([]);
-  const [trendingtv, setTrendingtv] = useState<any[]>([]);
+  const [intheaters, setInTheatersMovies] = useState<any[]>([]);
+  const [popularpeople, setPopularPeople] = useState<any[]>([]);
   const [randomImage, setRandomImage] = useState<string>('');
   const [navbar, setNavbar] = useState(false);
   const iconSize = "7x";
+
   useEffect(() => {
-     // trending movies
+
+//trending movies
     const trendingmovies = {
       method: 'GET',
       headers: {
@@ -37,17 +40,17 @@ export default function Home() {
       }
     
     };
-
+  
     fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingmovies)
       .then(response => response.json())
       .then(data => {
         setTrendingMovies(data.results);
-        generateRandomImage(data.results);
+        generateRandomImage(data.results)
       })
       .catch(err => console.error(err));
 
-      //popular movies
-      const popularmovies = {
+      //popular/top people
+      const popularpeople = {
         method: 'GET',
         headers: {
           accept: 'application/json',
@@ -55,50 +58,37 @@ export default function Home() {
         }
       
       };
+    
+      fetch('https://api.themoviedb.org/3/person/popular?language=en-US&page=1', popularpeople)
+        .then(response => response.json())
+        .then(data => {
+          setPopularPeople(data.results);
+         
+        })
+        .catch(err => console.error(err));
 
-fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', popularmovies)
-.then(response => response.json())
-.then(data => {
-  setPopularMovies(data.results);
+//trending movies
+const intheaters = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
+  }
 
-})
-.catch(err => console.error(err));
+};
 
-
-      // popular tv shows
-      const populartv = {method: 'GET', headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
-      }};
-
-fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv)
-.then(response => response.json())
-.then(data => {
-  setPopulartv(data.results);
-
-})
-.catch(err => console.error(err));
-
-//trending tv shows
-
-const trendingtv = {method: 'GET', headers: {
-  accept: 'application/json',
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
-}};
-
-fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
-.then(response => response.json())
-.then(data => {
-  setTrendingtv(data.results);
-
-})
-.catch(err => console.error(err));
-
-
+fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', intheaters)
+  .then(response => response.json())
+  .then(data => {
+    setInTheatersMovies(data.results);
+  
+  })
+  .catch(err => console.error(err));
 
   }, []);
 
-  console.log(trendingtv)
+
+  //generate random pics every reload for homepage
   const generateRandomImage = (movies: any[]) => {
     if (movies.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);
@@ -109,7 +99,7 @@ fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
     }
   };
 
-
+console.log(popularpeople)
 
 
   return (
@@ -264,13 +254,64 @@ fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
         </div>
         <div className='fade-effect'></div>
 
-        <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'> Movies</h1>
+        {/* <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'> Movies & TV Shows</h1> */}
 
-<h1 className='px-10 pt-10 text-2xl font-bold'>Popular</h1>
 
+
+
+ <h1 className='px-10 pt-10 text-2xl font-bold mb-6'>What's Trending Today?</h1>
+
+ <Trending />  
+
+ <h1 className='px-10 pt-10 text-2xl font-bold mb-6'>Popular</h1>
+
+ <Popular />    
+
+
+ <h1 className='px-10 pt-10 text-2xl font-bold mb-6'>Top Rated</h1>
+ <TopRated />    
+       {/* <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'>People</h1> */}
+        <h1 className='px-10 pt-10 text-2xl font-bold'>Top People</h1>
+      
+        <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+
+{popularpeople.map(movie => (
+<div key={movie['id']}> 
+
+<div className='grid grid-cols-fit'>
+
+<div className='flex flex-col justify-center '>
+  <img
+  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+  src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+  alt={movie['name']}
+
+
+  />
+ 
+    <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
+    <div className='flex  justify-between items-center py-[5px] '>
+     <div className=' flex flex-row items-center gap-2'>
+     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+   <p>{movie['popularity'].toFixed(1)}</p>
+
+    </div>
+    <p>{movie['known_for_department']}</p>
+
+    </div>
+    </div>     
+</div>
+</div>
+
+))
+
+}
+</div>
+
+<h1 className='px-10 pt-10 text-2xl font-bold'>In Theaters</h1>
 <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
 
-{popularmovies.map(movie => (
+{intheaters.map(movie => (
 <div key={movie['id']}> 
 
 <div className='grid grid-cols-fit'>
@@ -309,138 +350,6 @@ fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', trendingtv)
 
 }
 </div>
- <h1 className='px-10 pt-10 text-2xl font-bold'>Trending</h1>
-
-<div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
-
-{trendingmovies.map(movie => (
-<div key={movie['id']}> 
-
-<div className='grid grid-cols-fit'>
-
-<div className='flex flex-col justify-center '>
-  <img
-  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
-  src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
-  alt={movie['original_title']}
-
-
-  />
- 
-    <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
-    <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-2'>
-     <Image
- className='h-[1rem] w-[1rem] object-contain'
- src={star}
- alt='home icon'
- width={1}
- height={100}
-
-  />
-   <p>{movie['vote_average'].toFixed(1)}</p>
-
-    </div>
-    <p>{new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
-
-    </div>
-    </div>     
-</div>
-</div>
-
-))
-
-}
-</div>
-
-        <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'>TV Shows</h1>
-        <h1 className='px-10 pt-10 text-2xl font-bold'>Popular</h1>
-      
-      <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
-    
-       {populartv.map(movie => (
-      <div key={movie['id']}> 
-     
-     <div className='grid grid-cols-fit'>
-
-    <div className='flex flex-col justify-center '>
-         <img
-         className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
-         src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
-         alt={movie['original_title']}
-      
-
-         />
-        
-           <p className='font-bold  mt-4 truncate '>{movie['original_name']}</p>
-           <div className='flex  justify-between items-center py-[5px] '>
-            <div className=' flex flex-row items-center gap-2'>
-            <Image
-        className='h-[1rem] w-[1rem] object-contain'
-        src={star}
-        alt='home icon'
-        width={1}
-        height={100}
-
-         />
-          <p>{movie['vote_average'].toFixed(1)}</p>
-
-           </div>
-           <p>{new Date(movie['first_air_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
-
-           </div>
-           </div>     
-   </div>
-      </div>
-
-       ))
-       
-       }
-       </div>
-
-       <h1 className='px-10 pt-10 text-2xl font-bold'>Trending</h1>
-      
-      <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
-    
-       {trendingtv.map(movie => (
-      <div key={movie['id']}> 
-     
-     <div className='grid grid-cols-fit'>
-
-    <div className='flex flex-col justify-center '>
-         <img
-         className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
-         src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
-         alt={movie['original_title']}
-      
-
-         />
-        
-           <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
-           <div className='flex  justify-between items-center py-[5px] '>
-            <div className=' flex flex-row items-center gap-2'>
-            <Image
-        className='h-[1rem] w-[1rem] object-contain'
-        src={star}
-        alt='home icon'
-        width={1}
-        height={100}
-
-         />
-          <p>{movie['vote_average'].toFixed(1)}</p>
-
-           </div>
-           <p>{new Date(movie['first_air_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
-
-           </div>
-           </div>     
-   </div>
-      </div>
-
-       ))
-       
-       }
-       </div>
        <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2'>
 
         <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
@@ -487,4 +396,5 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
     
   );
 }
+
 

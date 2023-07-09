@@ -22,6 +22,9 @@ module.exports = {
       screens: {
         cpsize: '490px',
       },
+      boxShadow: {
+        '3xl': '0 0 14px 4px rgba(0, 0, 0, 1)',
+      },
     },
   },
   plugins: [],
