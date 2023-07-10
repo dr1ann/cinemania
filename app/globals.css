@@ -86,7 +86,7 @@ input[type="radio"] {
 
 #radiolabel {
   cursor: pointer;
-  padding: 3.3px 10.5px;
+  padding: 4px 11px;
   border-radius: 0.75rem;
 }
 

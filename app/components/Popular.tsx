@@ -56,7 +56,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
   return (
     <div className='selector '>
 
-      <div className='inline-flex items-center border-2 border-white ml-[2.5rem]   justify-start gap-2 rounded-xl'>
+      <div className='inline-flex items-center border-2 border-[#e2b616] ml-[2.5rem]   justify-start gap-2 rounded-xl'>
        
       <div className='selector-item '>
       <label id='radiolabel' className={selectedOption === 'Movies' ? 'active1' : ''}>
