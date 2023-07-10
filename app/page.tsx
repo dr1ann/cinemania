@@ -13,7 +13,7 @@ import popular from './Images/popular.png'
 import { Suspense } from 'react'
 import Trending from './components/Trending';
 import Popular from './components/Popular';
-
+import HomeLaoding from './components/HomeLoading';
 import TopRated from './components/TopRated';
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
@@ -34,9 +34,25 @@ export default function Home() {
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isHomeLoading, setIsHomeLoading] = useState(true);
-  const iconSize = "7x";
+  const [color, setColor] = useState(false)
+
+
+  //change color of header when scrolled
+  const changeColor = () => {
+    if(window.scrollY) {
+      setColor(true)
+    } else {
+      setColor(false)
+    }
+  }
+
+  
+
 
   useEffect(() => {
+
+    //trigger scroll effect when window is scrolled
+    window.addEventListener('scroll', changeColor)
 
 //trending movies
     const trendingmovies = {
@@ -107,7 +123,7 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', in
     }
   };
 
-console.log(popularpeople)
+
 
 
   return (
@@ -116,22 +132,13 @@ console.log(popularpeople)
          
       {isHomeLoading ?
 
-<div className='flex items-center justify-center h-screen '>
-<Image
-  className='animate-spin'
-    src={dotbar}
-    width={400}
-    height={400}
-    alt="Picture of the author"
-   
-  />
-</div>
+<  HomeLaoding/>
 
       :
       <div className=' h-screen homepage home-animate pop' style={{ backgroundImage: `linear-gradient(rgba(16, 16, 16, 0.4), rgba(16, 16, 16, 0.9)), url(${randomImage})` }}>
       <Headroom>
-      <nav className="w-full bg-transparent py-4" >
-      <div className="justify-between  z-30 px-4 md:items-center md:flex md:px-8  ">
+      <nav className={color ? 'new-bg' : 'myHeader'} >
+      <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
         <div>
           <div className="flex items-center justify-between   md:block" >
             <div className='flex flex-row'>
@@ -270,6 +277,15 @@ className="cursor-pointer animate-wiggle"
 
       </div>
       </div>
+
+
+
+
+
+
+
+
+
       }
        
         
