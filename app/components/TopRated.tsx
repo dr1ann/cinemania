@@ -32,7 +32,7 @@ const TopRated = () => {
 .catch(err => console.error(err));
 
 
-      // popular tv shows
+      // top rated tv shows
       const topratedtv = {method: 'GET', headers: {
         accept: 'application/json',
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
@@ -47,6 +47,7 @@ const TopRated = () => {
 .catch(err => console.error(err));
       }, []);
 
+      //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Movies');
 
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {

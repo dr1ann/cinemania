@@ -52,7 +52,7 @@ const Trending = () => {
 
         
       }, []);
-
+    //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Movies');
 
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {

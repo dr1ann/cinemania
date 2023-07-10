@@ -46,7 +46,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
 })
 .catch(err => console.error(err));
       }, []);
-
+    //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Movies');
 
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
