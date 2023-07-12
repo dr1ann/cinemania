@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
-
+import loadingbar from './Images/loading-11.gif'
 import icon from './Images/icon.png'
 import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
@@ -18,7 +18,7 @@ export default function Page() {
 
   const [navbar, setNavbar] = useState(false);
   const [color, setColor] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(true)
 
   //change color of header when scrolled
   const changeColor = () => {
@@ -44,7 +44,7 @@ export default function Page() {
         );
         const data = await response.json();
         setMovieDetails(data);
-      
+          
       } catch (error) {
         console.error(error);
       }
@@ -61,7 +61,7 @@ export default function Page() {
         );
         const data = await response.json();
         setMovieVid(data);
-       
+       setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -104,12 +104,28 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
-    <body>
+    
       
-   
+     <body>
+      
+      {isLoading ?
+           <div className='h-screen movdbg flex flex-col justify-center items-center'  >
+      
+             <Image className=' w-[35%] object-contain'
+        src={loadingbar}
+        alt='laoding bar'
+        width={1}
+        height={1}
+        
+        />
+       <p className='text-[1.5rem] sm:text-[3rem] text-center ml-4'>Loading...</p>
+       
+         </div>
+         :
+
  
-  <div className='movdetpic relative' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
-  <div className="fade-effect3"></div>
+  <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
+
   <div className="fade-effect2"></div>
     <div className="fade-effect1"></div>
 <Headroom>
@@ -278,9 +294,9 @@ className="cursor-pointer animate-wiggle"
 
 </div>
     </div>
-     
-   
-    </body>
+ 
+  }
+       </body>     
     
   );
 }
