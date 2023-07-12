@@ -5,6 +5,9 @@ const nextConfig = {
     unoptimized: true,
     domains: ["image.tmdb.org"],
   },
+  experimental: {
+    appDir: true
+  },
 };
 
 module.exports = nextConfig;

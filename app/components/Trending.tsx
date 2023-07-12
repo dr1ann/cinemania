@@ -3,14 +3,15 @@ import { useState, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image'
 import star from '../Images/star.png'
 import CardLoading from './CardLoading';
+import Router from 'next/navigation';
+import Link from 'next/link';
+import Movies from 'moviestmdb/lib/Classes/Movies';
 
-
-
-const Trending = () => {
+export default function Trending() {
     const [trendingmovies, setTrendingMovies] = useState<any[]>([]);
     const [trendingtv, setTrendingtv] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-
+  
     useEffect(() => {
         // trending movies
         const trendingmovies = {
@@ -58,6 +59,7 @@ const Trending = () => {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
+  console.log(trendingmovies)
 
   return (
     <div className='selector '>
@@ -115,7 +117,13 @@ const Trending = () => {
         
         <div className='flex flex-col justify-center  animate pop'>
        
-  
+          <Link
+           href={{
+            pathname: `/components/moviedetails`,
+            query: movie, // the data
+          }}
+       
+          >
           <img
           className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
           src={  `https://image.tmdb.org/t/p/original${movie['poster_path']}`}
@@ -123,7 +131,7 @@ const Trending = () => {
         
         
           />
-         
+         </Link>
             <p className='font-bold  mt-4 truncate '>{ movie['original_title'] }</p>
             <div className='flex  justify-between items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-2'>
@@ -214,4 +222,3 @@ const Trending = () => {
   );
 };
 
-export default Trending;

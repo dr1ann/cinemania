@@ -127,7 +127,9 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', in
 
 
   return (
-   
+   <body>
+    
+  
       <div >
          
       {isHomeLoading ?
@@ -455,7 +457,7 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
        </footer>
 
     </div>
-   
+    </body>
     
   );
 }
