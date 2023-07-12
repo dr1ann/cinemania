@@ -109,8 +109,9 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
    
  
   <div className='movdetpic relative' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
-
-    <div className="fade-effect1 md:hidden"></div>
+  <div className="fade-effect3"></div>
+  <div className="fade-effect2"></div>
+    <div className="fade-effect1"></div>
 <Headroom>
       <nav className={color ? 'new-bg' : 'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
@@ -232,7 +233,7 @@ className="cursor-pointer animate-wiggle"
 
 
   
-<div className='flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[10rem] md:h-full md:max-w-[50%] md:pt-0'>
+<div className='flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[10rem] md:h-full md:max-w-[50%] md:pt-0 z-10'>
 
     <img className=' object-contain w-[70%] flex self-center md:self-start px-2 z-10' 
       src={logoImage}
@@ -242,9 +243,9 @@ className="cursor-pointer animate-wiggle"
 
   
     
-<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] 2xl:text-[2.5rem] px-4 md:px-0'>{movieDetails.original_title}</h1>
+<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] 2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
-  <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] 2xl:text-[1.2rem]'>
+  <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] 2xl:text-[1.2rem] z-10'>
 <p className=''>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 <span className=''>│ {separtedNames} </span>
 <span>│ {time_convert(movieDetails.runtime)}</span>
@@ -252,7 +253,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 
-<div className='flex flex-row flex-wrap items-center mt-2 px-4 md:px-0'>
+<div className='flex flex-row flex-wrap items-center mt-2 px-4 md:px-0 z-10'>
 <Image
          className=' w-[6rem] object-contain 2xl:w-[8rem]'
          src={tmdbicon}
@@ -273,7 +274,7 @@ className="cursor-pointer animate-wiggle"
 <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]'> ▷ Random Trailer</button>
 </div>
 
-<p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full'>{movieDetails.overview}</p>
+<p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
 
 </div>
     </div>

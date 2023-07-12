@@ -68,9 +68,17 @@ body {
 }
 .fade-effect1 {
   position: absolute;
-    bottom: 0;
+    bottom: -2px;
     height: 3rem;
     background-image: linear-gradient(180deg,transparent,#141414);
+   z-index: 1;
+    width: 100%;
+}
+.fade-effect2 {
+  position: absolute;
+    top: 0;
+    height: 7rem;
+    background-image: linear-gradient(180deg,#141414, transparent);
    z-index: .5;
     width: 100%;
 }
