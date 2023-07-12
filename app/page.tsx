@@ -146,10 +146,11 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', in
         <div>
           <div className="flex items-center justify-between   md:block" >
             <div className='flex flex-row'>
-          <Image
+            <Image
+            className='w-[6.25rem] h-full md:w-[11.25rem] object-contain'
     src={icon}
-    width={180}
-    height={100}
+    width={1}
+    height={1}
     alt="Picture of the author"
    
   />
@@ -264,7 +265,7 @@ className="cursor-pointer animate-wiggle"
       />
       <h2 className='text-center text-[3rem] font-bold'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
    
-<form className="flex items-center w-full">   
+<form className="flex items-center w-full z-10">   
   <label className="sr-only">Search</label>
   <div className="relative w-full active">
      
@@ -295,7 +296,7 @@ className="cursor-pointer animate-wiggle"
         
       
        
-        <div className='fade-effect'></div>
+    
 
         {/* <h1 className='px-10 pt-10 text-[2.75rem] text-center font-bold'> Movies & TV Shows</h1> */}
 
