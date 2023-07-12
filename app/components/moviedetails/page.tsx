@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 
-import icon from '/cinemania/app/Images/icon.png';
-import star from '/cinemania/app/Images/star.png';
-import tmdbicon from '/cinemania/app/Images/tmdb.png';
+import icon from './Images/icon.png'
+import star from './Images/star.png';
+import tmdbicon from './Images/tmdb.png';
+
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 export default function Page() {
