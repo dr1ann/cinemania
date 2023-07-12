@@ -129,7 +129,7 @@ console.log(movieSoc)
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
     
-      <div>
+      <body>
    
       
       {isLoading ?
@@ -146,12 +146,13 @@ console.log(movieSoc)
        
          </div>
          :
-
+<div>
  
   <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
  <div className="fade-effectcp md:hidden"></div>
   <div className="fade-effect2 hidden md:block"></div>
-    <div className="fade-effect1 md:hidden"></div>
+    <div className="fade-effect1"></div>
+    <div className="fade-effect3 hidden md:block"></div>
 <Headroom>
       <nav className={color ? 'new-bg' : 'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
@@ -273,7 +274,10 @@ className="cursor-pointer animate-wiggle"
 
 
   
-<div className='flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[10rem] md:h-full md:max-w-[50%] md:pt-0 z-10'>
+
+    </div>
+   
+    <div className='flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 
     <img className=' object-contain w-[70%] flex self-center md:self-start px-2 z-10' 
       src={logoImage}
@@ -319,7 +323,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 
-<div className='flex flex-row flex-wrap gap-6 px-4 items-center justify-start mx-auto py-2 border-2 border-[#e2b616] w-[80%]'>
+<div className='flex flex-row flex-wrap gap-6 px-4 items-center justify-start mx-auto py-2 border-2 border-[#e2b616] w-[80%] z-20'>
   
   <div className='flex flex-col items-start'>
     <p>Status</p>
@@ -362,7 +366,7 @@ className="cursor-pointer animate-wiggle"
 
 
 
-<footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2'>
+<footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20'>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
 <div className=' flex flex-row flex-wrap justify-center items-center'>
@@ -403,11 +407,9 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 </div>
 </footer>
     </div>
- 
   }
   
         
-       </div>
+       </body>
   );
 }
-
