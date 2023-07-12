@@ -1,4 +1,7 @@
 'use client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faGithub  } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
@@ -6,7 +9,8 @@ import loadingbar from './Images/loading-11.gif'
 import icon from './Images/icon.png'
 import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
-
+import nextjs from './Images/nextjs.png'
+import tailwind from './Images/tailwind.png'
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 export default function Page() {
@@ -15,7 +19,7 @@ export default function Page() {
   const [movieDetails, setMovieDetails] = useState<any>({});
   const [movieVid, setMovieVid] = useState<any>({});
   const [movielogo, setmovieLogo] = useState<any>({});
-
+  const [movieSoc, setMovieSoc] = useState<any>({});
   const [navbar, setNavbar] = useState(false);
   const [color, setColor] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -84,9 +88,29 @@ export default function Page() {
       }
     };
 
+    const movieSocMed = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/external_ids`,
+          {
+            headers: {
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+            },
+          }
+        );
+        const data = await response.json();
+        setMovieSoc(data);
+       
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
     fetchMovieDetails();
     fetchMovieVid();
     movieLogo();
+    movieSocMed();
   }, [searchParams]);
   console.log(movieDetails)
 
@@ -100,13 +124,13 @@ export default function Page() {
 const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
-
+console.log(movieSoc)
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
     
-      
-     <body>
+      <div>
+   
       
       {isLoading ?
            <div className='h-screen movdbg flex flex-col justify-center items-center'  >
@@ -118,16 +142,16 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
         height={1}
         
         />
-       <p className='text-[1.5rem] sm:text-[3rem] text-center ml-4'>Loading...</p>
+    
        
          </div>
          :
 
  
   <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
-
-  <div className="fade-effect2"></div>
-    <div className="fade-effect1"></div>
+ <div className="fade-effectcp md:hidden"></div>
+  <div className="fade-effect2 hidden md:block"></div>
+    <div className="fade-effect1 md:hidden"></div>
 <Headroom>
       <nav className={color ? 'new-bg' : 'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
@@ -293,11 +317,97 @@ className="cursor-pointer animate-wiggle"
 <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
 
 </div>
+
+
+<div className='flex flex-row flex-wrap gap-6 px-4 items-center justify-start mx-auto py-2 border-2 border-[#e2b616] w-[80%]'>
+  
+  <div className='flex flex-col items-start'>
+    <p>Status</p>
+    <span>{movieDetails.status}</span>
+
+  </div>
+  <div className='flex flex-col items-start'>
+  <p>Release Date</p>
+    <span>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+    </div>
+
+   
+
+    <div className='flex flex-col items-start'>
+  <p>Budget</p>
+    <span>{movieDetails.budget && '$' + movieDetails.budget.toLocaleString()}</span>
+    </div>
+
+    <div className='flex flex-col items-start'>
+  <p>Revenue</p>
+    <span>{movieDetails.revenue && '$' + movieDetails.revenue.toLocaleString()}</span>
+    </div>
+
+    <div className='flex flex-col items-start'>
+  <p>Popularity</p>
+    <span>{movieDetails.popularity && movieDetails.popularity.toFixed(1)}</span>
+    </div>
+
+    <div className='flex flex-col items-start'>
+  <p>Vote Count</p>
+    <span>{movieDetails.vote_count && movieDetails.vote_count.toLocaleString()}</span>
+    </div>
+    <div className='flex flex-row justify-end items-end float-right'>
+<a href={`https://facebook.com/${movieSoc}`}>asd</a>
+<a href={`https://facebook.com/${movieSoc}`}>asasdad</a>
+</div>
+</div>
+
+
+
+
+
+<footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2'>
+
+<span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
+<div className=' flex flex-row flex-wrap justify-center items-center'>
+<p className='text-white text-center text-[0.9rem]'>Created with 
+
+
+</p>
+<Image className='w-[30px] object-contain'
+src={nextjs}
+
+alt="NEXT JS Icon"
+/>
+<Image className='w-[34px] object-contain'
+src={tailwind}
+
+alt="NEXT JS Icon"
+/>
+<p className='text-white  text-[0.9rem] text-center'>
+by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
+</p>
+</div>
+<div className='flex flex-row justify-center items-center '>
+<a href="https://web.facebook.com/jamesdenoy12/" target="_blank" rel="noopener noreferrer" className="icon-link" >
+<FontAwesomeIcon icon={faFacebook} className="text-black m-2 text-xl animate-custom-bounce bg-gray-500 rounded-full p-2 "  />
+</a>
+
+<a href="https://www.instagram.com/dr1annnnnnn/" target="_blank" rel="noopener noreferrer" className="icon-link" >
+<FontAwesomeIcon icon={faInstagram} className="text-black m-2  text-[1.25rem] animate-custom-bounce  bg-gray-500  rounded-full p-2" />
+</a>
+<a href="https://github.com/dr1ann" target="_blank" rel="noopener noreferrer" className="icon-link"  >
+<FontAwesomeIcon icon={faGithub} className="text-black m-2 text-xl animate-custom-bounce bg-gray-500  rounded-full p-2" />
+</a>
+<a href="mailto:jamesdenoy56@gmail.com" target="_blank" rel="noopener noreferrer" className="icon-link"  >
+<FontAwesomeIcon icon={faEnvelope} className="text-black  text-[1.15rem] animate-custom-bounce  m-2 bg-gray-500 rounded-full p-2" />
+
+</a>
+
+</div>
+</footer>
     </div>
  
   }
-       </body>     
-    
+  
+        
+       </div>
   );
 }
 

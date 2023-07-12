@@ -14,7 +14,7 @@ export default function Loading() {
         height={1}
         
         />
-       <p className='text-[1.5rem] sm:text-[3rem] text-center ml-4'>Loading...</p>
+     
        
          </div>
     )
