@@ -1,6 +1,6 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faGithub  } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faGithub, faTwitter  } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -112,7 +112,7 @@ export default function Page() {
     movieLogo();
     movieSocMed();
   }, [searchParams]);
-  console.log(movieDetails)
+
 
   function time_convert(num: number)
  { 
@@ -125,6 +125,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
 console.log(movieSoc)
+
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
@@ -322,43 +323,66 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 
-
-<div className='flex flex-row flex-wrap gap-6 px-4 items-center justify-start mx-auto py-2 border-2 border-[#e2b616] w-[80%] z-20'>
+<div className='px-4'>
+<div className='flex flex-row flex-wrap gap-6 px-6 items-center movdet justify-center mx-auto py-2 shadow-3xl shadow-[#e2b616] rounded-xl w-fit z-20'>
   
-  <div className='flex flex-col items-start'>
-    <p>Status</p>
+  <div className='flex flex-col items-center'>
+    <p className='text-gray-400'>Status</p>
     <span>{movieDetails.status}</span>
 
   </div>
-  <div className='flex flex-col items-start'>
-  <p>Release Date</p>
+  <div className='flex flex-col items-center'>
+  <p className='text-gray-400'>Release Date</p>
     <span>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
     </div>
 
    
 
-    <div className='flex flex-col items-start'>
-  <p>Budget</p>
+    <div className='flex flex-col items-center'>
+  <p className='text-gray-400'>Budget</p>
     <span>{movieDetails.budget && '$' + movieDetails.budget.toLocaleString()}</span>
     </div>
 
-    <div className='flex flex-col items-start'>
-  <p>Revenue</p>
+    <div className='flex flex-col items-center'>
+  <p className='text-gray-400'>Revenue</p>
     <span>{movieDetails.revenue && '$' + movieDetails.revenue.toLocaleString()}</span>
     </div>
 
-    <div className='flex flex-col items-start'>
-  <p>Popularity</p>
+    <div className='flex flex-col items-center'>
+  <p className='text-gray-400'>Popularity</p>
     <span>{movieDetails.popularity && movieDetails.popularity.toFixed(1)}</span>
     </div>
 
-    <div className='flex flex-col items-start'>
-  <p>Vote Count</p>
+    <div className='flex flex-col items-center '>
+  <p className='text-gray-400'>Vote Count</p>
     <span>{movieDetails.vote_count && movieDetails.vote_count.toLocaleString()}</span>
     </div>
-    <div className='flex flex-row justify-end items-end float-right'>
-<a href={`https://facebook.com/${movieSoc}`}>asd</a>
-<a href={`https://facebook.com/${movieSoc}`}>asasdad</a>
+   
+    <div className='flex flex-row justify-center items-center gap-6 cpsize1:ml-4  flex-wrap'>
+      
+
+{movieSoc.facebook_id ?
+  <a href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer">
+<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.75rem]  "  />
+  </a>
+:
+''
+}
+{movieSoc.instagram_id ?
+  <a href={`https://instagram.com/${movieSoc.instagram_id}` } target="_blank" rel="noopener noreferrer">
+<FontAwesomeIcon icon={faInstagram} className="text-white text-[1.75rem]  "  />
+  </a>
+:
+''
+}
+{movieSoc.twitter_id ?
+  <a href={`https://twitter.com/${movieSoc.twitter_id}` } target="_blank" rel="noopener noreferrer">
+<FontAwesomeIcon icon={faTwitter} className="text-white text-[1.75rem]  "  />
+  </a>
+:
+''
+}
+</div>
 </div>
 </div>
 
