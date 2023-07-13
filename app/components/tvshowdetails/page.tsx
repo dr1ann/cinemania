@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
-export default function page() {
+export default function Page() {
     const [tvDetails, SetTvDetails] = useState<any>({});
     useEffect(() => {
         const tvDet = async () => {
