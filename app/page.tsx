@@ -39,7 +39,7 @@ export default function Home() {
 
   //change color of header when scrolled
   const changeColor = () => {
-    if(window.scrollY) {
+    if(window.scrollY >= 63.25) {
       setColor(true)
     } else {
       setColor(false)
@@ -256,14 +256,14 @@ className="cursor-pointer animate-wiggle"
       </div>
     </nav>
     </Headroom>
-    <div className='flex flex-col justify-center gap-2 items-center h-[100%] w-[85%] sm:w-[70%] lg:w-[60%] 2xl:w-[50%] m-auto'>
+    <div className='flex flex-col justify-center gap-2 items-center h-full w-[85%] sm:w-[70%] lg:w-[60%] 2xl:w-[50%] m-auto'>
       <Image
       src={icon}
       alt='home icon'
       width={600}
       height={100}
       />
-      <h2 className='text-center text-[2.5rem] sm:text-[3rem] newfont'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
+      <h2 className='text-center text-[3rem] newfont'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
    
 <form className="flex items-center w-full z-10">   
   <label className="sr-only">Search</label>

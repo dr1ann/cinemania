@@ -13,7 +13,9 @@ import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
-export default function Page() {
+import Modal   from './Modal';
+
+const Page = () => {
 
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
@@ -23,7 +25,7 @@ export default function Page() {
   const [navbar, setNavbar] = useState(false);
   const [color, setColor] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-
+  const [isOpen, setIsOpen] = useState(false)
   //change color of header when scrolled
   const changeColor = () => {
     if(window.scrollY) {
@@ -272,6 +274,7 @@ className="cursor-pointer animate-wiggle"
     </Headroom>
    
 
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} />
 
 
   
@@ -280,7 +283,7 @@ className="cursor-pointer animate-wiggle"
    
     <div className='home-animate pop flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 
-    <Image className=' object-contain w-[70%] flex self-center md:self-start px-2 z-10' 
+    <Image className=' w-[70%] flex self-center md:self-start px-2 z-10' 
       src={logoImage}
       alt='image'
             width={1}
@@ -317,8 +320,10 @@ className="cursor-pointer animate-wiggle"
         
           />
 <p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
-<button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]'> ▷ Random Trailer</button>
+<button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
 </div>
+
+
 
 <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
 
@@ -455,3 +460,4 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
        </body>
   );
 }
+export default Page;
