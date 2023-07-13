@@ -137,7 +137,7 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', in
 <  HomeLaoding/>
 
       :
-      <div className=' h-screen homepage home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414), url(${randomImage})` }}>
+      <div className=' h-screen homepage home-animate pop relative' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414), url(${randomImage})` }}>
          <div className="fade-effect2"></div>
     <div className="fade-effect"></div>
       <Headroom>
