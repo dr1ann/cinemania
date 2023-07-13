@@ -323,65 +323,71 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 
-<div className='px-4'>
-<div className='flex flex-row flex-wrap gap-6 px-6 items-center movdet justify-center mx-auto py-2 shadow-3xl shadow-[#e2b616] rounded-xl w-fit z-20'>
+<div className='px-4 '>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 shadow-3xl shadow-[#e2b616] rounded-xl w-fit z-20'>
   
-  <div className='flex flex-col items-center'>
-    <p className='text-gray-400'>Status</p>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <p className='text-gray-400 '>Status</p>
     <span>{movieDetails.status}</span>
 
   </div>
-  <div className='flex flex-col items-center'>
-  <p className='text-gray-400'>Release Date</p>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <p className='text-gray-400 '>Release Date</p>
     <span>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
     </div>
 
    
 
-    <div className='flex flex-col items-center'>
-  <p className='text-gray-400'>Budget</p>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <p className='text-gray-400 '>Budget</p>
     <span>{movieDetails.budget && '$' + movieDetails.budget.toLocaleString()}</span>
     </div>
 
-    <div className='flex flex-col items-center'>
-  <p className='text-gray-400'>Revenue</p>
-    <span>{movieDetails.revenue && '$' + movieDetails.revenue.toLocaleString()}</span>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <p className='text-gray-400 '>Revenue</p>
+    <span>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '$' + "0"}</span>
     </div>
 
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400'>Popularity</p>
     <span>{movieDetails.popularity && movieDetails.popularity.toFixed(1)}</span>
     </div>
 
-    <div className='flex flex-col items-center '>
-  <p className='text-gray-400'>Vote Count</p>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <p className='text-gray-400 '>Vote Count</p>
     <span>{movieDetails.vote_count && movieDetails.vote_count.toLocaleString()}</span>
     </div>
    
-    <div className='flex flex-row justify-center items-center gap-6 cpsize1:ml-4  flex-wrap'>
-      
+
+   <div className='md:hidden flex items-center justify-center text-[0.85rem]'>
+    <p>Discover More ➠</p>
+   </div>
+   
+    <div className='flex flex-row justify-center items-center gap-6  md:w-full'>
+    <p className='hidden md:block 2xl:text-[1.5rem]'>Discover More ➨</p>
 
 {movieSoc.facebook_id ?
   <a href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.75rem]  "  />
+<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem]"  />
   </a>
 :
 ''
 }
 {movieSoc.instagram_id ?
   <a href={`https://instagram.com/${movieSoc.instagram_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faInstagram} className="text-white text-[1.75rem]  "  />
+<FontAwesomeIcon icon={faInstagram} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem]"  />
   </a>
 :
 ''
 }
 {movieSoc.twitter_id ?
   <a href={`https://twitter.com/${movieSoc.twitter_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faTwitter} className="text-white text-[1.75rem]  "  />
+<FontAwesomeIcon icon={faTwitter} className="text-white text-[1.5rem] md:text-[1.75rem] 2xl:text-[2rem]"  />
   </a>
 :
 ''
 }
+
 </div>
 </div>
 </div>
