@@ -162,10 +162,12 @@ input[type="radio"] {
 
 .new-bg {
   background-color: #141414;
+  z-index: 999;
 }
 
 .myHeader {
   background-color: transparent;
+  z-index: 999;
 }
 
 .movdetpic {

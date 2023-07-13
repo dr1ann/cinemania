@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect } from 'react';
 
 import Image from 'next/image'
 import star from '../Images/star.png'
-
+import Link from 'next/link';
 
 import CardLoading from './CardLoading';
 
@@ -108,15 +108,27 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
         <div className='grid grid-cols-fit'>
         
         <div className='flex flex-col justify-center  animate pop'>
-          <img
-          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+        <Link
+           href={{
+            pathname: `/components/moviedetails`,
+            query: movie, // the data
+          }} >
+          <Image
+          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
           alt={movie['original_title']}
-        
+          width={1}
+          height={1}
         
           />
-         
-            <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
+            </Link>
+            <Link
+           href={{
+            pathname: `/components/moviedetails`,
+            query: movie, // the data
+          }} >
+            <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
+         </Link>
             <div className='flex  justify-between items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-2'>
              <Image
@@ -152,11 +164,12 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
       <div className='grid grid-cols-fit'>
  
      <div className='flex flex-col justify-center  animate pop'>
-          <img
-          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+          <Image
+          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
           alt={movie['original_title']}
-       
+          width={1}
+          height={1}
  
           />
          

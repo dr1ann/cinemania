@@ -335,11 +335,12 @@ className="cursor-pointer animate-wiggle"
 <div className='grid grid-cols-fit'>
 
 <div className='flex flex-col justify-center animate pop'>
-  <img
-  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+  <Image
+  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
   src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
   alt={movie['name']}
-
+  width={1}
+  height={1}
 
   />
  
@@ -384,11 +385,12 @@ className="cursor-pointer animate-wiggle"
 <div className='grid grid-cols-fit'>
 
 <div className='flex flex-col justify-center animate pop'>
-  <img
-  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-500 hover:scale-110 hover:z-10'
+  <Image
+  className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
   src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
   alt={movie['original_title']}
-
+  width={1}
+  height={1}
 
   />
  

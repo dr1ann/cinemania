@@ -125,7 +125,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
 console.log(movieSoc)
-
+console.log(movieDetails)
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
@@ -278,12 +278,13 @@ className="cursor-pointer animate-wiggle"
 
     </div>
    
-    <div className='flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
+    <div className='home-animate pop flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 
-    <img className=' object-contain w-[70%] flex self-center md:self-start px-2 z-10' 
+    <Image className=' object-contain w-[70%] flex self-center md:self-start px-2 z-10' 
       src={logoImage}
       alt='image'
-   
+            width={1}
+            height={1}
     />
 
   
@@ -340,7 +341,7 @@ className="cursor-pointer animate-wiggle"
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Budget</p>
-    <span>{movieDetails.budget && '$' + movieDetails.budget.toLocaleString()}</span>
+  <span>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '$' + "0"}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
@@ -358,13 +359,20 @@ className="cursor-pointer animate-wiggle"
     <span>{movieDetails.vote_count && movieDetails.vote_count.toLocaleString()}</span>
     </div>
    
-
+    {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
    <div className='md:hidden flex items-center justify-center text-[0.85rem]'>
     <p>Discover More ➠</p>
    </div>
-   
+
+   :
+   ''
+}
+{movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
     <div className='flex flex-row justify-center items-center gap-6  md:w-full'>
-    <p className='hidden md:block 2xl:text-[1.5rem]'>Discover More ➨</p>
+ 
+ <p className='hidden md:block 2xl:text-[1.5rem]'>Discover More ➨</p>
+
+   
 
 {movieSoc.facebook_id ?
   <a href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer">
@@ -389,7 +397,11 @@ className="cursor-pointer animate-wiggle"
 }
 
 </div>
+:
+''
+}
 </div>
+
 </div>
 
 
