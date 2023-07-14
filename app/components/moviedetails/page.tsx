@@ -336,7 +336,7 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 
-<div className='px-4 '>
+<div className='px-4 home-animate pop'>
 <div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 shadow-3xl shadow-[#e2b616] rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
@@ -420,7 +420,7 @@ className="cursor-pointer animate-wiggle"
 
 
 
-<footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20'>
+<footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
 <div className=' flex flex-row flex-wrap justify-center items-center'>
