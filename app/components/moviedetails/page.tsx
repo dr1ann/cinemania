@@ -26,6 +26,7 @@ const Page = () => {
   const [color, setColor] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
+  const [currmovieID, setcurMovieID] = useState<any>({})
   //change color of header when scrolled
   const changeColor = () => {
     if(window.scrollY) {
@@ -34,10 +35,12 @@ const Page = () => {
       setColor(false)
     }
   }
+ 
+
 
   useEffect(() => {
     window.addEventListener('scroll', changeColor)
-
+    setcurMovieID(searchParams.get('id'))
     const fetchMovieDetails = async () => {
       try {
         const response = await fetch(
@@ -126,8 +129,11 @@ const Page = () => {
 const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
-console.log(movieSoc)
-console.log(movieDetails)
+ 
+
+
+console.log(movieVid)
+
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
@@ -274,7 +280,7 @@ className="cursor-pointer animate-wiggle"
     </Headroom>
    
 
-    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} />
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
 
 
   

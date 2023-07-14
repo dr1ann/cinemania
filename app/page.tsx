@@ -256,7 +256,7 @@ className="cursor-pointer animate-wiggle"
       </div>
     </nav>
     </Headroom>
-    <div className='flex flex-col justify-center gap-2 items-center h-full w-[85%] sm:w-[70%] lg:w-[60%] 2xl:w-[50%] m-auto'>
+    <div className='flex flex-col justify-center gap-2 items-center h-full w-[85%] sm:w-[70%] lg:w-[60%] 2xl:w-[50%] absolute top-[30px] right-0 left-0 bottom-0 mx-auto'>
       <Image
       src={icon}
       alt='home icon'
