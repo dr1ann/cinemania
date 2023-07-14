@@ -9,6 +9,7 @@ import loadingbar from './Images/loading-11.gif'
 import icon from './Images/icon.png'
 import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
+import blackscreen from './Images/black-screen.png';
 import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
@@ -157,7 +158,7 @@ console.log(movieVid)
          :
 <div>
  
-  <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
+  <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage || blackscreen })` }}>
  <div className="fade-effectcp md:hidden"></div>
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>
@@ -289,22 +290,41 @@ className="cursor-pointer animate-wiggle"
     </div>
    
     <div className='home-animate pop flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
-
-    <Image className=' w-[70%] flex self-center md:self-start px-2 z-10' 
-      src={logoImage}
-      alt='image'
-            width={1}
-            height={1}
-    />
+{logoImage ? 
+ <Image className=' w-[70%] flex self-center md:self-start px-2 z-10' 
+ src={logoImage}
+ alt='image'
+       width={1}
+       height={1}
+/>
+: 
+''
+}
+   
 
   
-    
+   
 <h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] 2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
   <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] 2xl:text-[1.2rem] z-10'>
-<p className=''>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-<span className=''>│ {separtedNames} </span>
-<span>│ {time_convert(movieDetails.runtime)}</span>
+    {movieDetails['release_date'] ?
+  <p className=''>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+  :
+  ''
+  }
+
+ {separtedNames ?
+  <span className=''>│ {separtedNames} </span>
+  :
+  ''
+  }
+   {movieDetails.runtime?
+ <span>│ {time_convert(movieDetails.runtime)}</span>
+  :
+  ''
+  }
+
+
 </div>
 </div>
 
@@ -318,6 +338,7 @@ className="cursor-pointer animate-wiggle"
          height={100}
         
           />
+      
 <Image
          className='h-[1rem] w-[1rem] 2xl:w-[1.5rem] 2xl:h-[1.5rem] object-contain'
          src={star}
@@ -326,13 +347,29 @@ className="cursor-pointer animate-wiggle"
          height={100}
         
           />
-<p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
-<button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
+          {movieDetails.vote_average
+          
+          ?
+          <p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          :
+          <p className='mr-4 2xl:text-[1.2rem]'>N/A</p>
+          }
+
+         {movieVid ?
+        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
+        :
+        <p className='px-2 text-[0.85rem] 2xl:text-[1.2rem]'> No Trailer Available</p>
+        }
+
 </div>
 
+{movieDetails.overview ?
+  <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
+  :
+  <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
+}
 
 
-<p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
 
 </div>
 
@@ -341,12 +378,12 @@ className="cursor-pointer animate-wiggle"
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
     <p className='text-gray-400 '>Status</p>
-    <span>{movieDetails.status}</span>
+    <span>{movieDetails.status || 'TBA'} </span>
 
   </div>
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Release Date</p>
-    <span>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+    <span>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'TBA'}</span>
     </div>
 
    
@@ -363,12 +400,12 @@ className="cursor-pointer animate-wiggle"
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400'>Popularity</p>
-    <span>{movieDetails.popularity && movieDetails.popularity.toFixed(1)}</span>
+    <span>{movieDetails.popularity ? movieDetails.popularity.toFixed(1) : 'N/A'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Vote Count</p>
-    <span>{movieDetails.vote_count && movieDetails.vote_count.toLocaleString()}</span>
+    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
     </div>
    
     {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
