@@ -47,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({ isVisible, onClose, getMovieID }) => {
     <div>
       {isVisible && isLoading && movieVid !== null ? (
         <div className='h-screen w-full bg-opacity-25 z-[100000] backdrop-blur-sm fixed mx-auto flex justify-center items-center'>
-          <div className='flex items-center justify-center relative px-2 h-[50%] w-full sm:w-[80%] sm:h-[55%] md:w-[70%] md:h-[60%] lg:w-[55%] lg:h-[65%] mb-[3.8rem] overflow-x-hidden '>
+          <div className='flex items-center justify-center relative mx-4 sm:mx-0 h-[50%] w-full sm:w-[80%] sm:h-[55%] md:w-[70%] md:h-[60%] lg:w-[55%] lg:h-[65%] overflow-x-hidden '>
             <button
               className='absolute top-0 text-[0.75rem] rounded-full bg-gray-800 w-fit h-fit px-2 py-[2px] right-0 z-[9999999] mx-auto'
               onClick={onClose}
@@ -58,6 +58,7 @@ const Modal: React.FC<ModalProps> = ({ isVisible, onClose, getMovieID }) => {
               src={movieVid}
               className='object-contain responsive-iframe w-full h-full'
               allowFullScreen
+              
             />
           </div>
         </div>

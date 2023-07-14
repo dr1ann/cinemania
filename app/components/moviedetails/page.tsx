@@ -162,6 +162,7 @@ console.log(movieVid)
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
 <Headroom>
       <nav className={color ? 'new-bg' : 'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
@@ -280,7 +281,7 @@ className="cursor-pointer animate-wiggle"
     </Headroom>
    
 
-    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
+    
 
 
   
