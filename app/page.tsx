@@ -420,7 +420,7 @@ className="cursor-pointer animate-wiggle"
 }
 </div>
   }
-       <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2'>
+       <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 px-2'>
 
         <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
         <div className=' flex flex-row flex-wrap justify-center items-center'>
