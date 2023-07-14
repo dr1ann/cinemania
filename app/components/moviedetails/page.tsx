@@ -10,13 +10,23 @@ import icon from './Images/icon.png'
 import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
 import blackscreen from './Images/black-screen.png';
+import noprofile from './Images/noprofile.png';
 import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 import Modal   from './Modal';
-
-const Page = () => {
+import CardLoading from '../CardLoading';
+type MovieCredits = {
+  cast_id: number;
+ character: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  known_for_department: string;
+  // Add other properties if necessary
+};
+const Page = (movie: MovieCredits) => {
 
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
@@ -28,6 +38,8 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
   const [currmovieID, setcurMovieID] = useState<any>({})
+  const [credits, setCredits] = useState<any>({})
+  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
   //change color of header when scrolled
   const changeColor = () => {
     if(window.scrollY) {
@@ -36,7 +48,7 @@ const Page = () => {
       setColor(false)
     }
   }
- 
+
 
 
   useEffect(() => {
@@ -112,11 +124,33 @@ const Page = () => {
       }
     };
 
+    const movieCredits = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/credits?language=en-US`,
+          {
+            headers: {
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+            },
+          }
+        );
+        const data = await response.json();
+        setCredits(data);
+        setIsPeopleLoading(false)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
 
     fetchMovieDetails();
     fetchMovieVid();
     movieLogo();
     movieSocMed();
+    movieCredits();
+
+  
   }, [searchParams]);
 
 
@@ -133,8 +167,8 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
  
 
 
-console.log(movieVid)
-
+console.log(credits)
+console.log(movieDetails)
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
@@ -352,7 +386,7 @@ className="cursor-pointer animate-wiggle"
           ?
           <p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
-          <p className='mr-4 2xl:text-[1.2rem]'>N/A</p>
+          <p className='mr-4 2xl:text-[1.2rem]'>0</p>
           }
 
          {movieVid ?
@@ -405,7 +439,7 @@ className="cursor-pointer animate-wiggle"
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Vote Count</p>
-    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
+    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : '0'}</span>
     </div>
    
     {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
@@ -449,10 +483,73 @@ className="cursor-pointer animate-wiggle"
 :
 ''
 }
-</div>
 
 </div>
 
+</div>
+{isPeopleLoading ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+
+   {Array.from({ length: 21 }).map((_, index) => (
+     <CardLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
+    <div>
+    <h1 className='px-10 pt-10 text-2xl font-bold mb-6'>Top Billed Cast</h1>
+    <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+
+{credits && credits.cast.map((movie: MovieCredits) => (
+
+<div key={movie['cast_id']}> 
+
+<div className='grid grid-cols-fit'>
+
+<div className='flex flex-col justify-center animate pop'>
+  {movie['profile_path'] ?
+    <Image
+    className='w-full h-full cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+    src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+    alt={movie['original_name']}
+    width={1}
+    height={1}
+  
+    />
+
+    :
+    <Image
+    className='w-full h-[304.47px]  cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+    src={noprofile}
+    alt={movie['original_name']}
+    width={1}
+    height={1}
+  
+    />
+  }
+
+ 
+    <p className='font-bold  mt-4 truncate '>{movie['original_name']}</p>
+    <div className='flex  justify-between items-center py-[5px] '>
+     <div className=' flex flex-row items-center gap-2'>
+     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+   <p>{movie['popularity'].toFixed(1)}</p>
+
+    </div>
+    <p>{movie['known_for_department']}</p>
+
+    </div>
+    </div>     
+</div>
+</div>
+
+))
+
+}
+</div>
+</div>
+    }
 
 
 
