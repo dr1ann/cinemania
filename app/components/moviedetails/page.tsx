@@ -26,7 +26,7 @@ type MovieCredits = {
   known_for_department: string;
   // Add other properties if necessary
 };
-const Page = (movie: MovieCredits) => {
+const Page = () => {
 
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
@@ -534,7 +534,13 @@ className="cursor-pointer animate-wiggle"
     <div className='flex  justify-between items-center py-[5px] '>
      <div className=' flex flex-row items-center gap-2'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-   <p>{movie['popularity'].toFixed(1)}</p>
+     {movie['popularity'] ?
+        <p>{movie['popularity'].toFixed(1)}</p>
+
+        :
+        '0'
+     }
+
 
     </div>
     <p>{movie['known_for_department']}</p>
