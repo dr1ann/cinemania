@@ -18,12 +18,14 @@ import Headroom from 'react-headroom';
 import Modal   from './Modal';
 import CardLoading from '../CardLoading';
 type MovieCredits = {
+  id?: number;
   cast_id: number;
  character: string;
   original_name: string;
   popularity: number;
   profile_path: string;
   known_for_department: string;
+  job?: string;
   // Add other properties if necessary
 };
 const Page = () => {
@@ -167,8 +169,28 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
  
 
 
+
+// const ew = credits && credits.crew && credits.crew.map((movie: MovieCredits) => {
+//   return movie.job && (movie.job === 'Director' && movie.job === 'Writer' && movie.job === 'Producer') ? movie : null;
+// });
+
+// console.log(ew);
+
+
+const importantCrewMembers = credits && credits.crew && credits.crew.filter((movie:MovieCredits) => {
+  return (
+    movie.job === 'Director' || 
+     movie.job === 'Writer' ||
+      movie.job === 'Producer'
+   
+  )
+  
+});
+
 console.log(credits)
-console.log(movieDetails)
+
+
+
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
@@ -386,11 +408,11 @@ className="cursor-pointer animate-wiggle"
           ?
           <p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
-          <p className='mr-4 2xl:text-[1.2rem]'>0</p>
+          <p className='mr-4 2xl:text-[1.2rem]'>N/A</p>
           }
 
          {movieVid ?
-        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] pb-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
+        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] pb-[2px] pt-[1px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
         :
         <p className='px-2 text-[0.85rem] 2xl:text-[1.2rem]'> No Trailer Available</p>
         }
@@ -412,34 +434,34 @@ className="cursor-pointer animate-wiggle"
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
     <p className='text-gray-400 '>Status</p>
-    <span>{movieDetails.status || 'TBA'} </span>
+    <span>{movieDetails.status || 'N/A'} </span>
 
   </div>
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Release Date</p>
-    <span>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'TBA'}</span>
+    <span>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'N/A'}</span>
     </div>
 
    
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Budget</p>
-  <span>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '$' + "0"}</span>
+  <span>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '-'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Revenue</p>
-    <span>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '$' + "0"}</span>
+    <span>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '-'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400'>Popularity</p>
-    <span>{movieDetails.popularity ? movieDetails.popularity.toFixed(1) : 'N/A'}</span>
+    <span>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') : 'N/A'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
   <p className='text-gray-400 '>Vote Count</p>
-    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : '0'}</span>
+    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
     </div>
    
     {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
@@ -498,12 +520,12 @@ className="cursor-pointer animate-wiggle"
        
     :
     <div>
-    <h1 className='px-10 pt-10 text-[1.875rem] font-bold '>Cast</h1>
+    <h1 className='px-10 pt-10 text-2xl  sm:text-[1.875rem] font-bold '>Cast</h1>
     <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
 
-{credits && credits.cast.map((movie: MovieCredits) => (
+    {credits && credits.cast.map((movie: MovieCredits) => (
 
-<div key={movie['cast_id']}> 
+<div key={movie['id']}> 
 
 <div className='grid grid-cols-fit'>
 
@@ -547,7 +569,7 @@ className="cursor-pointer animate-wiggle"
      <div className=' flex flex-row items-center gap-2'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
      {movie['popularity'] ?
-        <p>{movie['popularity'].toFixed(1)}</p>
+       <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
 
         :
         '0'
@@ -555,7 +577,7 @@ className="cursor-pointer animate-wiggle"
 
 
     </div>
-    <p>{movie['known_for_department']}</p>
+    <p className='text-[0.9rem]'>{movie['known_for_department']}</p>
 
     </div>
     </div>     
@@ -565,11 +587,99 @@ className="cursor-pointer animate-wiggle"
 ))
 
 }
+
+
 </div>
 </div>
+
+
     }
 
 
+{isPeopleLoading ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-10 gap-10 '>
+
+   {Array.from({ length: 21 }).map((_, index) => (
+     <CardLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
+    <div>
+    <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
+    <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
+
+{importantCrewMembers.map((movie: MovieCredits) => (
+
+
+<div key={movie['id']}> 
+
+<div className='grid grid-cols-fit'>
+
+<div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
+  {movie['profile_path'] ?
+
+<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<Image
+  src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+  alt={movie['original_name']}
+  width={1}
+  height={1}
+  layout="responsive"
+  
+/>
+</div>
+
+  
+    :
+    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <Image
+      src={noprofile}
+      alt={movie['original_name']}
+      width={1}
+      height={1}
+      layout="responsive"
+      
+    />
+    </div>
+  }
+
+ 
+    <p className='font-bold  mt-4 truncate '>{movie['original_name'] || 'N/A'}</p>
+   
+
+    <div className='flex  justify-between items-center py-[5px] '>
+     <div className=' flex flex-row items-center gap-2'>
+     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+     {movie['popularity'] ?
+        <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
+
+        :
+        '0'
+     }
+
+
+    </div>
+    <p className='text-[0.9rem]'>{movie['job']}</p>
+
+    </div>
+    </div>     
+</div>
+</div>
+
+
+
+))
+
+}
+
+
+</div>
+</div>
+
+
+    }
 
 
 <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
