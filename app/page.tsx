@@ -263,7 +263,7 @@ className="cursor-pointer animate-wiggle"
       width={600}
       height={100}
       />
-      <h2 className='text-center text-[3rem] newfont'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
+      <h2 className='text-center text-[2.7rem] md:text-[3.2rem] newfont'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
    
 <form className="flex items-center w-full z-10">   
   <label className="sr-only">Search</label>

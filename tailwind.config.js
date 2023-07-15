@@ -15,6 +15,7 @@ module.exports = {
       gridTemplateColumns: {
         // Simple 8 row grid
         'fit': 'repeat(auto-fit, minmax(200px, 1fr))',
+        'fit1': 'repeat(auto-fit, minmax(150px, 1fr))',
         'cp': 'repeat(2, minmax(0, 1fr))'
         // Complex site-specific row configuration
        

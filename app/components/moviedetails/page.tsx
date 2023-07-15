@@ -390,7 +390,7 @@ className="cursor-pointer animate-wiggle"
           }
 
          {movieVid ?
-        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] py-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
+        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] pb-[2px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
         :
         <p className='px-2 text-[0.85rem] 2xl:text-[1.2rem]'> No Trailer Available</p>
         }
@@ -488,7 +488,7 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 {isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-10 gap-10 '>
 
    {Array.from({ length: 21 }).map((_, index) => (
      <CardLoading key={index} />
@@ -498,8 +498,8 @@ className="cursor-pointer animate-wiggle"
        
     :
     <div>
-    <h1 className='px-10 pt-10 text-2xl font-bold mb-6'>Top Billed Cast</h1>
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+    <h1 className='px-10 pt-10 text-[1.875rem] font-bold '>Cast</h1>
+    <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
 
 {credits && credits.cast.map((movie: MovieCredits) => (
 
@@ -507,30 +507,42 @@ className="cursor-pointer animate-wiggle"
 
 <div className='grid grid-cols-fit'>
 
-<div className='flex flex-col justify-center animate pop'>
+<div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
   {movie['profile_path'] ?
-    <Image
-    className='w-full h-full cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-    src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
-    alt={movie['original_name']}
-    width={1}
-    height={1}
-  
-    />
 
-    :
-    <Image
-    className='w-full h-[304.47px]  cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-    src={noprofile}
-    alt={movie['original_name']}
-    width={1}
-    height={1}
+<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<Image
+  src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+  alt={movie['original_name']}
+  width={1}
+  height={1}
+  layout="responsive"
   
+/>
+</div>
+
+  
+    :
+    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <Image
+      src={noprofile}
+      alt={movie['original_name']}
+      width={1}
+      height={1}
+      layout="responsive"
+      
     />
+    </div>
   }
 
  
-    <p className='font-bold  mt-4 truncate '>{movie['original_name']}</p>
+    <p className='font-bold  mt-4 truncate '>{movie['original_name'] || 'N/A'}</p>
+    {movie.character ?
+        <p className='text-[0.813rem] text-gray-300'>{movie['character']}</p> 
+        :
+        <p className='text-[0.813rem]'>N/A</p> 
+  }
+
     <div className='flex  justify-between items-center py-[5px] '>
      <div className=' flex flex-row items-center gap-2'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
