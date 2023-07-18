@@ -17,6 +17,7 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 import Modal   from './Modal';
 import CardLoading from '../CardLoading';
+import Balancer from 'react-wrap-balancer'
 type MovieCredits = {
   id?: number;
   cast_id: number;
@@ -28,6 +29,15 @@ type MovieCredits = {
   job?: string;
   // Add other properties if necessary
 };
+type movieCollection = {
+  id: number;
+  name: string;
+  original_title: string;
+  poster_path: string;
+  release_date: string;
+  vote_average: number;
+  overview: string;
+}
 const Page = () => {
 
   const searchParams = useSearchParams();
@@ -41,6 +51,8 @@ const Page = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [currmovieID, setcurMovieID] = useState<any>({})
   const [credits, setCredits] = useState<any>({})
+  const [collection, setCollection] = useState<any>({})
+  const [collectionID, setCollectionID] = useState<any>({})
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
   //change color of header when scrolled
   const changeColor = () => {
@@ -68,10 +80,12 @@ const Page = () => {
         );
         const data = await response.json();
         setMovieDetails(data);
-          
+         setCollectionID (data.belongs_to_collection ? data.belongs_to_collection.id : null) ;
       } catch (error) {
         console.error(error);
       }
+
+      
     };
     const fetchMovieVid = async () => {
       try {
@@ -144,17 +158,43 @@ const Page = () => {
       }
     };
 
+  
 
 
-    fetchMovieDetails();
+
+ 
     fetchMovieVid();
     movieLogo();
     movieSocMed();
     movieCredits();
+    fetchMovieDetails();
+   
+    const movieCollection = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/collection/${movieDetails.belongs_to_collection ? movieDetails.belongs_to_collection.id : 'yawa'}`,
+          {
+            headers: {
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+            },
+          }
+        );
+        const data = await response.json();
+        setCollection(data);
+      
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (collectionID) {
+      movieCollection();
+    }
 
+    
+  }, [searchParams, collectionID]);
+
+ 
   
-  }, [searchParams]);
-
 
   function time_convert(num: number)
  { 
@@ -167,8 +207,8 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
  
-
-
+ 
+  console.log(collection)
 
 // const ew = credits && credits.crew && credits.crew.map((movie: MovieCredits) => {
 //   return movie.job && (movie.job === 'Director' && movie.job === 'Writer' && movie.job === 'Producer') ? movie : null;
@@ -187,7 +227,7 @@ const importantCrewMembers = credits && credits.crew && credits.crew.filter((mov
   
 });
 
-console.log(credits)
+
 
 
 
@@ -420,9 +460,9 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 {movieDetails.overview ?
-  <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
+  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
   :
-  <p className='text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
+  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
 }
 
 
@@ -521,13 +561,13 @@ className="cursor-pointer animate-wiggle"
     :
     <div>
     <h1 className='px-10 pt-10 text-2xl  sm:text-[1.875rem] font-bold '>Cast</h1>
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
+    <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
     {credits && credits.cast.map((movie: MovieCredits) => (
 
 <div key={movie['id']}> 
 
-<div className='grid grid-cols-fit'>
+
 
 <div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
   {movie['profile_path'] ?
@@ -582,7 +622,7 @@ className="cursor-pointer animate-wiggle"
     </div>
     </div>     
 </div>
-</div>
+
 
 ))
 
@@ -608,14 +648,13 @@ className="cursor-pointer animate-wiggle"
     :
     <div>
     <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
+    <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
 {importantCrewMembers.map((movie: MovieCredits) => (
 
 
 <div key={movie['id']}> 
 
-<div className='grid grid-cols-fit'>
 
 <div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
   {movie['profile_path'] ?
@@ -666,7 +705,7 @@ className="cursor-pointer animate-wiggle"
     </div>
     </div>     
 </div>
-</div>
+
 
 
 
@@ -680,8 +719,76 @@ className="cursor-pointer animate-wiggle"
 
 
     }
+    
+<div className="flex flex-col gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16">
+  <div className='flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
+   <Image
+      className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+          src={`https://image.tmdb.org/t/p/original${collection['poster_path']}`}
+          alt='asa22'
+          width={1}
+          height={1}
+        
+          />
+    <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
+    
+<h1 className='font-bold text-[2rem]'>{collection.name}</h1>
+<p className='text-[1.1rem]  text-gray-300'>➠ {collection.overview}</p>
+
+</div>
+</div>
+<div className='flex flex-row overflow-x-scroll  sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] sm:mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  items-center lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
+     
+    {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
+      <div key={movie['id']} className='mx-auto '> 
 
 
+        
+       
+<div className='flex flex-col justify-center   animate pop  max-w-[11rem] min-w-[11rem]'>
+       
+       <div>
+        
+          <Image
+      className='max-w-[11rem] min-w-[11rem]  max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+          src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
+          alt={movie['original_title']}
+          width={1}
+          height={1}
+        
+          />
+       
+       </div>
+
+         
+            <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
+       
+            <div className='flex  justify-between items-center py-[5px] '>
+             <div className=' flex flex-row items-center gap-2'>
+             <Image
+         className='h-[1rem] w-[1rem] object-contain'
+         src={star}
+         alt='home icon'
+         width={1}
+         height={100}
+        
+          />
+           <p>{movie['vote_average'].toFixed(1).replace(/\.0$/, '')}</p>
+        
+            </div>
+            <p>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+        
+            </div>
+            </div>     
+
+        </div>
+
+
+))
+
+}
+</div>
+</div>
 <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
