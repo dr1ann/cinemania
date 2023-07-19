@@ -737,7 +737,7 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 </div>
-<div className='flex flex-row overflow-x-scroll  sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] sm:mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  items-center lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
+<div className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet  sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  items-center lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
      
     {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
       <div key={movie['id']} className='mx-auto '> 
@@ -745,12 +745,12 @@ className="cursor-pointer animate-wiggle"
 
         
        
-<div className='flex flex-col justify-center   animate pop  max-w-[11rem] min-w-[11rem]'>
+<div className='flex flex-col  justify-center   animate pop min-w-[9rem] max-w-[9rem] tabletcollectionscreen:min-w-[8rem] tabletcollectionscreen:max-w-[8rem] sm:min-w-[11rem] sm:max-w-[11rem]'>
        
-       <div>
+      
         
           <Image
-      className='max-w-[11rem] min-w-[11rem]  max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+      className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
           alt={movie['original_title']}
           width={1}
@@ -758,11 +758,11 @@ className="cursor-pointer animate-wiggle"
         
           />
        
-       </div>
+     
 
          
-            <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
-       
+            <p className='font-bold   mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
+          
             <div className='flex  justify-between items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-2'>
              <Image

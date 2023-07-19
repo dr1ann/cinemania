@@ -17,6 +17,8 @@ module.exports = {
         'fit': 'repeat(auto-fit, minmax(200px, 1fr))',
         'fit1': 'repeat(auto-fit, minmax(150px, 1fr))',
         'collection': 'repeat(auto-fit, minmax(176px, 1fr))',
+        'collectioncp': 'repeat(2,1fr)',
+        'collectiontablet': 'repeat(3,1fr)',
         'cp': 'repeat(2, minmax(0, 1fr))'
         // Complex site-specific row configuration
        
@@ -24,6 +26,9 @@ module.exports = {
       screens: {
         cpsize: '490px',
         cpsize1: '492px',
+        collectionscreen: '523px',
+        cpcollectionscreen: '425px',
+        tabletcollectionscreen: '520px'
       },
       boxShadow: {
         '3xl': '0 0 15px 3px rgba(0, 0, 0, 1)',
