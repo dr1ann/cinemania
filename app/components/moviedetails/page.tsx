@@ -11,6 +11,8 @@ import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
 import blackscreen from './Images/black-screen.png';
 import noprofile from './Images/noprofile.png';
+import noposter from './Images/noposter.png';
+import nocollectionposter from './Images/nocollectionposter.png';
 import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
@@ -48,6 +50,7 @@ const Page = () => {
   const [navbar, setNavbar] = useState(false);
   const [color, setColor] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isCollectionLoading, setIsCollectionLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
   const [currmovieID, setcurMovieID] = useState<any>({})
   const [credits, setCredits] = useState<any>({})
@@ -80,7 +83,8 @@ const Page = () => {
         );
         const data = await response.json();
         setMovieDetails(data);
-         setCollectionID (data.belongs_to_collection ? data.belongs_to_collection.id : null) ;
+        setIsLoading(false);
+      
       } catch (error) {
         console.error(error);
       }
@@ -99,7 +103,7 @@ const Page = () => {
         );
         const data = await response.json();
         setMovieVid(data);
-       setIsLoading(false);
+       
       } catch (error) {
         console.error(error);
       }
@@ -171,46 +175,37 @@ const Page = () => {
    
     const movieCollection = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/collection/${movieDetails.belongs_to_collection ? movieDetails.belongs_to_collection.id : ''}`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setCollection(data);
-      
+        const collectionId = movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
+        if (collectionId) {
+          const response = await fetch(
+            `https://api.themoviedb.org/3/collection/${collectionId}`,
+            {
+              headers: {
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+              },
+            }
+          );
+          const data = await response.json();
+          setCollection(data);
+          setIsCollectionLoading(false);
+        } else {
+          setIsCollectionLoading(true);
+        }
       } catch (error) {
         console.error(error);
       }
     };
-    if (collectionID) {
+   
+  
       movieCollection();
-    }
-
     
-  }, [searchParams, collectionID]);
+    
+  
+  }, [searchParams, movieDetails]);
 
  
-  // function truncateTitles() {
-  //   useEffect(() => {
-  //     const titles = document.querySelectorAll('.truncate-title');
-  //     titles.forEach((titleElement) => {
-  //       const title = titleElement as HTMLElement;
-  //       if (title.scrollWidth > title.clientWidth) {
-  //         title.title = title.innerText;
-  //       } else {
-  //         title.title = '';
-  //       }
-  //     });
-  //   }, []);
-  
-  //   return null;
-  // }
 
-  // truncateTitles()
+
   
 
   function time_convert(num: number)
@@ -225,8 +220,8 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
  
  
-  console.log(collection)
-
+//   console.log(collection)
+// console.log(movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id)
 // const ew = credits && credits.crew && credits.crew.map((movie: MovieCredits) => {
 //   return movie.job && (movie.job === 'Director' && movie.job === 'Writer' && movie.job === 'Producer') ? movie : null;
 // });
@@ -255,7 +250,7 @@ const importantCrewMembers = credits && credits.crew && credits.crew.filter((mov
       <body>
    
       
-      {isLoading ?
+      {isLoading  ?
            <div className='h-screen movdbg flex flex-col justify-center items-center'  >
       
              <Image className=' w-[35%] object-contain'
@@ -271,7 +266,7 @@ const importantCrewMembers = credits && credits.crew && credits.crew.filter((mov
          :
 <div>
  
-  <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage || blackscreen })` }}>
+  <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage ? bgImage : blackscreen })` }}>
  <div className="fade-effectcp md:hidden"></div>
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>
@@ -491,7 +486,7 @@ className="cursor-pointer animate-wiggle"
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
     <p className='text-gray-400 '>Status</p>
-    <span>{movieDetails.status || 'N/A'} </span>
+    <span>{movieDetails.status ? movieDetails.status :  'N/A'} </span>
 
   </div>
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
@@ -615,7 +610,7 @@ className="cursor-pointer animate-wiggle"
   }
 
  
-    <p className='font-bold  mt-4 truncate '>{movie['original_name'] || 'N/A'}</p>
+    <p className='font-bold  mt-4 truncate '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
     {movie.character ?
         <p className='text-[0.813rem] text-gray-300'>{movie['character']}</p> 
         :
@@ -702,7 +697,7 @@ className="cursor-pointer animate-wiggle"
   }
 
  
-    <p className='font-bold  mt-4 truncate '>{movie['original_name'] || 'N/A'}</p>
+    <p className='font-bold  mt-4 truncate '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
    
 
     <div className='flex  justify-between items-center py-[5px] '>
@@ -736,25 +731,31 @@ className="cursor-pointer animate-wiggle"
 
 
     }
-    
+   {!isCollectionLoading 
+   ?
+   
+   
 <div className="flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16">
   <div className='flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
-   <Image
-      className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={`https://image.tmdb.org/t/p/original${collection['poster_path']}`}
-          alt='asa22'
-          width={1}
-          height={1}
-        
-          />
+  
+    <Image
+    className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : nocollectionposter}
+        alt={collection['poster_path']}
+        width={1}
+        height={1}
+      
+        />
+      
+   
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name}</h1>
-<p className='text-[0.85rem] xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview}</p>
+<h1 className='font-bold text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : ' Collection Name N/A'}</h1>
+<p className='text-[0.85rem] xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview  ? collection.overview: 'No overview available'}</p>
 
 </div>
 </div>
-<ul className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4  '>
+<ul className='grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4  '>
      
     {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
       
@@ -763,22 +764,26 @@ className="cursor-pointer animate-wiggle"
         
        
 <li key={movie['id']} className='flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
-       
+
    
        
           <Image
       className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
+          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/original${movie['poster_path']}` : noposter}
           alt={movie['original_title']}
           width={1}
           height={1}
           />
-     
-       
+    
+     {movie['original_title'] ?
        <a href='/' className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
-            {movie['original_title']}
+           {movie['original_title']}
           </a>
-         
+          :
+          <p className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+           N/A
+          </p>
+}
           
          
           
@@ -792,8 +797,12 @@ className="cursor-pointer animate-wiggle"
          height={100}
         
           />
-           <p className='text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '')}</p>
-        
+          {movie['vote_average']
+          ?
+           <p className='text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+          :
+          <p className='text-[0.85rem] sm:text-[1rem]'>N/A</p>
+  }
             </div>
             <p className='text-[0.85rem] sm:text-[1rem]'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
@@ -808,6 +817,9 @@ className="cursor-pointer animate-wiggle"
 }
 </ul>
 </div>
+:
+''
+}
 <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
