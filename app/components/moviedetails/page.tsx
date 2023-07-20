@@ -749,8 +749,8 @@ className="cursor-pointer animate-wiggle"
           />
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold text-[1.7rem] tabletcollectionscreen:text-[2rem]'>{collection.name}</h1>
-<p className='text-[1.1rem]  text-gray-300'>➠ {collection.overview}</p>
+<h1 className='font-bold text-[1.5rem] sm:text-[2rem]'>{collection.name}</h1>
+<p className='text-[0.85rem] sm:text-[1rem]  text-gray-300'>➠ {collection.overview}</p>
 
 </div>
 </div>
