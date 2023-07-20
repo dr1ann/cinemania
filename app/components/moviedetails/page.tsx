@@ -417,7 +417,7 @@ className="cursor-pointer animate-wiggle"
 
   
    
-<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] 2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
+<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
   <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] 2xl:text-[1.2rem] z-10'>
     {movieDetails['release_date'] ?
@@ -749,8 +749,8 @@ className="cursor-pointer animate-wiggle"
           />
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold text-[1.5rem] sm:text-[2rem]'>{collection.name}</h1>
-<p className='text-[0.85rem] sm:text-[1rem]  text-gray-300'>➠ {collection.overview}</p>
+<h1 className='font-bold text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name}</h1>
+<p className='text-[0.85rem] xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview}</p>
 
 </div>
 </div>
