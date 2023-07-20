@@ -754,7 +754,7 @@ className="cursor-pointer animate-wiggle"
 
 </div>
 </div>
-<ul className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
+<ul className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4  '>
      
     {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
       
