@@ -172,7 +172,7 @@ const Page = () => {
     const movieCollection = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/collection/${movieDetails.belongs_to_collection ? movieDetails.belongs_to_collection.id : 'yawa'}`,
+          `https://api.themoviedb.org/3/collection/${movieDetails.belongs_to_collection ? movieDetails.belongs_to_collection.id : ''}`,
           {
             headers: {
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
@@ -194,6 +194,23 @@ const Page = () => {
   }, [searchParams, collectionID]);
 
  
+  // function truncateTitles() {
+  //   useEffect(() => {
+  //     const titles = document.querySelectorAll('.truncate-title');
+  //     titles.forEach((titleElement) => {
+  //       const title = titleElement as HTMLElement;
+  //       if (title.scrollWidth > title.clientWidth) {
+  //         title.title = title.innerText;
+  //       } else {
+  //         title.title = '';
+  //       }
+  //     });
+  //   }, []);
+  
+  //   return null;
+  // }
+
+  // truncateTitles()
   
 
   function time_convert(num: number)
@@ -606,7 +623,7 @@ className="cursor-pointer animate-wiggle"
   }
 
     <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-2'>
+     <div className=' flex flex-row items-center gap-1'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
      {movie['popularity'] ?
        <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
@@ -689,7 +706,7 @@ className="cursor-pointer animate-wiggle"
    
 
     <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-2'>
+     <div className=' flex flex-row items-center gap-1'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
      {movie['popularity'] ?
         <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
@@ -720,7 +737,7 @@ className="cursor-pointer animate-wiggle"
 
     }
     
-<div className="flex flex-col gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16">
+<div className="flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16">
   <div className='flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
    <Image
       className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
@@ -732,62 +749,64 @@ className="cursor-pointer animate-wiggle"
           />
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold text-[2rem]'>{collection.name}</h1>
+<h1 className='font-bold text-[1.7rem] tabletcollectionscreen:text-[2rem]'>{collection.name}</h1>
 <p className='text-[1.1rem]  text-gray-300'>➠ {collection.overview}</p>
 
 </div>
 </div>
-<div className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet  sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  items-center lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
+<ul className='grid grid-cols-collectioncp tabletcollectionscreen:grid-cols-collectiontablet sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-10 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden  '>
      
     {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
-      <div key={movie['id']} className='mx-auto '> 
-
-
-        
-       
-<div className='flex flex-col  justify-center   animate pop min-w-[9rem] max-w-[9rem] tabletcollectionscreen:min-w-[8rem] tabletcollectionscreen:max-w-[8rem] sm:min-w-[11rem] sm:max-w-[11rem]'>
-       
       
+
+
         
+       
+<li key={movie['id']} className='flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
+       
+   
+       
           <Image
       className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
           src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
           alt={movie['original_title']}
           width={1}
           height={1}
-        
           />
-       
      
-
+       
+       <a href='/' className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+            {movie['original_title']}
+          </a>
          
-            <p className='font-bold   mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
+          
+         
           
             <div className='flex  justify-between items-center py-[5px] '>
-             <div className=' flex flex-row items-center gap-2'>
+             <div className=' flex flex-row items-center gap-1'>
              <Image
-         className='h-[1rem] w-[1rem] object-contain'
+         className='h-[0.9rem] w-[0.9rem] sm:h-[1rem] sm:w-[1rem] object-contain'
          src={star}
          alt='home icon'
          width={1}
          height={100}
         
           />
-           <p>{movie['vote_average'].toFixed(1).replace(/\.0$/, '')}</p>
+           <p className='text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '')}</p>
         
             </div>
-            <p>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className='text-[0.85rem] sm:text-[1rem]'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
-            </div>     
+            </li>     
 
-        </div>
+       
 
 
 ))
 
 }
-</div>
+</ul>
 </div>
 <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 

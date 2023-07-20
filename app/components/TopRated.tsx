@@ -131,7 +131,7 @@ const TopRated = () => {
             <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
          </Link>
             <div className='flex  justify-between items-center py-[5px] '>
-             <div className=' flex flex-row items-center gap-2'>
+             <div className=' flex flex-row items-center gap-1'>
              <Image
          className='h-[1rem] w-[1rem] object-contain'
          src={star}
@@ -176,7 +176,7 @@ const TopRated = () => {
          
             <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
             <div className='flex  justify-between items-center py-[5px] '>
-             <div className=' flex flex-row items-center gap-2'>
+             <div className=' flex flex-row items-center gap-1'>
              <Image
          className='h-[1rem] w-[1rem] object-contain'
          src={star}

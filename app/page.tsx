@@ -346,7 +346,7 @@ className="cursor-pointer animate-wiggle"
  
     <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
     <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-2'>
+     <div className=' flex flex-row items-center gap-1'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
    <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
 
@@ -396,7 +396,7 @@ className="cursor-pointer animate-wiggle"
  
     <p className='font-bold  mt-4 truncate '>{movie['original_title']}</p>
     <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-2'>
+     <div className=' flex flex-row items-center gap-1'>
      <Image
  className='h-[1rem] w-[1rem] object-contain'
  src={star}
