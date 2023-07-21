@@ -1,29 +1,38 @@
 'use client'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faGithub, faTwitter  } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+// External Libraries
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Image from 'next/image'
-import loadingbar from './Images/loading-11.gif'
-import icon from './Images/icon.png'
+import Image from 'next/image';
+import axios from 'axios';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import Headroom from 'react-headroom';
+import Modal from './Modal';
+import Balancer from 'react-wrap-balancer';
+
+// Font Awesome Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
+// Images
+import loadingbar from './Images/loading-11.gif';
+import icon from './Images/icon.png';
 import star from './Images/star.png';
 import tmdbicon from './Images/tmdb.png';
 import blackscreen from './Images/black-screen.png';
 import noprofile from './Images/noprofile.png';
 import noposter from './Images/noposter.png';
 import nocollectionposter from './Images/nocollectionposter.png';
-import nextjs from './Images/nextjs.png'
-import tailwind from './Images/tailwind.png'
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
-import Headroom from 'react-headroom';
-import Modal   from './Modal';
+import nextjs from './Images/nextjs.png';
+import tailwind from './Images/tailwind.png';
+
+// Components
 import CardLoading from '../CardLoading';
-import axios from 'axios';
-import Balancer from 'react-wrap-balancer'
+
 
 //types
 type MovieCredits = {
+  credit_id?: number
   id?: number;
   cast_id: number;
  character: string;
@@ -59,8 +68,8 @@ const Page = () => {
   const [currmovieID, setcurMovieID] = useState<any>({})
   const [credits, setCredits] = useState<any>({})
   const [collection, setCollection] = useState<any>({})
-  const [collectionID, setCollectionID] = useState<any>({})
-  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+
+
 
   //change color of header when scrolled
   const changeColor = () => {
@@ -188,7 +197,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 });
 
 
-
+console.log(importantCrewMembers)
 
   //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
@@ -518,7 +527,7 @@ className="cursor-pointer animate-wiggle"
 
     {credits && credits.cast.map((movie: MovieCredits) => (
 
-<div key={movie['id']}> 
+<div key={movie['credit_id']}> 
 
 
 
@@ -597,7 +606,7 @@ className="cursor-pointer animate-wiggle"
 {importantCrewMembers.map((movie: MovieCredits) => (
 
 
-<div key={movie['id']}> 
+<div key={movie['credit_id']}> 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
@@ -667,8 +676,14 @@ className="cursor-pointer animate-wiggle"
    ?
    
    
-<div className="flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16">
-  <div className='flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
+<div style={{backgroundPosition: 'center bottom 80%', backgroundAttachment:'fixed',
+ backgroundImage: `linear-gradient(to top, rgba(7, 15, 21, 0.98), rgba(7, 15, 21, 0.85)),
+ url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/original${collection['backdrop_path']}` 
+ : blackscreen })` }}
+  className="relative flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16" >
+    <div className="fade-effect1"></div>
+    <div className="fade-effect-top-collection"></div>
+  <div className='mt-4 sm:mt-0 flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   
     <Image
     className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'

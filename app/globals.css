@@ -98,6 +98,16 @@ font-weight: bold;
    z-index: .5;
     width: 100%;
 }
+.fade-effect-top-collection {
+  position: absolute;
+    top: 0;
+    height: 5rem;
+    background: rgb(20,20,20);
+    background: linear-gradient(180deg, rgba(20,20,20,1) 1%, rgba(253,29,29,0) 46%);
+   z-index: .5;
+    width: 100%;
+   
+}
 /* radio buttons */
 
 input[type="radio"] {
