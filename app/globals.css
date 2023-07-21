@@ -103,7 +103,17 @@ font-weight: bold;
     top: 0;
     height: 5rem;
     background: rgb(20,20,20);
-    background: linear-gradient(180deg, rgba(20,20,20,1) 1%, rgba(253,29,29,0) 46%);
+    background: linear-gradient(180deg,#141414, transparent);
+   z-index: .5;
+    width: 100%;
+   
+}
+.fade-effect-bottom-collection {
+  position: absolute;
+    bottom: 0;
+    height: 5rem;
+    background: rgb(20,20,20);
+    background: linear-gradient(0deg,#141414, transparent);
    z-index: .5;
     width: 100%;
    

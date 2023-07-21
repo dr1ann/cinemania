@@ -681,9 +681,9 @@ className="cursor-pointer animate-wiggle"
  url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/original${collection['backdrop_path']}` 
  : blackscreen })` }}
   className="relative flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16" >
-    <div className="fade-effect1"></div>
     <div className="fade-effect-top-collection"></div>
-  <div className='mt-4 sm:mt-0 flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
+    <div className="fade-effect-bottom-collection"></div>
+  <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   
     <Image
     className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
@@ -710,7 +710,7 @@ className="cursor-pointer animate-wiggle"
 
         
        
-<li key={movie['id']} className='flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
+<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
 
    
        
