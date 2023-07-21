@@ -19,7 +19,10 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 import Modal   from './Modal';
 import CardLoading from '../CardLoading';
+import axios from 'axios';
 import Balancer from 'react-wrap-balancer'
+
+
 type MovieCredits = {
   id?: number;
   cast_id: number;
@@ -29,7 +32,7 @@ type MovieCredits = {
   profile_path: string;
   known_for_department: string;
   job?: string;
-  // Add other properties if necessary
+  
 };
 type movieCollection = {
   id: number;
@@ -65,132 +68,78 @@ const Page = () => {
       setColor(false)
     }
   }
+window.addEventListener('scroll', changeColor)
 
+  //Authorization to fetch data from the API with its base url
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.themoviedb.org/3', 
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+    },
+  });
 
 
   useEffect(() => {
-    window.addEventListener('scroll', changeColor)
+
+    
+
+    //get the current movie id from the searchParams
     setcurMovieID(searchParams.get('id'))
-    const fetchMovieDetails = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}?language=en-US`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setMovieDetails(data);
-        setIsLoading(false);
-      
-      } catch (error) {
-        console.error(error);
-      }
-
-      
-    };
-    const fetchMovieVid = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/videos?language=en-US`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setMovieVid(data);
-       
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const movieLogo = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/images`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setmovieLogo(data);
-       
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const movieSocMed = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/external_ids`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setMovieSoc(data);
-       
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const movieCredits = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${searchParams.get('id')}/credits?language=en-US`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        setCredits(data);
-        setIsPeopleLoading(false)
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-  
-
-
-
- 
-    fetchMovieVid();
-    movieLogo();
-    movieSocMed();
-    movieCredits();
-    fetchMovieDetails();
    
-    const movieCollection = async () => {
+
+    //fetch all data from the api
+    const DataFromAPI = async () => {
+      
+
       try {
-        const collectionId = movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
+        const searchId = searchParams.get('id');
+        const apiPromises = [
+          axiosInstance.get(`/movie/${searchId}?language=en-US`), //MovieDetails
+          axiosInstance.get(`/movie/${searchId}/videos?language=en-US`), //MovieVids
+          axiosInstance.get(`/movie/${searchId}/images`), //MovieLogo
+          axiosInstance.get(`/movie/${searchId}/external_ids`), //MovieSocMed
+          axiosInstance.get(`/movie/${searchId}/credits?language=en-US`), //MovieCredits
+        ];
+    
+        const [MovieDetails, MovieVids, MovieLogo, MovieSocMed, MovieCredits   ] = await Promise.all(apiPromises);
+    
+        //getting the data from the API to use later in the webpage using the assigned variables
+        setMovieDetails(MovieDetails.data);
+        setMovieVid(MovieVids.data);
+        setmovieLogo(MovieLogo.data);
+        setMovieSoc(MovieSocMed.data);
+        setCredits(MovieCredits.data);
+
+        setIsLoading(false); // Webpage now shows data 
+     
+       
+      } catch (error) {
+        console.error('Error fetching data:', error); // Catch errors if data is not fetched
+      }
+      
+    };
+    //call the function to get all the data
+    DataFromAPI();
+
+   //create new function to get the id of the current movie
+    const movieCollection = async () => {
+     
+      try {
+        const collectionId = movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
+        
+        //only get the collection data if the ID of the movie is there
         if (collectionId) {
-          const response = await fetch(
-            `https://api.themoviedb.org/3/collection/${collectionId}`,
-            {
-              headers: {
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-              },
-            }
-          );
-          const data = await response.json();
-          setCollection(data);
+
+        const response = await  axiosInstance.get(`/collection/${collectionId}`)
+          
+          setCollection(response.data);
           setIsCollectionLoading(false);
+
         } else {
           setIsCollectionLoading(true);
+          
         }
+        
       } catch (error) {
         console.error(error);
       }
@@ -200,36 +149,31 @@ const Page = () => {
       movieCollection();
     
     
-  
-  }, [searchParams, movieDetails]);
+  //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
+  }, [searchParams.get('id'), movieDetails.id]);
 
  
 
 
-  
-
+  //convert the number to hours and minutes ex.2h 7m
   function time_convert(num: number)
  { 
   var hours = Math.floor(num / 60);  
   var minutes = num % 60;
   return hours + "h" + " " + minutes + "m";         
 }
+
+//get the genre names array and separate them
   const genreNames = movieDetails && movieDetails.genres && movieDetails.genres.map((genres: { id: number, name: string }) => genres.name);
 const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
-  const lastVideo = movieVid && movieVid.results && movieVid.results[movieVid.results.length - 1];
+
+  //get only the first movie logo
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
  
- 
-//   console.log(collection)
-// console.log(movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id)
-// const ew = credits && credits.crew && credits.crew.map((movie: MovieCredits) => {
-//   return movie.job && (movie.job === 'Director' && movie.job === 'Writer' && movie.job === 'Producer') ? movie : null;
-// });
-
-// console.log(ew);
 
 
-const importantCrewMembers = credits && credits.crew && credits.crew.filter((movie:MovieCredits) => {
+ //get only the important crew members from the movie 
+ const importantCrewMembers = credits && credits.crew && credits.crew.filter((movie:MovieCredits) => {
   return (
     movie.job === 'Director' || 
      movie.job === 'Writer' ||
@@ -242,14 +186,16 @@ const importantCrewMembers = credits && credits.crew && credits.crew.filter((mov
 
 
 
-
+  //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
+  //get the logo image of the movie
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
   return (
     
       <body>
    
-      
+      {/* if no data from the api has been fetched, put a loading bar until the data has been fetched */}
+
       {isLoading  ?
            <div className='h-screen movdbg flex flex-col justify-center items-center'  >
       
@@ -273,7 +219,7 @@ const importantCrewMembers = credits && credits.crew && credits.crew.filter((mov
     <div className="fade-effect3 hidden md:block"></div>
     <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
 <Headroom>
-      <nav className={color ? 'new-bg' : 'myHeader'} >
+      <nav id='changeHeight' className={color ? 'new-bg' : 'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
         <div>
           <div className="flex items-center justify-between   md:block" >
@@ -561,16 +507,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 </div>
-{isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-10 gap-10 '>
 
-   {Array.from({ length: 21 }).map((_, index) => (
-     <CardLoading key={index} />
-   ))}
-       
-       </div> 
-       
-    :
     <div>
     <h1 className='px-10 pt-10 text-2xl  sm:text-[1.875rem] font-bold '>Cast</h1>
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
@@ -599,7 +536,7 @@ className="cursor-pointer animate-wiggle"
     :
     <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
-      src={noprofile}
+      src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
       width={1}
       height={1}
@@ -645,19 +582,10 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 
-    }
+    
 
 
-{isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-10 gap-10 '>
 
-   {Array.from({ length: 21 }).map((_, index) => (
-     <CardLoading key={index} />
-   ))}
-       
-       </div> 
-       
-    :
     <div>
     <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
@@ -686,7 +614,7 @@ className="cursor-pointer animate-wiggle"
     :
     <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
-      src={noprofile}
+      src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
       width={1}
       height={1}
@@ -730,7 +658,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 
-    }
+    
    {!isCollectionLoading 
    ?
    
@@ -740,7 +668,7 @@ className="cursor-pointer animate-wiggle"
   
     <Image
     className='hidden  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : nocollectionposter}
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
         width={1}
         height={1}
@@ -769,7 +697,7 @@ className="cursor-pointer animate-wiggle"
        
           <Image
       className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/original${movie['poster_path']}` : noposter}
+          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/original${movie['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
           alt={movie['original_title']}
           width={1}
           height={1}

@@ -28,7 +28,7 @@ module.exports = {
         cpsize1: '492px',
         collectionscreen: '523px',
         cpcollectionscreen: '425px',
-        tabletcollectionscreen: '420px'
+        tabletcollectionscreen: '480px'
       },
       boxShadow: {
         '3xl': '0 0 15px 3px rgba(0, 0, 0, 1)',

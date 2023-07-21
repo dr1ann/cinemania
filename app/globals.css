@@ -233,3 +233,7 @@ background: linear-gradient(90deg, rgba(20,20,20,1) 0%, rgba(253,29,29,0) 46%);
 width: inherit;
 
 }
+
+#changeHeight {
+  height: 63.25px;
+}
