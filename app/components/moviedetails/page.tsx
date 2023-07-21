@@ -22,7 +22,7 @@ import CardLoading from '../CardLoading';
 import axios from 'axios';
 import Balancer from 'react-wrap-balancer'
 
-
+//types
 type MovieCredits = {
   id?: number;
   cast_id: number;
@@ -45,6 +45,7 @@ type movieCollection = {
 }
 const Page = () => {
 
+  //use states
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
   const [movieVid, setMovieVid] = useState<any>({});
@@ -60,6 +61,7 @@ const Page = () => {
   const [collection, setCollection] = useState<any>({})
   const [collectionID, setCollectionID] = useState<any>({})
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+
   //change color of header when scrolled
   const changeColor = () => {
     if(window.scrollY) {
@@ -92,18 +94,20 @@ window.addEventListener('scroll', changeColor)
       
 
       try {
-        const searchId = searchParams.get('id');
+
+        //the current movie id
+        const currID = searchParams.get('id');
         const apiPromises = [
-          axiosInstance.get(`/movie/${searchId}?language=en-US`), //MovieDetails
-          axiosInstance.get(`/movie/${searchId}/videos?language=en-US`), //MovieVids
-          axiosInstance.get(`/movie/${searchId}/images`), //MovieLogo
-          axiosInstance.get(`/movie/${searchId}/external_ids`), //MovieSocMed
-          axiosInstance.get(`/movie/${searchId}/credits?language=en-US`), //MovieCredits
+          axiosInstance.get(`/movie/${currID}?language=en-US`), //MovieDetails
+          axiosInstance.get(`/movie/${currID}/videos?language=en-US`), //MovieVids
+          axiosInstance.get(`/movie/${currID}/images`), //MovieLogo
+          axiosInstance.get(`/movie/${currID}/external_ids`), //MovieSocMed
+          axiosInstance.get(`/movie/${currID}/credits?language=en-US`), //MovieCredits
         ];
     
         const [MovieDetails, MovieVids, MovieLogo, MovieSocMed, MovieCredits   ] = await Promise.all(apiPromises);
     
-        //getting the data from the API to use later in the webpage using the assigned variables
+        //getting the data from the API and put values on to its assigned variables
         setMovieDetails(MovieDetails.data);
         setMovieVid(MovieVids.data);
         setmovieLogo(MovieLogo.data);
@@ -133,10 +137,10 @@ window.addEventListener('scroll', changeColor)
         const response = await  axiosInstance.get(`/collection/${collectionId}`)
           
           setCollection(response.data);
-          setIsCollectionLoading(false);
+          setIsCollectionLoading(false); //Collection now shows data in the webpage
 
         } else {
-          setIsCollectionLoading(true);
+          setIsCollectionLoading(true); // Collection will return empty in the webpage
           
         }
         
@@ -547,26 +551,26 @@ className="cursor-pointer animate-wiggle"
   }
 
  
-    <p className='font-bold  mt-4 truncate '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
+    <p className='font-bold  mt-4 truncate text-[0.85rem] sm:text-[1rem]'>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
     {movie.character ?
-        <p className='text-[0.813rem] text-gray-300'>{movie['character']}</p> 
+        <p className=' text-[0.78rem] sm:text-[0.813rem]  text-gray-300'>{movie['character']}</p> 
         :
-        <p className='text-[0.813rem]'>N/A</p> 
+        <p className='text-[0.78rem] sm:text-[0.813rem]'>N/A</p> 
   }
 
     <div className='flex  justify-between items-center py-[5px] '>
      <div className=' flex flex-row items-center gap-1'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
      {movie['popularity'] ?
-       <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
+       <p className='text-[0.85rem] sm:text-[1rem]'>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
 
         :
-        '0'
+        <p className='text-[0.85rem] sm:text-[1rem]'>0</p>
      }
 
 
     </div>
-    <p className='text-[0.9rem]'>{movie['known_for_department']}</p>
+    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['known_for_department']}</p>
 
     </div>
     </div>     
@@ -625,22 +629,22 @@ className="cursor-pointer animate-wiggle"
   }
 
  
-    <p className='font-bold  mt-4 truncate '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
+    <p className='font-bold  mt-4 truncate text-[0.85rem] sm:text-[1rem] '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
    
 
     <div className='flex  justify-between items-center py-[5px] '>
      <div className=' flex flex-row items-center gap-1'>
      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
      {movie['popularity'] ?
-        <p>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
+        <p className='text-[0.85rem] sm:text-[1rem]'>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
 
         :
-        '0'
+        <p className='text-[0.85rem] sm:text-[1rem]'>0</p>
      }
 
 
     </div>
-    <p className='text-[0.9rem]'>{movie['job']}</p>
+    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['job']}</p>
 
     </div>
     </div>     
