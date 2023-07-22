@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 
 // Components
-import Overview from "./Overview";
+import Overview from "./overview";
 import Crew_Cast from "./Crew_Cast";
 import Collection from "./Collection";
 
