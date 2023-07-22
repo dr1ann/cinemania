@@ -184,12 +184,14 @@ input[type="radio"] {
 
 .new-bg {
   background-color: #141414;
-  z-index: 999;
+  z-index: 99999;
+  position: relative;
 }
 
 .myHeader {
   background-color: transparent;
-  z-index: 999;
+  z-index: 99999;
+  position: relative;
 }
 .responsive-iframe {
   position: absolute;
