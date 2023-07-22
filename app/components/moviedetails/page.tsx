@@ -196,8 +196,8 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   
 });
 
+console.log(movielogo)
 
-console.log(importantCrewMembers)
 
   //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
@@ -534,7 +534,7 @@ className="cursor-pointer animate-wiggle"
 <div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
   src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
   alt={movie['original_name']}
@@ -547,7 +547,7 @@ className="cursor-pointer animate-wiggle"
 
   
     :
-    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
@@ -612,7 +612,7 @@ className="cursor-pointer animate-wiggle"
 <div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
   src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
   alt={movie['original_name']}
@@ -625,7 +625,7 @@ className="cursor-pointer animate-wiggle"
 
   
     :
-    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
@@ -676,7 +676,7 @@ className="cursor-pointer animate-wiggle"
    ?
    
    
-<div style={{backgroundPosition: 'center bottom 80%', backgroundAttachment:'fixed',
+<div style={{backgroundPosition: 'center bottom 50%', backgroundAttachment:'fixed',
  backgroundImage: `linear-gradient(to top, rgba(7, 15, 21, 0.98), rgba(7, 15, 21, 0.85)),
  url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/original${collection['backdrop_path']}` 
  : blackscreen })` }}
@@ -686,7 +686,7 @@ className="cursor-pointer animate-wiggle"
   <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   
     <Image
-    className='hidden z-[9999]  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+    className='hidden z-[9999]  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
         src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
         width={1}
@@ -715,7 +715,7 @@ className="cursor-pointer animate-wiggle"
    
        
           <Image
-      className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
+      className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
           src={movie['poster_path'] ? `https://image.tmdb.org/t/p/original${movie['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
           alt={movie['original_title']}
           width={1}
@@ -767,6 +767,10 @@ className="cursor-pointer animate-wiggle"
 :
 ''
 }
+
+<div className='mt-10'>
+  <h1>Media</h1>
+</div>
 <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
