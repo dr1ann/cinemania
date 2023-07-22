@@ -6,12 +6,12 @@ import Image from 'next/image';
 import axios from 'axios';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
-import Modal from './Modal';
+
 
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 
 // Images
@@ -21,7 +21,8 @@ import tmdbicon from './Images/tmdb.png';
 import blackscreen from './Images/black-screen.png';
 import loadingbar from './Images/loading-11.gif';
 
-
+//Components
+import Modal from './Trailer_Modal';
 
 
 
