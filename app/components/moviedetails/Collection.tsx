@@ -77,7 +77,7 @@ const Collection = () => {
       }
       
     };
-    //call the function to get all the data
+    //call the function to get all the data from the api
     DataFromAPI();
 
    //create new function to get the id of the current movie
@@ -112,17 +112,6 @@ const Collection = () => {
   }, [ movieDetails.id]);
 
  
-
-
- 
-
-
- //get only the important crew members from the movie 
-
-  
-
-
-
   return (
     
     <div>

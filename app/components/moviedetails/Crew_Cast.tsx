@@ -5,6 +5,9 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 
+//Components
+import CardLoading from '../CardLoading';
+
 //type
 type MovieCredits = {
   credit_id?: number
@@ -24,7 +27,7 @@ const Crew_Cast = () => {
   //use states
   const searchParams = useSearchParams();
   const [credits, setCredits] = useState<any>({})
-
+  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
 
 
 
@@ -60,7 +63,7 @@ const Crew_Cast = () => {
     
       
         setCredits(response.data);
-
+        setIsPeopleLoading(false) // Skeleton loader is disabled
     
      
        
@@ -69,10 +72,10 @@ const Crew_Cast = () => {
       }
       
     };
-    //call the function to get all the data
+    //call the function to get the data from the api
     DataFromAPI();
 
-   //create new function to get the id of the current movie
+ 
    
   }, []);
 
@@ -99,6 +102,17 @@ const Crew_Cast = () => {
     <div>
          <div>
     <h1 className='px-10 pt-10 text-2xl  sm:text-[1.875rem] font-bold '>Cast</h1>
+    {isPeopleLoading ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+
+   {Array.from({ length: 21 }).map((_, index) => (
+     <CardLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
+
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
     {credits && credits.cast && credits.cast.map((movie: MovieCredits) => (
@@ -161,13 +175,14 @@ const Crew_Cast = () => {
     </div>     
 </div>
 
-
+    
 ))
 
 }
-
+    
 
 </div>
+}
 </div>
 
 
@@ -177,6 +192,16 @@ const Crew_Cast = () => {
 
     <div>
     <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
+    {isPeopleLoading ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+
+   {Array.from({ length: 21 }).map((_, index) => (
+     <CardLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
 {importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
@@ -244,6 +269,7 @@ const Crew_Cast = () => {
 
 
 </div>
+}
 </div>
     </div>
   );
