@@ -14,7 +14,6 @@ import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 // Images
-
 import nextjs from './Images/nextjs.png';
 import tailwind from './Images/tailwind.png';
 const Page = () => {
