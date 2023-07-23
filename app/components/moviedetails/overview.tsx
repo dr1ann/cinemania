@@ -53,7 +53,7 @@ const Overview = () => {
       setColor(false)
     }
   }
-window.addEventListener('scroll', changeColor)
+
 
   //Authorization to fetch data from the API with its base url
   const axiosInstance = axios.create({
@@ -66,7 +66,7 @@ window.addEventListener('scroll', changeColor)
 
   useEffect(() => {
 
-    
+    window.addEventListener('scroll', changeColor)
 
     //get the current movie id from the searchParams
     setcurMovieID(searchParams.get('id'))
