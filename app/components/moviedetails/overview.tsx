@@ -66,11 +66,11 @@ const Overview = () => {
 
   useEffect(() => {
 
-    window.addEventListener('scroll', changeColor)
+    
 
     //get the current movie id from the searchParams
     setcurMovieID(searchParams.get('id'))
-   
+    window.addEventListener('scroll', changeColor)
 
     //fetch all data from the api
     const DataFromAPI = async () => {
@@ -111,7 +111,7 @@ const Overview = () => {
 
    //create new function to get the id of the current movie
    
-  }, []);
+  }, [searchParams.get('id')]);
 
  
 

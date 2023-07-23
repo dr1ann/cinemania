@@ -64,7 +64,7 @@ export default function Media() {
       };
       //call the function to get all the data from the api
       DataFromAPI();
-  }, []);
+  }, );
  // Use the movieId as a seed value for the random number generator
 const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
