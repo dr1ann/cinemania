@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* Add your custom fonts here */}
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=YourCustomFont1&display=swap"
