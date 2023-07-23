@@ -95,7 +95,7 @@ const Collection = () => {
         setIsCollectionLoading(false); //Collection now shows data in the webpage
 
       } else {
-        setIsCollectionLoading(false); // Collection will return empty in the webpage
+        setIsCollectionLoading(true); // Collection will return empty in the webpage
         
       }
       
@@ -116,9 +116,9 @@ const Collection = () => {
   return (
     
     <div>
-{isCollectionLoading && Object.keys(collection).length === 0 && <CollectionLoading />}
+
       
-      {Object.keys(collection).length
+      {!isCollectionLoading
    ?
    
    
