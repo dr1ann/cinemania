@@ -111,7 +111,7 @@ window.addEventListener('scroll', changeColor)
 
    //create new function to get the id of the current movie
    
-  }, [searchParams.get('id')]);
+  }, []);
 
  
 
