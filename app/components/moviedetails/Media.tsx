@@ -9,13 +9,13 @@ import Headroom from 'react-headroom';
 import Modal from './Trailer_Modal';
 import VidTrailer from './VidTrailer'
 interface MovieVideos {
-    id?: number
+    id?: string
     key?: string
     
 }
 interface MovieImgs {
   file_path?:string
-    
+  id?: number
 }
 export default function Media() {
     const searchParams = useSearchParams();
@@ -64,7 +64,7 @@ export default function Media() {
       };
       //call the function to get all the data from the api
       DataFromAPI();
-  }, );
+  },[] );
  // Use the movieId as a seed value for the random number generator
 const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
@@ -88,6 +88,8 @@ const seededRandom = (min: number, max: number, seed: number) => {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
+  console.log(randomPostersSubset)
+  console.log(MovieVids)
   return (
     <div className='relative'>
          <VidTrailer isVisible={isOpen} onClose={() => setIsOpen(false)} selectedMovieKey={selectedMovieKey} />
@@ -129,7 +131,7 @@ const seededRandom = (min: number, max: number, seed: number) => {
       
  {MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
 
-        <div className='max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/maxresdefault.jpg)` }}>
+        <div key={movieVid.id} className='max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/maxresdefault.jpg)` }}>
            <button className='trailer-button' onClick={() => { 
             if(movieVid.key !== undefined) {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
@@ -156,7 +158,7 @@ const seededRandom = (min: number, max: number, seed: number) => {
       
  {randomPostersSubset && randomPostersSubset.map((movieImg: MovieImgs) => (
 
-        <div className='max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  relative flex justify-center items-center '>
+        <div key={movieImg.file_path} className='max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  relative flex justify-center items-center '>
            <Image
            src={  `https://image.tmdb.org/t/p/original${movieImg.file_path}`}
            alt='posters'
