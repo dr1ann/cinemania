@@ -131,15 +131,42 @@ input[type="radio"] {
  
 }
 .active1 {
-  background-color: #e2b616;
+  background-color: #1a1a1a;
+  color: #e2b616;
+font-weight: bold;
+font-size: .85rem;
+word-spacing: 8px;
 }
-
+.notactive {
+  background-color: #1a1a1a;
+  color: white;
+  word-spacing: 8px;
+  font-size: .85rem;
+}
+@media screen and (min-width: 640px) {
+  .active1 {
+    background-color: #1a1a1a;
+    color: #e2b616;
+  font-weight: bold;
+  word-spacing: 8px;
+  font-size: 1rem;
+  }
+  .notactive {
+    background-color: #1a1a1a;
+    color: white;
+    word-spacing: 8px;
+    font-size: 1rem;
+  }
+}
 #radiolabel {
   cursor: pointer;
-  padding: 0px 12px;
-  border-radius: 0.75rem;
-  margin-left: 1px;
-  margin-right: 1px;
+  padding-right:  .8em;
+  padding-left: .8em;
+  padding-top: .25em;
+  padding-bottom: .4em;
+  border-radius: 6px;
+  border: none;
+
 }
 
 
@@ -204,7 +231,17 @@ input[type="radio"] {
   border: none;
 
 }
+.vids {
+  background: no-repeat;
+ background-size: cover;
 
+
+
+ width: 100%;
+     background-position: center center;
+
+     box-sizing: border-box;
+ }
 .movdetpic {
   background: no-repeat;
  background-size: cover;
@@ -258,4 +295,15 @@ width: inherit;
 
 #changeHeight {
   height: 63.25px;
+}
+
+.trailer-button {
+  background-color: rgba(15,15,15,.7);
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

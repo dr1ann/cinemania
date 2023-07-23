@@ -101,7 +101,7 @@ const Crew_Cast = () => {
     
     <div>
          <div>
-    <h1 className='px-10 pt-10 text-2xl  sm:text-[1.875rem] font-bold '>Cast</h1>
+    <h1 className='px-10 pt-10 text-2xl  font-bold '>Cast</h1>
     {isPeopleLoading ? 
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
 

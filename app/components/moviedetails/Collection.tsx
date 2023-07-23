@@ -12,7 +12,7 @@ import axios from 'axios';
 import star from './Images/star.png';
 import blackscreen from './Images/black-screen.png';
 
-
+import CollectionLoading from './CollectionLoading';
 //types
 
 type movieCollection = {
@@ -32,7 +32,7 @@ const Collection = () => {
 
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
   const [collection, setCollection] = useState<any>({})
-
+  const [isLoadingCardVisible, setIsLoadingCardVisible] = useState(true);
 
 
 
@@ -95,7 +95,7 @@ const Collection = () => {
         setIsCollectionLoading(false); //Collection now shows data in the webpage
 
       } else {
-        setIsCollectionLoading(true); // Collection will return empty in the webpage
+        setIsCollectionLoading(false); // Collection will return empty in the webpage
         
       }
       
@@ -111,11 +111,14 @@ const Collection = () => {
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
+
  
   return (
     
     <div>
-      {!isCollectionLoading 
+{isCollectionLoading && Object.keys(collection).length === 0 && <CollectionLoading />}
+      
+      {Object.keys(collection).length
    ?
    
    
@@ -129,7 +132,7 @@ const Collection = () => {
   <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   
     <Image
-    className='hidden z-[9999]  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+    className='hidden z-[9999] animate pop  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
         src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
         width={1}
@@ -140,8 +143,8 @@ const Collection = () => {
    
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : ' Collection Name N/A'}</h1>
-<p className='text-[0.85rem] xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview  ? collection.overview: 'No overview available'}</p>
+<h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : ' Collection Name N/A'}</h1>
+<p className='text-[0.85rem] animate pop xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview  ? collection.overview: 'No overview available'}</p>
 
 </div>
 </div>

@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Overview from "./overview";
 import Crew_Cast from "./Crew_Cast";
 import Collection from "./Collection";
-
+import Media from './Media';
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -25,6 +25,7 @@ const Page = () => {
   
     <Crew_Cast />
     <Collection />
+    <Media />
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>

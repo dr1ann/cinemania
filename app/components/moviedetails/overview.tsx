@@ -6,7 +6,9 @@ import Image from 'next/image';
 import axios from 'axios';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 
 // Font Awesome Icons
@@ -146,18 +148,17 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
      
 <div>
   {isLoading  ?
-           <div className='h-screen movdbg flex flex-col justify-center items-center'  >
-      
-             <Image className=' w-[35%] object-contain'
-        src={loadingbar}
-        alt='laoding bar'
-        width={1}
-        height={1}
-        
-        />
-    
-       
-         </div>
+           <div className='h-screen flex flex-col  items-center relative'>
+
+           <SkeletonTheme baseColor="#202020" highlightColor="#444">
+           
+           <Skeleton   style={{ height: '100vh', width: '100vw' }}  className='rounded-xl '/>
+           
+             </SkeletonTheme>
+                 
+            
+           
+                 </div>
          :
          <div>
          <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage ? bgImage : blackscreen })` }}>
