@@ -6,7 +6,7 @@ import Image from 'next/image';
 import axios from 'axios';
 
 //Components
-import CardLoading from '../CardLoading';
+import CardLoading from '../Loaders/CardLoading';
 
 //type
 type MovieCredits = {
@@ -105,7 +105,7 @@ const Crew_Cast = () => {
     {isPeopleLoading ? 
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
 
-   {Array.from({ length: 21 }).map((_, index) => (
+   {Array.from({ length: 10 }).map((_, index) => (
      <CardLoading key={index} />
    ))}
        
@@ -195,7 +195,7 @@ const Crew_Cast = () => {
     {isPeopleLoading ? 
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
 
-   {Array.from({ length: 21 }).map((_, index) => (
+   {Array.from({ length: 10 }).map((_, index) => (
      <CardLoading key={index} />
    ))}
        

@@ -13,14 +13,14 @@ import popular from './Images/popular.png'
 import { Suspense } from 'react'
 import Trending from './components/Trending';
 import Popular from './components/Popular';
-import HomeLaoding from './components/HomeLoading';
+import HomeLaoding from './components/Loaders/HomeLoading';
 import TopRated from './components/TopRated';
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 
 import { start } from 'repl';
-import CardLoading from './components/CardLoading';
+import CardLoading from './components/Loaders/CardLoading';
 
 // Initialization for ES Users
 

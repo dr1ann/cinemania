@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect } from 'react';
 
 import Image from 'next/image'
 import star from '../Images/star.png'
-import CardLoading from './CardLoading';
+import CardLoading from './Loaders/CardLoading';
 import Link from 'next/link';
 
 

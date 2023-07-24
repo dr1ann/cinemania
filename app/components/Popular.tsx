@@ -4,7 +4,7 @@ import Image from 'next/image'
 import star from '../Images/star.png'
 import Link from 'next/link';
 
-import CardLoading from './CardLoading';
+import CardLoading from './Loaders/CardLoading';
 
 
 const Popular = () => {

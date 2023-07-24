@@ -9,7 +9,7 @@ import Headroom from 'react-headroom';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SkeletonTheme } from 'react-loading-skeleton';
-
+import _debounce from 'lodash/debounce';
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +24,7 @@ import blackscreen from './Images/black-screen.png';
 import loadingbar from './Images/loading-11.gif';
 
 //Components
-import Modal from './Trailer_Modal';
+import Modal from './Random-Trailer_Modal';
 
 
 
@@ -47,7 +47,7 @@ const Overview = () => {
 
   //change color of header when scrolled
   const changeColor = () => {
-    if(window.scrollY) {
+    if(window.scrollY >= 63.25) {
       setColor(true)
     } else {
       setColor(false)
@@ -62,15 +62,15 @@ const Overview = () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
-
-
+  window.addEventListener('scroll', changeColor)
+  
   useEffect(() => {
 
-    
+
 
     //get the current movie id from the searchParams
     setcurMovieID(searchParams.get('id'))
-    window.addEventListener('scroll', changeColor)
+
 
     //fetch all data from the api
     const DataFromAPI = async () => {
@@ -109,12 +109,12 @@ const Overview = () => {
     //call the function to get all the data
     DataFromAPI();
 
-   //create new function to get the id of the current movie
+
    
-  }, [searchParams.get('id')]);
+  }, []);
 
- 
 
+console.log(movieDetails)
 
   //convert the number to hours and minutes ex.2h 7m
   function time_convert(num: number)
@@ -292,9 +292,9 @@ className="cursor-pointer animate-wiggle"
 
     </div>
    
-    <div className='home-animate pop flex flex-col flex-wrap justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh] md:h-screen  md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
+    <div className='home-animate pop flex flex-col  justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh]  md:min-h-screen   md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 {logoImage ? 
- <Image className=' w-[70%] flex self-center md:self-start px-2 z-10' 
+ <Image className='w-[70%]  sm:w-[60%]    object-contain   flex self-center md:self-start px-2 z-10 md:mt-10' 
  src={logoImage}
  alt='image'
        width={1}
@@ -307,9 +307,9 @@ className="cursor-pointer animate-wiggle"
 
   
    
-<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
+<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] md:text-[2rem]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title}</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
-  <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] 2xl:text-[1.2rem] z-10'>
+  <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] z-10'>
     {movieDetails['release_date'] ?
   <p className=''>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
   :
@@ -359,15 +359,19 @@ className="cursor-pointer animate-wiggle"
           }
 
          {movieVid ?
-        <button className='border-2 border-[#e2b616] px-2 rounded-xl text-[0.85rem] 2xl:text-[1.2rem] pb-[2px] pt-[1px]' onClick={() =>  setIsOpen(true)}> ▷ Random Trailer</button>
+        <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[3px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
+        <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play" color="#fff">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+         Random Trailer</button>
         :
-        <p className='px-2 text-[0.85rem] 2xl:text-[1.2rem]'> No Trailer Available</p>
+        <p className='px-2 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'> No Trailer Available</p>
         }
 
 </div>
 
 {movieDetails.overview ?
-  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>{movieDetails.overview}</p>
+  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] sm:text-center md:text-left md:w-full z-10'>{movieDetails.overview}</p>
   :
   <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
 }
@@ -377,7 +381,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 <div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 shadow-3xl shadow-[#e2b616] rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
     <p className='text-gray-400 '>Status</p>

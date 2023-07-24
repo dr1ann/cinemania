@@ -12,15 +12,15 @@ export default function CardLoading() {
 
     return (
 
-    <div className='grid grid-cols-fit place-content-center'>
+    <div >
 
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
     
-    <Skeleton  height={300} width={200}  className='rounded-xl  '/>
+    <Skeleton  className='rounded-xl  max-w-[11rem] min-w-[11rem] max-h-[250px] min-h-[250px]'/>
     
       </SkeletonTheme>
           
-      <div>
+      <div className='mt-[3px]'>
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
     <Skeleton count={2} />
     </SkeletonTheme>

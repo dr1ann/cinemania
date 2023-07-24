@@ -6,8 +6,10 @@ import Image from 'next/image';
 import axios from 'axios';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
-import Modal from './Trailer_Modal';
-import VidTrailer from './VidTrailer'
+import Modal from './Random-Trailer_Modal';
+import VidTrailer from './Videos'
+import VideosLoading from '../Loaders/VideosLoading'
+import PostersLoading from '../Loaders/PosterLoading'
 interface MovieVideos {
     id?: string
     key?: string
@@ -24,6 +26,9 @@ export default function Media() {
     const [currmovieID, setcurMovieID] = useState<any>({})
     const [isOpen, setIsOpen] = useState(false)
     const [selectedMovieKey, setSelectedMovieKey] =useState<string>('')
+    const [movieVidsReady, setMovieVidsReady] = useState(false);
+  const [movieImagesReady, setMovieImagesReady] = useState(false);
+
      //Authorization to fetch data from the API with its base url
   const axiosInstance = axios.create({
     baseURL: 'https://api.themoviedb.org/3', 
@@ -52,10 +57,11 @@ export default function Media() {
         //getting the data from the API and put values on to its assigned variables
           const [MovieVids, MovieImages] = await Promise.all(apiPromises);
     
-          setMovieVids(MovieVids.data)
-          setMovieImages(MovieImages.data)
-      
-       
+          setMovieVids(MovieVids.data);
+        setMovieVidsReady(true);
+
+        setMovieImages(MovieImages.data);
+        setMovieImagesReady(true);
          
         } catch (error) {
           console.error('Error fetching data:', error); // Catch errors if data is not fetched
@@ -65,6 +71,7 @@ export default function Media() {
       //call the function to get all the data from the api
       DataFromAPI();
   },[] );
+
  // Use the movieId as a seed value for the random number generator
 const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
@@ -127,17 +134,27 @@ const seededRandom = (min: number, max: number, seed: number) => {
        </div>
        {selectedOption === 'Videos' && 
        <div>
+        {!movieVidsReady ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-4'>
+
+   {Array.from({ length: 10 }).map((_, index) => (
+     <VideosLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
        <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
       
  {MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
 
-        <div key={movieVid.id} className='max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/maxresdefault.jpg)` }}>
+        <div key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/maxresdefault.jpg)` }}>
            <button className='trailer-button' onClick={() => { 
             if(movieVid.key !== undefined) {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
             }>
   <i>
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play" color="#fff">
+    <svg  xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play pl-[1.5px]" color="#fff">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
   </i>
@@ -150,15 +167,26 @@ const seededRandom = (min: number, max: number, seed: number) => {
 }
 
 </div>
+}
 </div>
   }
   {selectedOption === 'Posters' && 
        <div>
+          {!movieImagesReady ? 
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-4'>
+
+   {Array.from({ length: 10 }).map((_, index) => (
+     <PostersLoading key={index} />
+   ))}
+       
+       </div> 
+       
+    :
        <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
       
  {randomPostersSubset && randomPostersSubset.map((movieImg: MovieImgs) => (
 
-        <div key={movieImg.file_path} className='max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  relative flex justify-center items-center '>
+        <div key={movieImg.file_path} className='animate pop max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  relative flex justify-center items-center '>
            <Image
            src={  `https://image.tmdb.org/t/p/original${movieImg.file_path}`}
            alt='posters'
@@ -175,10 +203,11 @@ const seededRandom = (min: number, max: number, seed: number) => {
 }
 
 </div>
+}
 </div>
   }
   
-
+  
 
     </div>
   )

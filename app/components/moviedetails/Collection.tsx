@@ -94,14 +94,13 @@ const Collection = () => {
         setCollection(response.data);
         setIsCollectionLoading(false); //Collection now shows data in the webpage
 
-      } else {
-        setIsCollectionLoading(true); // Collection will return empty in the webpage
-        
-      }
-      
+      } 
+     
     } catch (error) {
       console.error(error);
+      
     }
+    
   };
  
 
@@ -111,16 +110,21 @@ const Collection = () => {
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
-
+console.log('yawa')
  
   return (
     
     <div>
 
       
-      {!isCollectionLoading
+      { movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id 
    ?
-   
+   <div>
+  {!isCollectionLoading
+
+  ?
+  
+  
    
 <div style={{backgroundPosition: 'center bottom 50%', backgroundAttachment:'fixed',
  backgroundImage: `linear-gradient(to top, rgba(7, 15, 21, 0.98), rgba(7, 15, 21, 0.85)),
@@ -211,9 +215,16 @@ const Collection = () => {
 </ul>
 </div>
 :
+<CollectionLoading />
+}
+</div>
+
+:
 ''
 }
+
     </div>
+    
   );
 }
 export default Collection;

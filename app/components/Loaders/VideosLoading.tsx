@@ -8,21 +8,21 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 
 
 
-export default function CollectionLoading() {
+export default function VideosLoading() {
 
     return (
 
-        <div className='h-[500px] w-[95%] mx-auto mt-4'>
+      
 
         <SkeletonTheme baseColor="#202020" highlightColor="#444">
         
-        <Skeleton   style={{ height: '100%', width: '100%' }}  className='rounded-xl '/>
+        <Skeleton   className='rounded-xl max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem]  '/>
         
           </SkeletonTheme>
               
          
         
-              </div>
+             
     )
 }
 
