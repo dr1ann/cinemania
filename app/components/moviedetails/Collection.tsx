@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-
+import Link from 'next/link';
 
 
 // Images
@@ -110,7 +110,7 @@ const Collection = () => {
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
-console.log('yawa')
+console.log(collection && collection.parts)
  
   return (
     
@@ -173,9 +173,15 @@ console.log('yawa')
           />
     
      {movie['original_title'] ?
-       <a href='/' className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+      <Link
+      href={{
+       pathname: `/components/moviedetails`,
+       query:  { id: movie.id }, // the data
+     }} >
+       <p className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
            {movie['original_title']}
-          </a>
+          </p>
+          </Link>
           :
           <p className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
            N/A

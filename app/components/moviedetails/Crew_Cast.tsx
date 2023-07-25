@@ -112,7 +112,9 @@ const Crew_Cast = () => {
        </div> 
        
     :
-
+<div className='relative'>
+      {credits && credits.cast && credits.cast.length > 0
+      ?
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
     {credits && credits.cast && credits.cast.map((movie: MovieCredits) => (
@@ -180,7 +182,10 @@ const Crew_Cast = () => {
 
 }
     
-
+</div>
+:
+<p className='animate pop text-center sm:text-left  text-[1.5rem] p-10 sm:pl-16'>N/A</p>
+}
 </div>
 }
 </div>
@@ -190,9 +195,14 @@ const Crew_Cast = () => {
 
 
 
-    <div>
+    <div >
+     
+   
+      
     <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
     {isPeopleLoading ? 
+
+
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
@@ -202,7 +212,10 @@ const Crew_Cast = () => {
        </div> 
        
     :
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
+    <div className='relative'>
+      {credits && credits.crew && credits.crew.length > 0
+      ?
+    <div className=' flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
 {importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
 
@@ -266,11 +279,14 @@ const Crew_Cast = () => {
 ))
 
 }
-
-
+</div>
+:
+<p className='animate pop text-center sm:text-left  text-[1.5rem] p-10 sm:pl-16'>N/A</p>
+}
 </div>
 }
 </div>
+
     </div>
   );
 }

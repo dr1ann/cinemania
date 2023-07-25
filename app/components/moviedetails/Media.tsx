@@ -185,7 +185,7 @@ export default function Media() {
  ) : (
   // Fallback content to display when movie videos is empty
 
-    <p className='animate pop text-center text-[1.5rem] absolute top-0 right-0 bottom-0 left-0'>No videos available</p>
+    <p className='animate pop text-center text-[1rem] centered-text sm:text-[1.5rem]'>No videos available</p>
  
 )}  
 
@@ -227,7 +227,7 @@ export default function Media() {
     ) : (
       // Fallback content to display when randomPostersSubset is empty
  
-        <p className='animate pop text-center text-[1.5rem] absolute top-0 right-0 bottom-0 left-0'>No posters available</p>
+      <p className='animate pop text-center text-[1rem] sm:text-[1.5rem] centered-text'>No posters available</p>
      
     )}
   </div>

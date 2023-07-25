@@ -2,7 +2,6 @@
 //External Libraries
 import Image from 'next/image'
 
-
 // Components
 import Overview from "./overview";
 import Crew_Cast from "./Crew_Cast";
@@ -16,11 +15,14 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 // Images
 import nextjs from './Images/nextjs.png';
 import tailwind from './Images/tailwind.png';
+
+
 const Page = () => {
+ 
   return (
     
       <body>
-   
+        
     <Overview />
   
     <Crew_Cast />

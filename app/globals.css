@@ -253,10 +253,23 @@ word-spacing: 8px;
 
      box-sizing: border-box;
  }
+ .nobackdrop {
+  background: no-repeat;
+ background-size: cover;
+ height: 40vh;
+ position: absolute;
+ top: 0;
+ width: 100%;
+     background-position: center center;
 
+     box-sizing: border-box;
+ }
  
  @media (min-width: 48rem) {
  .movdetpic {
+  height: 100vh;
+ }
+ .nobackdrop {
   height: 100vh;
  }
 }
@@ -317,4 +330,11 @@ width: inherit;
 
 .wew {
   width: unset;
+}
+.centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) ;
+  
 }

@@ -111,7 +111,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
         <Link
            href={{
             pathname: `/components/moviedetails`,
-            query: movie, // the data
+            query:  { id: movie.id }, // the data
           }} >
           <Image
           className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
@@ -125,7 +125,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
             <Link
            href={{
             pathname: `/components/moviedetails`,
-            query: movie, // the data
+            query:  { id: movie.id }, // the data
           }} >
             <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
          </Link>
