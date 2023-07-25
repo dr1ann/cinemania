@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MovieDetails from './page';
-
+import axios from 'axios';
 interface ModalProps {
   isVisible: boolean;
   onClose?: () => void;
@@ -9,24 +9,31 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isVisible, onClose, getMovieID }) => {
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.themoviedb.org/3', 
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+    },
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [movieVid, setMovieVid] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMovieVid = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${getMovieID}/videos?language=en-US`,
-          {
-            headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-            },
-          }
-        );
-        const data = await response.json();
-        generateRandomVid(data.results);
+
+      
+
+        const response =  await axiosInstance.get(`/movie/${getMovieID}/videos?language=en-US`) //MovieCredits
+       
+    
+      
+        generateRandomVid(response.data && response.data.results);
+    
+     
+       
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data:', error); // Catch errors if data is not fetched
       }
     };
     if (isVisible) {

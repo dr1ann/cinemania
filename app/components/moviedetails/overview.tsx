@@ -294,12 +294,12 @@ className="cursor-pointer animate-wiggle"
    
     <div className='home-animate pop flex flex-col  justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh]  md:min-h-screen   md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 {logoImage ? 
- <Image className='w-[70%]  sm:w-[60%]    object-contain   flex self-center md:self-start px-2 z-10 md:mt-10' 
- src={logoImage}
- alt='image'
-       width={1}
-       height={1}
-/>
+  <Image className='w-[70%]  max-h-[200px] object-contain flex self-center md:self-start px-2 z-10 md:mt-10' 
+  src={logoImage}
+  alt='image'
+        width={1}
+        height={1}
+ />
 : 
 ''
 }
