@@ -359,7 +359,7 @@ className="cursor-pointer animate-wiggle"
           }
 
          {movieVid ?
-        <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[3px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
+        <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[6px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play" color="#fff">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
@@ -381,7 +381,7 @@ className="cursor-pointer animate-wiggle"
 </div>
 
 <div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
     <p className='text-gray-400 '>Status</p>
@@ -431,21 +431,21 @@ className="cursor-pointer animate-wiggle"
    
 
 {movieSoc.facebook_id ?
-  <a href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem]"  />
+  <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer ">
+<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem] "  />
   </a>
 :
 ''
 }
 {movieSoc.instagram_id ?
-  <a href={`https://instagram.com/${movieSoc.instagram_id}` } target="_blank" rel="noopener noreferrer">
+  <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://instagram.com/${movieSoc.instagram_id}` } target="_blank" rel="noopener noreferrer">
 <FontAwesomeIcon icon={faInstagram} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem]"  />
   </a>
 :
 ''
 }
 {movieSoc.twitter_id ?
-  <a href={`https://twitter.com/${movieSoc.twitter_id}` } target="_blank" rel="noopener noreferrer">
+  <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://twitter.com/${movieSoc.twitter_id}` } target="_blank" rel="noopener noreferrer">
 <FontAwesomeIcon icon={faTwitter} className="text-white text-[1.5rem] md:text-[1.75rem] 2xl:text-[2rem]"  />
   </a>
 :

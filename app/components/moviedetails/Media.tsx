@@ -58,35 +58,51 @@ export default function Media() {
           const [MovieVids, MovieImages] = await Promise.all(apiPromises);
     
           setMovieVids(MovieVids.data);
-        setMovieVidsReady(true);
-
-        setMovieImages(MovieImages.data);
-        setMovieImagesReady(true);
+          setMovieImages(MovieImages.data)
+        
+          setMovieVidsReady(true);
+          setMovieImagesReady(true);
          
         } catch (error) {
           console.error('Error fetching data:', error); // Catch errors if data is not fetched
-        }
+        } 
         
       };
       //call the function to get all the data from the api
       DataFromAPI();
   },[] );
 
- // Use the movieId as a seed value for the random number generator
-const seededRandom = (min: number, max: number, seed: number) => {
+
+  const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
     const scaledRandom = min + (random / 233280) * (max - min);
     return Math.floor(scaledRandom);
   };
   
-  // Generate the random start index using the seeded random function
-  const startIndex = seededRandom(0, movieImages && movieImages.posters && movieImages.posters.length - 50, currmovieID);
+  // Check if movieImages.posters is available and has a length greater than 0
+  const postersArray = movieImages?.posters || [];
+  const postersCount = postersArray.length;
   
-  // Get the subset of 50 to 60 posters starting from the randomly generated index
-  const randomPostersSubset = movieImages && movieImages.posters && movieImages.posters.slice(
-    startIndex,
-    startIndex + 50 + seededRandom(0, 11, currmovieID)
-  );
+  // Calculate the startIndex, making sure it is within the bounds of the array
+  const startIndex = seededRandom(0, Math.max(0, postersCount - 50), currmovieID);
+  
+  // Calculate the number of posters to slice, considering the available posters
+  let numberOfPostersToSlice = 0;
+  if (postersCount >= 50) {
+    // If there are 50 or more posters available, generate a random number between 50 and 65
+    numberOfPostersToSlice = 50 + seededRandom(0, 16, currmovieID); // 16 (65 - 50) to have a range from 50 to 65
+  } else {
+    // If there are fewer than 50 posters, take all available posters
+    numberOfPostersToSlice = postersCount;
+  }
+  
+  // Get the subset of posters starting from the randomly generated index
+  const randomPostersSubset = postersArray.slice(startIndex, startIndex + numberOfPostersToSlice);
+  
+
+
+
+
   let vidLength =  MovieVids && MovieVids.results &&MovieVids.results.length 
   let ImgLength =  randomPostersSubset && randomPostersSubset.length
   //handler when the option is changed
@@ -95,10 +111,11 @@ const seededRandom = (min: number, max: number, seed: number) => {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
-  console.log(randomPostersSubset)
+  console.log(movieImages)
   console.log(MovieVids)
   return (
     <div className='relative'>
+      
          <VidTrailer isVisible={isOpen} onClose={() => setIsOpen(false)} selectedMovieKey={selectedMovieKey} />
         <h1  className='mt-10 px-10 mb-4 text-2xl font-bold'>Media</h1>
         <div className='inline-flex items-center  ml-[2.5rem]   justify-start gap-4 rounded-xl'>
@@ -127,7 +144,7 @@ const seededRandom = (min: number, max: number, seed: number) => {
              onChange={handleOptionChange}
            />
         
-        {vidLength ?  `Posters  ${ImgLength}` : 'Posters 0'}
+        {ImgLength ?  `Posters  ${ImgLength}` : 'Posters 0'}
          </label>
        </div>
      
@@ -144,11 +161,13 @@ const seededRandom = (min: number, max: number, seed: number) => {
        </div> 
        
     :
-       <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
+       <div className='flex flex-row overflow-x-scroll  p-10 gap-4 relative'>
+      {MovieVids && MovieVids.results && MovieVids.results.length  > 0 ? (
       
- {MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
+   
+ MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
 
-        <div key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/maxresdefault.jpg)` }}>
+        <div key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/hqdefault.jpg)` }}>
            <button className='trailer-button' onClick={() => { 
             if(movieVid.key !== undefined) {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
@@ -163,8 +182,13 @@ const seededRandom = (min: number, max: number, seed: number) => {
         </div>
         
  ))
-        
-}
+ ) : (
+  // Fallback content to display when movie videos is empty
+
+    <p className='animate pop text-center text-[1.5rem] absolute top-0 right-0 bottom-0 left-0'>No videos available</p>
+ 
+)}  
+
 
 </div>
 }
@@ -182,33 +206,42 @@ const seededRandom = (min: number, max: number, seed: number) => {
        </div> 
        
     :
-       <div className='flex flex-row overflow-x-scroll  p-10 gap-4 '>
-      
- {randomPostersSubset && randomPostersSubset.map((movieImg: MovieImgs) => (
-
-        <div key={movieImg.file_path} className='animate pop max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  relative flex justify-center items-center '>
-           <Image
-           src={  `https://image.tmdb.org/t/p/original${movieImg.file_path}`}
-           alt='posters'
-            className=' w-full h-full rounded-xl'
-           width={1}
-           height={1}
-           />
-
-
+    
+    <div className='flex flex-row overflow-x-scroll p-10 gap-4 relative'>
+    {randomPostersSubset && randomPostersSubset.length > 0 ? (
+      randomPostersSubset.map((movieImg: MovieImgs) => (
+        <div
+          key={movieImg.file_path}
+          className='animate pop max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px] relative flex justify-center items-center'
+        >
+          <Image
+            onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
+            src={`https://image.tmdb.org/t/p/original${movieImg.file_path}`}
+            alt='posters'
+            className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+            width={1}
+            height={1}
+          />
         </div>
-        
- ))
-        
+      ))
+    ) : (
+      // Fallback content to display when randomPostersSubset is empty
+ 
+        <p className='animate pop text-center text-[1.5rem] absolute top-0 right-0 bottom-0 left-0'>No posters available</p>
+     
+    )}
+  </div>
+ 
+
 }
 
 </div>
-}
-</div>
+
   }
   
   
 
     </div>
+    
   )
 }
