@@ -123,30 +123,31 @@ const Crew_Cast = () => {
 
 
 
-<div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
+<div className='flex flex-col justify-center animate pop max-w-[10rem] min-w-[10rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
   src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
   alt={movie['original_name']}
-  width={1}
-  height={1}
-  layout="responsive"
+  fill
+
   
+
+  priority
 />
 </div>
 
   
     :
-    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
-      width={1}
-      height={1}
-      layout="responsive"
-      
+     
+     
+      fill
+      priority
     />
     </div>
   }
@@ -154,9 +155,9 @@ const Crew_Cast = () => {
  
     <p className='font-bold  mt-4 truncate text-[0.85rem] sm:text-[1rem]'>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
     {movie.character ?
-        <p className=' text-[0.78rem] sm:text-[0.813rem]  text-gray-300'>{movie['character']}</p> 
+        <p className=' text-[0.78rem] sm:text-[0.813rem] truncate  text-gray-300'>{movie['character']}</p> 
         :
-        <p className='text-[0.78rem] sm:text-[0.813rem]'>N/A</p> 
+        <p className='text-[0.78rem] truncate sm:text-[0.813rem]'>N/A</p> 
   }
 
     <div className='flex  justify-between items-center py-[5px] '>
@@ -223,30 +224,29 @@ const Crew_Cast = () => {
 <div key={movie['credit_id']}> 
 
 
-<div className='flex flex-col justify-center animate pop max-w-[11rem] min-w-[11rem]'>
+<div className='flex flex-col justify-center animate pop max-w-[10rem] min-w-[10rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full relative   max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
   src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
   alt={movie['original_name']}
-  width={1}
-  height={1}
-  layout="responsive"
-  
+  fill
+
+  priority
 />
 </div>
 
   
     :
-    <div className='max-w-[11rem] min-w-[11rem] object-contain max-h-[250px] min-h-[250px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
-      width={1}
-      height={1}
-      layout="responsive"
-      
+     
+     
+      fill
+      priority
     />
     </div>
   }

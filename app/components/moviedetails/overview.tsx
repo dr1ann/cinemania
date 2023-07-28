@@ -36,8 +36,7 @@ const Overview = () => {
   const [movieVid, setMovieVid] = useState<any>({});
   const [movielogo, setmovieLogo] = useState<any>({});
   const [movieSoc, setMovieSoc] = useState<any>({});
-  const [navbar, setNavbar] = useState(false);
-  const [color, setColor] = useState(false)
+
   const [isLoading, setIsLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
   const [currmovieID, setcurMovieID] = useState<any>({})
@@ -45,14 +44,7 @@ const Overview = () => {
 
 
 
-  //change color of header when scrolled
-  const changeColor = () => {
-    if(window.scrollY >= 63.25) {
-      setColor(true)
-    } else {
-      setColor(false)
-    }
-  }
+ 
 
 
   //Authorization to fetch data from the API with its base url
@@ -62,7 +54,7 @@ const Overview = () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
-  window.addEventListener('scroll', changeColor)
+ 
   
   useEffect(() => {
 

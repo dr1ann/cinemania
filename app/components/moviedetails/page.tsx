@@ -21,7 +21,7 @@ const Page = () => {
  
   return (
     
-      <body>
+      <div>
         
     <Overview />
   
@@ -68,7 +68,7 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 
 </div>
 </footer>
-       </body>
+       </div>
   );
 }
 

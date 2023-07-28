@@ -16,7 +16,7 @@ export default function CardLoading() {
 
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
     
-    <Skeleton  className='rounded-xl  max-w-[11rem] min-w-[11rem] max-h-[250px] min-h-[250px]'/>
+    <Skeleton  className='rounded-xl  max-w-[10rem] min-w-[10rem] max-h-[220px] min-h-[220px]'/>
     
       </SkeletonTheme>
           

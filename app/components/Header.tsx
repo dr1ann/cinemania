@@ -11,26 +11,26 @@ import icon from '../Images/icon.png';
 export default function Header() {
     const [navbar, setNavbar] = useState(false);
     const [color, setColor] = useState(false)
-    const changeColor = () => {
-        if(window.scrollY >= 63.25) {
-          setColor(true)
-        } else {
-          setColor(false)
-        }
-      }
-      useEffect(() => {
-        // Add event listener on the client side
-        window.addEventListener('scroll', changeColor);
+    // const changeColor = () => {
+    //     if(window.scrollY >= 63.25) {
+    //       setColor(true)
+    //     } else {
+    //       setColor(false)
+    //     }
+    //   }
+    //   useEffect(() => {
+    //     // Add event listener on the client side
+    //     window.addEventListener('scroll', changeColor);
     
-        // Clean up the event listener on unmounting
-        return () => {
-          window.removeEventListener('scroll', changeColor);
-        };
-      }, []);
+    //     // Clean up the event listener on unmounting
+    //     return () => {
+    //       window.removeEventListener('scroll', changeColor);
+    //     };
+    //   }, []);
   return (
-    <div>
+   
     <Headroom>
-    <nav id='changeHeight' className={color ? 'new-bg' : 'myHeader'} >
+    <nav id='changeHeight' className='myHeader' >
     <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
       <div>
         <div className="flex items-center justify-between   md:block" >
@@ -145,6 +145,6 @@ className="cursor-pointer animate-wiggle"
     </div>
   </nav>
   </Headroom>
-  </div>
+ 
   )
 }
