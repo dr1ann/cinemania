@@ -140,6 +140,7 @@ console.log(collection && collection.parts)
         src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
       loading='lazy'
+      
       fill
         />
       </div>
