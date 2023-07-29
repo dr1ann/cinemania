@@ -6,7 +6,7 @@ import Image from 'next/image';
 import axios from 'axios';
 
 //Components
-import CardLoading from '../Loaders/CardLoading';
+import CardLoading from '../components/Loaders/CardLoading';
 
 //type
 type MovieCredits = {
@@ -123,12 +123,12 @@ const Crew_Cast = () => {
 
 
 
-<div className='flex flex-col justify-center animate pop max-w-[10rem] min-w-[10rem]'>
+<div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full relative  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
-  src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+  src={`https://image.tmdb.org/t/p/w138_and_h175_bestv2${movie['profile_path']}`}
   alt={movie['original_name']}
   fill
 
@@ -140,7 +140,7 @@ const Crew_Cast = () => {
 
   
     :
-    <div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full relative  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}
@@ -224,12 +224,12 @@ const Crew_Cast = () => {
 <div key={movie['credit_id']}> 
 
 
-<div className='flex flex-col justify-center animate pop max-w-[10rem] min-w-[10rem]'>
+<div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full relative   max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full relative   max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
-  src={`https://image.tmdb.org/t/p/original${movie['profile_path']}`}
+   src={`https://image.tmdb.org/t/p/w138_and_h175_bestv2${movie['profile_path']}`}
   alt={movie['original_name']}
   fill
 
@@ -239,7 +239,7 @@ const Crew_Cast = () => {
 
   
     :
-    <div className='max-w-full min-w-full relative  max-h-[220px] min-h-[220px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full relative   max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
     <Image
       src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
       alt={movie['original_name']}

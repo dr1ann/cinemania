@@ -8,8 +8,9 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 import Modal from './Random-Trailer_Modal';
 import VidTrailer from './Videos'
-import VideosLoading from '../Loaders/VideosLoading'
-import PostersLoading from '../Loaders/PosterLoading'
+import VideosLoading from '../components/Loaders/VideosLoading'
+import PostersLoading from '../components/Loaders/PosterLoading'
+import blackscreen from './Images/black-screen.png'
 interface MovieVideos {
     id?: string
     key?: string
@@ -28,7 +29,7 @@ export default function Media() {
     const [selectedMovieKey, setSelectedMovieKey] =useState<string>('')
     const [movieVidsReady, setMovieVidsReady] = useState(false);
   const [movieImagesReady, setMovieImagesReady] = useState(false);
-
+  const blurDataURL = `data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMDAwIDEwMDAiIHJvbGU9IjEiIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iLjEiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIHZlcnNpb249IjEuMSI+PHBhdGggZD0iTTEwMDAsNzAwdjcwMGgyMDB2NzAwSDEwMDB2NzAwWiIvPjwvc3ZnPg==`;
      //Authorization to fetch data from the API with its base url
   const axiosInstance = axios.create({
     baseURL: 'https://api.themoviedb.org/3', 
@@ -212,15 +213,16 @@ export default function Media() {
       randomPostersSubset.map((movieImg: MovieImgs) => (
         <div
           key={movieImg.file_path}
-          className='animate pop max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px] relative flex justify-center items-center'
+          className='animate pop max-w-[9.375rem] rounded-xl min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
           <Image
-            onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
-            src={`https://image.tmdb.org/t/p/original${movieImg.file_path}`}
+            onClick={() => window.open(`https://image.tmdb.org/t/p/w150_and_h225_bestv2${movieImg.file_path}`, '_blank')}
+            src={`https://image.tmdb.org/t/p/w150_and_h225_bestv2${movieImg.file_path}`}
             alt='posters'
             className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-            width={1}
-            height={1}
+            fill
+            priority
+          
           />
         </div>
       ))

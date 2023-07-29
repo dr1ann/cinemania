@@ -3,10 +3,9 @@
 import Image from 'next/image'
 
 // Components
-import Overview from "./overview";
-import Crew_Cast from "./Crew_Cast";
-import Collection from "./Collection";
-import Media from './Media';
+
+
+import dynamic from 'next/dynamic'
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -15,10 +14,14 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 // Images
 import nextjs from './Images/nextjs.png';
 import tailwind from './Images/tailwind.png';
-
+// Client Components:
+const Overview = dynamic(() => import('./overview'))
+const Crew_Cast = dynamic(() => import('./Crew_Cast'))
+const Collection = dynamic(() => import('./Collection'))
+const Media = dynamic(() => import('./Media'))
 
 const Page = () => {
- 
+
   return (
     
       <div>
@@ -27,7 +30,7 @@ const Page = () => {
   
     <Crew_Cast />
     <Collection />
-    <Media />
+    <Media  />
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>

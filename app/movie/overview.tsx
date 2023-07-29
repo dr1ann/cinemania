@@ -25,8 +25,8 @@ import loadingbar from './Images/loading-11.gif';
 
 //Components
 import Modal from './Random-Trailer_Modal';
-import Header from '../Header';
-
+import Header from '../components/Header';
+import HomeLoading from '../components/Loaders/HomeLoading';
 
 const Overview = () => {
 
@@ -134,23 +134,13 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
   //get the logo image of the movie
-  const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/original${firstLogo.file_path}`
+  const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/w500${firstLogo.file_path}`
   return (
     
      
 <div>
   {isLoading  ?
-           <div className='h-screen flex flex-col  items-center relative'>
-
-           <SkeletonTheme baseColor="#202020" highlightColor="#444">
-           
-           <Skeleton   style={{ height: '100vh', width: '100vw' }}  className='rounded-xl '/>
-           
-             </SkeletonTheme>
-                 
-            
-           
-                 </div>
+       <HomeLoading />
          :
          <div>
           {movieDetails && movieDetails.backdrop_path ?
@@ -193,6 +183,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   alt='image'
         width={1}
         height={1}
+        priority
  />
 : 
 ''

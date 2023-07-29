@@ -110,7 +110,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
         <div className='flex flex-col justify-center  animate pop'>
         <Link
            href={{
-            pathname: `/components/moviedetails`,
+            pathname: `/movie`,
             query:  { id: movie.id }, // the data
           }} >
           <Image
@@ -124,7 +124,7 @@ fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', populartv
             </Link>
             <Link
            href={{
-            pathname: `/components/moviedetails`,
+            pathname: `/movie`,
             query:  { id: movie.id }, // the data
           }} >
             <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>

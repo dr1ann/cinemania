@@ -119,7 +119,7 @@ export default function Trending() {
        
           <Link
            href={{
-            pathname: `/components/moviedetails`,
+            pathname: `/movie`,
             query:  { id: movie.id }, // the data
           }}
        
@@ -137,7 +137,7 @@ export default function Trending() {
 
          <Link
            href={{
-            pathname: `/components/moviedetails`,
+            pathname: `/movie`,
             query:  { id: movie.id }, // the data
           }} >
             <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>

@@ -12,7 +12,7 @@ import Link from 'next/link';
 import star from './Images/star.png';
 import blackscreen from './Images/black-screen.png';
 
-import CollectionLoading from './CollectionLoading';
+import CollectionLoading from '../components/Loaders/CollectionLoading';
 //types
 
 type movieCollection = {
@@ -134,16 +134,15 @@ console.log(collection && collection.parts)
     <div className="fade-effect-top-collection"></div>
     <div className="fade-effect-bottom-collection"></div>
   <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
-  
+  <div className='hidden z-[9999] animate pop relative  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4  sm:flex self-center   '>
     <Image
-    className='hidden z-[9999] animate pop  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4 cursor-pointer sm:flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/original${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
+        className='max-w-full min-w-full rounded-xl max-h-full min-h-full'
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
-        width={1}
-        height={1}
-      
+       priority
+      fill
         />
-      
+      </div>
    
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
@@ -163,15 +162,14 @@ console.log(collection && collection.parts)
 <li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
 
    
-       
-          <Image
-      className='w-full  sm:min-h-[250px] sm:max-h-[250px] cursor-pointer flex self-center rounded-xl  hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/original${movie['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
+<Image
+      className='w-full  sm:min-h-[250px] sm:max-h-[250px]  flex self-center rounded-xl'
+          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
           alt={movie['original_title']}
           width={1}
           height={1}
+          priority
           />
-    
      {movie['original_title'] ?
       <Link
       href={{
@@ -202,12 +200,12 @@ console.log(collection && collection.parts)
           />
           {movie['vote_average']
           ?
-           <p className='text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className='text-[0.85rem] sm:text-[1rem]'>N/A</p>
+          <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]'>N/A</p>
   }
             </div>
-            <p className='text-[0.85rem] sm:text-[1rem]'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
             </li>     
