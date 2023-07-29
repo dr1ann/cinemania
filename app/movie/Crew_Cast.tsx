@@ -131,23 +131,22 @@ const Crew_Cast = () => {
 src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
 className='w-full h-full'
 srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']} 1x, https://image.tmdb.org/t/p/w276_and_h350_face${movie['profile_path']} 2x`}
-
+loading='eager'
 alt={movie['original_name']} />
 
 </div>
-  
-    :
-    <Image
- className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
- src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
-  alt={movie['original_name']}
-  layout='responsive'
-    priority
-width={138}
-height={175}
 
-  
-/>
+
+    :
+    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <img  
+ src="https://via.placeholder.com/138x175/3F3F3F/FFFFFF/?text=Profile N/A"
+    className='w-full h-full'
+   
+    loading='eager'
+    alt={movie['original_name']} />
+    
+    </div>
   }
 
  
@@ -170,7 +169,12 @@ height={175}
 
 
     </div>
+    {movie['known_for_department']
+    ?
     <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['known_for_department']}</p>
+:
+<p className='text-[0.85rem] sm:text-[0.9rem]'>N/A</p>
+  }
 
     </div>
     </div>     
@@ -225,27 +229,26 @@ height={175}
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full relative   max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-<Image
-   src={`https://image.tmdb.org/t/p/w138_and_h175_bestv2${movie['profile_path']}`}
-  alt={movie['original_name']}
-  fill
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<img  
+src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
+className='w-full h-full'
+srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']} 1x, https://image.tmdb.org/t/p/w276_and_h350_face${movie['profile_path']} 2x`}
 
-  loading='lazy'
-/>
+alt={movie['original_name']} />
+
 </div>
 
-  
+
     :
-    <div className='max-w-full min-w-full relative   max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-    <Image
-      src="https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Profile N/A"
-      alt={movie['original_name']}
-     
-     
-      fill
-      loading='lazy'
-    />
+    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <img  
+ src="https://via.placeholder.com/138x175/3F3F3F/FFFFFF/?text=Profile N/A"
+    className='w-full h-full'
+   
+   
+    alt={movie['original_name']} />
+    
     </div>
   }
 
@@ -265,8 +268,12 @@ height={175}
 
 
     </div>
+    {movie['job'] ?
+   
     <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['job']}</p>
-
+    :
+    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['known_for_department']}</p>
+  }
     </div>
     </div>     
 </div>

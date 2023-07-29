@@ -137,7 +137,8 @@ console.log(collection && collection.parts)
   <div className='hidden z-[9999] animate pop relative  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4  sm:flex self-center   '>
     <Image
         className='max-w-full min-w-full rounded-xl max-h-full min-h-full'
-        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
+       
         alt={collection['poster_path']}
       loading='lazy'
       
@@ -160,29 +161,39 @@ console.log(collection && collection.parts)
 
         
        
-<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[11rem] sm:max-w-[11rem]'>
+<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
+
 
    
-<Image
-      className='w-full  sm:min-h-[250px] sm:max-h-[250px]  flex self-center rounded-xl'
-          src={movie['poster_path'] ? `https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
-          alt={movie['original_title']}
-          width={1}
-          height={1}
-          loading='lazy'
-          />
+
+         {movie['poster_path']
+         ?
+<img  
+src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
+className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-xl'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
+loading='lazy'
+alt={movie['original_title']} />
+:
+<img  
+src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A'
+className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-xl'
+
+loading='lazy'
+alt={movie['original_title']} />
+}
      {movie['original_title'] ?
       <Link
       href={{
        pathname: `/components/moviedetails`,
        query:  { id: movie.id }, // the data
      }} >
-       <p className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+       <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
            {movie['original_title']}
           </p>
           </Link>
           :
-          <p className='truncate   text-[0.85rem] sm:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+          <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
            N/A
           </p>
 }
@@ -201,12 +212,12 @@ console.log(collection && collection.parts)
           />
           {movie['vote_average']
           ?
-           <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]'>N/A</p>
+          <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]'>N/A</p>
   }
             </div>
-            <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] sm:text-[1rem]  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
             </li>     

@@ -215,16 +215,16 @@ export default function Media() {
           key={movieImg.file_path}
           className='animate pop max-w-[9.375rem] rounded-xl min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
-          <Image
-            onClick={() => window.open(`https://image.tmdb.org/t/p/w150_and_h225_bestv2${movieImg.file_path}`, '_blank')}
-            src={`https://image.tmdb.org/t/p/w150_and_h225_bestv2${movieImg.file_path}`}
-            alt='posters'
-            className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-            fill
-           priority
-          
-          />
-        </div>
+       
+<img  
+src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
+className='w-full h-full rounded-xl'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
+loading='eager'
+alt={movieImg.file_path} />
+
+</div>
+       
       ))
     ) : (
       // Fallback content to display when randomPostersSubset is empty
