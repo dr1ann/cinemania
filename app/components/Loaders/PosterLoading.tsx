@@ -16,7 +16,7 @@ export default function VideosLoading() {
 
         <SkeletonTheme baseColor="#202020" highlightColor="#444">
         
-        <Skeleton   className=' max-w-[10rem] rounded-xl min-w-[10rem] min-h-[250px] max-h-[250px]  '/>
+        <Skeleton   className=' max-w-[9.375rem] rounded-xl min-w-[9.375rem] min-h-[225px] max-h-[225px]  '/>
         
           </SkeletonTheme>
               
