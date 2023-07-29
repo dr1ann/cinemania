@@ -132,7 +132,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 
 
   //get the bg image of the movie
-  const bgImage = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`
+  const bgImage = `https://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`
   //get the logo image of the movie
   const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/w500${firstLogo.file_path}`
   return (

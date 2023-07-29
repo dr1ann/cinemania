@@ -139,7 +139,7 @@ console.log(collection && collection.parts)
         className='max-w-full min-w-full rounded-xl max-h-full min-h-full'
         src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
         alt={collection['poster_path']}
-       priority
+      loading='lazy'
       fill
         />
       </div>
@@ -168,7 +168,7 @@ console.log(collection && collection.parts)
           alt={movie['original_title']}
           width={1}
           height={1}
-          priority
+          loading='lazy'
           />
      {movie['original_title'] ?
       <Link

@@ -128,13 +128,13 @@ const Crew_Cast = () => {
 
 <div className='max-w-full min-w-full relative  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
 <Image
-  src={`https://image.tmdb.org/t/p/w138_and_h175_bestv2${movie['profile_path']}`}
+  src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
   alt={movie['original_name']}
   fill
-
+    priority
   
 
-  priority
+  
 />
 </div>
 
@@ -233,7 +233,7 @@ const Crew_Cast = () => {
   alt={movie['original_name']}
   fill
 
-  priority
+  loading='lazy'
 />
 </div>
 
@@ -246,7 +246,7 @@ const Crew_Cast = () => {
      
      
       fill
-      priority
+      loading='lazy'
     />
     </div>
   }

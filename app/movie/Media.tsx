@@ -221,7 +221,7 @@ export default function Media() {
             alt='posters'
             className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
             fill
-            priority
+           priority
           
           />
         </div>
