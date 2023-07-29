@@ -126,20 +126,15 @@ const Crew_Cast = () => {
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<img  
+src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
+className='w-full h-full'
+srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']} 1x, https://image.tmdb.org/t/p/w276_and_h350_face${movie['profile_path']} 2x`}
 
-<Image
- className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-  src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
-  alt={movie['original_name']}
-  layout='responsive'
-    priority
-width={138}
-height={175}
+alt={movie['original_name']} />
 
-  
-/>
-
-
+</div>
   
     :
     <Image
