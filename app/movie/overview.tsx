@@ -164,7 +164,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   
    :
    
-   <div className='nobackdrop relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url('https://via.placeholder.com/220x330/141414/808080/?text=Backdrop N/A')` }}>
+   <div className='nobackdrop relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url('https://via.placeholder.com/220x330/141414/808080/?text=BACKDROP N/A')` }}>
  <div className="fade-effectcp md:hidden"></div>
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>

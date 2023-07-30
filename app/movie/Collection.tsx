@@ -137,7 +137,7 @@ console.log(collection && collection.parts)
   <div className='hidden z-[9999] animate pop relative  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4  sm:flex self-center   '>
     <Image
         className='max-w-full min-w-full rounded-xl max-h-full min-h-full'
-        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A"}
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"}
        
         alt={collection['poster_path']}
       loading='lazy'
@@ -176,7 +176,7 @@ loading='lazy'
 alt={movie['original_title']} />
 :
 <img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=Poster N/A'
+src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-xl'
 
 loading='lazy'

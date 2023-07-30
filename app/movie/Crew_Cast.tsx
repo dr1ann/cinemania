@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-
+import noprofile from './Images/noprofile.png'
 //Components
 import CardLoading from '../components/Loaders/CardLoading';
 
@@ -139,10 +139,10 @@ alt={movie['original_name']} />
 
     :
     <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-    <img  
- src="https://via.placeholder.com/138x175/3F3F3F/FFFFFF/?text=Profile N/A"
+    <Image  
+ src={noprofile}
     className='w-full h-full'
-   
+   fill
     loading='eager'
     alt={movie['original_name']} />
     
@@ -242,11 +242,11 @@ alt={movie['original_name']} />
 
     :
     <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-    <img  
- src="https://via.placeholder.com/138x175/3F3F3F/FFFFFF/?text=Profile N/A"
+    <Image  
+ src={noprofile}
     className='w-full h-full'
-   
-   
+   fill
+    loading='eager'
     alt={movie['original_name']} />
     
     </div>
