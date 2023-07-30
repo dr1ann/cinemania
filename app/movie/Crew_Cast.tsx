@@ -84,7 +84,7 @@ const Crew_Cast = () => {
 
  
 
-
+console.log(credits && credits.crew )
  
 
 
@@ -122,14 +122,14 @@ const Crew_Cast = () => {
 
     {credits && credits.cast && credits.cast.map((movie: MovieCredits) => (
 
-<div key={movie['credit_id']}> 
+<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl'> 
 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-xl overflow-hidden'>
 <img  
 src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
 className='w-full h-full'
@@ -141,11 +141,11 @@ alt={movie['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full  rounded-t-xl max-h-[175px] min-h-[175px] flex self-center  overflow-hidden'>
     <Image  
  src={noprofile}
     className='w-full h-full'
-   fill
+  
     loading='eager'
     alt={movie['original_name']} />
     
@@ -153,33 +153,14 @@ alt={movie['original_name']} />
   }
 
  
-    <p className='font-bold  mt-4 truncate text-[0.85rem] sm:text-[1rem]'>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
+    <p className='font-bold  pt-2 px-2  text-[0.85rem] sm:text-[1rem]'>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
     {movie.character ?
-        <p className=' text-[0.78rem] sm:text-[0.813rem] truncate  text-gray-300'>{movie['character']}</p> 
+        <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]   text-gray-300'>{movie['character']}</p> 
         :
-        <p className='text-[0.78rem] truncate sm:text-[0.813rem]'>N/A</p> 
+        <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>N/A</p> 
   }
 
-    <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-1'>
-     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-     {movie['popularity'] ?
-       <p className='text-[0.85rem] sm:text-[1rem]'>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
-
-        :
-        <p className='text-[0.85rem] sm:text-[1rem]'>0</p>
-     }
-
-
-    </div>
-    {movie['known_for_department']
-    ?
-    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['known_for_department']}</p>
-:
-<p className='text-[0.85rem] sm:text-[0.9rem]'>N/A</p>
-  }
-
-    </div>
+    
     </div>     
 </div>
 
@@ -226,13 +207,13 @@ alt={movie['original_name']} />
 {importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
 
 
-<div key={movie['credit_id']}> 
+<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl'> 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px]  flex self-center rounded-t-xl overflow-hidden'>
 <img  
 src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
 className='w-full h-full'
@@ -244,11 +225,11 @@ alt={movie['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] cursor-pointer flex self-center rounded-xl overflow-hidden hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-xl overflow-hidden '>
     <Image  
  src={noprofile}
     className='w-full h-full'
-   fill
+   
     loading='eager'
     alt={movie['original_name']} />
     
@@ -256,28 +237,15 @@ alt={movie['original_name']} />
   }
 
  
-    <p className='font-bold  mt-4 truncate text-[0.85rem] sm:text-[1rem] '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
-   
-
-    <div className='flex  justify-between items-center py-[5px] '>
-     <div className=' flex flex-row items-center gap-1'>
-     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-     {movie['popularity'] ?
-        <p className='text-[0.85rem] sm:text-[1rem]'>{movie['popularity'].toFixed(1).replace(/\.0$/, '')}%</p>
-
-        :
-        <p className='text-[0.85rem] sm:text-[1rem]'>0</p>
-     }
-
-
-    </div>
+    <p className='font-bold  pt-2 px-2 text-[0.85rem] sm:text-[1rem] '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
     {movie['job'] ?
    
-    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['job']}</p>
-    :
-    <p className='text-[0.85rem] sm:text-[0.9rem]'>{movie['known_for_department']}</p>
-  }
-    </div>
+   <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem] text-gray-300'>{movie['job']}</p> 
+        :
+        <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>{movie['known_for_department']}</p> 
+ }
+
+    
     </div>     
 </div>
 
