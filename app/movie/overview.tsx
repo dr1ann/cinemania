@@ -4,12 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
-import Headroom from 'react-headroom';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
-import { SkeletonTheme } from 'react-loading-skeleton';
-import _debounce from 'lodash/debounce';
+
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,11 +12,10 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 
 // Images
-import icon from './Images/icon.png';
-import star from './Images/star.png';
-import tmdbicon from './Images/tmdb.png';
-import blackscreen from './Images/TEST.jpg';
-import loadingbar from './Images/loading-11.gif';
+
+import star from '../Images/star.png';
+import tmdbicon from '../Images/tmdb.png';
+
 
 //Components
 import Modal from './Random-Trailer_Modal';

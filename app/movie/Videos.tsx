@@ -9,7 +9,7 @@ const VidTrailer: React.FC<VidTrailerProps> = ({ selectedMovieKey, isVisible, on
    
 
 
-    const videoUrl = `https://www.youtube.com/embed/${selectedMovieKey}`;
+ 
   if (!selectedMovieKey) {
        
       return null; // Return null or some default content when no video is selected

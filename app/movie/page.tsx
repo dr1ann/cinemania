@@ -2,35 +2,36 @@
 //External Libraries
 import Image from 'next/image'
 
-// Components
 
-
-import dynamic from 'next/dynamic'
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { lazy, Suspense } from 'react';
+import Loading from '../components/Loaders/PageLoading'
 
 // Images
-import nextjs from './Images/nextjs.png';
-import tailwind from './Images/tailwind.png';
+import nextjs from '../Images/nextjs.png';
+import tailwind from '../Images/tailwind.png';
+
 // Client Components:
-const Overview = dynamic(() => import('./overview'))
-const Crew_Cast = dynamic(() => import('./Crew_Cast'))
-const Collection = dynamic(() => import('./Collection'))
-const Media = dynamic(() => import('./Media'))
+const Overview = lazy(() => import('./overview'))
+const Crew_Cast = lazy(() => import('./Crew_Cast'))
+const Collection = lazy(() => import('./Collection'))
+const Media = lazy(() => import('./Media'))
 
 const Page = () => {
 
   return (
     
       <div>
-        
+        <Suspense fallback={<Loading />}>
     <Overview />
   
     <Crew_Cast />
     <Collection />
     <Media  />
+  
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
@@ -71,6 +72,7 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 
 </div>
 </footer>
+</Suspense>
        </div>
   );
 }

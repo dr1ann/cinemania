@@ -4,7 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-import noprofile from './Images/noprofile.png'
+
+//Images
+import noprofile from '../Images/noprofile.png'
+
 //Components
 import CardLoading from '../components/Loaders/CardLoading';
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import MovieDetails from './page';
 import axios from 'axios';
 interface ModalProps {
   isVisible: boolean;

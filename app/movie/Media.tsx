@@ -4,13 +4,12 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
-import Headroom from 'react-headroom';
-import Modal from './Random-Trailer_Modal';
+
+//Components
 import VidTrailer from './Videos'
 import VideosLoading from '../components/Loaders/VideosLoading'
 import PostersLoading from '../components/Loaders/PosterLoading'
-import blackscreen from './Images/black-screen.png'
+
 interface MovieVideos {
     id?: string
     key?: string
@@ -218,10 +217,12 @@ export default function Media() {
        
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
-className='w-full h-full rounded-xl'
+className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
 loading='eager'
-alt={movieImg.file_path} />
+alt={movieImg.file_path} 
+onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
+/>
 
 </div>
        

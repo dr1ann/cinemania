@@ -9,12 +9,13 @@ import Link from 'next/link';
 
 // Images
 
-import star from './Images/star.png';
-import blackscreen from './Images/black-screen.png';
+import star from '../Images/star.png';
+import blackscreen from '../Images/black-screen.png';
 
+//components
 import CollectionLoading from '../components/Loaders/CollectionLoading';
-//types
 
+//types
 type movieCollection = {
     id: number;
     name: string;
