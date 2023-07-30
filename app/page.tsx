@@ -5,12 +5,11 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image'
 import icon from './Images/icon.png'
 import star from './Images/star.png'
-import search from './Images/search.png'
+
 import nextjs from './Images/nextjs.png'
 import tailwind from './Images/tailwind.png'
-import dotbar from './Images/dotbar.png'
-import popular from './Images/popular.png'
-import { Suspense } from 'react'
+
+
 import Trending from './components/Trending';
 import Popular from './components/Popular';
 import HomeLaoding from './components/Loaders/HomeLoading';
