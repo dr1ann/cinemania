@@ -19,6 +19,7 @@ const Overview = lazy(() => import('./overview'))
 const Crew_Cast = lazy(() => import('./Crew_Cast'))
 const Collection = lazy(() => import('./Collection'))
 const Media = lazy(() => import('./Media'))
+
 import CardLoading from '../components/Loaders/CardLoading';
 import HomeLoading from '../components/Loaders/HomeLoading';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
@@ -38,25 +39,27 @@ const Page = () => {
       // For example, you can trigger a full page reload using window.location.reload()
       window.location.reload();
 
-    } else {
-   
     }
+
   }, [searchParams, isLoading]);
 
   return (
     
-      <div>
+    
         
         <Suspense fallback={<Loading />}>
 
       
   
 
+
 <Suspense fallback={<HomeLoading />}>
     <Overview />
     </Suspense>
 
-    <Suspense fallback={<CardLoading />}>
+    <Suspense fallback= {Array.from({ length: 10 }).map((_, index) => (
+     <CardLoading key={index} />
+   ))}>
     <Crew_Cast />
     </Suspense>
 
@@ -64,10 +67,13 @@ const Page = () => {
     <Collection />
     </Suspense>
 
-    <Suspense fallback={<VideosLoading />}>
+    <Suspense fallback= {Array.from({ length: 10 }).map((_, index) => (
+     <VideosLoading key={index} />
+   ))}>
 
     <Media  />
-  </Suspense>
+  </Suspense>	
+ 
 
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
@@ -110,7 +116,7 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 </div>
 </footer>
 </Suspense>
-       </div>
+       
   );
 }
 
