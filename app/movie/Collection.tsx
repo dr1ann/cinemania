@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 
 // Images
 
@@ -25,8 +25,11 @@ type movieCollection = {
     vote_average: number;
     overview: string;
   }
-const Collection = () => {
-
+const Collection =  () => {
+  const router = useRouter();
+  const handleRefreshClick = () => {
+    window.location.reload(); // Refresh the current page
+  };
   //use states
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
@@ -111,7 +114,7 @@ const Collection = () => {
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
-console.log(collection && collection.parts)
+
  
   return (
     
@@ -149,7 +152,7 @@ console.log(collection && collection.parts)
    
     <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
     
-<h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : ' Collection Name N/A'}</h1>
+<h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
 <p className='text-[0.85rem] animate pop xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview  ? collection.overview: 'No overview available'}</p>
 
 </div>
@@ -185,13 +188,15 @@ alt={movie['original_title']} />
 }
      {movie['original_title'] ?
       <Link
+      className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
-       pathname: `/components/moviedetails`,
+       pathname: `/movie`,
        query:  { id: movie.id }, // the data
-     }} >
-       <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
-           {movie['original_title']}
-          </p>
+     
+     }}
+    
+      >
+       {movie['original_title']}
           </Link>
           :
           <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
@@ -201,7 +206,7 @@ alt={movie['original_title']} />
           
          
           
-            <div className='flex  justify-between items-center py-[5px] '>
+            <div className='flex  justify-between gap-6 items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-1'>
              <Image
          className='h-[0.9rem] w-[0.9rem] sm:h-[1rem] sm:w-[1rem] object-contain'
@@ -213,12 +218,12 @@ alt={movie['original_title']} />
           />
           {movie['vote_average']
           ?
-           <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]'>N/A</p>
+          <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>N/A</p>
   }
             </div>
-            <p className='text-[0.75rem] collectionsmallscreen:text-[0.85rem] md:text-[1rem]  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
             </li>     

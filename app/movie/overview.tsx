@@ -22,7 +22,7 @@ import Modal from './Random-Trailer_Modal';
 import Header from '../components/Header';
 import HomeLoading from '../components/Loaders/HomeLoading';
 
-const Overview = () => {
+const Overview =   () => {
 
   //use states
   const searchParams = useSearchParams();
@@ -239,7 +239,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 
          {movieVid && movieVid.results && movieVid.results.length > 0 ?
         <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[6px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
-        <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play" color="#fff">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-play" color="#fff">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
          Random Trailer</button>

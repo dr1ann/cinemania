@@ -98,7 +98,7 @@ duration={500}
 offset={-100}
 className="cursor-pointer"
 >
-<a>Home</a>
+<p>Home</p>
 </ScrollLink>
             </li>
             <li className="text-white text-center font-bold">
@@ -110,7 +110,7 @@ offset={-100}
 className="cursor-pointer"
 >
 
-<a>Movies</a>
+<p>Movies</p>
 </ScrollLink>
 
             </li>
@@ -123,7 +123,7 @@ offset={-100}
 className="cursor-pointer"
 >
 
-<a>TV Shows</a>
+<p>TV Shows</p>
 </ScrollLink>
 
             </li>
@@ -136,7 +136,7 @@ offset={-100}
 className="cursor-pointer animate-wiggle"
 >
 
-<a>People</a>
+<p>People</p>
 </ScrollLink>
             </li>
           </ul>

@@ -19,7 +19,7 @@ interface MovieImgs {
   file_path?:string
   id?: number
 }
-export default function Media() {
+const Media = () => {
     const searchParams = useSearchParams();
     const [movieImages, setMovieImages] = useState<any>({});
     const [MovieVids, setMovieVids] = useState<any>({});
@@ -111,8 +111,7 @@ export default function Media() {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
-  console.log(movieImages)
-  console.log(MovieVids)
+
   return (
     <div className='relative'>
       
@@ -173,7 +172,7 @@ export default function Media() {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
             }>
   <i>
-    <svg  xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-play pl-[1.5px]" color="#fff">
+    <svg  xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-play pl-[1.5px]" color="#fff">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
   </i>
@@ -212,7 +211,7 @@ export default function Media() {
       randomPostersSubset.map((movieImg: MovieImgs) => (
         <div
           key={movieImg.file_path}
-          className='animate pop max-w-[9.375rem] rounded-xl min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
+          className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
        
 <img  
@@ -248,3 +247,4 @@ onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_p
     
   )
 }
+export default Media;

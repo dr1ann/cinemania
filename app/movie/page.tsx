@@ -7,9 +7,9 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Loading from '../components/Loaders/PageLoading'
-
+import { useSearchParams } from 'next/navigation';
 // Images
 import nextjs from '../Images/nextjs.png';
 import tailwind from '../Images/tailwind.png';
@@ -19,19 +19,56 @@ const Overview = lazy(() => import('./overview'))
 const Crew_Cast = lazy(() => import('./Crew_Cast'))
 const Collection = lazy(() => import('./Collection'))
 const Media = lazy(() => import('./Media'))
+import CardLoading from '../components/Loaders/CardLoading';
+import HomeLoading from '../components/Loaders/HomeLoading';
+import CollectionLoading from '../components/Loaders/CollectionLoading';
+import VideosLoading from '../components/Loaders/PosterLoading';
+
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState(searchParams.get('id'))
+
+  useEffect(() => {
+    // Check if the searchParams.get('id') value has changed
+    const newId = searchParams.get('id');
+    if (newId !== isLoading) {
+      setIsLoading(newId);
+      // Perform any additional actions you need when the id value changes
+      // For example, you can trigger a full page reload using window.location.reload()
+      window.location.reload();
+
+    } else {
+   
+    }
+  }, [searchParams, isLoading]);
 
   return (
     
       <div>
+        
         <Suspense fallback={<Loading />}>
+
+      
+  
+
+<Suspense fallback={<HomeLoading />}>
     <Overview />
-  
+    </Suspense>
+
+    <Suspense fallback={<CardLoading />}>
     <Crew_Cast />
+    </Suspense>
+
+    <Suspense fallback={<CollectionLoading />}>
     <Collection />
+    </Suspense>
+
+    <Suspense fallback={<VideosLoading />}>
+
     <Media  />
-  
+  </Suspense>
+
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
 
 <span className='text-[0.9rem]'>Copyright © 2023 Cinemania</span>
