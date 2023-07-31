@@ -25,7 +25,7 @@ type MovieCredits = {
   
 };
 
-const Crew_Cast =  () => {
+const Crew_Cast =   () => {
 
   //use states
   const searchParams = useSearchParams();

@@ -15,21 +15,20 @@ import nextjs from '../Images/nextjs.png';
 import tailwind from '../Images/tailwind.png';
 
 // Client Components:
-const Overview = lazy(() => import('./overview'))
-const Crew_Cast = lazy(() => import('./Crew_Cast'))
-const Collection = lazy(() => import('./Collection'))
-const Media = lazy(() => import('./Media'))
-
+import Overview from './overview';
+import Media from './Media';
+import Collection from './Collection';
+import Crew_Cast from './Crew_Cast';
 import CardLoading from '../components/Loaders/CardLoading';
 import HomeLoading from '../components/Loaders/HomeLoading';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
 import VideosLoading from '../components/Loaders/PosterLoading';
 
 
-const Page = () => {
+const Page  = () => {
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(searchParams.get('id'))
-
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   useEffect(() => {
     // Check if the searchParams.get('id') value has changed
     const newId = searchParams.get('id');
@@ -38,7 +37,7 @@ const Page = () => {
       // Perform any additional actions you need when the id value changes
       // For example, you can trigger a full page reload using window.location.reload()
       window.location.reload();
-
+    
     }
 
   }, [searchParams, isLoading]);
@@ -46,33 +45,21 @@ const Page = () => {
   return (
     
     
-        
-        <Suspense fallback={<Loading />}>
 
-      
-  
+       <>
 
 
-<Suspense fallback={<HomeLoading />}>
     <Overview />
-    </Suspense>
 
-    <Suspense fallback= {Array.from({ length: 10 }).map((_, index) => (
-     <CardLoading key={index} />
-   ))}>
     <Crew_Cast />
-    </Suspense>
-
-    <Suspense fallback={<CollectionLoading />}>
+   
     <Collection />
-    </Suspense>
-
-    <Suspense fallback= {Array.from({ length: 10 }).map((_, index) => (
-     <VideosLoading key={index} />
-   ))}>
 
     <Media  />
-  </Suspense>	
+ 
+
+ 
+
  
 
     <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
@@ -115,8 +102,9 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
 
 </div>
 </footer>
-</Suspense>
-       
+
+
+</>
   );
 }
 

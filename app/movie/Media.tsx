@@ -1,6 +1,6 @@
 'use client'
 // External Libraries
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, Suspense, useEffect, ChangeEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
@@ -19,7 +19,7 @@ interface MovieImgs {
   file_path?:string
   id?: number
 }
-const Media = () => {
+const Media =  () => {
     const searchParams = useSearchParams();
     const [movieImages, setMovieImages] = useState<any>({});
     const [MovieVids, setMovieVids] = useState<any>({});

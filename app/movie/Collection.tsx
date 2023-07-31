@@ -25,11 +25,8 @@ type movieCollection = {
     vote_average: number;
     overview: string;
   }
-const Collection =  () => {
-  const router = useRouter();
-  const handleRefreshClick = () => {
-    window.location.reload(); // Refresh the current page
-  };
+const Collection =   () => {
+  
   //use states
   const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
