@@ -19,6 +19,8 @@ import Overview from './overview';
 import Media from './Media';
 import Collection from './Collection';
 import Crew_Cast from './Crew_Cast';
+import Similar from './Similar';
+import Suggested from './Suggested'
 import CardLoading from '../components/Loaders/CardLoading';
 import HomeLoading from '../components/Loaders/HomeLoading';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
@@ -28,7 +30,7 @@ import VideosLoading from '../components/Loaders/PosterLoading';
 const Page  = () => {
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(searchParams.get('id'))
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   useEffect(() => {
     // Check if the searchParams.get('id') value has changed
     const newId = searchParams.get('id');
@@ -57,8 +59,8 @@ const Page  = () => {
 
     <Media  />
  
-
- 
+    <Similar  />
+    <Suggested  />
 
  
 

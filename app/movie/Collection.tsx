@@ -147,11 +147,15 @@ const Collection =   () => {
         />
       </div>
    
-    <div className='mb-6 sm:mb-0 px-4 sm:px-0'>
+    <div className='mb-6 sm:mb-0 px-4 sm:px-0 flex flex-col justify-center  '>
     
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
-<p className='text-[0.85rem] animate pop xl:text-[1rem] 2xl:text-[1.5rem]  text-gray-300'>➠ {collection.overview  ? collection.overview: 'No overview available'}</p>
-
+{collection.overview.length >= 561
+?
+<p className='text-[0.85rem] animate pop xl:text-[1rem]    max-h-[320px] min-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
+:
+<p className='text-[0.85rem] animate pop xl:text-[1rem]  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
+}
 </div>
 </div>
 <ul className='grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4  '>

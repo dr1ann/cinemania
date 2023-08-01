@@ -100,7 +100,7 @@ const Overview =   () => {
   }, []);
 
 
-console.log(movieDetails)
+
 
   //convert the number to hours and minutes ex.2h 7m
   function time_convert(num: number)

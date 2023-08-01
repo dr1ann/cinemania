@@ -13,15 +13,15 @@ import CardLoading from '../components/Loaders/CardLoading';
 
 //type
 type MovieCredits = {
-  credit_id?: number
-  id?: number;
+  credit_id: number;
+  id: number;
   cast_id: number;
  character: string;
-  original_name: string;
-  popularity: number;
-  profile_path: string;
+  original_name: string ;
+  
+  profile_path: string ;
   known_for_department: string;
-  job?: string;
+  job: string;
   
 };
 
@@ -104,7 +104,7 @@ const Crew_Cast =   () => {
     
     <div>
          <div>
-    <h1 className='px-10 pt-10 text-2xl  font-bold '>Cast</h1>
+    <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Top Billed Cast</h1>
     {isPeopleLoading ? 
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
 
@@ -120,7 +120,7 @@ const Crew_Cast =   () => {
       ?
     <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
 
-    {credits && credits.cast && credits.cast.map((movie: MovieCredits) => (
+{credits && credits.cast && credits.cast.slice(0, 20).map((movie: MovieCredits) => (
 
 <div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl'> 
 

@@ -36,14 +36,7 @@ export default function Home() {
   const [color, setColor] = useState(false)
 
 
-  //change color of header when scrolled
-  const changeColor = () => {
-    if(window.scrollY >= 63.25) {
-      setColor(true)
-    } else {
-      setColor(false)
-    }
-  }
+ 
 
   
 
@@ -51,7 +44,7 @@ export default function Home() {
   useEffect(() => {
 
     //trigger scroll effect when window is scrolled
-    window.addEventListener('scroll', changeColor)
+    
 
 //trending movies
     const trendingmovies = {
@@ -140,7 +133,7 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', in
          <div className="fade-effect2"></div>
     <div className="fade-effect"></div>
       <Headroom>
-      <nav className={color ? 'new-bg' : 'myHeader'} >
+      <nav className={'myHeader'} >
       <div className="justify-between py-4 z-30 px-4 md:items-center md:flex md:px-8  ">
         <div>
           <div className="flex items-center justify-between   md:block" >

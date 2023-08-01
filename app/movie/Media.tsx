@@ -116,7 +116,7 @@ const Media =  () => {
     <div className='relative'>
       
          <VidTrailer isVisible={isOpen} onClose={() => setIsOpen(false)} selectedMovieKey={selectedMovieKey} />
-        <h1  className='mt-10 px-10 mb-4 text-2xl font-bold'>Media</h1>
+        <h1  className='mt-10 px-10 mb-4 text-[1.2rem] sm:text-2xl font-bold'>Media</h1>
         <div className='inline-flex items-center  ml-[2.5rem]   justify-start gap-4 rounded-xl'>
        
        <div className='selector-item '>
