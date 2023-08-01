@@ -6,11 +6,15 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
+
 //Images
 import noprofile from '../Images/noprofile.png'
 import star from '../Images/star.png'
+
 //Components
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
+
+//type
 interface TopRatedMoviesProps {
     id: number;
     original_title: string;
@@ -18,6 +22,7 @@ interface TopRatedMoviesProps {
     release_date: string;
     poster_path: string;
 }
+
 export default function TopRatedMovies() {
 
     const [TopRatedMovies, setTopRatedMovies] = useState<any>({})
@@ -42,14 +47,10 @@ export default function TopRatedMovies() {
     try {
 
       const response =  await axiosInstance.get(`movie/top_rated?language=en-US&page=1`) //Top Rated Movies
-     
-  
     
       setTopRatedMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
   
-   
-     
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
     }

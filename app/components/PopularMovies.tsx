@@ -47,8 +47,6 @@ export default function PopularMovies() {
 
       const response =  await axiosInstance.get(`movie/popular?language=en-US&page=1`) //Popular Movies
      
-  
-    
       setPopularMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
   

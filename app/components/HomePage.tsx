@@ -4,16 +4,16 @@ import React, { useState, useEffect } from 'react';
 
 import Image from 'next/image';
 import axios from 'axios';
-import Link from 'next/link';
+
 
 //Images
 import icon from '../Images/icon.png'
-import blackscreen from '../Images/black-screen.png'
 
 //Components
 import HomeLoading from './Loaders/HomeLoading';
 
 export default function HomePage() {
+
     const [TrendingMovies, setTrendingMovies] = useState<any>({})
     const [isHomeLoading, setIsHomeLoading] = useState(true);
     const [randomImage, setRandomImage] = useState<string>('');
@@ -35,17 +35,11 @@ export default function HomePage() {
   
     try {
 
-     
-
       const response =  await axiosInstance.get(`trending/movie/day?language=en-US`) //Trending Movies
    
-  
-    
       setTrendingMovies(response.data);
-      generateRandomImage(response.data && response.data.results)
+      generateRandomImage(response.data && response.data.results); //used to generate random images
         
-   
-     
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
     }
@@ -59,7 +53,7 @@ export default function HomePage() {
 
     }, []);
 
-      //generate random pics every reload for homepage
+      //generate random backdrops every reload for homepage
   const generateRandomImage = (movies: any[]) => {
     if (movies.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);
@@ -67,7 +61,7 @@ export default function HomePage() {
       const imageUrl = TrendingMovies ? ` https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`  : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/" ;
 
       setRandomImage(imageUrl);
-      setIsHomeLoading(false)
+      setIsHomeLoading(false) //remove the skeleton loader
     }
   };
   return (

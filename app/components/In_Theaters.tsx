@@ -46,10 +46,8 @@ export default function InTheatersMovies() {
 
       const response =  await axiosInstance.get(`movie/now_playing?language=en-US&page=1`) //In Theaters Movies
      
-  
       SetInTheatersMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
-   
      
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched

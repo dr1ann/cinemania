@@ -40,18 +40,11 @@ export default function PopularPeople() {
   
     try {
 
-
-     
-
       const response =  await axiosInstance.get(`person/popular?language=en-US&page=1`) //Popular People
      
-  
-    
       setPopularPeople(response.data);
       setIsLoading(false) // Skeleton loader is disabled
   
-   
-     
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
     }
@@ -60,7 +53,7 @@ export default function PopularPeople() {
 
   //call the function to get the data from the api
     useEffect(() => {
-
+      
       DataFromAPI();
 
     }, []);

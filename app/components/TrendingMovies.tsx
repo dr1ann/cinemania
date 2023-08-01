@@ -45,17 +45,11 @@ export default function TrendingMovies() {
   
     try {
 
-     
-
       const response =  await axiosInstance.get(`trending/movie/day?language=en-US`) //Trending Movies
    
-  
-    
       setTrendingMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
   
-   
-     
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
     }
