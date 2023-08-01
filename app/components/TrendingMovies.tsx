@@ -70,8 +70,8 @@ export default function TrendingMovies() {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>What's Trending Today?</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -85,28 +85,50 @@ export default function TrendingMovies() {
       {TrendingMovies && TrendingMovies.results && TrendingMovies.results.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>What's Trending Today?</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
    
-    <div className='flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
-{TrendingMovies && TrendingMovies.results && TrendingMovies.results.map((movie: TrendingMoviesProps) => (
+    <div className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:p-10 gap-6 '>
+{TrendingMovies && TrendingMovies.results && TrendingMovies.results.slice(0, 15).map((movie: TrendingMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
          ?
-
+         <Link
+   
+         href={{
+          pathname: `/movie`,
+          query:  { id: movie.id }, // the data
+        
+        }}
+       
+         >
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
-className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
-srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
+className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-xl
+hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
+ https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='eager'
 alt={movie['original_title']} />
+</Link>
 :
+<Link
+   
+href={{
+ pathname: `/movie`,
+ query:  { id: movie.id }, // the data
+
+}}
+
+>
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
+className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-xl
+hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='eager'
 alt={movie['original_title']} />
+</Link>
 }
      {movie['original_title'] ?
       <Link

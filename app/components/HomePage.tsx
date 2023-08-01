@@ -11,6 +11,7 @@ import icon from '../Images/icon.png'
 
 //Components
 import HomeLoading from './Loaders/HomeLoading';
+import Header from './Header';
 
 export default function HomePage() {
 
@@ -71,7 +72,9 @@ export default function HomePage() {
 < HomeLoading/>
 
       :
+
       <div className=' h-screen homepage home-animate pop relative' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414), url(${randomImage})` }}>
+        <Header />
       <div className="fade-effect2"></div>
  <div className="fade-effect"></div>
   
@@ -82,7 +85,7 @@ export default function HomePage() {
    width={600}
    height={100}
    />
-   <h2 className='text-center text-[2.7rem] md:text-[3.2rem] newfont'> <span className='text-[#e2b616]'> Explore</span> the World of <span className='text-[#e2b616]'> Movies</span></h2>
+   <h2 className='text-center text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] newfont sm:whitespace-nowrap'> <span className='text-[#e2b616]'> EXPLORE</span> THE WORLD OF <span className='text-[#e2b616]'> MOVIES</span></h2>
 
 <form className="flex items-center w-full z-10">   
 <label className="sr-only">Search</label>

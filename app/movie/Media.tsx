@@ -201,7 +201,7 @@ const Media =  () => {
   {selectedOption === 'Posters' && 
        <div>
           {!movieImagesReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center p-6 sm:p-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll  items-center p-6 sm:p-10 gap-4'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <PostersLoading key={index} />

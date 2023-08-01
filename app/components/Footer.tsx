@@ -31,7 +31,7 @@ alt="NEXT JS Icon"
 <Image className='max-w-[25px] min-w-[25px] object-contain mr-1'
 src={typescript}
 
-alt="NEXT JS Icon"
+alt="Typescript Icon"
 />
 <p className='text-white  text-[0.9rem] text-center'>
 by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
