@@ -6,9 +6,11 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
+
 //Images
 import noprofile from '../Images/noprofile.png'
 import star from '../Images/star.png'
+
 //Components
 import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
 interface SuggestedMoviesProps {

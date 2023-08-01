@@ -1,4 +1,5 @@
 'use client'
+
 // External Libraries
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -137,7 +138,7 @@ alt={movie['original_name']} />
     <Image  
  src={noprofile}
     className='w-full h-full'
-  
+    
     loading='eager'
     alt={movie['original_name']} />
     

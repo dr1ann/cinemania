@@ -2,7 +2,7 @@
 'use client'
 // External Libraries
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
@@ -11,17 +11,20 @@ import Link from 'next/link';
 import star from '../Images/star.png'
 
 //Components
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
-interface SimilarMoviesProps {
+import MoviePosterLoading from './Loaders/MoviePosterLoading';
+
+//type
+interface PopularMoviesProps {
     id: number;
     original_title: string;
     vote_average: number;
     release_date: string;
     poster_path: string;
 }
-export default function Similar() {
-    const searchParams = useSearchParams();
-    const [similarMovies, setSimilarMovies] = useState<any>({})
+
+export default function PopularMovies() {
+
+    const [PopularMovies, setPopularMovies] = useState<any>({})
     const [isLoading, setIsLoading] = useState(true);
   
   
@@ -42,14 +45,11 @@ export default function Similar() {
   
     try {
 
-      //the current movie id
-      const currID = searchParams.get('id');
-
-      const response =  await axiosInstance.get(`/movie/${currID}/similar`) //Similar Movies
+      const response =  await axiosInstance.get(`movie/popular?language=en-US&page=1`) //Popular Movies
      
   
     
-      setSimilarMovies(response.data);
+      setPopularMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
   
    
@@ -66,7 +66,7 @@ export default function Similar() {
       DataFromAPI();
 
     }, []);
-  
+
   return (
     <>
   
@@ -74,7 +74,7 @@ export default function Similar() {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Similar Movies</h1>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Popular</h1>
    <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
@@ -86,13 +86,13 @@ export default function Similar() {
     :
     
 <ul className='relative'>
-      {similarMovies && similarMovies.results && similarMovies.results.length > 0
+      {PopularMovies && PopularMovies.results && PopularMovies.results.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Similar Movies</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Popular</h1>
    
     <div className='flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
-{similarMovies && similarMovies.results && similarMovies.results.slice(0, 15).map((movie: SimilarMoviesProps) => (
+{PopularMovies && PopularMovies.results && PopularMovies.results.map((movie: PopularMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
@@ -102,14 +102,14 @@ export default function Similar() {
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
 className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
-loading='lazy'
+loading='eager'
 alt={movie['original_title']} />
 :
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
 
-loading='lazy'
+loading='eager'
 alt={movie['original_title']} />
 }
      {movie['original_title'] ?

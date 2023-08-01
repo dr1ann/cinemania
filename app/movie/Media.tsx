@@ -10,6 +10,7 @@ import VidTrailer from './Videos'
 import VideosLoading from '../components/Loaders/VideosLoading'
 import PostersLoading from '../components/Loaders/PosterLoading'
 
+//types
 interface MovieVideos {
     id?: string
     key?: string
@@ -74,6 +75,7 @@ const Media =  () => {
       DataFromAPI();
   },[] );
 
+  console.log(movieImages && movieImages.posters)
 
   const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
@@ -104,9 +106,10 @@ const Media =  () => {
 
 
 
-
+  //get the length of vid and img
   let vidLength =  MovieVids && MovieVids.results &&MovieVids.results.length 
   let ImgLength =  randomPostersSubset && randomPostersSubset.length
+
   //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Videos');
 
@@ -215,6 +218,8 @@ const Media =  () => {
           key={movieImg.file_path}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
+       {movieImg.file_path
+       ?
        
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
@@ -224,7 +229,17 @@ loading='eager'
 alt={movieImg.file_path} 
 onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
 />
+:
+<div className='max-w-full min-w-full  rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
+<Image  
+src= "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"
+className='w-full h-full'
 
+loading='eager'
+alt='movie poster' />
+
+</div>
+}
 </div>
        
       ))

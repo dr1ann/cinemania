@@ -12,7 +12,6 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 
 // Images
-
 import star from '../Images/star.png';
 import tmdbicon from '../Images/tmdb.png';
 

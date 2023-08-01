@@ -1,209 +1,171 @@
-import { useState, ChangeEvent, useEffect } from 'react';
 
-import Image from 'next/image'
-import star from '../Images/star.png'
-import PersonLoading from './Loaders/PersonLoading';
+'use client'
+// External Libraries
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+import axios from 'axios';
 import Link from 'next/link';
+//Images
+import noprofile from '../Images/noprofile.png'
+import star from '../Images/star.png'
+//Components
+import MoviePosterLoading from './Loaders/MoviePosterLoading';
+interface TopRatedMoviesProps {
+    id: number;
+    original_title: string;
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+}
+export default function TopRatedMovies() {
 
-
-
-const TopRated = () => {
- 
-    const [topratedmovies, setTopRatedMovies] = useState<any[]>([]);
-    const [topratedtv, setTopRatedtv] = useState<any[]>([]);
+    const [TopRatedMovies, setTopRatedMovies] = useState<any>({})
     const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-       //top rated movies
-       const topratedmovies = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
-        }
-      
-      };
+  
+  
+  
+  
+  
+    //Authorization to fetch data from the API with its base url
+    const axiosInstance = axios.create({
+      baseURL: 'https://api.themoviedb.org/3', 
+      headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+      },
+    });
+  
+   //fetch all data from the api
+   const DataFromAPI = async () => {
+        
+  
+    try {
 
-      fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', topratedmovies)
-.then(response => response.json())
-.then(data => {
-    setTopRatedMovies(data.results);
-  setIsLoading(false)
-})
-.catch(err => console.error(err));
-
-
-      // top rated tv shows
-      const topratedtv = {method: 'GET', headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY'
-      }};
-
-      fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', topratedtv)
-.then(response => response.json())
-.then(data => {
-    setTopRatedtv(data.results);
-
-})
-.catch(err => console.error(err));
-      }, []);
-
-      //handler when the option is changed
-  const [selectedOption, setSelectedOption] = useState<string>('Movies');
-
-  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(e.target.value);
+      const response =  await axiosInstance.get(`movie/top_rated?language=en-US&page=1`) //Top Rated Movies
+     
+  
+    
+      setTopRatedMovies(response.data);
+      setIsLoading(false) // Skeleton loader is disabled
+  
+   
+     
+    } catch (error) {
+      console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    }
+    
   };
 
+  //call the function to get the data from the api
+    useEffect(() => {
+
+      DataFromAPI();
+
+    }, []);
+
   return (
-    <div className='selector '>
+    <>
+  
 
-      <div className='inline-flex items-center border-2 border-[#e2b616] ml-[2.5rem]   justify-start gap-2 rounded-xl'>
+    {isLoading ? 
+
+        <>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Top Rated</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
+
+   {Array.from({ length: 10 }).map((_, index) => (
+     <MoviePosterLoading key={index} />
+   ))}
        
-      <div className='selector-item '>
-      <label id='radiolabel' className={selectedOption === 'Movies' ? 'active1' : ''}>
-          <input
-          className='selector-item_radio'
-            type="radio"
-            value="Movies"
-            checked={selectedOption === 'Movies'}
-            onChange={handleOptionChange}
-          />
-           
-          Movies
-        </label>
-      </div>
-      <div className='selector-item '>
-      <label id='radiolabel' className={selectedOption === 'TV' ? 'active1' : ''} >
-          <input
-          className='selector-item_radio'
+       </div> 
+       </>
+    :
+    
+<ul className='relative'>
+      {TopRatedMovies && TopRatedMovies.results && TopRatedMovies.results.length > 0
+      ?
+      <>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Top Rated</h1>
+   
+    <div className='flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
+{TopRatedMovies && TopRatedMovies.results && TopRatedMovies.results.map((movie: TopRatedMoviesProps) => (
+<li key={movie.id}>
+    <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
+{movie['poster_path']
+         ?
+
+<img  
+src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
+className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
+loading='eager'
+alt={movie['original_title']} />
+:
+<img  
+src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
+className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-xl'
+
+loading='eager'
+alt={movie['original_title']} />
+}
+     {movie['original_title'] ?
+      <Link
+      className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      href={{
+       pathname: `/movie`,
+       query:  { id: movie.id }, // the data
+     
+     }}
+    
+      >
+       {movie['original_title']}
+          </Link>
+          :
+          <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+           N/A
+          </p>
+}
+          
          
-            type="radio"
-            value="TV"
-            checked={selectedOption === 'TV'}
-            onChange={handleOptionChange}
-          />
-       
-          TV Shows
-        </label>
-      </div>
-    
-      </div>
-      <div>
-
-      {isLoading &&  
+          
+            <div className='flex  justify-between gap-6 items-center py-[5px] '>
+             <div className=' flex flex-row items-center gap-1'>
+             <Image
+         className='h-[0.9rem] w-[0.9rem] sm:h-[1rem] sm:w-[1rem] object-contain'
+         src={star}
+         alt='home icon'
+         width={1}
+         height={100}
         
-        <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+          />
+          {movie['vote_average']
+          ?
+           <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+          :
+          <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>N/A</p>
+  }
+            </div>
+            <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+        
+            </div>
+             
+            </div>
+</li>
+))
+}
+</div>
+</>
+:
+''
 
-{Array.from({ length: 21 }).map((_, index) => (
-  <PersonLoading key={index} />
-))}
-    
-    </div> 
+
     }
-        {selectedOption === 'Movies' && 
-        <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
-
-        {topratedmovies.map(movie => (
-        <div key={movie['id']}> 
-        
-        <div className='grid grid-cols-fit animate pop'>
-        
-        <div className='flex flex-col justify-center '>
-        <Link
-           href={{
-            pathname: `/movie`,
-            query:  { id: movie.id }, // the data
-          }} >
-          <Image
-          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
-          alt={movie['original_title']}
-          width={1}
-          height={1}
-        
-          />
-           </Link>
-          <Link
-           href={{
-            pathname: `/movie`,
-            query:  { id: movie.id }, // the data
-          }} >
-            <p className='font-bold  mt-4 truncate hover:text-[#e2b616]'>{ movie['original_title'] }</p>
-         </Link>
-            <div className='flex  justify-between items-center py-[5px] '>
-             <div className=' flex flex-row items-center gap-1'>
-             <Image
-         className='h-[1rem] w-[1rem] object-contain'
-         src={star}
-         alt='home icon'
-         width={1}
-         height={100}
-        
-          />
-           <p>{movie['vote_average'].toFixed(1)}</p>
-        
-            </div>
-            <p>{new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
-        
-            </div>
-            </div>     
-        </div>
-        </div>
-        
-        ))
-        
-        }
-        </div>
-        
-        }
-        {selectedOption === 'TV' && 
-        <div className='flex flex-row overflow-x-scroll  p-10 gap-10'>
+  
+    </ul>
     
-        {topratedtv.map(movie => (
-       <div key={movie['id']}> 
-      
-      <div className='grid grid-cols-fit animate pop'>
- 
-     <div className='flex flex-col justify-center '>
-          <Image
-          className='w-[13rem] cursor-pointer flex self-center rounded-xl object-cover hover:rotate-[-3deg] transform transition duration-250 hover:scale-110 hover:z-10'
-          src={`https://image.tmdb.org/t/p/original${movie['poster_path']}`}
-          alt={movie['original_title']}
-          width={1}
-          height={1}
- 
-          />
-         
-            <p className='font-bold  mt-4 truncate '>{movie['name']}</p>
-            <div className='flex  justify-between items-center py-[5px] '>
-             <div className=' flex flex-row items-center gap-1'>
-             <Image
-         className='h-[1rem] w-[1rem] object-contain'
-         src={star}
-         alt='home icon'
-         width={1}
-         height={100}
- 
-          />
-           <p>{movie['vote_average'].toFixed(1)}</p>
- 
-            </div>
-            <p>{new Date(movie['first_air_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
- 
-            </div>
-            </div>     
-    </div>
-       </div>
- 
-        ))
-        
-        }
-        </div>
-        
-        }
-      </div>
-    </div>
-  );
-};
+}
 
-export default TopRated;
+ 
+   </>
+  )
+}
