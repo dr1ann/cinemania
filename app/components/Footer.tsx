@@ -5,13 +5,13 @@ import React from 'react'
 import Image from 'next/image'
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 
 // Images
 import nextjs from '../Images/nextjs.png';
-import tailwind from '../Images/tailwind.png';
+import typescript from '../Images/typescript.jpg'
 export default function Footer() {
   return (
    <>
@@ -28,8 +28,8 @@ src={nextjs}
 
 alt="NEXT JS Icon"
 />
-<Image className='w-[34px] object-contain'
-src={tailwind}
+<Image className='max-w-[25px] min-w-[25px] object-contain mr-1'
+src={typescript}
 
 alt="NEXT JS Icon"
 />
