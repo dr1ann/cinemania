@@ -33,7 +33,7 @@ const Collection =   () => {
 
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
   const [collection, setCollection] = useState<any>({})
-  const [isLoadingCardVisible, setIsLoadingCardVisible] = useState(true);
+
 
 
 
@@ -47,66 +47,61 @@ const Collection =   () => {
     },
   });
 
+  //fetch all data from the api
+  const DataFromAPI = async () => {
+      
+
+    try {
+
+      //the current movie id
+      const currID = searchParams.get('id');
+
+      const response =  await axiosInstance.get(`/movie/${currID}?language=en-US`) //MovieDetails
+     
+  
+    
+      setMovieDetails(response.data);
+
+  
+   
+     
+    } catch (error) {
+      console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    }
+    
+  };
+
+
+//create new function to get the id of the current movie
+ const movieCollection = async () => {
+   
+  try {
+    const collectionId = movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
+    
+    //only get the collection data if the ID of the movie is there
+    if (collectionId) {
+
+    const response = await  axiosInstance.get(`/collection/${collectionId}`)
+      
+      setCollection(response.data);
+      setIsCollectionLoading(false); //Collection now shows data in the webpage
+
+    } 
+   
+  } catch (error) {
+    console.error(error);
+    
+  }
+  
+};
 
   useEffect(() => {
 
     
-
- 
-   
-
-    //fetch all data from the api
-    const DataFromAPI = async () => {
-      
-
-      try {
-
-        //the current movie id
-        const currID = searchParams.get('id');
-
-        const response =  await axiosInstance.get(`/movie/${currID}?language=en-US`) //MovieDetails
-       
-    
-      
-        setMovieDetails(response.data);
-
-    
-     
-       
-      } catch (error) {
-        console.error('Error fetching data:', error); // Catch errors if data is not fetched
-      }
-      
-    };
-    //call the function to get all the data from the api
+    //call the functions to get all the data from the api
     DataFromAPI();
 
-   //create new function to get the id of the current movie
-   const movieCollection = async () => {
-     
-    try {
-      const collectionId = movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
-      
-      //only get the collection data if the ID of the movie is there
-      if (collectionId) {
-
-      const response = await  axiosInstance.get(`/collection/${collectionId}`)
-        
-        setCollection(response.data);
-        setIsCollectionLoading(false); //Collection now shows data in the webpage
-
-      } 
-     
-    } catch (error) {
-      console.error(error);
-      
-    }
-    
-  };
- 
-
     movieCollection();
-  
   
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);

@@ -44,42 +44,34 @@ const Crew_Cast =   () => {
     },
   });
 
+ //fetch all data from the api
+ const DataFromAPI = async () => {
+      
 
-  useEffect(() => {
+  try {
 
-    
+    //the current movie id
+    const currID = searchParams.get('id');
 
-
+    const response =  await axiosInstance.get(`/movie/${currID}/credits?language=en-US`) //MovieCredits
    
 
-    //fetch all data from the api
-    const DataFromAPI = async () => {
-      
-
-      try {
-
-        //the current movie id
-        const currID = searchParams.get('id');
-
-        const response =  await axiosInstance.get(`/movie/${currID}/credits?language=en-US`) //MovieCredits
-       
-    
-      
-        setCredits(response.data);
-        setIsPeopleLoading(false) // Skeleton loader is disabled
-    
-     
-       
-      } catch (error) {
-        console.error('Error fetching data:', error); // Catch errors if data is not fetched
-      }
-      
-    };
-    //call the function to get the data from the api
-    DataFromAPI();
+  
+    setCredits(response.data);
+    setIsPeopleLoading(false) // Skeleton loader is disabled
 
  
    
+  } catch (error) {
+    console.error('Error fetching data:', error); // Catch errors if data is not fetched
+  }
+  
+};
+  useEffect(() => {
+ 
+    //call the function to get the data from the api
+    DataFromAPI();
+
   }, []);
 
  
@@ -104,9 +96,9 @@ const Crew_Cast =   () => {
     
     <div>
          <div>
-    <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Top Billed Cast</h1>
+    <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Top Billed Cast</h1>
     {isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <CardLoading key={index} />
@@ -118,7 +110,7 @@ const Crew_Cast =   () => {
 <div className='relative'>
       {credits && credits.cast && credits.cast.length > 0
       ?
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
+    <div className='flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
 
 {credits && credits.cast && credits.cast.slice(0, 20).map((movie: MovieCredits) => (
 
@@ -186,11 +178,11 @@ alt={movie['original_name']} />
      
    
       
-    <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
+    <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Director, Writer & Producer</h1>
     {isPeopleLoading ? 
 
 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <CardLoading key={index} />
@@ -202,7 +194,7 @@ alt={movie['original_name']} />
     <div className='relative'>
       {credits && credits.crew && credits.crew.length > 0
       ?
-    <div className=' flex flex-row overflow-x-scroll  p-10 gap-6 '>
+    <div className=' flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
 
 {importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
 

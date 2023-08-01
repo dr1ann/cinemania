@@ -65,7 +65,7 @@ export default function Similar() {
       DataFromAPI();
 
     }, []);
-  console.log(suggestedMovies)
+
   return (
     <>
    <div>
@@ -73,7 +73,7 @@ export default function Similar() {
     {isLoading ? 
 
 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <CardLoading key={index} />
@@ -87,9 +87,9 @@ export default function Similar() {
       {suggestedMovies && suggestedMovies.results && suggestedMovies.results.length > 0
       ?
       <>
-       <h1 className='px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Suggested Movies</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Suggested Movies</h1>
    
-    <div className='flex flex-row overflow-x-scroll  p-10 gap-6 '>
+    <div className='flex flex-row overflow-x-scroll   p-6 sm:p-10 gap-6 '>
 {suggestedMovies && suggestedMovies.results && suggestedMovies.results.slice(0, 15).map((movie: SuggestedMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>

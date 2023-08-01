@@ -28,7 +28,7 @@ const Media =  () => {
     const [selectedMovieKey, setSelectedMovieKey] =useState<string>('')
     const [movieVidsReady, setMovieVidsReady] = useState(false);
   const [movieImagesReady, setMovieImagesReady] = useState(false);
-  const blurDataURL = `data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMDAwIDEwMDAiIHJvbGU9IjEiIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iLjEiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIHZlcnNpb249IjEuMSI+PHBhdGggZD0iTTEwMDAsNzAwdjcwMGgyMDB2NzAwSDEwMDB2NzAwWiIvPjwvc3ZnPg==`;
+ 
      //Authorization to fetch data from the API with its base url
   const axiosInstance = axios.create({
     baseURL: 'https://api.themoviedb.org/3', 
@@ -36,38 +36,40 @@ const Media =  () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
+  //geting the data from the API
+  const DataFromAPI = async () => {
+      
+
+    try {
+
+      //the current movie id
+      const currID = searchParams.get('id');
+
+      const apiPromises = [
+   
+        axiosInstance.get(`/movie/${currID}/videos?language=en-US`), //MovieVids
+        axiosInstance.get(`/movie/${currID}/images`), //MovieImages
+       
+    
+      ];
+    //getting the data from the API and put values on to its assigned variables
+      const [MovieVids, MovieImages] = await Promise.all(apiPromises);
+
+      setMovieVids(MovieVids.data);
+      setMovieImages(MovieImages.data)
+    
+      setMovieVidsReady(true);
+      setMovieImagesReady(true);
+     
+    } catch (error) {
+      console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    } 
+    
+  };
   useEffect(() => {
      //get the current movie id from the searchParams
      setcurMovieID(searchParams.get('id'))
-    const DataFromAPI = async () => {
-      
-
-        try {
   
-          //the current movie id
-          const currID = searchParams.get('id');
-  
-          const apiPromises = [
-       
-            axiosInstance.get(`/movie/${currID}/videos?language=en-US`), //MovieVids
-            axiosInstance.get(`/movie/${currID}/images`), //MovieImages
-           
-        
-          ];
-        //getting the data from the API and put values on to its assigned variables
-          const [MovieVids, MovieImages] = await Promise.all(apiPromises);
-    
-          setMovieVids(MovieVids.data);
-          setMovieImages(MovieImages.data)
-        
-          setMovieVidsReady(true);
-          setMovieImagesReady(true);
-         
-        } catch (error) {
-          console.error('Error fetching data:', error); // Catch errors if data is not fetched
-        } 
-        
-      };
       //call the function to get all the data from the api
       DataFromAPI();
   },[] );
@@ -116,8 +118,8 @@ const Media =  () => {
     <div className='relative'>
       
          <VidTrailer isVisible={isOpen} onClose={() => setIsOpen(false)} selectedMovieKey={selectedMovieKey} />
-        <h1  className='mt-10 px-10 mb-4 text-[1.2rem] sm:text-2xl font-bold'>Media</h1>
-        <div className='inline-flex items-center  ml-[2.5rem]   justify-start gap-4 rounded-xl'>
+        <h1  className='mt-10 px-6 sm:px-10 mb-4 text-[1.2rem] sm:text-2xl font-bold'>Media</h1>
+        <div className='inline-flex items-center  ml-6 sm:ml-10   justify-start gap-4 rounded-xl'>
        
        <div className='selector-item '>
        <label id='radiolabel' className={selectedOption === 'Videos' ? 'active1' : 'notactive'}>
@@ -151,7 +153,7 @@ const Media =  () => {
        {selectedOption === 'Videos' && 
        <div>
         {!movieVidsReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-6 sm:p-10 gap-4'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <VideosLoading key={index} />
@@ -160,7 +162,7 @@ const Media =  () => {
        </div> 
        
     :
-       <div className='flex flex-row overflow-x-scroll  p-10 gap-4 relative'>
+       <div className='flex flex-row overflow-x-scroll  p-6  sm:p-10 gap-4 relative'>
       {MovieVids && MovieVids.results && MovieVids.results.length  > 0 ? (
       
    
@@ -196,7 +198,7 @@ const Media =  () => {
   {selectedOption === 'Posters' && 
        <div>
           {!movieImagesReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center p-6 sm:p-10 gap-4'>
 
    {Array.from({ length: 10 }).map((_, index) => (
      <PostersLoading key={index} />
@@ -206,7 +208,7 @@ const Media =  () => {
        
     :
     
-    <div className='flex flex-row overflow-x-scroll p-10 gap-4 relative'>
+    <div className='flex flex-row overflow-x-scroll p-6 sm:p-10 gap-4 relative'>
     {randomPostersSubset && randomPostersSubset.length > 0 ? (
       randomPostersSubset.map((movieImg: MovieImgs) => (
         <div

@@ -48,16 +48,6 @@ const Overview =   () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
- 
-  
-  useEffect(() => {
-
-
-
-    //get the current movie id from the searchParams
-    setcurMovieID(searchParams.get('id'))
-
-
     //fetch all data from the api
     const DataFromAPI = async () => {
       
@@ -92,6 +82,16 @@ const Overview =   () => {
       
       
     };
+  
+  useEffect(() => {
+
+
+
+    //get the current movie id from the searchParams
+    setcurMovieID(searchParams.get('id'))
+
+
+ 
     //call the function to get all the data
     DataFromAPI();
 
