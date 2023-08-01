@@ -223,7 +223,7 @@ alt={movie['original_name']} />
  src={noprofile}
     className='w-full h-full'
    
-    loading='eager'
+
     alt={movie['original_name']} />
     
     </div>

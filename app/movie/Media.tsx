@@ -225,7 +225,7 @@ const Media =  () => {
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
 className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
-loading='eager'
+loading='lazy'
 alt={movieImg.file_path} 
 onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
 />
@@ -235,7 +235,7 @@ onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_p
 src= "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"
 className='w-full h-full'
 
-loading='eager'
+loading='lazy'
 alt='movie poster' />
 
 </div>
