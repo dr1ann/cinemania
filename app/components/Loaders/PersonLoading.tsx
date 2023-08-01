@@ -8,7 +8,7 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 
 
 
-export default function CardLoading() {
+export default function PersonLoading() {
 
     return (
 

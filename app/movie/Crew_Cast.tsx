@@ -9,7 +9,7 @@ import axios from 'axios';
 import noprofile from '../Images/noprofile.png'
 
 //Components
-import CardLoading from '../components/Loaders/CardLoading';
+import PersonLoading from '../components/Loaders/PersonLoading';
 
 //type
 type MovieCredits = {
@@ -90,7 +90,7 @@ const Crew_Cast =   () => {
   )
   
 });
-
+console.log(credits && credits.crew)
 
   return (
     
@@ -101,7 +101,7 @@ const Crew_Cast =   () => {
    <div className='flex flex-row justify-start overflow-x-scroll items-center p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
-     <CardLoading key={index} />
+     <PersonLoading key={index} />
    ))}
        
        </div> 
@@ -185,7 +185,7 @@ alt={movie['original_name']} />
    <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
-     <CardLoading key={index} />
+     <PersonLoading key={index} />
    ))}
        
        </div> 

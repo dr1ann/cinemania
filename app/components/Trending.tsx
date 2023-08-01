@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect } from 'react';
 
 import Image from 'next/image'
 import star from '../Images/star.png'
-import CardLoading from './Loaders/CardLoading';
+import PersonLoading from './Loaders/PersonLoading';
 import Router from 'next/navigation';
 import Link from 'next/link';
 import Movies from 'moviestmdb/lib/Classes/Movies';
@@ -101,7 +101,7 @@ export default function Trending() {
           <div className='flex flex-row justify-start overflow-x-scroll items-center  p-10 gap-10'>
   
   {Array.from({ length: 21 }).map((_, index) => (
-    <CardLoading key={index} />
+    <PersonLoading key={index} />
   ))}
       
       </div> 

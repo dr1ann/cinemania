@@ -19,7 +19,7 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 
 import { start } from 'repl';
-import CardLoading from './components/Loaders/CardLoading';
+import CardLoading from './components/Loaders/PersonLoading';
 
 // Initialization for ES Users
 

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { lazy, Suspense, useEffect, useState } from 'react';
-import Loading from '../components/Loaders/PageLoading'
+
 import { useSearchParams } from 'next/navigation';
 // Images
 import nextjs from '../Images/nextjs.png';
@@ -21,7 +21,7 @@ import Collection from './Collection';
 import Crew_Cast from './Crew_Cast';
 import Similar from './Similar';
 import Suggested from './Suggested'
-import CardLoading from '../components/Loaders/CardLoading';
+import CardLoading from '../components/Loaders/PersonLoading';
 import HomeLoading from '../components/Loaders/HomeLoading';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
 import VideosLoading from '../components/Loaders/PosterLoading';

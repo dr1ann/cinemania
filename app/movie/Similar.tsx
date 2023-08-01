@@ -10,7 +10,7 @@ import Link from 'next/link';
 import noprofile from '../Images/noprofile.png'
 import star from '../Images/star.png'
 //Components
-import CardLoading from '../components/Loaders/CardLoading';
+import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
 interface SimilarMoviesProps {
     id: number;
     original_title: string;
@@ -68,19 +68,20 @@ export default function Similar() {
   
   return (
     <>
-   <div>
+  
 
     {isLoading ? 
 
-
+        <>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold '>Similar Movies</h1>
    <div className='flex flex-row justify-start overflow-x-scroll items-center   p-6 sm:p-10 gap-10'>
 
    {Array.from({ length: 10 }).map((_, index) => (
-     <CardLoading key={index} />
+     <MoviePosterLoading key={index} />
    ))}
        
        </div> 
-       
+       </>
     :
     
 <ul className='relative'>
@@ -166,7 +167,7 @@ alt={movie['original_title']} />
     </ul>
     
 }
-</div>
+
  
    </>
   )
