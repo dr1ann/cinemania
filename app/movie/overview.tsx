@@ -117,13 +117,6 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
  
 
-
- //get only the important crew members from the movie 
-
-
-
-
-
   //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`
   //get the logo image of the movie
@@ -144,7 +137,9 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
+   
     <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
+   
  <Header/>
    
 

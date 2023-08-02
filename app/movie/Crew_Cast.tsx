@@ -91,7 +91,6 @@ const Crew_Cast =   () => {
   )
   
 });
-console.log(credits && credits.crew)
 
   return (
     
@@ -115,14 +114,14 @@ console.log(credits && credits.crew)
 
 {credits && credits.cast && credits.cast.slice(0, 20).map((movie: MovieCredits) => (
 
-<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl'> 
+<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-xl overflow-hidden'>
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden'>
 <img  
 src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
 className='w-full h-full'
@@ -134,7 +133,7 @@ alt={movie['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  rounded-t-xl max-h-[175px] min-h-[175px] flex self-center  overflow-hidden'>
+    <div className='max-w-full min-w-full  rounded-t-md max-h-[175px] min-h-[175px] flex self-center  overflow-hidden'>
     <Image  
  src={noprofile}
     className='w-full h-full'
@@ -200,13 +199,13 @@ alt={movie['original_name']} />
 {importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
 
 
-<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl'> 
+<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
   {movie['profile_path'] ?
 
-<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px]  flex self-center rounded-t-xl overflow-hidden'>
+<div className='max-w-full min-w-full  max-h-[175px] min-h-[175px]  flex self-center rounded-t-md overflow-hidden'>
 <img  
 src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
 className='w-full h-full'
@@ -218,7 +217,7 @@ alt={movie['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-xl overflow-hidden '>
+    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden '>
     <Image  
  src={noprofile}
     className='w-full h-full'

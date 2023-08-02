@@ -15,7 +15,7 @@ import Suggested from './Suggested'
 import Footer from '../components/Footer';
 
 
-const Page  = () => {
+const Page  = async () => {
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(searchParams.get('id'))
 

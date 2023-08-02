@@ -132,7 +132,7 @@ const Collection =   () => {
   <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   <div className='hidden z-[9999] animate pop relative  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4  sm:flex self-center   '>
     <Image
-        className='max-w-full min-w-full rounded-xl max-h-full min-h-full'
+        className='max-w-full min-w-full rounded-md max-h-full min-h-full'
         src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"}
        
         alt={collection['poster_path']}
@@ -168,19 +168,42 @@ const Collection =   () => {
 
          {movie['poster_path']
          ?
+         <Link
+         className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+         href={{
+          pathname: `/movie`,
+          query:  { id: movie.id }, // the data
+        
+        }}
+       
+         >
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
-className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-xl'
-srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
+className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, 
+https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='lazy'
 alt={movie['original_title']} />
+ </Link>
 :
+<Link
+className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+href={{
+ pathname: `/movie`,
+ query:  { id: movie.id }, // the data
+
+}}
+
+>
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-xl'
+className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
 
 loading='lazy'
 alt={movie['original_title']} />
+ </Link>
 }
      {movie['original_title'] ?
       <Link

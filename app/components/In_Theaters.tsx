@@ -101,8 +101,10 @@ export default function InTheatersMovies() {
 >
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
-className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-xl hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
-srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
+className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md 
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
+srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
+ https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='lazy'
 alt={movie['original_title']} />
 </Link>
@@ -116,7 +118,8 @@ alt={movie['original_title']} />
 >
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-xl hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
+ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='lazy'
 alt={movie['original_title']} />
