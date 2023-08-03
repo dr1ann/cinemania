@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
+import Link from 'next/link';
 
 //Images
 import noprofile from '../Images/noprofile.png'
@@ -112,22 +113,23 @@ const Crew_Cast =   () => {
       ?
     <div className='flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
 
-{credits && credits.cast && credits.cast.slice(0, 20).map((movie: MovieCredits) => (
+{credits && credits.cast && credits.cast.slice(0, 20).map((person: MovieCredits) => (
 
-<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
+<div key={person['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
-  {movie['profile_path'] ?
+  {person['profile_path'] ?
 
 <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden'>
 <img  
-src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
+src={`https://image.tmdb.org/t/p/w138_and_h175_face${person['profile_path']}`}
 className='w-full h-full'
-srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']} 1x, https://image.tmdb.org/t/p/w276_and_h350_face${movie['profile_path']} 2x`}
+srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${person['profile_path']} 1x,
+ https://image.tmdb.org/t/p/w276_and_h350_face${person['profile_path']} 2x`}
 loading='eager'
-alt={movie['original_name']} />
+alt={person['original_name']} />
 
 </div>
 
@@ -139,15 +141,27 @@ alt={movie['original_name']} />
     className='w-full h-full'
     
     loading='eager'
-    alt={movie['original_name']} />
+    alt={person['original_name']} />
     
     </div>
   }
 
  
-    <p className='font-bold  pt-2 px-2  text-[0.85rem] sm:text-[1rem]'>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
-    {movie.character ?
-        <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]   text-gray-300'>{movie['character']}</p> 
+    <Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
+    href={{
+      pathname: `/person`,
+      query:  { id: person.id }, // the data
+    
+    }}
+    
+    >
+
+    {person['original_name'] ?
+     person['original_name'] : 'N/A'}
+     
+     </Link>
+    {person.character ?
+        <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]   text-gray-300'>{person['character']}</p> 
         :
         <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>N/A</p> 
   }
@@ -196,22 +210,23 @@ alt={movie['original_name']} />
       ?
     <div className=' flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
 
-{importantCrewMembers && importantCrewMembers.map((movie: MovieCredits) => (
+{importantCrewMembers && importantCrewMembers.map((person: MovieCredits) => (
 
 
-<div key={movie['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
+<div key={person['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
 
 <div className='flex flex-col justify-center animate pop max-w-[8.625rem] min-w-[8.625rem]'>
-  {movie['profile_path'] ?
+  {person['profile_path'] ?
 
 <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px]  flex self-center rounded-t-md overflow-hidden'>
 <img  
-src={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']}`}
+src={`https://image.tmdb.org/t/p/w138_and_h175_face${person['profile_path']}`}
 className='w-full h-full'
-srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${movie['profile_path']} 1x, https://image.tmdb.org/t/p/w276_and_h350_face${movie['profile_path']} 2x`}
+srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${person['profile_path']} 1x, 
+https://image.tmdb.org/t/p/w276_and_h350_face${person['profile_path']} 2x`}
 
-alt={movie['original_name']} />
+alt={person['original_name']} />
 
 </div>
 
@@ -223,18 +238,30 @@ alt={movie['original_name']} />
     className='w-full h-full'
    
 
-    alt={movie['original_name']} />
+    alt={person['original_name']} />
     
     </div>
   }
 
  
-    <p className='font-bold  pt-2 px-2 text-[0.85rem] sm:text-[1rem] '>{movie['original_name'] ? movie['original_name'] : 'N/A'}</p>
-    {movie['job'] ?
+<Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
+    href={{
+      pathname: `/person`,
+      query:  { id: person.id }, // the data
+    
+    }}
+  
+    >
+
+    {person['original_name'] ?
+     person['original_name'] : 'N/A'}
+     
+     </Link>
+    {person['job'] ?
    
-   <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem] text-gray-300'>{movie['job']}</p> 
+   <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem] text-gray-300'>{person['job']}</p> 
         :
-        <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>{movie['known_for_department']}</p> 
+        <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>{person['known_for_department']}</p> 
  }
 
     

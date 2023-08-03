@@ -57,7 +57,7 @@ export default function PopularPeople() {
       DataFromAPI();
 
     }, []);
-
+console.log(PopularPeople)
   return (
     <>
   
@@ -127,7 +127,7 @@ alt={person.name} />
 }
      {person.name ?
       <Link
-      className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
        pathname: `/person`,
        query:  { id: person.id }, // the data
@@ -138,9 +138,17 @@ alt={person.name} />
        {person.name}
           </Link>
           :
-          <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+          <Link
+          className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+          href={{
+           pathname: `/movie`,
+           query:  { id: person.id }, // the data
+         
+         }}
+        
+          >
            N/A
-          </p>
+              </Link>
 }
           
          
@@ -150,12 +158,12 @@ alt={person.name} />
              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
           {person.popularity
           ?
-           <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>{person.popularity.toFixed(1).replace(/\.0$/, '') }</p>
+           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>{person.popularity.toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>N/A</p>
+          <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>N/A</p>
   }
             </div>
-            <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300  truncate'>{person.known_for_department ? person.known_for_department : 'N/A'}</p>
+            <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300  truncate'>{person.known_for_department ? person.known_for_department : 'N/A'}</p>
         
             </div>
              

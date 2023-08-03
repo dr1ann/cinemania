@@ -19,7 +19,7 @@ import CollectionLoading from '../components/Loaders/CollectionLoading';
 type movieCollection = {
     id: number;
     name: string;
-    original_title: string;
+    title: string;
     poster_path: string;
     release_date: string;
     vote_average: number;
@@ -147,7 +147,7 @@ const Collection =   () => {
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
 {collection.overview.length >= 561
 ?
-<p className='text-[0.85rem] animate pop xl:text-[1rem]    max-h-[320px] min-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
+<p className='text-[0.85rem] animate pop xl:text-[1rem]  px-2  max-h-[320px] min-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 :
 <p className='text-[0.85rem] animate pop xl:text-[1rem]  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 }
@@ -169,6 +169,7 @@ const Collection =   () => {
          {movie['poster_path']
          ?
          <Link
+       
          className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
          href={{
           pathname: `/movie`,
@@ -184,10 +185,11 @@ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-1
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x, 
 https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='lazy'
-alt={movie['original_title']} />
+alt={movie['title']} />
  </Link>
 :
 <Link
+
 className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
 href={{
  pathname: `/movie`,
@@ -202,12 +204,13 @@ className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-m
 hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
 
 loading='lazy'
-alt={movie['original_title']} />
+alt={movie['title']} />
  </Link>
 }
-     {movie['original_title'] ?
+     {movie['title'] ?
       <Link
-      className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+     
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
        pathname: `/movie`,
        query:  { id: movie.id }, // the data
@@ -215,12 +218,21 @@ alt={movie['original_title']} />
      }}
     
       >
-       {movie['original_title']}
+       {movie['title']}
           </Link>
           :
-          <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+          <Link
+        
+          className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+          href={{
+           pathname: `/movie`,
+           query:  { id: movie.id }, // the data
+         
+         }}
+        
+          >
            N/A
-          </p>
+              </Link>
 }
           
          
@@ -237,12 +249,12 @@ alt={movie['original_title']} />
           />
           {movie['vote_average']
           ?
-           <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>N/A</p>
+          <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>N/A</p>
   }
             </div>
-            <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
             </li>     

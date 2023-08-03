@@ -23,7 +23,7 @@ body {
 ::-webkit-scrollbar-thumb {
   border-radius: 6px;
   height: 0.5rem;
-  background: #1a1a1a;
+  background: #3F3F3F;
   transition: background-color 0.3s; /* Add transition property */
 }
 

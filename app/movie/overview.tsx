@@ -180,7 +180,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 
   
    
-<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] md:text-[2rem]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.original_title ? movieDetails.original_title : 'N/A' }</h1>
+<h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] md:text-[2rem]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.title ? movieDetails.title : 'N/A' }</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
   <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] z-10'>
     {movieDetails['release_date'] ?

@@ -16,7 +16,7 @@ import MoviePosterLoading from './Loaders/MoviePosterLoading';
 //type
 interface PopularMoviesProps {
     id: number;
-    original_title: string;
+    title: string;
     vote_average: number;
     release_date: string;
     poster_path: string;
@@ -111,7 +111,7 @@ className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
  https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='eager'
-alt={movie['original_title']} />
+alt={movie['title']} />
 </Link>
 :
 <Link
@@ -130,12 +130,12 @@ className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
  hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='eager'
-alt={movie['original_title']} />
+alt={movie['title']} />
 </Link>
 }
-     {movie['original_title'] ?
+     {movie['title'] ?
       <Link
-      className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
        pathname: `/movie`,
        query:  { id: movie.id }, // the data
@@ -143,12 +143,20 @@ alt={movie['original_title']} />
      }}
     
       >
-       {movie['original_title']}
+       {movie['title']}
           </Link>
           :
-          <p className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616] '>
+          <Link
+          className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+          href={{
+           pathname: `/movie`,
+           query:  { id: movie.id }, // the data
+         
+         }}
+        
+          >
            N/A
-          </p>
+              </Link>
 }
           
          
@@ -165,12 +173,12 @@ alt={movie['original_title']} />
           />
           {movie['vote_average']
           ?
-           <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
           :
-          <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300'>N/A</p>
+          <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>N/A</p>
   }
             </div>
-            <p className=' text-[0.78rem] md:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
         
             </div>
              
