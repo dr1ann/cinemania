@@ -101,7 +101,7 @@ const Crew_Cast =   () => {
     {isPeopleLoading ? 
    <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center p-6 sm:p-10 gap-10'>
 
-   {Array.from({ length: 10 }).map((_, index) => (
+   {Array.from({ length: 15 }).map((_, index) => (
      <PersonLoading key={index} />
    ))}
        
@@ -179,7 +179,7 @@ alt={person['original_name']} />
 ?
 <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <button className='max-w-[8.625rem] min-w-[8.625rem]'>View More →</button>
+        <button className='max-w-[8.625rem] min-w-[8.625rem]'>View More ➠</button>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -272,7 +272,7 @@ alt={person['original_name']} />
 
    <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
 
-   {Array.from({ length: 10 }).map((_, index) => (
+   {Array.from({ length: 5 }).map((_, index) => (
      <PersonLoading key={index} />
    ))}
        

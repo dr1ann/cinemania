@@ -72,7 +72,7 @@ export default function InTheatersMovies() {
         <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center '>In Theaters</h1>
    <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
 
-   {Array.from({ length: 10 }).map((_, index) => (
+   {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
    ))}
        
