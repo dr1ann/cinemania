@@ -227,9 +227,9 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           {movieDetails.vote_average
           
           ?
-          <p className=' mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          <p className='mt-[2px] md:mt-[1px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
-          <p className=' mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
+          <p className='mt-[2px] md:mt-[1px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
 
          {movieVid && movieVid.results && movieVid.results.length > 0 ?
