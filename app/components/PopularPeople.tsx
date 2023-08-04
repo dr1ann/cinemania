@@ -57,7 +57,7 @@ export default function PopularPeople() {
       DataFromAPI();
 
     }, []);
-console.log(PopularPeople)
+
   return (
     <>
   

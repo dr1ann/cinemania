@@ -75,7 +75,7 @@ const Media =  () => {
       DataFromAPI();
   },[] );
 
-  console.log(movieImages && movieImages.posters)
+  
 
   const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;

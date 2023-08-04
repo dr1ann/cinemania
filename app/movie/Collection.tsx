@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
 
 // Images
 
@@ -240,11 +240,11 @@ alt={movie['title']} />
             <div className='flex  justify-between gap-6 items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-1'>
              <Image
-         className='h-[0.9rem] w-[0.9rem] sm:h-[1rem] sm:w-[1rem] object-contain'
+         className='h-[0.8rem] w-[0.8rem] sm:h-[0.9rem] sm:w-[0.9rem] object-contain mb-[2px] sm:mb-[.5px]'
          src={star}
          alt='home icon'
          width={1}
-         height={100}
+         height={1}
         
           />
           {movie['vote_average']

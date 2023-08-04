@@ -205,7 +205,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 </div>
 
 
-<div className='flex flex-row flex-wrap items-center mt-2 px-4 md:px-0 z-10'>
+<div className='flex flex-row flex-wrap items-center mt-2 px-4 md:px-0 z-10 '>
 <Image
          className=' w-[6rem] object-contain 2xl:w-[8rem]'
          src={tmdbicon}
@@ -216,19 +216,19 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           />
       
 <Image
-         className='h-[1rem] w-[1rem] 2xl:w-[1.5rem] 2xl:h-[1.5rem] object-contain'
+         className=' mr-1 md:mb-[0.5px] h-[0.85rem] w-[0.85rem] md:w-[1rem] md:h-[1rem] 2xl:w-[1.2rem] 2xl:h-[1.2rem] object-contain'
          src={star}
          alt='home icon'
          width={1}
-         height={100}
+         height={1}
         
           />
           {movieDetails.vote_average
           
           ?
-          <p className='mr-4 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          <p className='mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
-          <p className='mr-4 2xl:text-[1.2rem]'>N/A</p>
+          <p className='mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
 
          {movieVid && movieVid.results && movieVid.results.length > 0 ?
