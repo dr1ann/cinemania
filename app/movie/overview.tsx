@@ -214,15 +214,16 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
          height={100}
         
           />
-      
-<Image
-         className=' mr-1 md:mb-[0.5px] h-[0.85rem] w-[0.85rem] md:w-[1rem] md:h-[1rem] 2xl:w-[1.2rem] 2xl:h-[1.2rem] object-contain'
+      <div className='flex justify-center items-center gap-1'>
+      <Image
+         className='  h-[0.85rem] w-[0.85rem] md:h-[1rem] md:w-[1rem] 2xl:h-[1.2rem] 2xl:w-[1.2rem] object-contain'
          src={star}
          alt='home icon'
          width={1}
          height={1}
         
           />
+         
           {movieDetails.vote_average
           
           ?
@@ -230,7 +231,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           :
           <p className='mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
-
+ </div>
          {movieVid && movieVid.results && movieVid.results.length > 0 ?
         <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[6px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-play" color="#fff">
