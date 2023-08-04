@@ -147,7 +147,7 @@ const Collection =   () => {
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
 {collection.overview.length >= 561
 ?
-<p className='text-[0.85rem] animate pop xl:text-[1rem]  px-2  max-h-[320px] min-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
+<p className='text-[0.85rem] animate pop xl:text-[1rem]  px-2  lg:max-h-[320px] lg:min-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 :
 <p className='text-[0.85rem] animate pop xl:text-[1rem]  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 }
