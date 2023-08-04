@@ -240,7 +240,7 @@ alt={movie['title']} />
             <div className='flex  justify-between gap-6 items-center py-[5px] '>
              <div className=' flex flex-row items-center gap-1'>
              <Image
-         className='h-[0.8rem] w-[0.8rem] sm:h-[0.9rem] sm:w-[0.9rem] object-contain mb-[2px] sm:mb-[.5px]'
+         className='h-[0.8rem] w-[0.8rem] sm:h-[0.9rem] sm:w-[0.9rem] object-contain mb-[2px] sm:mb-[1px]'
          src={star}
          alt='home icon'
          width={1}

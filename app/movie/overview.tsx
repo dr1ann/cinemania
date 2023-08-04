@@ -216,7 +216,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           />
     
       <Image
-         className='mr-1  h-[0.85rem] w-[0.85rem] md:h-[1rem] md:w-[1rem] 2xl:h-[1.2rem] 2xl:w-[1.2rem] object-contain'
+         className='mr-1  h-[0.87rem] w-[0.87rem] md:h-[1rem] md:w-[1rem] 2xl:h-[1.2rem] 2xl:w-[1.2rem] object-contain'
          src={star}
          alt='home icon'
          width={1}
@@ -227,9 +227,9 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           {movieDetails.vote_average
           
           ?
-          <p className='mt-[2px] sm:mt-[.5px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          <p className=' mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
-          <p className='mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
+          <p className=' mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
 
          {movieVid && movieVid.results && movieVid.results.length > 0 ?
