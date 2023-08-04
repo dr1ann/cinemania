@@ -227,7 +227,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           {movieDetails.vote_average
           
           ?
-          <p className='flex self-end mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          <p className='flex self-center mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
           :
           <p className='mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
