@@ -175,7 +175,7 @@ alt={person['original_name']} />
 
 }
 <div className='flex items-center '>
-{credits && credits.cast && credits.cast.length > 20
+{credits && credits.cast && credits.cast.length >= 20
 ?
 <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
@@ -183,7 +183,7 @@ alt={person['original_name']} />
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="bg-[#141414] flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[10px]">
+        <Drawer.Content className="bg-[#141414] z-[99999999] flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[10px]">
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
           <div className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-moreCast mx-auto sm:w-[95%]  px-4 sm:px-0  sm:gap-4  gap-6  overflow-y-scroll py-4 ">
           {credits && credits.cast && credits.cast.slice(15).map((person: MovieCredits) => (

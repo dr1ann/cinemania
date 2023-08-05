@@ -21,10 +21,12 @@ module.exports = {
         'collectiontablet': 'repeat(3,1fr)',
         'cp': 'repeat(2, minmax(0, 1fr))',
         'moreCast': 'repeat(auto-fit, minmax(138px, 1fr))',
+        'morePosters': 'repeat(auto-fit, minmax(150px, 1fr))',
         // Complex site-specific row configuration
        
       },
       screens: {
+        xsmallcpsize: '326px',
         cpsize: '490px',
         cpsize1: '492px',
         collectionscreen: '523px',

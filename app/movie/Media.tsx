@@ -4,7 +4,7 @@ import React, { useState, Suspense, useEffect, ChangeEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-
+import  {Drawer} from 'vaul'
 //Components
 import VidTrailer from './Videos'
 import VideosLoading from '../components/Loaders/VideosLoading'
@@ -212,44 +212,96 @@ const Media =  () => {
     :
     
     <div className='flex flex-row overflow-x-scroll p-6 sm:p-10 gap-4 relative'>
-    {randomPostersSubset && randomPostersSubset.length > 0 ? (
-      randomPostersSubset.map((movieImg: MovieImgs) => (
+  {randomPostersSubset && randomPostersSubset.length > 0 ? (
+    <>
+      {randomPostersSubset.slice(0, 15).map((movieImg: MovieImgs) => (
         <div
           key={movieImg.file_path}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
-       {movieImg.file_path
-       ?
-       
-<img  
-src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
-className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
-loading='lazy'
-alt={movieImg.file_path} 
-onClick={() => window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')}
-/>
-:
-<div className='max-w-full min-w-full  rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
-<Image  
-src= "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"
-className='w-full h-full'
-
-loading='lazy'
-alt='movie poster' />
-
+          {movieImg.file_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
+              className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+              srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
+              loading='eager'
+              alt={movieImg.file_path}
+              onClick={() =>
+                window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')
+              }
+            />
+          ) : (
+            <div className='max-w-full min-w-full rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
+              <Image
+                src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
+                className='w-full h-full'
+                loading='eager'
+                alt='movie poster'
+              />
+            </div>
+          )}
+        </div>
+      ))}
+      {/* Add the second condition here */}
+      {randomPostersSubset && randomPostersSubset.length >= 19 ? (
+        <Drawer.Root shouldScaleBackground>
+        <Drawer.Trigger asChild>
+          <button className='max-w-[8.625rem] min-w-[8.625rem]'>View More ➠</button>
+        </Drawer.Trigger>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+          <Drawer.Content className="bg-[#141414] z-[99999999] flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[10px]">
+          <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
+            <div className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-morePosters tabletcollectionscreen:px-2 sm:px-0 mx-auto sm:w-[95%]   gap-2 sm:gap-4    overflow-y-scroll py-4 ">
+            {randomPostersSubset && randomPostersSubset.slice(15).map((movieImg: MovieImgs) => (
+               <div
+               key={movieImg.file_path}
+               className='animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]
+               xsmallcpsize:max-w-[9.375rem]  xsmallcpsize:min-w-[9.375rem] xsmallcpsize:min-h-[225px] xsmallcpsize:max-h-[225px] 
+               relative flex justify-center items-center'
+             >
+               {movieImg.file_path ? (
+                 <img
+                   src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
+                   className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
+                   srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
+                   loading='lazy'
+                   alt={movieImg.file_path}
+                   onClick={() =>
+                     window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')
+                   }
+                 />
+               ) : (
+                 <div className='max-w-full min-w-full rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
+                   <Image
+                     src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
+                     className='w-full h-full'
+                     loading='lazy'
+                     alt='movie poster'
+                   />
+                 </div>
+               )}
+             </div>
+  ))
+  
+  }
+            </div>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
+   
+      ) : (
+        ''
+      )}
+    </>
+  ) : (
+    // Fallback content to display when randomPostersSubset is empty
+    <p className='animate pop text-center text-[1rem] sm:text-[1.5rem] centered-text'>
+      No posters available
+    </p>
+  )}
 </div>
-}
-</div>
-       
-      ))
-    ) : (
-      // Fallback content to display when randomPostersSubset is empty
- 
-      <p className='animate pop text-center text-[1rem] sm:text-[1.5rem] centered-text'>No posters available</p>
-     
-    )}
-  </div>
+
  
 
 }
