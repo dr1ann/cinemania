@@ -158,20 +158,22 @@ const Media =  () => {
         {!movieVidsReady ? 
    <div className='flex flex-row justify-start overflow-x-scroll items-center  p-6 sm:p-10 gap-4'>
 
-   {Array.from({ length: 10 }).map((_, index) => (
+   {Array.from({ length: 15 }).map((_, index) => (
      <VideosLoading key={index} />
    ))}
        
        </div> 
        
     :
-       <div className='flex flex-row overflow-x-scroll  p-6  sm:p-10 gap-4 relative'>
+       <ul className='flex flex-row overflow-x-scroll  p-6  sm:p-10 gap-4 relative'>
       {MovieVids && MovieVids.results && MovieVids.results.length  > 0 ? (
       
    
  MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
 
-        <div key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl' style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/hqdefault.jpg)` }}>
+        <li key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] 
+        max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl'
+         style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/hqdefault.jpg)` }}>
            <button className='trailer-button' onClick={() => { 
             if(movieVid.key !== undefined) {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
@@ -183,7 +185,7 @@ const Media =  () => {
   </i>
 </button>
 
-        </div>
+        </li>
         
  ))
  ) : (
@@ -194,7 +196,7 @@ const Media =  () => {
 )}  
 
 
-</div>
+</ul>
 }
 </div>
   }
@@ -203,7 +205,7 @@ const Media =  () => {
           {!movieImagesReady ? 
    <div className='flex flex-row justify-start overflow-x-scroll  items-center p-6 sm:p-10 gap-4'>
 
-   {Array.from({ length: 10 }).map((_, index) => (
+   {Array.from({ length: 15 }).map((_, index) => (
      <PostersLoading key={index} />
    ))}
        
@@ -211,23 +213,24 @@ const Media =  () => {
        
     :
     
-    <div className='flex flex-row overflow-x-scroll p-6 sm:p-10 gap-4 relative'>
+    <ul className='flex flex-row overflow-x-scroll p-6 sm:p-10 gap-4 relative'>
   {randomPostersSubset && randomPostersSubset.length > 0 ? (
     <>
-      {randomPostersSubset.slice(0, 15).map((movieImg: MovieImgs) => (
-        <div
-          key={movieImg.file_path}
+      {randomPostersSubset.slice(0, 15).map((posters: MovieImgs) => (
+        <li
+          key={posters.file_path}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
-          {movieImg.file_path ? (
+          {posters.file_path ? (
             <img
-              src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
+              src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${posters.file_path}`}
               className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-              srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
+              srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${posters.file_path} 1x,
+               https://image.tmdb.org/t/p/w300_and_h450_bestv2${posters.file_path} 2x`}
               loading='eager'
-              alt={movieImg.file_path}
+              alt={posters.file_path}
               onClick={() =>
-                window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')
+                window.open(`https://image.tmdb.org/t/p/original${posters.file_path}`, '_blank')
               }
             />
           ) : (
@@ -240,35 +243,41 @@ const Media =  () => {
               />
             </div>
           )}
-        </div>
+        </li>
       ))}
       {/* Add the second condition here */}
       {randomPostersSubset && randomPostersSubset.length >= 19 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>
-          <button className='max-w-[8.625rem] min-w-[8.625rem]'>View More ➠</button>
+          <button className='max-w-[8.625rem] min-w-[8.625rem] hover:text-[#e2b616]'>View More ➠</button>
         </Drawer.Trigger>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
           <Drawer.Content className="bg-[#141414] z-[99999999] flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[10px]">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
-            <div className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-morePosters px-2 sm:px-0 mx-auto sm:w-[95%]   gap-2 sm:gap-4    overflow-y-scroll py-4 ">
-            {randomPostersSubset && randomPostersSubset.slice(15).map((movieImg: MovieImgs) => (
-               <div
-               key={movieImg.file_path}
-               className='animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]
+          <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Posters</h1>
+            <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
+            sm:grid  sm:grid-cols-morePosters px-2
+             sm:px-0 mx-auto sm:w-[95%] gap-2   overflow-y-scroll py-4 ">
+            {randomPostersSubset && randomPostersSubset.slice(15).map((other_posters: MovieImgs) => (
+               <li
+               key={other_posters.file_path}
+               className=' animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]
                xsmallcpsize:max-w-[9.375rem]  xsmallcpsize:min-w-[9.375rem] xsmallcpsize:min-h-[225px] xsmallcpsize:max-h-[225px] 
                relative flex justify-center items-center'
              >
-               {movieImg.file_path ? (
+               {other_posters.file_path ? (
                  <img
-                   src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path}`}
-                   className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
-                   srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movieImg.file_path} 1x, https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieImg.file_path} 2x`}
+                   src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${other_posters.file_path}`}
+                   className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition
+                    duration-250
+                    hover:scale-110 hover:z-10'
+                   srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${other_posters.file_path} 1x,
+                    https://image.tmdb.org/t/p/w300_and_h450_bestv2${other_posters.file_path} 2x`}
                    loading='lazy'
-                   alt={movieImg.file_path}
+                   alt={other_posters.file_path}
                    onClick={() =>
-                     window.open(`https://image.tmdb.org/t/p/original${movieImg.file_path}`, '_blank')
+                     window.open(`https://image.tmdb.org/t/p/original${other_posters.file_path}`, '_blank')
                    }
                  />
                ) : (
@@ -281,11 +290,11 @@ const Media =  () => {
                    />
                  </div>
                )}
-             </div>
+             </li>
   ))
   
   }
-            </div>
+            </ul>
           </Drawer.Content>
         </Drawer.Portal>
       </Drawer.Root>
@@ -300,7 +309,7 @@ const Media =  () => {
       No posters available
     </p>
   )}
-</div>
+</ul>
 
  
 

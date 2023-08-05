@@ -80,13 +80,13 @@ export default function InTheatersMovies() {
        </>
     :
     
-<ul className='relative'>
+<div className='relative'>
       {InTheatersMovies && InTheatersMovies.results && InTheatersMovies.results.length > 0
       ?
       <>
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center '>In Theaters</h1>
    
-    <div className='flex flex-row overflow-x-scroll bigscreens:justify-center   p-6 sm:p-10 gap-6 '>
+    <ul className='flex flex-row overflow-x-scroll bigscreens:justify-center   p-6 sm:p-10 gap-6 '>
 {InTheatersMovies && InTheatersMovies.results && InTheatersMovies.results.slice(0, 15).map((movie: InTheatersMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
@@ -127,7 +127,8 @@ alt={movie['title']} />
 }
      {movie['title'] ?
       <Link
-      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white 
+        hover:text-[#e2b616]'
       href={{
        pathname: `/movie`,
        query:  { id: movie.id }, // the data
@@ -139,7 +140,8 @@ alt={movie['title']} />
           </Link>
           :
           <Link
-      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white  
+       hover:text-[#e2b616]'
       href={{
        pathname: `/movie`,
        query:  { id: movie.id }, // the data
@@ -165,12 +167,15 @@ alt={movie['title']} />
           />
           {movie['vote_average']
           ?
-           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).replace(/\.0$/, '') }</p>
+           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>{movie['vote_average'].toFixed(1).
+           replace(/\.0$/, '') }</p>
           :
           <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300'>N/A</p>
   }
             </div>
-            <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ? new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}</p>
+            <p className=' text-[0.78rem] sm:text-[0.9rem] text-gray-300  truncate'>{movie['release_date'] ?
+             new Date(movie['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+              : 'N/A'}</p>
         
             </div>
              
@@ -178,7 +183,7 @@ alt={movie['title']} />
 </li>
 ))
 }
-</div>
+</ul>
 </>
 :
 ''
@@ -186,7 +191,7 @@ alt={movie['title']} />
 
     }
   
-    </ul>
+    </div>
     
 }
 
