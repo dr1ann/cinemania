@@ -245,7 +245,7 @@ const Media =  () => {
           )}
         </li>
       ))}
-      {/* Add the second condition here */}
+   
       {randomPostersSubset && randomPostersSubset.length >= 19 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>

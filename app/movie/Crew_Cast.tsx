@@ -174,7 +174,7 @@ alt={cast['original_name']} />
 ))
 
 }
-<div className='flex items-center '>
+<>
 {credits && credits.cast && credits.cast.length >= 20
 ?
 <Drawer.Root shouldScaleBackground>
@@ -189,7 +189,7 @@ alt={cast['original_name']} />
           <ul className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]  sm:grid  sm:grid-cols-moreCast
            mx-auto sm:w-[95%]  px-2 sm:px-0  sm:gap-4  gap-6  overflow-y-scroll py-4 ">
           {credits && credits.cast && credits.cast.slice(15).map((other_cast: MovieCredits) => (
-            <li key={other_cast.credit_id} className='bg-[#1a1a1a]  drop-shadow-2xl customized-shadow
+            <li key={other_cast.credit_id} className='bg-[#1a1a1a] mx-auto  drop-shadow-2xl customized-shadow
              shadow-sm rounded-md flex flex-col 
              animate pop max-w-[8rem] min-w-[8rem] xsmallcpsize:max-w-[8.625rem] xsmallcpsize:min-w-[8.625rem]'>
   {other_cast['profile_path'] ?
@@ -252,7 +252,7 @@ alt={other_cast['original_name']} />
 :
 ''
 }
-</div>
+</>
 </ul>
 :
 <p className='animate pop text-center sm:text-left  text-[1.5rem] p-10 sm:pl-16'>N/A</p>
