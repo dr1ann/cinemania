@@ -179,7 +179,7 @@ alt={cast['original_name']} />
 ?
 <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <button className='max-w-[8.625rem] min-w-[8.625rem] hover:text-[#e2b616]'>View More ➠</button>
+        <button className='w-fit whitespace-nowrap  h-fit flex self-center hover:text-[#e2b616]'>View More ➠</button>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -187,7 +187,7 @@ alt={cast['original_name']} />
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
         <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Cast</h1>
           <ul className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]  sm:grid  sm:grid-cols-moreCast
-           mx-auto sm:w-[95%]  px-2 sm:px-0  sm:gap-4  gap-6  overflow-y-scroll py-4 ">
+           mx-auto sm:w-[95%]  px-2   sm:gap-4  gap-6  overflow-y-scroll py-4 ">
           {credits && credits.cast && credits.cast.slice(15).map((other_cast: MovieCredits) => (
             <li key={other_cast.credit_id} className='bg-[#1a1a1a] mx-auto  drop-shadow-2xl customized-shadow
              shadow-sm rounded-md flex flex-col 

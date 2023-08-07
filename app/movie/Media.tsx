@@ -249,7 +249,7 @@ const Media =  () => {
       {randomPostersSubset && randomPostersSubset.length >= 19 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>
-          <button className='max-w-[8.625rem] min-w-[8.625rem] hover:text-[#e2b616]'>View More ➠</button>
+        <button className='w-fit whitespace-nowrap  h-fit flex self-center hover:text-[#e2b616]'>View More ➠</button>
         </Drawer.Trigger>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -258,7 +258,7 @@ const Media =  () => {
           <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Posters</h1>
             <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
             sm:grid  sm:grid-cols-morePosters px-2
-             sm:px-0 mx-auto sm:w-[95%] gap-2   overflow-y-scroll py-4 ">
+             mx-auto sm:w-[95%] gap-2   overflow-y-scroll py-4 ">
             {randomPostersSubset && randomPostersSubset.slice(15).map((other_posters: MovieImgs) => (
                <li
                key={other_posters.file_path}
