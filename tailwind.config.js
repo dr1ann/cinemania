@@ -16,7 +16,7 @@ module.exports = {
         // Simple 8 row grid
         'fit': 'repeat(auto-fit, minmax(200px, 1fr))',
         'fit1': 'repeat(auto-fit, minmax(150px, 1fr))',
-        'collection': 'repeat(auto-fit, minmax(176px, 1fr))',
+        'collection': 'repeat(auto-fit, minmax(150px, 1fr))',
         'collectioncp': 'repeat(2,1fr)',
         'collectiontablet': 'repeat(3,1fr)',
         'cp': 'repeat(2, minmax(0, 1fr))',

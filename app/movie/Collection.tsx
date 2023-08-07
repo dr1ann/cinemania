@@ -142,7 +142,7 @@ const Collection =   () => {
         />
       </div>
    
-    <div className='mb-6 sm:mb-0 px-4 sm:px-0 flex flex-col justify-center  '>
+    <div className='  px-4 sm:px-0 flex flex-col justify-center  '>
     
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
 {collection.overview.length >= 561
@@ -153,7 +153,11 @@ const Collection =   () => {
 }
 </div>
 </div>
-<ul className='grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)] sm:grid  sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px]  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4  '>
+<ul className={`grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${collection && 
+collection.parts && 
+collection.parts.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
+sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px] 
+ lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4`}>
      
     {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
       
@@ -161,7 +165,8 @@ const Collection =   () => {
 
         
        
-<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
+<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
+   animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 
 
    
