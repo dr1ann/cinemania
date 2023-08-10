@@ -1,5 +1,5 @@
 import React from 'react'
-import Info from './Info'
+import Info from './info'
 export default function page() {
   return (
    < Info />
