@@ -14,7 +14,7 @@ const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) =>
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
-  const [isLoading, setIsLoading] = useState(true);
+
   const [movieVid, setMovieVid] = useState<string | null>(null);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) =>
 
   return (
     <div>
-      {isVisible && isLoading && movieVid !== null ? (
+      {isVisible  && movieVid !== null ? (
         <div className='h-screen w-full bg-opacity-25 z-[100000] backdrop-blur-sm fixed mx-auto flex justify-center items-center'>
           <div className='flex items-center justify-center relative mx-4 sm:mx-0 h-[50%] w-full sm:w-[80%] sm:h-[55%] md:w-[70%] md:h-[60%] lg:w-[55%] lg:h-[65%] overflow-x-hidden '>
             <button

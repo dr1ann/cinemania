@@ -245,9 +245,9 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 </div>
 
 {movieDetails.overview ?
-  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] sm:text-center md:text-left md:w-full z-10'>{movieDetails.overview}</p>
+  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.2rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] sm:text-center md:text-left md:w-full z-10'>{movieDetails.overview}</p>
   :
-  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.5rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
+  <p className='text-[0.85rem] mx-auto  md:text-[1rem] 2xl:text-[1.2rem] mt-2 px-4 md:px-0 sm:px-0 sm:w-[70%] md:w-full z-10'>No overview available</p>
 }
 
 

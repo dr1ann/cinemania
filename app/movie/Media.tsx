@@ -1,6 +1,6 @@
 'use client'
 // External Libraries
-import React, { useState, Suspense, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
