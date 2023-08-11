@@ -179,7 +179,7 @@ const renderReadButton = () => {
 
 {PersonSocMedia.facebook_id || PersonSocMedia.instagram_id || PersonSocMedia.twitter_id ?
 
-<ul className='mb-1 pb-1 pt-[5px] bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit mx-auto md:mx-0 px-4 flex flex-row gap-4 justify-center md:justify-start items-center'>
+<ul className='my-1 pb-1 pt-[5px] bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit mx-auto md:mx-0 px-4 flex flex-row gap-4 justify-center md:justify-start items-center'>
 <h3 className='pb-[3px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>Social Media ➨</h3>
 {PersonSocMedia.facebook_id
 ?
