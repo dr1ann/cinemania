@@ -179,37 +179,48 @@ const renderReadButton = () => {
 
 {PersonSocMedia.facebook_id || PersonSocMedia.instagram_id || PersonSocMedia.twitter_id ?
 
-<ul className='flex flex-row gap-4 justify-center md:justify-start items-center pt-1'>
-    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-      {PersonSocMedia.facebook_id
-      ?
+<ul className='pb-1 pt-[5px] bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit mx-auto md:mx-0 px-4 flex flex-row gap-4 justify-center md:justify-start items-center'>
+{PersonSocMedia.facebook_id
+?
+    <li className='hover:rotate-[0deg]   transform transition duration-250 hover:scale-110 hover:z-10'>
+           
       <a  href={`https://facebook.com/${PersonSocMedia.facebook_id}` } target="_blank" rel="noopener noreferrer ">
       <FontAwesomeIcon icon={faFacebook} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
      </a>
-     :
+      
+    </li>
+   
+    :
      ''
     }
-    </li>
-    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-      {PersonSocMedia.instagram_id
-      ?
-      <a href={`https://facebook.com/${PersonSocMedia.instagram_id}` } target="_blank" rel="noopener noreferrer ">
+    
+    {PersonSocMedia.instagram_id
+?
+    <li className='hover:rotate-[0deg]   transform transition duration-250 hover:scale-110 hover:z-10'>
+           
+      <a  href={`https://facebook.com/${PersonSocMedia.instagram_id}` } target="_blank" rel="noopener noreferrer ">
       <FontAwesomeIcon icon={faInstagram} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
      </a>
-     :
+      
+    </li>
+   
+    :
      ''
     }
-    </li>
-    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
-      {PersonSocMedia.twitter_id
-      ?
-      <a href={`https://facebook.com/${PersonSocMedia.twitter_id}` } target="_blank" rel="noopener noreferrer ">
+
+{PersonSocMedia.twitter_id
+?
+    <li className='hover:rotate-[0deg]   transform transition duration-250 hover:scale-110 hover:z-10'>
+           
+      <a  href={`https://facebook.com/${PersonSocMedia.twitter_id}` } target="_blank" rel="noopener noreferrer ">
       <FontAwesomeIcon icon={faTwitter} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
      </a>
-     :
+      
+    </li>
+   
+    :
      ''
     }
-    </li>
     </ul>
     :
     ''

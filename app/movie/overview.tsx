@@ -255,7 +255,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 </div>
 
 <div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4 md:px-0  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
     <p className='text-gray-400 '>Status</p>
@@ -290,8 +290,8 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
     </div>
    
     {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
-   <div className='md:hidden flex items-center justify-center text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>
-    <p>Discover More ➠</p>
+   <div className='md:hidden flex items-center justify-center '>
+    <p className='text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] whitespace-nowrap'>Discover More ➠</p>
    </div>
 
    :
@@ -307,21 +307,21 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 
 {movieSoc.facebook_id ?
   <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://facebook.com/${movieSoc.facebook_id}` } target="_blank" rel="noopener noreferrer ">
-<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem] "  />
+<FontAwesomeIcon icon={faFacebook} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem]"  />
   </a>
 :
 ''
 }
 {movieSoc.instagram_id ?
   <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://instagram.com/${movieSoc.instagram_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faInstagram} className="text-white text-[1.5rem]  md:text-[1.75rem] 2xl:text-[2rem]"  />
+<FontAwesomeIcon icon={faInstagram} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem]"  />
   </a>
 :
 ''
 }
 {movieSoc.twitter_id ?
   <a className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' href={`https://twitter.com/${movieSoc.twitter_id}` } target="_blank" rel="noopener noreferrer">
-<FontAwesomeIcon icon={faTwitter} className="text-white text-[1.5rem] md:text-[1.75rem] 2xl:text-[2rem]"  />
+<FontAwesomeIcon icon={faTwitter} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem]"  />
   </a>
 :
 ''
