@@ -110,26 +110,26 @@ const Overview =   () => {
 }
 
 //get the genre names array and separate them
-  const genreNames = movieDetails && movieDetails.genres && movieDetails.genres.map((genres: { id: number, name: string }) => genres.name);
-const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
+  const genreNames = movieDetails?.genres?.map((genres: { id: number, name: string }) => genres.name);
+const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
   //get only the first movie logo
-  const firstLogo = movielogo && movielogo.logos && movielogo.logos[0];
+  const firstLogo = movielogo?.logos?.[0];
  
 
   //get the bg image of the movie
   const bgImage = `https://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`
   //get the logo image of the movie
-  const logoImage = firstLogo && firstLogo.file_path && `https://image.tmdb.org/t/p/w500${firstLogo.file_path}`
+  const logoImage = firstLogo?.file_path && `https://image.tmdb.org/t/p/w500${firstLogo.file_path}`
   return (
     
      
-<div>
+<>
   {isLoading  ?
        <HomeLoading />
          :
          <div>
-          {movieDetails && movieDetails.backdrop_path ?
+          {movieDetails?.backdrop_path ?
           
         
          <div className='movdetpic relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url(${bgImage})` }}>
@@ -227,12 +227,12 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
           {movieDetails.vote_average
           
           ?
-          <p className='mt-[2px] md:mt-[1px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails.vote_average && movieDetails.vote_average.toFixed(1)}</p>
+          <p className='mt-[2px] md:mt-[1px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] '>{movieDetails?.vote_average?.toFixed(1)}</p>
           :
           <p className='mt-[2px] md:mt-[1px] mr-4 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>N/A</p>
           }
 
-         {movieVid && movieVid.results && movieVid.results.length > 0 ?
+         {movieVid?.results?.length > 0 ?
         <button className='bg-[#1a1a1a] px-[10px] rounded-xl inline-flex items-center justify-center gap-[6px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] py-[2.5px] hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10' onClick={() =>  setIsOpen(true)}> 
         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-play" color="#fff">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -338,7 +338,7 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 </div>
   }
  
-</div>
+</>
    );
 }
 export default Overview;

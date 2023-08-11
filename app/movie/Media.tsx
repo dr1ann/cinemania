@@ -107,8 +107,8 @@ const Media =  () => {
 
 
   //get the length of vid and img
-  let vidLength =  MovieVids && MovieVids.results &&MovieVids.results.length 
-  let ImgLength =  randomPostersSubset && randomPostersSubset.length
+  let vidLength =MovieVids?.results?.length 
+  let ImgLength = randomPostersSubset?.length
 
   //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Videos');
@@ -156,7 +156,7 @@ const Media =  () => {
        {selectedOption === 'Videos' && 
        <div>
         {!movieVidsReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-6 sm:p-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-6 sm:py-6 sm:px-10 gap-4'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <VideosLoading key={index} />
@@ -165,11 +165,11 @@ const Media =  () => {
        </div> 
        
     :
-       <ul className='flex flex-row overflow-x-scroll  p-6  sm:p-10 gap-4 relative'>
-      {MovieVids && MovieVids.results && MovieVids.results.length  > 0 ? (
+       <ul className='flex flex-row overflow-x-scroll  p-6 sm:py-6 sm:px-10 gap-4 relative'>
+      {MovieVids?.results?.length  > 0 ? (
       
    
- MovieVids.results && MovieVids.results.map((movieVid: MovieVideos) => (
+MovieVids?.results?.map((movieVid: MovieVideos) => (
 
         <li key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] 
         max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl'
@@ -203,7 +203,7 @@ const Media =  () => {
   {selectedOption === 'Posters' && 
        <div>
           {!movieImagesReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll  items-center p-6 sm:p-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll  items-center p-6 sm:py-6 sm:px-10 gap-4'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <PostersLoading key={index} />
@@ -213,10 +213,10 @@ const Media =  () => {
        
     :
     
-    <ul className='flex flex-row overflow-x-scroll p-6 sm:p-10 gap-4 relative'>
-  {randomPostersSubset && randomPostersSubset.length > 0 ? (
+    <ul className='flex flex-row overflow-x-scroll p-6 sm:py-6 sm:px-10 gap-4 relative'>
+  {randomPostersSubset?.length > 0 ? (
     <>
-      {randomPostersSubset.slice(0, 15).map((posters: MovieImgs) => (
+      {randomPostersSubset?.slice(0, 15).map((posters: MovieImgs) => (
         <li
           key={posters.file_path}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
@@ -246,7 +246,7 @@ const Media =  () => {
         </li>
       ))}
    
-      {randomPostersSubset && randomPostersSubset.length >= 19 ? (
+      {randomPostersSubset?.length >= 19 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>
         <button className='w-fit whitespace-nowrap  h-fit flex self-center hover:text-[#e2b616]'>View More ➠</button>
@@ -259,7 +259,7 @@ const Media =  () => {
             <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
             sm:grid  sm:grid-cols-morePosters px-2
              mx-auto sm:w-[95%] gap-2   overflow-y-scroll py-4 ">
-            {randomPostersSubset && randomPostersSubset.slice(15).map((other_posters: MovieImgs) => (
+            {randomPostersSubset?.slice(15).map((other_posters: MovieImgs) => (
                <li
                key={other_posters.file_path}
                className=' animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]

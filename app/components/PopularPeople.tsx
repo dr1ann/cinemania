@@ -66,7 +66,7 @@ export default function PopularPeople() {
 
         <>
         <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top People</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -77,13 +77,13 @@ export default function PopularPeople() {
     :
     
 <div className='relative'>
-      {PopularPeople && PopularPeople.results && PopularPeople.results.length > 0
+      {PopularPeople?.results?.length > 0
       ?
       <>
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top People</h1>
    
-    <ul className='flex flex-row overflow-x-scroll  bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
-{PopularPeople && PopularPeople.results && PopularPeople.results.slice(0, 15).map((person: PopularPeopleProps) => (
+    <ul className='flex flex-row overflow-x-scroll  bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6'>
+{PopularPeople?.results?.slice(0, 15).map((person: PopularPeopleProps) => (
 <li key={person.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {person.profile_path

@@ -77,7 +77,7 @@ export default function Similar() {
 
 <>
 <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
-<div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
+<div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
 {Array.from({ length: 15 }).map((_, index) => (
 <MoviePosterLoading key={index} />
@@ -89,13 +89,13 @@ export default function Similar() {
     :
     
 <div className='relative'>
-      {suggestedMovies && suggestedMovies.results && suggestedMovies.results.length > 0
+      {suggestedMovies?.results?.length > 0
       ?
       <>
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
    
-    <ul className='flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
-{suggestedMovies && suggestedMovies.results && suggestedMovies.results.slice(0, 15).map((movie: SuggestedMoviesProps) => (
+    <ul className='flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
+{suggestedMovies?.results?.slice(0, 15).map((movie: SuggestedMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']

@@ -76,7 +76,7 @@ const Collection =   () => {
  const movieCollection = async () => {
    
   try {
-    const collectionId = movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id;
+    const collectionId = movieDetails?.belongs_to_collection?.id;
     
     //only get the collection data if the ID of the movie is there
     if (collectionId) {
@@ -110,10 +110,10 @@ const Collection =   () => {
  
   return (
     
-    <div>
+    <>
 
       
-      { movieDetails && movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.id 
+      {movieDetails?.belongs_to_collection?.id 
    ?
    <div>
   {!isCollectionLoading
@@ -145,7 +145,7 @@ const Collection =   () => {
     <div className='  px-4 sm:px-0 flex flex-col justify-center  '>
     
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.5rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
-{collection.overview.length >= 561
+{collection?.overview?.length >= 561
 ?
 <p className='text-[0.85rem] animate pop xl:text-[1rem]  lg:pr-2  lg:max-h-[320px] lg:min-h-[320px] lg:overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 :
@@ -153,13 +153,12 @@ const Collection =   () => {
 }
 </div>
 </div>
-<ul className={`grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${collection && 
-collection.parts && 
-collection.parts.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
+<ul className={`grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${
+collection?.parts?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px] 
  lg:max-h-[500px] lg:min-h-[500px] lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4`}>
      
-    {collection && collection.parts && collection.parts.map((movie: movieCollection) => (
+    {collection?.parts?.map((movie: movieCollection) => (
       
 
 
@@ -281,7 +280,7 @@ alt={movie['title']} />
 ''
 }
 
-    </div>
+    </>
     
   );
 }

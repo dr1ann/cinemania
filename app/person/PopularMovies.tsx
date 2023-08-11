@@ -1,68 +1,81 @@
-
 'use client'
+
 // External Libraries
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
+import  {Drawer} from 'vaul'
+
+// Font Awesome Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 //Images
-import noprofile from '../Images/noprofile.png'
 import star from '../Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import Header from '../components/Header';
+import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
 
 //type
-interface TopRatedMoviesProps {
+interface PopularMoviesProps {
     id: number;
     title: string;
     vote_average: number;
     release_date: string;
     poster_path: string;
 }
-
-export default function TopRatedMovies() {
-
-    const [TopRatedMovies, setTopRatedMovies] = useState<any>({})
+export default function PopularMovies() {
     const [isLoading, setIsLoading] = useState(true);
-  
-  
-  
-  
-  
+    const [Movies, setMovies] = useState<any>({})
+
+
+
+    const searchParams = useSearchParams();
+
     //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.themoviedb.org/3', 
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+    },
+  });
+
+ //fetch all data from the api
+ const DataFromAPI = async () => {
+      
+
+  try {
+
+    //the current person id
+    const currID = searchParams.get('id');
+
+    const response =  await axiosInstance.get(`/person/${currID}/movie_credits`) //MovieCredits
+   
+
   
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
+    setMovies(response.data); 
+    setIsLoading(false) // Skeleton loader is disabled
+
+ 
+   
+  } catch (error) {
+    console.error('Error fetching data:', error); // Catch errors if data is not fetched
+  }
   
-    try {
+};
+  useEffect(() => {
+ 
+    //call the function to get the data from the api
+    DataFromAPI();
 
-      const response =  await axiosInstance.get(`movie/top_rated?language=en-US&page=1`) //Top Rated Movies
-    
-      setTopRatedMovies(response.data);
-      setIsLoading(false) // Skeleton loader is disabled
-  
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
+  }, []);
 
-  //call the function to get the data from the api
-    useEffect(() => {
-
-      DataFromAPI();
-
-    }, []);
+ const sortedMovies = Movies?.cast?.sort((a:any, b:any) => b.popularity - a.popularity);
+// Get the top 15 most popular movies
+const PopularMovies = sortedMovies?.slice(0, 15);
 
   return (
     <>
@@ -71,8 +84,8 @@ export default function TopRatedMovies() {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6'>
+        <h1 className='px-6 sm:px-10 pt-4 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular Movies</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -83,14 +96,14 @@ export default function TopRatedMovies() {
     :
     
 <div className='relative'>
-      {TopRatedMovies?.results?.length > 0
+      {PopularMovies.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
+       <h1 className='px-6 sm:px-10 pt-4 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular Movies</h1>
    
-    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
-{TopRatedMovies?.results?.slice(0, 15).map((movie: TopRatedMoviesProps) => (
-<li key={movie.id}>
+    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
+{PopularMovies?.map((movie:PopularMoviesProps) => (
+    <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
          ?
@@ -102,14 +115,14 @@ export default function TopRatedMovies() {
         
         }}
        
-         >
+         > 
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
 className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md
-hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
  https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
-loading='lazy'
+loading='eager'
 alt={movie['title']} />
 </Link>
 :
@@ -121,13 +134,14 @@ href={{
 
 }}
 
->
+> 
+
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
-hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
-loading='lazy'
+loading='eager'
 alt={movie['title']} />
 </Link>
 }

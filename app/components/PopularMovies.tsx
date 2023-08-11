@@ -73,7 +73,7 @@ export default function PopularMovies() {
 
         <>
         <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -84,13 +84,13 @@ export default function PopularMovies() {
     :
     
 <div className='relative'>
-      {PopularMovies && PopularMovies.results && PopularMovies.results.length > 0
+      {PopularMovies?.results?.length > 0
       ?
       <>
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
    
-    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:p-10 gap-6 '>
-{PopularMovies && PopularMovies.results && PopularMovies.results.slice(0, 15).map((movie: PopularMoviesProps) => (
+    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
+{PopularMovies?.results?.slice(0, 15).map((movie: PopularMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']

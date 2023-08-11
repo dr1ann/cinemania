@@ -83,7 +83,7 @@ const Crew_Cast =   () => {
 
 
  //get only the important crew members from the movie 
- const importantCrewMembers = credits && credits.crew && credits.crew.filter((movie:MovieCredits) => {
+ const importantCrewMembers = credits?.crew?.filter((movie:MovieCredits) => {
   return (
     movie.job === 'Director' || 
      movie.job === 'Writer' ||
@@ -95,11 +95,11 @@ const Crew_Cast =   () => {
 
   return (
     
-    <div>
+    <>
          <div>
     <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Billed Cast</h1>
     {isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center p-6 sm:p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <PersonLoading key={index} />
@@ -109,11 +109,11 @@ const Crew_Cast =   () => {
        
     :
 <div className='relative'>
-      {credits && credits.cast && credits.cast.length > 0
+      {credits?.cast?.length > 0
       ?
-    <ul className='flex flex-row overflow-x-scroll  bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
+    <ul className='flex flex-row overflow-x-scroll  bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
-{credits && credits.cast && credits.cast.slice(0, 15).map((cast: MovieCredits) => (
+{credits?.cast?.slice(0, 15).map((cast: MovieCredits) => (
 
 <li key={cast['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
@@ -175,7 +175,7 @@ alt={cast['original_name']} />
 
 }
 <>
-{credits && credits.cast && credits.cast.length >= 20
+{credits?.cast?.length >= 20
 ?
 <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
@@ -188,7 +188,7 @@ alt={cast['original_name']} />
         <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Cast</h1>
           <ul className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]  sm:grid  sm:grid-cols-moreCast
            mx-auto sm:w-[95%]  px-2   sm:gap-4  gap-6  overflow-y-scroll py-4 ">
-          {credits && credits.cast && credits.cast.slice(15).map((other_cast: MovieCredits) => (
+          {credits?.cast?.slice(15).map((other_cast: MovieCredits) => (
             <li key={other_cast.credit_id} className='bg-[#1a1a1a] mx-auto  drop-shadow-2xl customized-shadow
              shadow-sm rounded-md flex flex-col 
              animate pop max-w-[8rem] min-w-[8rem] xsmallcpsize:max-w-[8.625rem] xsmallcpsize:min-w-[8.625rem]'>
@@ -274,7 +274,7 @@ alt={other_cast['original_name']} />
     {isPeopleLoading ? 
 
 
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:p-10 gap-10'>
+   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 5 }).map((_, index) => (
      <PersonLoading key={index} />
@@ -284,11 +284,11 @@ alt={other_cast['original_name']} />
        
     :
     <div className='relative'>
-      {credits && credits.crew && credits.crew.length > 0
+      {credits?.crew?.length > 0
       ?
-    <ul className=' flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:p-10 gap-6 '>
+    <ul className=' flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
-{importantCrewMembers && importantCrewMembers.map((crew: MovieCredits) => (
+{importantCrewMembers?.map((crew: MovieCredits) => (
 
 
 <li key={crew['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
@@ -359,7 +359,7 @@ alt={crew['original_name']} />
 }
 </div>
 
-    </div>
+    </>
   );
 }
 export default Crew_Cast;
