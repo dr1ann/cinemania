@@ -22,6 +22,7 @@ const Info = () => {
     //use states
   const searchParams = useSearchParams();
   const [personDetails, setPersonDetails] = useState<any>({})
+  const [PersonSocMedia, setPersonSocMedia] = useState<any>({})
   const [isPersonLoading, setIsPersonLoading] = useState(true);
   const [readMore, setReadMore] = useState(false);
   const biographyHeightRef = useRef<HTMLDivElement>(null);
@@ -45,11 +46,15 @@ const Info = () => {
     //the current person id
     const currID = searchParams.get('id');
 
-    const response =  await axiosInstance.get(`/person/${currID}`) //Person Details
-   
-
+  
+    const apiPromises = [
+      axiosInstance.get(`/person/${currID}`), //Person Details
+      axiosInstance.get(`/person/${currID}/external_ids`) //Person Details
+    ]
+    const [details, socMedia] = await Promise.all(apiPromises);
     
-    setPersonDetails(response.data) //data is fetched 
+    setPersonDetails(details.data) //Personal data is fetched 
+    setPersonSocMedia(socMedia.data) //Social Media is fetched 
     setIsPersonLoading(false) // Skeleton loader is disabled
 
  
@@ -63,7 +68,7 @@ const Info = () => {
   
 
   console.log(
-personDetails
+PersonSocMedia
   );
   useEffect(() => {
   
@@ -93,8 +98,21 @@ const  calculateAge = (birthdate:number) => {
   return currentYear - birthYear;
 }
 
+const calculateDeathAge = (deathdate: number, birthdate: string) => {
+  const DeathYear = new Date(deathdate).getFullYear();
+  const DeathMonth = new Date(deathdate).getMonth();
+  const BirthYear = new Date(birthdate).getFullYear();
+  const BirthMonth = new Date(birthdate).getMonth();
 
+  let age = DeathYear - BirthYear;
 
+  // If the death month is earlier than the birth month, subtract one year from the calculated age
+  if (DeathMonth < BirthMonth) {
+    age--;
+  }
+
+  return age;
+}
 
 
 const renderReadButton = () => {
@@ -102,7 +120,7 @@ const renderReadButton = () => {
     return (
       <button
         onClick={() => setReadMore(!readMore)}
-        className='bg-[#1a1a1a] py-[0.2em] px-[0.8em]'
+        className='bg-[#1a1a1a] py-[0.2em] px-[0.8em] text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'
       >
         {readMore ? 'Read less ←' : 'Read more →'}
       </button>
@@ -111,7 +129,7 @@ const renderReadButton = () => {
   return null;
 };
 
-console.log(personDetails?.length)
+
 
 
   return (
@@ -119,7 +137,7 @@ console.log(personDetails?.length)
     <> 
     <Header />
     
-    <div className='flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start p-2 md:p-10'>
+    <div className='flex flex-col md:flex-row items-center  justify-center md:items-start md:justify-start p-2 md:p-10'>
 {personDetails.profile_path
 ?
     <img className='rounded-xl max-w-[50%]' 
@@ -137,9 +155,66 @@ console.log(personDetails?.length)
       src='https://via.placeholder.com/300x450/3F3F3F/FFFFFF/?text=PROFILE N/A'
        />
     }
-      <div className='flex flex-col px-6'>
-      <h1 className='text-[1.5rem] font-bold  text-center md:text-left md:text-[2rem]  2xl:text-[2.5rem]  z-10'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
-     
+   
+    
+      <div className='flex flex-col px-4 md:px-6'>
+      <h1 className='text-[1.5rem] font-bold  text-center md:text-left md:text-[2rem]  2xl:text-[2.3rem]  z-10'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
+      <>
+      {personDetails.deathday ? 
+      <span className='text-center md:text-left text-[0.78rem] pb-2 sm:text-[0.813rem]   text-gray-300'>
+
+     Death Day: {new Date(personDetails.deathday).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {' ('}
+      {calculateDeathAge(personDetails.deathday, personDetails.birthday)}
+      {' years old)'}
+    
+      </span>
+    :
+  ''
+  }
+</>
+
+
+<>
+
+{PersonSocMedia.facebook_id || PersonSocMedia.instagram_id || PersonSocMedia.twitter_id ?
+
+<ul className='flex flex-row gap-4 justify-center md:justify-start items-center pt-1'>
+    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+      {PersonSocMedia.facebook_id
+      ?
+      <a  href={`https://facebook.com/${PersonSocMedia.facebook_id}` } target="_blank" rel="noopener noreferrer ">
+      <FontAwesomeIcon icon={faFacebook} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
+     </a>
+     :
+     ''
+    }
+    </li>
+    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+      {PersonSocMedia.instagram_id
+      ?
+      <a href={`https://facebook.com/${PersonSocMedia.instagram_id}` } target="_blank" rel="noopener noreferrer ">
+      <FontAwesomeIcon icon={faInstagram} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
+     </a>
+     :
+     ''
+    }
+    </li>
+    <li className='hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'>
+      {PersonSocMedia.twitter_id
+      ?
+      <a href={`https://facebook.com/${PersonSocMedia.twitter_id}` } target="_blank" rel="noopener noreferrer ">
+      <FontAwesomeIcon icon={faTwitter} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
+     </a>
+     :
+     ''
+    }
+    </li>
+    </ul>
+    :
+    ''
+}
+</>
        {/* checks first if there is a biography of the person details */}
       { personDetails.biography 
      ?
@@ -195,9 +270,9 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
     }
   
   
-    <div className=' mt-6 grid grid-cols-2 grid-auto-rows gap-6 px-4 place-content-start  items-center movdet justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+    <div className=' mt-6 grid grid-cols-2 2xl:grid-cols-4 gap-6 px-4 place-content-start    justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
-  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
     <p className='text-gray-400 '>Popularity</p>
     <div className='flex flex-row gap-1'>
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b616" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
@@ -205,31 +280,32 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
      personDetails.popularity.toFixed(1).replace(/\.0$/, '') + '%'  :  'N/A'} </span>
 </div>
   </div>
-  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
   <p className='text-gray-400 '>Known for</p>
     <span>{personDetails.known_for_department ? personDetails.known_for_department : 'N/A'}</span>
     </div>
 
    
 
-    <div className='flex flex-col items-center  text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center  text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
   <p className='text-gray-400 '>Birthday</p>
   <span className='text-center'>
 
-  {personDetails.birthday ? (
-    <>
-      {personDetails.birthday}({calculateAge(personDetails.birthday)} years old)
-    </>
-  ) : (
-    'N/A'
-  )}
+  {personDetails.birthday ? 
+      <>
+        {new Date(personDetails.birthday).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {personDetails.deathday ? '' : ` (${calculateAge(personDetails.birthday)} years old)`}
+      </>
+     : 
+      'N/A'
+    }
 
   </span>
     </div>
 
-    <div className=' text-center flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
   <p className='text-gray-400 '>Place of Birth</p>
-    <span>{personDetails.place_of_birth ? personDetails.place_of_birth : 'N/A' }</span>
+    <span className=' text-center '>{personDetails.place_of_birth ? personDetails.place_of_birth : 'N/A' }</span>
     </div>
 
    

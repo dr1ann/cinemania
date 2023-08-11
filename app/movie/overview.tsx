@@ -255,52 +255,53 @@ const separtedNames = genreNames && genreNames.join( ' ' + '•' + ' ')
 </div>
 
 <div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center movdet justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
-  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
     <p className='text-gray-400 '>Status</p>
     <span>{movieDetails.status ? movieDetails.status :  'N/A'} </span>
 
   </div>
-  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+  <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Release Date</p>
     <span>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'N/A'}</span>
     </div>
 
    
 
-    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Budget</p>
   <span>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '-'}</span>
     </div>
 
-    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Revenue</p>
     <span>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '-'}</span>
     </div>
 
-    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400'>Popularity</p>
     <span>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') : 'N/A'}</span>
     </div>
 
-    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.5rem]'>
+    <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Vote Count</p>
     <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
     </div>
    
     {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
-   <div className='md:hidden flex items-center justify-center text-[0.85rem]'>
+   <div className='md:hidden flex items-center justify-center text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>
     <p>Discover More ➠</p>
    </div>
 
    :
    ''
 }
+{/* duplicated condition and content but different layout to avoid ruining the placements*/}
 {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
     <div className='flex flex-row justify-center items-center gap-6  md:w-full'>
  
- <p className='hidden md:block 2xl:text-[1.5rem]'>Discover More ➨</p>
+ <p className='hidden md:block text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>Discover More ➨</p>
 
    
 
