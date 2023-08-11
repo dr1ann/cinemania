@@ -199,7 +199,7 @@ const renderReadButton = () => {
 ?
     <li className='hover:rotate-[0deg]   transform transition duration-250 hover:scale-110 hover:z-10'>
            
-      <a  href={`https://facebook.com/${PersonSocMedia.instagram_id}` } target="_blank" rel="noopener noreferrer ">
+      <a  href={`https://instagram.com/${PersonSocMedia.instagram_id}` } target="_blank" rel="noopener noreferrer ">
       <FontAwesomeIcon icon={faInstagram} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
      </a>
       
@@ -213,7 +213,7 @@ const renderReadButton = () => {
 ?
     <li className='hover:rotate-[0deg]   transform transition duration-250 hover:scale-110 hover:z-10'>
            
-      <a  href={`https://facebook.com/${PersonSocMedia.twitter_id}` } target="_blank" rel="noopener noreferrer ">
+      <a  href={`https://twitter.com/${PersonSocMedia.twitter_id}` } target="_blank" rel="noopener noreferrer ">
       <FontAwesomeIcon icon={faTwitter} className="text-white text-[1.3rem]  md:text-[1.5rem] 2xl:text-[1.75rem] "  />
      </a>
       
