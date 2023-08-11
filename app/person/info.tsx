@@ -120,9 +120,9 @@ const renderReadButton = () => {
     return (
       <button
         onClick={() => setReadMore(!readMore)}
-        className='bg-[#1a1a1a] py-[0.2em] px-[0.8em] text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'
+        className='bg-[#1a1a1a] rounded-md py-[0.2em] px-[0.8em] text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'
       >
-        {readMore ? 'Read less ←' : 'Read more →'}
+        {readMore ? 'Read less <' : 'Read more >'}
       </button>
     );
   }
