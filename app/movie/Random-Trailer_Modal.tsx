@@ -4,7 +4,7 @@ interface ModalProps {
   isVisible: boolean;
   onClose?: () => void;
   getMovieKey?: string;
-  getMovieID?: string;
+  getMovieID?: string | null;
 }
 
 const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) => {

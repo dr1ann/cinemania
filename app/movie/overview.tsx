@@ -20,83 +20,24 @@ import tmdbicon from '../Images/tmdb.png';
 import Modal from './Random-Trailer_Modal';
 import Header from '../components/Header';
 import HomeLoading from '../components/Loaders/HomeLoading';
-
+import OverviewAPI from '../components/API/MoviesAPI/Overview-API'
 const Overview =   () => {
 
   //use states
   const searchParams = useSearchParams();
-  const [movieDetails, setMovieDetails] = useState<any>({});
-  const [movieVid, setMovieVid] = useState<any>({});
-  const [movielogo, setmovieLogo] = useState<any>({});
-  const [movieSoc, setMovieSoc] = useState<any>({});
-
-  const [isLoading, setIsLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
-  const [currmovieID, setcurMovieID] = useState<any>({})
 
 
-
-
- 
-
-
-  //Authorization to fetch data from the API with its base url
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.themoviedb.org/3', 
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-    },
-  });
-    //fetch all data from the api
-    const DataFromAPI = async () => {
-      
-
-      try {
-
-        //the current movie id
-        const currID = searchParams.get('id');
-        const apiPromises = [
-          axiosInstance.get(`/movie/${currID}?language=en-US`), //MovieDetails
-          axiosInstance.get(`/movie/${currID}/videos?language=en-US`), //MovieVids
-          axiosInstance.get(`/movie/${currID}/images`), //MovieLogo
-          axiosInstance.get(`/movie/${currID}/external_ids`), //MovieSocMed
-      
-        ];
-    
-        const [MovieDetails, MovieVids, MovieLogo, MovieSocMed   ] = await Promise.all(apiPromises);
-    
-        //getting the data from the API and put values on to its assigned variables
-        setMovieDetails(MovieDetails.data);
-        setMovieVid(MovieVids.data);
-        setmovieLogo(MovieLogo.data);
-        setMovieSoc(MovieSocMed.data);
-   
-
-        setIsLoading(false); // Webpage now shows data after data is fetched
-    
-       
-      } catch (error) {
-        console.error('Error fetching data:', error); // Catch errors if data is not fetched
-      }
-      
-      
-    };
-  
-  useEffect(() => {
-
-
-
-    //get the current movie id from the searchParams
-    setcurMovieID(searchParams.get('id'))
+  const { movieDetails, movieVid, movielogo, movieSoc, isLoading } = OverviewAPI(
+    `/movie/${searchParams.get('id')}?language=en-US`,
+    `/movie/${searchParams.get('id')}/videos?language=en-US`,
+    `/movie/${searchParams.get('id')}/images`,
+    `/movie/${searchParams.get('id')}/external_ids`
+  );
 
 
  
-    //call the function to get all the data
-    DataFromAPI();
 
-
-   
-  }, []);
 
 
 
@@ -138,7 +79,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
    
-    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={currmovieID}  />
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={searchParams.get('id')}  />
    
  <Header/>
    

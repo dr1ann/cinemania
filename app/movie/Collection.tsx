@@ -14,7 +14,7 @@ import blackscreen from '../Images/black-screen.png';
 
 //components
 import CollectionLoading from '../components/Loaders/CollectionLoading';
-
+import CollectionAPI from '../components/API/MoviesAPI/Collection-API';
 //types
 type movieCollection = {
     id: number;
@@ -29,50 +29,25 @@ const Collection =   () => {
   
   //use states
   const searchParams = useSearchParams();
-  const [movieDetails, setMovieDetails] = useState<any>({});
-
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
   const [collection, setCollection] = useState<any>({})
 
 
-
-
-
-
-  //Authorization to fetch data from the API with its base url
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.themoviedb.org/3', 
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-    },
-  });
-
-  //fetch all data from the api
-  const DataFromAPI = async () => {
-      
-
-    try {
-
-      //the current movie id
-      const currID = searchParams.get('id');
-
-      const response =  await axiosInstance.get(`/movie/${currID}?language=en-US`) //MovieDetails
-     
-  
+//Authorization to fetch data from the API with its base url
+const axiosInstance = axios.create({
+  baseURL: 'https://api.themoviedb.org/3', 
+  headers: {
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+  },
+});
+  //only fetched movie details on the API folder to access id of its collection based from movie id
+  const {movieDetails } = CollectionAPI(
+    `/movie/${searchParams.get('id')}?language=en-US`,
     
-      setMovieDetails(response.data);
 
-  
-   
-     
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
+    );
 
-
-//create new function to get the id of the current movie
+   //create new function to get the id of the current movie
  const movieCollection = async () => {
    
   try {
@@ -85,7 +60,7 @@ const Collection =   () => {
       
       setCollection(response.data);
       setIsCollectionLoading(false); //Collection now shows data in the webpage
-
+     
     } 
    
   } catch (error) {
@@ -99,13 +74,14 @@ const Collection =   () => {
 
     
     //call the functions to get all the data from the api
-    DataFromAPI();
 
     movieCollection();
   
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
+ 
+    console.log('yawa')
 
  
   return (

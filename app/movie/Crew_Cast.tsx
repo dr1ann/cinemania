@@ -12,7 +12,7 @@ import noprofile from '../Images/noprofile.png'
 
 //Components
 import PersonLoading from '../components/Loaders/PersonLoading';
-
+import Crew_CastAPI from '../components/API/MoviesAPI/Crew_Cast-API';
 //type
 type MovieCredits = {
   credit_id: number;
@@ -29,52 +29,11 @@ type MovieCredits = {
 
 const Crew_Cast =   () => {
 
-  //use states
   const searchParams = useSearchParams();
-  const [credits, setCredits] = useState<any>({})
-  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
 
 
-
-
-
-  //Authorization to fetch data from the API with its base url
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.themoviedb.org/3', 
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-    },
-  });
-
- //fetch all data from the api
- const DataFromAPI = async () => {
-      
-
-  try {
-
-    //the current movie id
-    const currID = searchParams.get('id');
-
-    const response =  await axiosInstance.get(`/movie/${currID}/credits?language=en-US`) //MovieCredits
-   
-
-  
-    setCredits(response.data);
-    setIsPeopleLoading(false) // Skeleton loader is disabled
-
+  const { credits, isPeopleLoading } = Crew_CastAPI(`/movie/${searchParams.get('id')}/credits?language=en-US`);
  
-   
-  } catch (error) {
-    console.error('Error fetching data:', error); // Catch errors if data is not fetched
-  }
-  
-};
-  useEffect(() => {
- 
-    //call the function to get the data from the api
-    DataFromAPI();
-
-  }, []);
 
  
 
