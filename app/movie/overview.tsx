@@ -255,7 +255,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 </div>
 
 <div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4 md:px-0  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4 md:px-2  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
     <p className='text-gray-400 '>Status</p>
