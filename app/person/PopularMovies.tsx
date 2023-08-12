@@ -73,7 +73,9 @@ export default function PopularMovies() {
 
   }, []);
 
+  //sort all movies by highest popularity
  const sortedMovies = Movies?.cast?.sort((a:any, b:any) => b.popularity - a.popularity);
+ 
 // Get the top 15 most popular movies
 const PopularMovies = sortedMovies?.slice(0, 15);
 

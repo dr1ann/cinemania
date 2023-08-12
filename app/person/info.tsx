@@ -49,7 +49,8 @@ const Info = () => {
   
     const apiPromises = [
       axiosInstance.get(`/person/${currID}`), //Person Details
-      axiosInstance.get(`/person/${currID}/external_ids`) //Person Details
+      axiosInstance.get(`/person/${currID}/external_ids`) //Person Social Media
+
     ]
     const [details, socMedia] = await Promise.all(apiPromises);
     
