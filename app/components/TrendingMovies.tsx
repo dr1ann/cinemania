@@ -58,7 +58,7 @@ const TrendingMovies = () => {
 {movie['poster_path']
          ?
          <Link
-        
+      
          href={
          `/movie/${movie.id}`
         }
