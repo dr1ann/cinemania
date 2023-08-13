@@ -1,12 +1,47 @@
 'use client'
+import dynamic from 'next/dynamic'
+import HomeLoading from '@/app/components/Loaders/HomeLoading'
+import PersonLoading from '@/app/components/Loaders/PersonLoading'
+import CollectionLoading from '@/app/components/Loaders/CollectionLoading'
+import VideosLoading from '@/app/components/Loaders/VideosLoading'
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
 //Client Components
-import Overview from './overview'
-import Crew_Cast from './Crew_Cast'
-import Collection from './Collection'
-import Media from './Media'
-import Similar from './Similar'
-import Suggested from './Suggested'
+const Overview =  dynamic(() => import ('./overview'),
+{
+  loading: () => < HomeLoading />,
+}
+)
+const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
+{
+  loading: () => < PersonLoading />,
+}
+
+)
+
+const Collection =  dynamic(() => import ('./Collection'),
+{
+  loading: () => < CollectionLoading />,
+}
+)
+
+const Media =  dynamic(() => import ('./Media'),
+{
+  loading: () => < VideosLoading />,
+}
+)
+const Similar =  dynamic(() => import ('./Similar'),
+{
+  loading: () => < MoviePosterLoading />,
+}
+)
+
+const Suggested =  dynamic(() => import ('./Suggested'),
+{
+  loading: () => < MoviePosterLoading />,
+}
+)
+
 import Footer from '../../components/Footer'
 
 const page = ({ params }: { params: { id: number } }) => {
