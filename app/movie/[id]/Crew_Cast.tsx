@@ -1,18 +1,19 @@
 'use client'
 
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import axios from 'axios';
 import Link from 'next/link';
 import  {Drawer} from 'vaul'
+
 //Images
-import noprofile from '../Images/noprofile.png'
+import noprofile from '../../Images/noprofile.png'
 
 //Components
-import PersonLoading from '../components/Loaders/PersonLoading';
-import Crew_CastAPI from '../components/API/MovieDetails/Crew_CastAPI';
+import PersonLoading from '../../components/Loaders/PersonLoading';
+
+//API component
+import Crew_CastAPI from '../../components/API/MovieDetails/Crew_CastAPI';
+
 //type
 type MovieCredits = {
   credit_id: number;
@@ -27,12 +28,14 @@ type MovieCredits = {
   
 };
 
-const Crew_Cast =   () => {
-
-  const searchParams = useSearchParams();
 
 
-  const { credits, isPeopleLoading } = Crew_CastAPI(`/movie/${searchParams.get('id')}/credits?language=en-US`);
+const Crew_Cast = ({ id }: { id: number }) => {
+
+
+
+  //get the values of the fetched data from the API
+  const { credits, isPeopleLoading } = Crew_CastAPI(`/movie/${id}/credits?language=en-US`);
  
 
  
@@ -107,11 +110,9 @@ alt={cast['original_name']} />
 
  
     <Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
-    href={{
-      pathname: `/person`,
-      query:  { id: cast.id }, // the data
-    
-    }}
+       href={{
+        pathname: `/person/${cast.id}`,
+      }}
     
     >
 
@@ -179,11 +180,9 @@ alt={other_cast['original_name']} />
 
  
     <Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
-    href={{
-      pathname: `/person`,
-      query:  { id: other_cast.id }, // the data
-    
-    }}
+       href={{
+        pathname: `/person/${other_cast.id}`,
+      }}
     
     >
 
@@ -282,10 +281,8 @@ alt={crew['original_name']} />
  
 <Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
     href={{
-      pathname: `/person`,
-      query:  { id: crew.id }, // the data
-    
-    }}
+      pathname: `/person/${crew.id}`,
+   }}
   
     >
 

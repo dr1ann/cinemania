@@ -1,59 +1,59 @@
 
 'use client'
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import axios from 'axios';
+
 import Link from 'next/link';
 
 //Images
-import noprofile from '../Images/noprofile.png'
 import star from '../Images/star.png'
 
 //Components
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
-import SuggestedAPI from '../components/API/MovieDetails/SuggestedAPI';
-interface SuggestedMoviesProps {
+import MoviePosterLoading from './Loaders/MoviePosterLoading';
+
+//API Component
+import TopRatedMoviesAPI from './API/HomePage/TopRatedMoviesAPI';
+
+//type
+interface TopRatedMoviesProps {
     id: number;
     title: string;
     vote_average: number;
     release_date: string;
     poster_path: string;
 }
-export default function Similar() {
-    const searchParams = useSearchParams();
-    
-    const {suggestedMovies, isLoading } = SuggestedAPI(`/movie/${searchParams.get('id')}/recommendations`)
+
+const TopRatedMovies = () => {
+
+     //get the values of the fetched data from the API
+     const {TopRatedMovies, isLoading } = TopRatedMoviesAPI(`movie/top_rated?language=en-US&page=1`)
 
   return (
     <>
-   
+  
 
     {isLoading ? 
 
+        <>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6'>
 
-<>
-<h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
-<div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
-
-{Array.from({ length: 15 }).map((_, index) => (
-<MoviePosterLoading key={index} />
-))}
-
-</div> 
-</>
+   {Array.from({ length: 15 }).map((_, index) => (
+     <MoviePosterLoading key={index} />
+   ))}
        
+       </div> 
+       </>
     :
     
 <div className='relative'>
-      {suggestedMovies?.results?.length > 0
+      {TopRatedMovies?.results?.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
    
-    <ul className='flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
-{suggestedMovies?.results?.slice(0, 15).map((movie: SuggestedMoviesProps) => (
+    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
+{TopRatedMovies?.results?.slice(0, 15).map((movie: TopRatedMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
@@ -61,9 +61,7 @@ export default function Similar() {
          <Link
    
          href={{
-          pathname: `/movie`,
-          query:  { id: movie.id }, // the data
-        
+          pathname: `/movie/${movie.id}`,
         }}
        
          >
@@ -79,11 +77,9 @@ alt={movie['title']} />
 :
 <Link
    
-href={{
- pathname: `/movie`,
- query:  { id: movie.id }, // the data
-
-}}
+   href={{
+    pathname: `/movie/${movie.id}`,
+  }}
 
 >
 <img  
@@ -99,23 +95,18 @@ alt={movie['title']} />
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+        pathname: `/movie/${movie.id}`,
+      }}
     
       >
        {movie['title']}
           </Link>
           :
           <Link
-          
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
           href={{
-           pathname: `/movie`,
-           query:  { id: movie.id }, // the data
-         
-         }}
+            pathname: `/movie/${movie.id}`,
+          }}
         
           >
            N/A
@@ -165,3 +156,4 @@ alt={movie['title']} />
    </>
   )
 }
+export default TopRatedMovies

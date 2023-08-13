@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
 
 
-const MediaAPI = ( MovieVideos: any, MovieImgs: any  ) => {
+
+const MediaAPI = ( MovieVideosData: any, MovieImagesData: any  ) => {
     
-    const searchParams = useSearchParams();
+  //use states
     const [movieImages, setMovieImages] = useState<any>({});
     const [MovieVids, setMovieVids] = useState<any>({});
-    const [currmovieID, setcurMovieID] = useState<any>({})
     const [movieVidsReady, setMovieVidsReady] = useState(false);
   const [movieImagesReady, setMovieImagesReady] = useState(false);
  
@@ -21,19 +20,16 @@ const MediaAPI = ( MovieVideos: any, MovieImgs: any  ) => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
     },
   });
+
   //geting the data from the API
   const DataFromAPI = async () => {
       
-
     try {
-
-      //the current movie id
-    
 
       const apiPromises = [
    
-        axiosInstance.get(MovieVideos), //MovieVids
-        axiosInstance.get(MovieImgs), //MovieImages
+        axiosInstance.get(MovieVideosData), //Movie Videos
+        axiosInstance.get(MovieImagesData), //Movie Images
        
     
       ];
@@ -42,7 +38,7 @@ const MediaAPI = ( MovieVideos: any, MovieImgs: any  ) => {
 
       setMovieVids(MovieVids.data);
       setMovieImages(MovieImages.data)
-    
+
       setMovieVidsReady(true);
       setMovieImagesReady(true);
      
@@ -52,12 +48,12 @@ const MediaAPI = ( MovieVideos: any, MovieImgs: any  ) => {
     
   };
   useEffect(() => {
-     
-    setcurMovieID(searchParams.get('id'))
+
       //call the function to get all the data from the api
       DataFromAPI();
   },[] );
-return {MovieVids, movieImages, movieVidsReady, movieImagesReady, currmovieID }
+
+return {MovieVids, movieImages, movieVidsReady, movieImagesReady }
 };
 
 export default MediaAPI;

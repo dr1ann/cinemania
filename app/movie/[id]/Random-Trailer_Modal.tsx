@@ -4,7 +4,7 @@ interface ModalProps {
   isVisible: boolean;
   onClose?: () => void;
   getMovieKey?: string;
-  getMovieID?: string | null;
+  getMovieID?: number | null;
 }
 
 const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) => {
@@ -23,7 +23,7 @@ const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) =>
 
       
 
-        const response =  await axiosInstance.get(`/movie/${getMovieID}/videos?language=en-US`) //MovieCredits
+        const response =  await axiosInstance.get(`/movie/${getMovieID}/videos?language=en-US`) //get all videos on the current movie
        
     
       
@@ -40,6 +40,7 @@ const Modal :  React.FC<ModalProps>  =   ({ isVisible, onClose, getMovieID }) =>
     }
   }, [isVisible, getMovieID]);
 
+  //pick a random video from the current movie
   const generateRandomVid = (movies: any[]) => {
     if (movies.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);

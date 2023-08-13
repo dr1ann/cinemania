@@ -5,10 +5,10 @@ import axios from 'axios';
 
 
 
-const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
+const In_TheatersMoviesAPI = (In_TheatersMoviesData: any  ) => {
     
   //use states
-  const [suggestedMovies, setSuggestedMovies] = useState<any>({})
+  const [InTheatersMovies, SetInTheatersMovies] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -27,9 +27,9 @@ const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
 
   try {
 
-    const response =  await axiosInstance.get(SuggestedMoviesData) //Similar Movies
+    const response =  await axiosInstance.get(In_TheatersMoviesData) //In Theaters Movies
    
-    setSuggestedMovies(response.data);
+    SetInTheatersMovies(response.data);
     setIsLoading(false) // Skeleton loader is disabled
 
   } catch (error) {
@@ -44,7 +44,7 @@ const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
     DataFromAPI();
 
   }, []);
-return {suggestedMovies, isLoading}
+return {InTheatersMovies, isLoading}
 };
 
-export default SuggestedAPI;
+export default In_TheatersMoviesAPI;

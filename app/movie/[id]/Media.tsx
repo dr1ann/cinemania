@@ -1,15 +1,17 @@
 'use client'
+
 // External Libraries
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
-import axios from 'axios';
 import  {Drawer} from 'vaul'
+
 //Components
 import VidTrailer from './Videos'
-import VideosLoading from '../components/Loaders/VideosLoading'
-import PostersLoading from '../components/Loaders/PosterLoading'
-import MediaAPI from '../components/API/MovieDetails/MediaAPI';
+import VideosLoading from '../../components/Loaders/VideosLoading'
+import PostersLoading from '../../components/Loaders/PosterLoading'
+
+//API component
+import MediaAPI from '../../components/API/MovieDetails/MediaAPI';
 
 //types
 interface MovieVideos {
@@ -21,15 +23,18 @@ interface MovieImgs {
   file_path?:string
   id?: number
 }
-const Media =  () => {
-  const searchParams = useSearchParams();
 
+
+const Media = ({ id }: { id: number }) => {
+
+    //use states
     const [isOpen, setIsOpen] = useState(false)
     const [selectedMovieKey, setSelectedMovieKey] =useState<string>('')
 
-  const {MovieVids, movieImages, movieVidsReady, movieImagesReady, currmovieID } = MediaAPI(
-    `/movie/${searchParams.get('id')}/videos?language=en-US`,
-    `/movie/${searchParams.get('id')}/images`,
+  //get the values of the fetched data from the API
+  const {MovieVids, movieImages, movieVidsReady, movieImagesReady } = MediaAPI(
+    `/movie/${id}/videos?language=en-US`,
+    `/movie/${id}/images`,
    
   );
 
@@ -46,13 +51,13 @@ const Media =  () => {
   const postersCount = postersArray.length;
   
   // Calculate the startIndex, making sure it is within the bounds of the array
-  const startIndex = seededRandom(0, Math.max(0, postersCount - 50), currmovieID);
+  const startIndex = seededRandom(0, Math.max(0, postersCount - 50), id);
   
   // Calculate the number of posters to slice, considering the available posters
   let numberOfPostersToSlice = 0;
   if (postersCount >= 50) {
     // If there are 50 or more posters available, generate a random number between 50 and 65
-    numberOfPostersToSlice = 50 + seededRandom(0, 16, currmovieID); // 16 (65 - 50) to have a range from 50 to 65
+    numberOfPostersToSlice = 50 + seededRandom(0, 16, id); // 16 (65 - 50) to have a range from 50 to 65
   } else {
     // If there are fewer than 50 posters, take all available posters
     numberOfPostersToSlice = postersCount;

@@ -3,15 +3,15 @@ import React from 'react'
 import TrendingMovies from './components/TrendingMovies'
 import PopularMovies from './components/PopularMovies'
 import PopularPeople from './components/PopularPeople'
-import InTheatersMovies from './components/In_Theaters'
-import TopRatedMovies from './components/TopRated'
+import InTheatersMovies from './components/In_TheatersMovies'
+import TopRatedMovies from './components/TopRatedMovies'
 import Footer from './components/Footer'
-import HomePage from './components/HomePage'
+import MainPage from './components/MainPage'
 
-export default function page() {
+const page = () => {
   return (
    <>
-    <HomePage /> 
+    <MainPage /> 
    <TrendingMovies /> 
    <PopularMovies /> 
    <PopularPeople /> 
@@ -23,3 +23,4 @@ export default function page() {
    </>
   )
 }
+export default page

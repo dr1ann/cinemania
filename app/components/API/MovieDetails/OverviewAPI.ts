@@ -1,15 +1,14 @@
 
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+
 import axios from 'axios';
 
 
 
-const OverviewAPI = ( MovieDetails?: any, MovieVids?: any, MovieLogo?: any, MovieSocMed?: any   ) => {
+const OverviewAPI = ( MovieDetailsData?: any, MovieVidsData?: any, MovieLogoData?: any, MovieSocMedData?: any   ) => {
     
   //use states
-  const searchParams = useSearchParams();
   const [movieDetails, setMovieDetails] = useState<any>({});
   const [movieVid, setMovieVid] = useState<any>({});
   const [movielogo, setmovieLogo] = useState<any>({});
@@ -34,10 +33,10 @@ const OverviewAPI = ( MovieDetails?: any, MovieVids?: any, MovieLogo?: any, Movi
         
         
         const apiPromises = [
-           axiosInstance.get(MovieDetails),
-           axiosInstance.get(MovieVids),
-           axiosInstance.get(MovieLogo),
-           axiosInstance.get(MovieSocMed),
+           axiosInstance.get(MovieDetailsData),
+           axiosInstance.get(MovieVidsData),
+           axiosInstance.get(MovieLogoData),
+           axiosInstance.get(MovieSocMedData),
       
         ];
     
@@ -62,14 +61,11 @@ const OverviewAPI = ( MovieDetails?: any, MovieVids?: any, MovieLogo?: any, Movi
     };
     useEffect(() => {
 
-        setcurMovieID(searchParams.get('id'))
         //call the function to get all the data
         DataFromAPI();
-    
-    
-       
+  
       }, []);
-      console.log(movieVid)
+   
   return {currmovieID, movieDetails, movieVid,movielogo, movieSoc ,isLoading };
 };
 

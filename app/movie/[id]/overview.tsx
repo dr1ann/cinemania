@@ -1,9 +1,8 @@
 'use client'
+
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useState  } from 'react';
 import Image from 'next/image';
-import axios from 'axios';
 
 
 // Font Awesome Icons
@@ -12,27 +11,31 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 
 // Images
-import star from '../Images/star.png';
-import tmdbicon from '../Images/tmdb.png';
+import star from '../../Images/star.png';
+import tmdbicon from '../../Images/tmdb.png';
 
 
 //Components
 import Modal from './Random-Trailer_Modal';
-import Header from '../components/Header';
-import HomeLoading from '../components/Loaders/HomeLoading';
-import OverviewAPI from '../components/API/MovieDetails/OverviewAPI'
-const Overview =   () => {
+import Header from '../../components/Header';
+import HomeLoading from '../../components/Loaders/HomeLoading';
+
+//API component
+import OverviewAPI from '../../components/API/MovieDetails/OverviewAPI'; 
+
+
+
+const Overview = ({ id }: { id: number }) => {
 
   //use states
-  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false)
 
-
+  //get the values of the fetched data from the API
   const { movieDetails, movieVid, movielogo, movieSoc, isLoading } = OverviewAPI(
-    `/movie/${searchParams.get('id')}?language=en-US`,
-    `/movie/${searchParams.get('id')}/videos?language=en-US`,
-    `/movie/${searchParams.get('id')}/images`,
-    `/movie/${searchParams.get('id')}/external_ids`
+    `/movie/${id}?language=en-US`,
+    `/movie/${id}/videos?language=en-US`,
+    `/movie/${id}/images`,
+    `/movie/${id}/external_ids`
   );
 
 
@@ -79,7 +82,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
    
-    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={searchParams.get('id')}  />
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)}  getMovieID={id}  />
    
  <Header/>
    

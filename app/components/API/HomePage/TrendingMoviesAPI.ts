@@ -5,12 +5,12 @@ import axios from 'axios';
 
 
 
-const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
+const TrendingMoviesAPI = ( TrendingMoviesData: any  ) => {
     
   //use states
-  const [suggestedMovies, setSuggestedMovies] = useState<any>({})
+  const [TrendingMovies, setTrendingMovies] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
-
+    
 
 
   //Authorization to fetch data from the API with its base url
@@ -27,9 +27,9 @@ const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
 
   try {
 
-    const response =  await axiosInstance.get(SuggestedMoviesData) //Similar Movies
+    const response =  await axiosInstance.get(TrendingMoviesData) //Trending Movies
    
-    setSuggestedMovies(response.data);
+    setTrendingMovies(response.data);
     setIsLoading(false) // Skeleton loader is disabled
 
   } catch (error) {
@@ -44,7 +44,7 @@ const SuggestedAPI = ( SuggestedMoviesData: any  ) => {
     DataFromAPI();
 
   }, []);
-return {suggestedMovies, isLoading}
+return {TrendingMovies, isLoading}
 };
 
-export default SuggestedAPI;
+export default TrendingMoviesAPI;

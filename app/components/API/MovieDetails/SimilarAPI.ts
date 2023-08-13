@@ -5,10 +5,9 @@ import axios from 'axios';
 
 
 
-const SimilarAPI = ( SimilarMovies: any  ) => {
+const SimilarAPI = ( SimilarMoviesData: any  ) => {
     
   //use states
-
   const [similarMovies, setSimilarMovies] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,18 +29,12 @@ const SimilarAPI = ( SimilarMovies: any  ) => {
 
   try {
 
-    //the current movie id
-
-
-    const response =  await axiosInstance.get(SimilarMovies) //Similar Movies
+    const response =  await axiosInstance.get(SimilarMoviesData) //Similar Movies
    
-
-  
     setSimilarMovies(response.data);
     setIsLoading(false) // Skeleton loader is disabled
 
  
-   
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
   }

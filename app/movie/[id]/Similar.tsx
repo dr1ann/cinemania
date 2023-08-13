@@ -1,17 +1,21 @@
 
 'use client'
+
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import axios from 'axios';
 import Link from 'next/link';
-import SimilarAPI from '../components/API/MovieDetails/SimilarAPI';
+
+
 //Images
-import star from '../Images/star.png'
+import star from '../../Images/star.png'
 
 //Components
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
+import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+
+//API component
+import SimilarAPI from '../../components/API/MovieDetails/SimilarAPI';
+
+//type
 interface SimilarMoviesProps {
     id: number;
     title: string;
@@ -19,10 +23,14 @@ interface SimilarMoviesProps {
     release_date: string;
     poster_path: string;
 }
-export default function Similar() {
-   const searchParams = useSearchParams()
 
-  const { similarMovies, isLoading } = SimilarAPI(`/movie/${searchParams.get('id')}/similar`);
+
+
+const Similar = ({ id }: { id: number }) => {
+ 
+  //get the values of the fetched data from the API
+  const { similarMovies, isLoading } = SimilarAPI(`/movie/${id}/similar`);
+
   return (
     <>
   
@@ -55,11 +63,7 @@ export default function Similar() {
          ?
          <Link
         
-         href={{
-          pathname: `/movie`,
-          query:  { id: movie.id }, // the data
-        
-        }}
+        href={`${movie.id}`}
        
          >
 <img  
@@ -75,11 +79,7 @@ alt={movie['title']} />
 <Link
 
    
-href={{
- pathname: `/movie`,
- query:  { id: movie.id }, // the data
-
-}}
+href={`${movie.id}`}
 
 >
 <img  
@@ -95,11 +95,7 @@ alt={movie['title']} />
       <Link
       
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+      href={`${movie.id}`}
     
       >
        {movie['title']}
@@ -108,11 +104,8 @@ alt={movie['title']} />
           <Link
        
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={{
-           pathname: `/movie`,
-           query:  { id: movie.id }, // the data
-         
-         }}
+          href={`
+          ${movie.id}`}
         
           >
            N/A
@@ -162,3 +155,4 @@ alt={movie['title']} />
    </>
   )
 }
+export default Similar;

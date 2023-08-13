@@ -1,9 +1,8 @@
 
 'use client'
 // External Libraries
-import React, { useState, useEffect } from 'react';
+
 import Image from 'next/image';
-import axios from 'axios';
 import Link from 'next/link';
 
 //Images
@@ -11,6 +10,9 @@ import star from '../Images/star.png'
 
 //Components
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
+
+//API Component
+import In_TheatersMoviesAPI from './API/HomePage/In_TheatersMoviesAPI';
 
 //type
 interface InTheatersMoviesProps {
@@ -21,46 +23,10 @@ interface InTheatersMoviesProps {
     poster_path: string;
 }
 
-export default function InTheatersMovies() {
+const InTheatersMovies = () => {
 
-    const [InTheatersMovies, SetInTheatersMovies] = useState<any>({})
-    const [isLoading, setIsLoading] = useState(true);
-  
-  
-  
-  
-  
-    //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
-  
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
-  
-    try {
-
-      const response =  await axiosInstance.get(`movie/now_playing?language=en-US&page=1`) //In Theaters Movies
-     
-      SetInTheatersMovies(response.data);
-      setIsLoading(false) // Skeleton loader is disabled
-     
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
-
-  //call the function to get the data from the api
-    useEffect(() => {
-
-      DataFromAPI();
-
-    }, []);
+     //get the values of the fetched data from the API
+     const {InTheatersMovies, isLoading } = In_TheatersMoviesAPI(`movie/now_playing?language=en-US&page=1`)
 
   return (
     <>
@@ -93,11 +59,9 @@ export default function InTheatersMovies() {
 {movie['poster_path']
          ?
 <Link 
- href={{
-  pathname: `/movie`,
-  query:  { id: movie.id }, // the data
-
-}}
+  href={{
+    pathname: `/movie/${movie.id}`,
+  }}
 >
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
@@ -110,11 +74,9 @@ alt={movie['title']} />
 </Link>
 :
 <Link 
- href={{
-  pathname: `/movie`,
-  query:  { id: movie.id }, // the data
-
-}}
+  href={{
+    pathname: `/movie/${movie.id}`,
+  }}
 >
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
@@ -129,11 +91,9 @@ alt={movie['title']} />
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white 
         hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+        href={{
+          pathname: `/movie/${movie.id}`,
+        }}
     
       >
        {movie['title']}
@@ -142,11 +102,9 @@ alt={movie['title']} />
           <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white  
        hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+       href={{
+        pathname: `/movie/${movie.id}`,
+      }}
     
       >
        N/A
@@ -199,3 +157,4 @@ alt={movie['title']} />
    </>
   )
 }
+export default InTheatersMovies

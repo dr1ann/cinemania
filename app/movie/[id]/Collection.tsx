@@ -1,7 +1,6 @@
 'use client'
 // External Libraries
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
@@ -9,13 +8,16 @@ import Link from 'next/link';
 
 // Images
 
-import star from '../Images/star.png';
-import blackscreen from '../Images/black-screen.png';
+import star from '../../Images/star.png';
+import blackscreen from '../../Images/black-screen.png';
 
 //components
-import CollectionLoading from '../components/Loaders/CollectionLoading';
-import CollectionAPI from '../components/API/MovieDetails/CollectionAPI';
-//types
+import CollectionLoading from '../../components/Loaders/CollectionLoading';
+
+//API component
+import CollectionAPI from '../../components/API/MovieDetails/CollectionAPI';
+
+//type
 type movieCollection = {
     id: number;
     name: string;
@@ -25,10 +27,11 @@ type movieCollection = {
     vote_average: number;
     overview: string;
   }
-const Collection =   () => {
+
+  
+  const Collection = ({ id }: { id: number }) => {
   
   //use states
-  const searchParams = useSearchParams();
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
   const [collection, setCollection] = useState<any>({})
 
@@ -42,7 +45,7 @@ const axiosInstance = axios.create({
 });
   //only fetched movie details on the API folder to access id of its collection from its movie id
   const {movieDetails } = CollectionAPI(
-    `/movie/${searchParams.get('id')}?language=en-US`,
+    `/movie/${id}?language=en-US`,
     
 
     );
@@ -148,11 +151,7 @@ sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 p
          <Link
        
          className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-         href={{
-          pathname: `/movie`,
-          query:  { id: movie.id }, // the data
-        
-        }}
+         href={`${movie.id}`}
        
          >
 <img  
@@ -168,17 +167,13 @@ alt={movie['title']} />
 <Link
 
 className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-href={{
- pathname: `/movie`,
- query:  { id: movie.id }, // the data
-
-}}
+href={`${movie.id}`}
 
 >
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
-hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 cursor-pointer'
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 '
 
 loading='lazy'
 alt={movie['title']} />
@@ -188,11 +183,7 @@ alt={movie['title']} />
       <Link
      
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+      href={`${movie.id}`}
     
       >
        {movie['title']}
@@ -201,11 +192,7 @@ alt={movie['title']} />
           <Link
         
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={{
-           pathname: `/movie`,
-           query:  { id: movie.id }, // the data
-         
-         }}
+          href={`${movie.id}`}
         
           >
            N/A

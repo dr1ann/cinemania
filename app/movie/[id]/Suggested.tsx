@@ -1,21 +1,21 @@
 
 'use client'
+
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import axios from 'axios';
 import Link from 'next/link';
 
 //Images
-import noprofile from '../Images/noprofile.png'
-import star from '../Images/star.png'
+import star from '../../Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+
+//API component
+import SuggestedAPI from '../../components/API/MovieDetails/SuggestedAPI';
 
 //type
-interface TopRatedMoviesProps {
+interface SuggestedMoviesProps {
     id: number;
     title: string;
     vote_average: number;
@@ -23,84 +23,48 @@ interface TopRatedMoviesProps {
     poster_path: string;
 }
 
-export default function TopRatedMovies() {
 
-    const [TopRatedMovies, setTopRatedMovies] = useState<any>({})
-    const [isLoading, setIsLoading] = useState(true);
-  
-  
-  
-  
-  
-    //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
-  
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
-  
-    try {
 
-      const response =  await axiosInstance.get(`movie/top_rated?language=en-US&page=1`) //Top Rated Movies
-    
-      setTopRatedMovies(response.data);
-      setIsLoading(false) // Skeleton loader is disabled
-  
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
-
-  //call the function to get the data from the api
-    useEffect(() => {
-
-      DataFromAPI();
-
-    }, []);
+const Suggested = ({ id }: { id: number }) => {
+ 
+    //get the values of the fetched data from the API
+    const {suggestedMovies, isLoading } = SuggestedAPI(`/movie/${id}/recommendations`)
 
   return (
     <>
-  
+   
 
     {isLoading ? 
 
-        <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll  bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6'>
 
-   {Array.from({ length: 15 }).map((_, index) => (
-     <MoviePosterLoading key={index} />
-   ))}
+<>
+<h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
+<div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
+
+{Array.from({ length: 15 }).map((_, index) => (
+<MoviePosterLoading key={index} />
+))}
+
+</div> 
+</>
        
-       </div> 
-       </>
     :
     
 <div className='relative'>
-      {TopRatedMovies?.results?.length > 0
+      {suggestedMovies?.results?.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Suggested Movies</h1>
    
-    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
-{TopRatedMovies?.results?.slice(0, 15).map((movie: TopRatedMoviesProps) => (
+    <ul className='flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
+{suggestedMovies?.results?.slice(0, 15).map((movie: SuggestedMoviesProps) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
          ?
          <Link
    
-         href={{
-          pathname: `/movie`,
-          query:  { id: movie.id }, // the data
-        
-        }}
+         href={`${movie.id}`}
        
          >
 <img  
@@ -115,11 +79,7 @@ alt={movie['title']} />
 :
 <Link
    
-href={{
- pathname: `/movie`,
- query:  { id: movie.id }, // the data
-
-}}
+   href={`${movie.id}`}
 
 >
 <img  
@@ -134,23 +94,16 @@ alt={movie['title']} />
      {movie['title'] ?
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+      href={`${movie.id}`}
     
       >
        {movie['title']}
           </Link>
           :
           <Link
+          
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={{
-           pathname: `/movie`,
-           query:  { id: movie.id }, // the data
-         
-         }}
+          href={`${movie.id}`}
         
           >
            N/A
@@ -200,3 +153,4 @@ alt={movie['title']} />
    </>
   )
 }
+export default Suggested

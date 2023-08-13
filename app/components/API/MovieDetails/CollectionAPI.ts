@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
 
 
-const CollectionAPI = (MovieDetails?:any, Collection?: any  ) => {
+const CollectionAPI = (MovieDetailsData?:any  ) => {
     
   //use states
-
   const [movieDetails, setMovieDetails] = useState<any>({});
 
 
@@ -32,14 +30,11 @@ const axiosInstance = axios.create({
 
      
 
-      const response =  await axiosInstance.get(MovieDetails) //MovieDetails
+      const response =  await axiosInstance.get(MovieDetailsData) //Movie Details
      
   
-    
       setMovieDetails(response.data);
 
-  
-   
      
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
@@ -48,11 +43,8 @@ const axiosInstance = axios.create({
   };
 
 
-//create new function to get the id of the current movie
- 
 
   useEffect(() => {
-
     
     //call the functions to get all the data from the api
     DataFromAPI();

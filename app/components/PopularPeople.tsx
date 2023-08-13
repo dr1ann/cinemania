@@ -1,12 +1,13 @@
 
 'use client'
 // External Libraries
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Link from 'next/link';
 
 //Components
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
+
+//API Component
+import PopularPeopleAPI from './API/HomePage/PopularPeopleAPI';
 
 //type
 interface PopularPeopleProps {
@@ -17,46 +18,10 @@ interface PopularPeopleProps {
     profile_path: string;
 }
 
-export default function PopularPeople() {
+const PopularPeople = () => {
 
-    const [PopularPeople, setPopularPeople] = useState<any>({})
-    const [isLoading, setIsLoading] = useState(true);
-  
-  
-  
-  
-  
-    //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
-  
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
-  
-    try {
-
-      const response =  await axiosInstance.get(`person/popular?language=en-US&page=1`) //Popular People
-     
-      setPopularPeople(response.data);
-      setIsLoading(false) // Skeleton loader is disabled
-  
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
-
-  //call the function to get the data from the api
-    useEffect(() => {
-      
-      DataFromAPI();
-
-    }, []);
+      //get the values of the fetched data from the API
+      const {PopularPeople, isLoading } = PopularPeopleAPI(`person/popular?language=en-US&page=1`)
 
   return (
     <>
@@ -91,10 +56,9 @@ export default function PopularPeople() {
          <Link
    
          href={{
-          pathname: `/person`,
-          query:  { id: person.id }, // the data
-        
+          pathname: `/person/${person.id}`,
         }}
+        
        
          >
 <img  
@@ -109,11 +73,9 @@ alt={person.name} />
 :
 <Link
    
-href={{
- pathname: `/person`,
- query:  { id: person.id }, // the data
-
-}}
+   href={{
+    pathname: `/person/${person.id}`,
+  }}
 
 >
 <img  
@@ -129,10 +91,8 @@ alt={person.name} />
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={{
-       pathname: `/person`,
-       query:  { id: person.id }, // the data
-     
-     }}
+        pathname: `/person/${person.id}`,
+      }}
     
       >
        {person.name}
@@ -141,10 +101,8 @@ alt={person.name} />
           <Link
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
           href={{
-           pathname: `/movie`,
-           query:  { id: person.id }, // the data
-         
-         }}
+            pathname: `/person/${person.id}`,
+          }}
         
           >
            N/A
@@ -187,3 +145,4 @@ alt={person.name} />
    </>
   )
 }
+export default PopularPeople

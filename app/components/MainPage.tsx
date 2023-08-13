@@ -1,9 +1,7 @@
 'use client'
 // External Libraries
 import React, { useState, useEffect } from 'react';
-
 import Image from 'next/image';
-import axios from 'axios';
 
 
 //Images
@@ -13,50 +11,30 @@ import icon from '../Images/icon.png'
 import HomeLoading from './Loaders/HomeLoading';
 import Header from './Header';
 
-export default function HomePage() {
+//API Component
+import TrendingMoviesAPI from './API/HomePage/TrendingMoviesAPI';
 
-    const [TrendingMovies, setTrendingMovies] = useState<any>({})
+const MainPage = () => {
+
+    
     const [isHomeLoading, setIsHomeLoading] = useState(true);
     const [randomImage, setRandomImage] = useState<string>('');
   
   
   
-  
-    //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
-  
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
-  
-    try {
-
-      const response =  await axiosInstance.get(`trending/movie/day?language=en-US`) //Trending Movies
+    //get the values of the fetched data from the API
+    const {TrendingMovies } = TrendingMoviesAPI(`trending/movie/day?language=en-US`)
    
-      setTrendingMovies(response.data);
-      generateRandomImage(response.data && response.data.results); //used to generate random images
-        
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
-
-  //call the function to get the data from the api
+    console.log(randomImage)
     useEffect(() => {
 
-      DataFromAPI();
-
-    }, []);
+      generateRandomImage(TrendingMovies?.results)
+   
+       }, [TrendingMovies]);
 
       //generate random backdrops every reload for homepage
   const generateRandomImage = (movies: any[]) => {
-    if (movies.length > 0) {
+    if (movies?.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);
       const movie = movies[randomIndex];
       const imageUrl = TrendingMovies ? ` https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`  : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/" ;
@@ -65,6 +43,7 @@ export default function HomePage() {
       setIsHomeLoading(false) //remove the skeleton loader
     }
   };
+
   return (
  <>
 {isHomeLoading ?
@@ -117,3 +96,4 @@ export default function HomePage() {
  </>
   )
 }
+export default MainPage

@@ -5,14 +5,11 @@ import axios from 'axios';
 
 
 
-const Crew_CastAPI = ( Credits: any  ) => {
+const Crew_CastAPI = ( CreditsData: any  ) => {
     
   //use states
   const [credits, setCredits] = useState<any>({})
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
-
-
-
 
 
   //Authorization to fetch data from the API with its base url
@@ -29,13 +26,9 @@ const Crew_CastAPI = ( Credits: any  ) => {
 
   try {
 
-    //the current movie id
 
+    const response =  await axiosInstance.get(CreditsData) //Movie Credits 
 
-    const response =  await axiosInstance.get(Credits) //MovieCredits
-   
-
-  
     setCredits(response.data);
     setIsPeopleLoading(false) // Skeleton loader is disabled
 
