@@ -14,7 +14,7 @@ import blackscreen from '../Images/black-screen.png';
 
 //components
 import CollectionLoading from '../components/Loaders/CollectionLoading';
-import CollectionAPI from '../components/API/MoviesAPI/Collection-API';
+import CollectionAPI from '../components/API/MovieDetails/CollectionAPI';
 //types
 type movieCollection = {
     id: number;
@@ -40,7 +40,7 @@ const axiosInstance = axios.create({
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
   },
 });
-  //only fetched movie details on the API folder to access id of its collection based from movie id
+  //only fetched movie details on the API folder to access id of its collection from its movie id
   const {movieDetails } = CollectionAPI(
     `/movie/${searchParams.get('id')}?language=en-US`,
     

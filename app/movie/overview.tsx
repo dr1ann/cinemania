@@ -20,7 +20,7 @@ import tmdbicon from '../Images/tmdb.png';
 import Modal from './Random-Trailer_Modal';
 import Header from '../components/Header';
 import HomeLoading from '../components/Loaders/HomeLoading';
-import OverviewAPI from '../components/API/MoviesAPI/Overview-API'
+import OverviewAPI from '../components/API/MovieDetails/OverviewAPI'
 const Overview =   () => {
 
   //use states

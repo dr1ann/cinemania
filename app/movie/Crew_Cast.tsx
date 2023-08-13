@@ -12,7 +12,7 @@ import noprofile from '../Images/noprofile.png'
 
 //Components
 import PersonLoading from '../components/Loaders/PersonLoading';
-import Crew_CastAPI from '../components/API/MoviesAPI/Crew_Cast-API';
+import Crew_CastAPI from '../components/API/MovieDetails/Crew_CastAPI';
 //type
 type MovieCredits = {
   credit_id: number;

@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
-
+import SimilarAPI from '../components/API/MovieDetails/SimilarAPI';
 //Images
 import star from '../Images/star.png'
 
@@ -20,53 +20,9 @@ interface SimilarMoviesProps {
     poster_path: string;
 }
 export default function Similar() {
-    const searchParams = useSearchParams();
-    const [similarMovies, setSimilarMovies] = useState<any>({})
-    const [isLoading, setIsLoading] = useState(true);
-  
-  
-  
-  
-  
-    //Authorization to fetch data from the API with its base url
-    const axiosInstance = axios.create({
-      baseURL: 'https://api.themoviedb.org/3', 
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-      },
-    });
-  
-   //fetch all data from the api
-   const DataFromAPI = async () => {
-        
-  
-    try {
+   const searchParams = useSearchParams()
 
-      //the current movie id
-      const currID = searchParams.get('id');
-
-      const response =  await axiosInstance.get(`/movie/${currID}/similar`) //Similar Movies
-     
-  
-    
-      setSimilarMovies(response.data);
-      setIsLoading(false) // Skeleton loader is disabled
-  
-   
-     
-    } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
-    }
-    
-  };
-
-  //call the function to get the data from the api
-    useEffect(() => {
-
-      DataFromAPI();
-
-    }, []);
-  
+  const { similarMovies, isLoading } = SimilarAPI(`/movie/${searchParams.get('id')}/similar`);
   return (
     <>
   
