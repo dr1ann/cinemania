@@ -7,7 +7,7 @@ import Link from 'next/link';
 // Images
 import icon from '../Images/icon.png';
 
-export default function Header() {
+const Header = () => {
  
   return (
    
@@ -41,3 +41,4 @@ export default function Header() {
  
   )
 }
+export default Header

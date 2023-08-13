@@ -3,6 +3,7 @@
 //External Libraries
 import React from 'react'
 import Image from 'next/image'
+
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -12,7 +13,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 // Images
 import nextjs from '../Images/nextjs.png';
 import typescript from '../Images/typescript.jpg'
-export default function Footer() {
+
+const Footer =() => {
   return (
    <>
        <footer className='pt-[3.5rem] flex flex-col justify-center items-center gap-2 z-20 px-2 '>
@@ -58,3 +60,4 @@ by  <span className='font-bold text-gray-200'>James Adrian Denoy </span>
    </>
   )
 }
+export default Footer
