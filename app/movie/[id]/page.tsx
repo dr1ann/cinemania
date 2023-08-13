@@ -42,12 +42,15 @@ const Suggested =  dynamic(() => import ('./Suggested'),
 }
 )
 export async function generateStaticParams() {
-  const ids = [82992]
- 
+  const ids = [82992];
+
   return ids.map((id) => ({
-    id: id,
-  }))
+    params: {
+      id: id.toString(),
+    },
+  }));
 }
+
 
 import Footer from '../../components/Footer'
 
