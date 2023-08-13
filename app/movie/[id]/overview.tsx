@@ -11,17 +11,18 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 
 // Images
-import star from '../Images/star.png';
-import tmdbicon from '../Images/tmdb.png';
+import star from '../../Images/star.png';
+import tmdbicon from '../../Images/tmdb.png';
 
 
 //Components
 
-import Header from '../components/Header';
-import HomeLoading from '../components/Loaders/HomeLoading';
+import Header from '../../components/Header';
+import HomeLoading from '../../components/Loaders/HomeLoading';
+import Modal from './Random-Trailer_Modal';
 
 //API component
-import OverviewAPI from '../components/API/MovieDetails/OverviewAPI'; 
+import OverviewAPI from '../../components/API/MovieDetails/OverviewAPI'; 
 
 
 
@@ -82,7 +83,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
  
-   
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={id} />
  <Header/>
    
 

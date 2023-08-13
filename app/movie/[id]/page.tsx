@@ -1,7 +1,7 @@
 'use client'
 
 //Client Components
-import Overview from '../overview'
+import Overview from './overview'
 import Crew_Cast from './Crew_Cast'
 import Collection from './Collection'
 import Media from './Media'
