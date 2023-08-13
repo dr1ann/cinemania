@@ -1,3 +1,4 @@
+'use client'
 
 //Client Components
 import Overview from './overview'
@@ -9,9 +10,17 @@ import Suggested from './Suggested'
 import Footer from '../../components/Footer'
 
 const page = ({ params }: { params: { id: number } }) => {
+
+  console.log(params.id)
   return (
     <>
- <h1>wew</h1>
+   <Overview id={params.id} />
+    <Crew_Cast id={params.id} />
+    <Collection id={params.id} />
+    <Media id={params.id}/>
+    <Similar id={params.id} />
+    <Suggested id={params.id} />
+    <Footer />
     </>
   )
 }
