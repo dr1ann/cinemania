@@ -41,22 +41,7 @@ const Suggested =  dynamic(() => import ('./Suggested'),
   loading: () => < MoviePosterLoading />,
 }
 )
-export async function generateStaticParams() {
-  return [
-    {
-      params: {
-        id: '82992',
-      },
-    },
-    // You can add more objects with different IDs if needed
-    // {
-    //   params: {
-    //     id: 'another_id',
-    //   },
-    // },
-    // ...
-  ];
-}
+
 
 
 
