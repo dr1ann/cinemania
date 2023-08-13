@@ -41,7 +41,7 @@ const Overview = ({ id }: { id: number }) => {
 
  
 
-
+console.log(id)
 
 
 

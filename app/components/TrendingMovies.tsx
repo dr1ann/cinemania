@@ -58,9 +58,9 @@ const TrendingMovies = () => {
 {movie['poster_path']
          ?
          <Link
-   
+        
          href={
-          `https://cinemania-pied.vercel.app/movie/${movie.id}`
+         `/movie/${movie.id}`
         }
        
          >
@@ -77,7 +77,7 @@ alt={movie['title']} />
 <Link
    
    href={
-    `https://cinemania-pied.vercel.app/movie/${movie.id}`
+    `/movie/${movie.id}`
    }
 
 >
@@ -94,7 +94,7 @@ alt={movie['title']} />
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
       href={
-        `https://cinemania-pied.vercel.app/movie/${movie.id}`
+        `/movie/${movie.id}`
        }
     
       >
@@ -105,7 +105,7 @@ alt={movie['title']} />
          
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
           href={
-            `https://cinemania-pied.vercel.app/movie/${movie.id}`
+            `/movie/${movie.id}`
            }
           >
            N/A
