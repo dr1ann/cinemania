@@ -25,7 +25,7 @@ interface SimilarMoviesProps {
 }
 
 
-
+console.log('yawa haha')
 const Similar = ({ id }: { id: number }) => {
  
   //get the values of the fetched data from the API
