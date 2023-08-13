@@ -45,7 +45,7 @@ export async function generateStaticParams() {
   return [
     {
       params: {
-        id: '82292',
+        id: '82992',
       },
     },
     // You can add more objects with different IDs if needed
