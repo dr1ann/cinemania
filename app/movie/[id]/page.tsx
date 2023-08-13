@@ -14,12 +14,9 @@ const page = ({ params }: { params: { id: number } }) => {
   console.log(params.id)
   return (
     <>
-   <Overview id={params.id} />
-    <Crew_Cast id={params.id} />
-    <Collection id={params.id} />
-    <Media id={params.id}/>
-    <Similar id={params.id} />
-    <Suggested id={params.id} />
+ 
+    <Collection params={{ id: Number(params.id) }} />
+   
     <Footer />
     </>
   )
