@@ -29,7 +29,7 @@ type movieCollection = {
   }
 
   
-  const Collection = ({ params }: { params: { id: number } }) => {
+  const Collection = ({ id }: { id: number }) => {
   
   //use states
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
@@ -45,7 +45,7 @@ const axiosInstance = axios.create({
 });
   //only fetched movie details on the API folder to access id of its collection from its movie id
   const {movieDetails } = CollectionAPI(
-    `/movie/${params.id}?language=en-US`,
+    `/movie/${id}?language=en-US`,
     
 
     );
