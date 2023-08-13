@@ -41,7 +41,9 @@ const Suggested =  dynamic(() => import ('./Suggested'),
   loading: () => < MoviePosterLoading />,
 }
 )
-
+export async function generateStaticParams({ params }: { params: { id: number } }) {
+ return params.id
+}
 import Footer from '../../components/Footer'
 
 const page = ({ params }: { params: { id: number } }) => {
