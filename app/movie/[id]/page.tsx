@@ -1,4 +1,4 @@
-'use client'
+
 import dynamic from 'next/dynamic'
 import HomeLoading from '@/app/components/Loaders/HomeLoading'
 import PersonLoading from '@/app/components/Loaders/PersonLoading'
