@@ -42,14 +42,22 @@ const Suggested =  dynamic(() => import ('./Suggested'),
 }
 )
 export async function generateStaticParams() {
-  const ids = [82992];
-
-  return ids.map((id) => ({
-    params: {
-      id: id.toString(),
+  return [
+    {
+      params: {
+        id: '82292',
+      },
     },
-  }));
+    // You can add more objects with different IDs if needed
+    // {
+    //   params: {
+    //     id: 'another_id',
+    //   },
+    // },
+    // ...
+  ];
 }
+
 
 
 import Footer from '../../components/Footer'
