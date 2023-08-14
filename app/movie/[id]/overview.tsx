@@ -198,8 +198,8 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
 </div>
 
-<div className='px-4 home-animate pop'>
-<div className=' grid grid-cols-2 md:flex md:flex-row md:flex-wrap gap-6 px-4 md:px-2  items-center justify-center mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' py-2 px-4 md:px-8  mx-auto home-animate pop bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:grid-cols-6 gap-6  items-center justify-center  '>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
     <p className='text-gray-400 '>Status</p>
@@ -233,19 +233,14 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
     </div>
    
-    {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
-   <div className='md:hidden flex items-center justify-center '>
-    <p className='text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] whitespace-nowrap'>Discover More ➠</p>
-   </div>
+    
+</div>
 
-   :
-   ''
-}
-{/* duplicated condition and content but different layout to avoid ruining the placements*/}
+
 {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
-    <div className='flex flex-row justify-center items-center gap-6  md:w-full'>
+    <div className='flex flex-row justify-center items-center gap-6  md:w-full  pt-6'>
  
- <p className='hidden md:block text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem]'>Discover More ➨</p>
+ <p className='block text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] whitespace-nowrap'>Discover More ➨</p>
 
    
 
@@ -275,8 +270,6 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 :
 ''
 }
-
-</div>
 
 </div>
 </div>
