@@ -13,11 +13,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 //Images
-import star from '../Images/star.png'
+import star from '../../Images/star.png'
 
 //Components
-import Header from '../components/Header';
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
+import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+
+//API Component
+import PopularMoviesAPI from '@/app/components/API/PersonDetails/PopularMoviesAPI';
 
 //type
 interface PopularMoviesProps {
@@ -27,51 +29,12 @@ interface PopularMoviesProps {
     release_date: string;
     poster_path: string;
 }
-export default function PopularMovies() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [Movies, setMovies] = useState<any>({})
 
-
-
-    const searchParams = useSearchParams();
-
-    //Authorization to fetch data from the API with its base url
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.themoviedb.org/3', 
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-    },
-  });
-
- //fetch all data from the api
- const DataFromAPI = async () => {
-      
-
-  try {
-
-    //the current person id
-    const currID = searchParams.get('id');
-
-    const response =  await axiosInstance.get(`/person/${currID}/movie_credits`) //MovieCredits
+const PopularMovies = ({ id }: { id: number }) => {
    
 
-  
-    setMovies(response.data); 
-    setIsLoading(false) // Skeleton loader is disabled
+  const {Movies, isLoading } = PopularMoviesAPI (`/person/${id}/movie_credits`);
 
- 
-   
-  } catch (error) {
-    console.error('Error fetching data:', error); // Catch errors if data is not fetched
-  }
-  
-};
-  useEffect(() => {
- 
-    //call the function to get the data from the api
-    DataFromAPI();
-
-  }, []);
 
   //sort all movies by highest popularity
  const sortedMovies = Movies?.cast?.sort((a:any, b:any) => b.popularity - a.popularity);
@@ -111,11 +74,7 @@ const PopularMovies = sortedMovies?.slice(0, 15);
          ?
          <Link
    
-         href={{
-          pathname: `/movie`,
-          query:  { id: movie.id }, // the data
-        
-        }}
+         href={`/movie/${movie.id}`}
        
          > 
 <img  
@@ -130,11 +89,7 @@ alt={movie['title']} />
 :
 <Link
    
-href={{
- pathname: `/movie`,
- query:  { id: movie.id }, // the data
-
-}}
+   href={`/movie/${movie.id}`}
 
 > 
 
@@ -150,11 +105,7 @@ alt={movie['title']} />
      {movie['title'] ?
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={{
-       pathname: `/movie`,
-       query:  { id: movie.id }, // the data
-     
-     }}
+      href={`/movie/${movie.id}`}
     
       >
        {movie['title']}
@@ -162,11 +113,7 @@ alt={movie['title']} />
           :
           <Link
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={{
-           pathname: `/movie`,
-           query:  { id: movie.id }, // the data
-         
-         }}
+          href={`/movie/${movie.id}`}
         
           >
            N/A
@@ -216,3 +163,4 @@ alt={movie['title']} />
    </>
   )
 }
+export default PopularMovies

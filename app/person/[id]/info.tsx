@@ -1,87 +1,33 @@
 'use client'
 
+
 // External Libraries
-import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
-import axios from 'axios';
-import Link from 'next/link';
-import  {Drawer} from 'vaul'
+import React, { useState, useRef } from 'react';
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-//Images
-import noprofile from '../Images/noprofile.png'
 
-//Components
-import Header from '../components/Header';
+//API Component
+import InfoAPI from '../../components/API/PersonDetails/InfoAPI';
 
-const Info = () => {
+const Info = ({ id }: { id: number }) => {
+
     //use states
-  const searchParams = useSearchParams();
-  const [personDetails, setPersonDetails] = useState<any>({})
-  const [PersonSocMedia, setPersonSocMedia] = useState<any>({})
-  const [isPersonLoading, setIsPersonLoading] = useState(true);
   const [readMore, setReadMore] = useState(false);
   const biographyHeightRef = useRef<HTMLDivElement>(null);
 
-
-
-  //Authorization to fetch data from the API with its base url
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.themoviedb.org/3', 
-    headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
-    },
-  });
-
- //fetch all data from the api
- const DataFromAPI = async () => {
-      
-
-  try {
-
-    //the current person id
-    const currID = searchParams.get('id');
-
+  const {personDetails, PersonSocMedia, isPersonLoading } =
+   InfoAPI (`/person/${id}`,
+           `/person/${id}/external_ids`
+           )
+console.log(personDetails)
   
-    const apiPromises = [
-      axiosInstance.get(`/person/${currID}`), //Person Details
-      axiosInstance.get(`/person/${currID}/external_ids`) //Person Social Media
-
-    ]
-    const [details, socMedia] = await Promise.all(apiPromises);
-    
-    setPersonDetails(details.data) //Personal data is fetched 
-    setPersonSocMedia(socMedia.data) //Social Media is fetched 
-    setIsPersonLoading(false) // Skeleton loader is disabled
-
- 
-   
-  } catch (error) {
-    console.error('Error fetching data:', error); // Catch errors if data is not fetched
-  }
-  
-};
-
-  
-
-  console.log(
-personDetails
-  );
-  useEffect(() => {
-  
-  
-    //call the function to get the data from the api
-    DataFromAPI();
-
-  }, [isPersonLoading ]);
 
   const formatBiographyText = (text: string) =>  {
     return (
-      <div  ref={biographyHeightRef}> {/* Wrap the generated <p> elements in a <div> */}
+      <div  ref={biographyHeightRef} className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'> {/* Wrap the generated <p> elements in a <div> */}
         {text.split('\n').map((paragraph, index) => (
           <p key={index} className='my-2  text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'>{paragraph}</p>
         ))}
@@ -119,12 +65,14 @@ const calculateDeathAge = (deathdate: number, birthdate: string) => {
 const renderReadButton = () => {
   if ((biographyHeightRef?.current?.clientHeight ?? 0) > 240 ) {
     return (
+      <div className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'>
       <button
         onClick={() => setReadMore(!readMore)}
-        className='bg-[#1a1a1a] rounded-md py-[0.2em] px-[0.8em] text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'
+        className='bg-[#1a1a1a] rounded-md py-[0.2em] px-[0.8em] text-[0.85rem] md:text-[0.95rem] 2xl:text-[1.1rem]'
       >
         {readMore ? 'Read less <' : 'Read more >'}
       </button>
+      </div>
     );
   }
   return null;
@@ -136,9 +84,9 @@ const renderReadButton = () => {
   return (
    
     <> 
-    <Header />
+ 
     
-    <div className='flex flex-col md:flex-row items-center  justify-center md:items-start  p-2 md:p-10'>
+    <div className='flex flex-col lg:flex-row items-center  justify-center lg:items-start  p-2 lg:p-10'>
 {personDetails.profile_path
 ?
     <img className='rounded-xl max-w-[50%]' 
@@ -158,11 +106,11 @@ const renderReadButton = () => {
     }
    
     
-      <div className='flex flex-col px-4 md:px-6'>
-      <h1 className='text-[1.5rem] font-bold  text-center md:text-left md:text-[2rem]  2xl:text-[2.3rem]  z-10'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
+      <div className='flex flex-col px-4 lg:px-6'>
+      <h1 className='text-[1.5rem] font-bold  text-center lg:text-left md:text-[2rem]  2xl:text-[2.3rem]  z-10'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
       <>
       {personDetails.deathday ? 
-      <span className='text-center md:text-left text-[0.78rem] pb-2 sm:text-[0.813rem]   text-gray-300'>
+      <span className='text-center lg:text-left text-[0.78rem] pb-2 sm:text-[0.813rem]   text-gray-300'>
 
      Death Day: {new Date(personDetails.deathday).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
       {' ('}
@@ -180,7 +128,7 @@ const renderReadButton = () => {
 
 {PersonSocMedia.facebook_id || PersonSocMedia.instagram_id || PersonSocMedia.twitter_id ?
 
-<ul className='my-1 pb-[3px] pt-[5px] bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit mx-auto md:mx-0 px-4 flex flex-row gap-4 justify-center md:justify-start items-center'>
+<ul className='my-1 pb-[3px] pt-[5px] bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit mx-auto lg:mx-0 px-4 flex flex-row gap-4 justify-center lg:justify-start items-center'>
 <h3 className='pb-[3px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.1rem]'>Social Media ➨</h3>
 {PersonSocMedia.facebook_id
 ?
@@ -283,7 +231,7 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
     }
   
   
-    <div className=' mt-6 grid grid-cols-personalInfo 2xl:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+    <div className=' mt-6 grid grid-cols-1 md:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
     <p className='text-gray-400 '>Popularity</p>
@@ -302,7 +250,7 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
 
     <div className='flex flex-col items-center  text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
   <p className='text-gray-400 '>Birthday</p>
-  <span className='text-center'>
+  <span className='text-center max-w-[170px]'>
 
   {personDetails.birthday ? 
       <>
