@@ -198,39 +198,39 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
 </div>
 
-<div className=' py-2 px-4 md:px-8  mx-auto home-animate pop bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
-<div className=' grid grid-cols-2 md:grid-cols-6 gap-6  items-center justify-center  '>
+<div className=' py-2 px-6 md:px-8  mx-auto home-animate pop bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit z-20'>
+<div className=' grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6   '>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
     <p className='text-gray-400 '>Status</p>
-    <span>{movieDetails.status ? movieDetails.status :  'N/A'} </span>
+    <span className='text-center'>{movieDetails.status ? movieDetails.status :  'N/A'} </span>
 
   </div>
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Release Date</p>
-    <span>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'N/A'}</span>
+    <span className='text-center'>{movieDetails['release_date'] ? new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }): 'N/A'}</span>
     </div>
 
    
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Budget</p>
-  <span>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '-'}</span>
+  <span className='text-center'>{movieDetails.budget ? '$' + movieDetails.budget.toLocaleString() : '-'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Revenue</p>
-    <span>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '-'}</span>
+    <span className='text-center'>{movieDetails.revenue ? '$' + movieDetails.revenue.toLocaleString() : '-'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400'>Popularity</p>
-    <span>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') : 'N/A'}</span>
+    <span className='text-center'>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') : 'N/A'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400 '>Vote Count</p>
-    <span>{movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
+    <span className='text-center'> {movieDetails.vote_count ? movieDetails.vote_count.toLocaleString() : 'N/A'}</span>
     </div>
    
     
