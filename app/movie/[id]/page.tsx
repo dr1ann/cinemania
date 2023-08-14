@@ -1,50 +1,37 @@
 
+
+//External Libraries
 import dynamic from 'next/dynamic'
+
+//Loaders
 import HomeLoading from '@/app/components/Loaders/HomeLoading'
 import PersonLoading from '@/app/components/Loaders/PersonLoading'
 import CollectionLoading from '@/app/components/Loaders/CollectionLoading'
 import VideosLoading from '@/app/components/Loaders/VideosLoading'
 import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
-//Client Components
+//Client Components that are dynamically rendered
 const Overview =  dynamic(() => import ('./overview'),
-{
-  loading: () => < HomeLoading />,
-}
-)
-const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
-{
-  loading: () => < PersonLoading />,
-}
+{ loading: () => < HomeLoading />, })
 
-)
+const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
+{ loading: () => < PersonLoading />, })
 
 const Collection =  dynamic(() => import ('./Collection'),
-{
-  loading: () => < CollectionLoading />,
-}
-)
+{ loading: () => < CollectionLoading />, })
 
 const Media =  dynamic(() => import ('./Media'),
-{
-  loading: () => < VideosLoading />,
-}
-)
+{ loading: () => < VideosLoading />, })
+
 const Similar =  dynamic(() => import ('./Similar'),
-{
-  loading: () => < MoviePosterLoading />,
-}
-)
+{ loading: () => < MoviePosterLoading />, })
 
 const Suggested =  dynamic(() => import ('./Suggested'),
-{
-  loading: () => < MoviePosterLoading />,
-}
-)
+{ loading: () => < MoviePosterLoading />,})
 
 
 
-
+//Client Footer Component
 import Footer from '../../components/Footer'
 
 const page = ({ params }: { params: { id: number } }) => {
