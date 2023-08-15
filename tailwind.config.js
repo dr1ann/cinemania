@@ -24,6 +24,7 @@ module.exports = {
         'morePosters': 'repeat(auto-fit, minmax(150px, 1fr))',
         'personalInfo': 'repeat(4, minmax(0, 150px))',
         'smallscreenpersonal_info': 'repeat(1, minmax(0, 150px))',
+        'allmovies': 'repeat(auto-fit, minmax(250px, 1fr))',
         // Complex site-specific row configuration
        
       },
@@ -35,6 +36,7 @@ module.exports = {
         cpcollectionscreen: '425px',
         tabletcollectionscreen: '480px',
         collectionsmallscreen: '360px',
+        semibigscreens: '1920px',
         bigscreens: '2700px'
       },
       boxShadow: {

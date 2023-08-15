@@ -19,7 +19,7 @@ import star from '../../Images/star.png'
 import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
 
 //API Component
-import PopularMoviesAPI from '@/app/components/API/PersonDetails/PopularMoviesAPI';
+import PopularMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI';
 
 //type
 interface PopularMoviesProps {
@@ -104,7 +104,7 @@ alt={movie['title']} />
 }
      {movie['title'] ?
       <Link
-      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+      className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4   hover:text-[#e2b616]'
       href={`/movie/${movie.id}`}
     
       >
@@ -112,7 +112,7 @@ alt={movie['title']} />
           </Link>
           :
           <Link
-          className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
+          className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4   hover:text-[#e2b616]'
           href={`/movie/${movie.id}`}
         
           >

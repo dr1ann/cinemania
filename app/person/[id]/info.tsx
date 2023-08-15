@@ -2,7 +2,7 @@
 
 
 // External Libraries
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,29 +16,37 @@ const Info = ({ id }: { id: number }) => {
 
     //use states
   const [readMore, setReadMore] = useState(false);
-  const biographyHeightRef = useRef<HTMLDivElement>(null);
+  const elementRef  = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
 
   const {personDetails, PersonSocMedia, isPersonLoading } =
    InfoAPI (`/person/${id}`,
            `/person/${id}/external_ids`
            )
-console.log(personDetails)
+          
+
+ 
   
+  useLayoutEffect(() => {
+          
+    if (elementRef?.current) {
+      setHeight(elementRef?.current?.offsetHeight);
+    }
 
-  const formatBiographyText = (text: string) =>  {
-    return (
-      <div  ref={biographyHeightRef} className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'> {/* Wrap the generated <p> elements in a <div> */}
-        {text.split('\n').map((paragraph, index) => (
-          <p key={index} className='my-2  text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'>{paragraph}</p>
-        ))}
-      </div>
-    );
-  }
   
+  }, [elementRef.current]);
+console.log(height)
 
 
-
-
+const formatBiographyText = (text: string) =>  {
+  return (
+    <div  ref={elementRef} className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'> {/* Wrap the generated <p> elements in a <div> */}
+      {text.split('\n').map((paragraph, index) => (
+        <p key={index} className='my-2  text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'>{paragraph}</p>
+      ))}
+    </div>
+  );
+}
 const  calculateAge = (birthdate:number) => {
   const birthYear = new Date(birthdate).getFullYear();
   const currentYear = new Date().getFullYear();
@@ -63,7 +71,7 @@ const calculateDeathAge = (deathdate: number, birthdate: string) => {
 
 
 const renderReadButton = () => {
-  if ((biographyHeightRef?.current?.clientHeight ?? 0) > 240 ) {
+  if (height > 250 ) {
     return (
       <div className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'>
       <button
@@ -183,7 +191,7 @@ const renderReadButton = () => {
      // another statement if the above condition is true
      <>
      
-     {(biographyHeightRef?.current?.clientHeight ?? 0) > 240 
+     {height > 250
      ?
      
       //another statement if the above condition is true
@@ -193,7 +201,7 @@ const renderReadButton = () => {
      {!readMore
      ?
        //show only less content when read more is not clicked 
-        <div className='relative  max-h-[220px]   overflow-y-hidden'  >
+        <div className='relative max-h-[210px]    overflow-y-hidden'  >
     {formatBiographyText(personDetails.biography)}
 
       {/* put a fade effect on it */}
