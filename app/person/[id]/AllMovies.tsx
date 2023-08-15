@@ -91,7 +91,7 @@ const Sort = () => {
 </button>
 )
 }
-
+console.log('wew')
   return (
   <>
   <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Movies</h1>
