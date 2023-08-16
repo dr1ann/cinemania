@@ -233,14 +233,14 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
       
         
         // show something if person has no biography
-       <p className='text-[0.85rem]  lg:text-[0.95rem] 2xl:text-[1.1rem]'>Biography N/A</p>
+       <p className='text-[0.85rem] text-center lg:text-left lg:text-[0.95rem] 2xl:text-[1.1rem]'>Biography N/A</p>
 
        
         
     }
   
   
-    <div className=' mt-6 grid grid-cols-1 md:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit md:w-[80%] lg:w-fit  z-20'>
+    <div className=' mt-6 grid grid-cols-2 md:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit md:w-[80%] lg:w-fit  z-20'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
     <p className='text-gray-400 '>Popularity</p>
