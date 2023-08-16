@@ -175,11 +175,14 @@ console.log(Movies)
       </Listbox>
       </div>
       </div>
-    <ul className='grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 animate pop'>
+    <ul className='relative grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 animate pop'>
 
       {selected === ActingDept &&
       <>
-
+      {
+        Movies?.cast?.length > 0
+        ?
+     <>
       {sortedActingMovies.map((movie:MoviesProps) => (
         
       <li key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
@@ -250,10 +253,21 @@ alt={movie.title}
       ))
   }
   </>
+  :
+  <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
+      No movies available
+    </p>
+}
+  </>
  
 }
 {selected === ProductionDept &&
  <>
+  
+      {
+        Movies?.crew?.length > 0
+        ?
+     <>
  {sortedProductionMovies.map((movie:MoviesProps) => (
  <li  key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
@@ -322,12 +336,23 @@ href={`/movie/${movie.id}`}
  ))
 }
 </>
+:
+<p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
+      No movies available
+    </p>
+      }
+
+
+
+</>
   }
 
     </ul>
     </>
     :
-    <p className='animate pop text-center sm:text-left  text-[1.5rem] p-10 sm:pl-16'>N/A</p>
+    <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] pt-6  centered-text'>
+      No movies available
+    </p>
      }
   </div>
 }

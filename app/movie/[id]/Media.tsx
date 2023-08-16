@@ -154,7 +154,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
  ) : (
   // Fallback content to display when movie videos is empty
 
-    <p className='animate pop text-center text-[1rem] centered-text sm:text-[1.5rem]'>No videos available</p>
+    <p className='animate pop text-center text-[1rem] centered-text sm:text-[1.2rem] 2xl:text-[1.5rem]'>No videos available</p>
  
 )}  
 
@@ -268,7 +268,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
     </>
   ) : (
     // Fallback content to display when randomPostersSubset is empty
-    <p className='animate pop text-center text-[1rem] sm:text-[1.5rem] centered-text'>
+    <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
       No posters available
     </p>
   )}
