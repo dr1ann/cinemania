@@ -129,8 +129,8 @@ console.log(Movies)
      <div className="w-[170px] md:w-72   px-6">
     <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1  z-[999] ">
-          <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-[#1a1a1a] customized-shadow shadow-sm pb-1 pt-[3px] md:py-2 pl-2  pr-10 text-left focus:outline-none  sm:text-sm">
-            <span className="block truncate text-[.85rem] md:text-[1rem] pb-1 font-bold">{selected}</span>
+          <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-[#1a1a1a] customized-shadow shadow-sm py-1 md:py-2 pl-2  pr-10 text-left focus:outline-none  sm:text-sm">
+            <span className="block truncate text-[.85rem] pb-[2px] md:text-[1rem] font-bold">{selected}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-4 w-4 text-gray-400"
