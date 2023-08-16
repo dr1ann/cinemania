@@ -188,7 +188,7 @@ console.log(Movies)
        <div className='flex flex-row gap-2'>
        {movie.poster_path ? 
        <img
-       className='min-w-[45px] max-w-[45px] rounded-md'
+       className='min-w-[45px] max-w-[45px] object-contain'
        src={`https://image.tmdb.org/t/p/w45${movie.poster_path}` }
        srcSet={`https://image.tmdb.org/t/p/w45${movie.poster_path} 1x,
        https://image.tmdb.org/t/p/w92${movie.poster_path} 2x`}
@@ -197,7 +197,7 @@ console.log(Movies)
        />
 :
 <img
-className='min-w-[45px] max-w-[45px]  rounded-md'
+className='min-w-[45px] max-w-[45px] '
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
 
 alt={movie.title}
@@ -261,7 +261,7 @@ alt={movie.title}
   <div className='flex flex-row gap-2'>
   {movie.poster_path ? 
        <img
-       className='min-w-[45px] max-w-[45px]  rounded-md'
+       className='min-w-[45px] max-w-[45px] object-contain'
        src={`https://image.tmdb.org/t/p/w45${movie.poster_path}` }
        srcSet={`https://image.tmdb.org/t/p/w45${movie.poster_path} 1x,
        https://image.tmdb.org/t/p/w92${movie.poster_path} 2x`}
@@ -270,7 +270,7 @@ alt={movie.title}
        />
 :
 <img
-className='min-w-[45px] max-w-[45px]  rounded-md'
+className='min-w-[45px] max-w-[45px]  '
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
 alt={movie.title}
 
