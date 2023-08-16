@@ -106,7 +106,7 @@ const Sort = () => {
   onClick={() => setsortMethod(!sortMethod)}
   className='bg-[#1a1a1a] rounded-md mt-4 pb-[2px] ml-6 px-2 text-[0.85rem] md:text-[1rem]'
 >
-  {sortMethod ? 'Newest' : 'Oldest'}
+  {sortMethod ? 'Newest - Oldest' : 'Oldest - Newest'}
 </button>
 )
 }
@@ -130,10 +130,10 @@ console.log(Movies)
     <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1  z-[999] ">
           <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-[#1a1a1a] customized-shadow shadow-sm pb-1 pt-[3px] md:py-2 pl-2  pr-10 text-left focus:outline-none  sm:text-sm">
-            <span className="block truncate text-[.85rem] md:text-[1rem] font-bold">{selected}</span>
+            <span className="block truncate text-[.85rem] md:text-[1rem] pb-1 font-bold">{selected}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
+                className="h-4 w-4 text-gray-400"
                 aria-hidden="true"
               />
             </span>
