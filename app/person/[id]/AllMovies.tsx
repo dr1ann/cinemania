@@ -197,7 +197,7 @@ console.log(Movies)
        />
 :
 <img
-className='min-w-[45px] max-w-[45px] '
+className='min-w-[45px] max-w-[45px] object-contain'
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
 
 alt={movie.title}
@@ -270,7 +270,7 @@ alt={movie.title}
        />
 :
 <img
-className='min-w-[45px] max-w-[45px]  '
+className='min-w-[45px] max-w-[45px]  object-contain'
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
 alt={movie.title}
 
