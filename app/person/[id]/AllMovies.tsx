@@ -195,6 +195,7 @@ console.log(Movies)
        src={`https://image.tmdb.org/t/p/w45${movie.poster_path}` }
        srcSet={`https://image.tmdb.org/t/p/w45${movie.poster_path} 1x,
        https://image.tmdb.org/t/p/w92${movie.poster_path} 2x`}
+       loading='lazy'
        alt={movie.title}
       
        />
@@ -202,7 +203,7 @@ console.log(Movies)
 <img
 className='min-w-[45px] max-w-[45px] object-contain'
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
-
+loading='lazy'
 alt={movie.title}
 
 />
@@ -280,14 +281,14 @@ alt={movie.title}
        srcSet={`https://image.tmdb.org/t/p/w45${movie.poster_path} 1x,
        https://image.tmdb.org/t/p/w92${movie.poster_path} 2x`}
        alt={movie.title}
-      
+       loading='lazy'
        />
 :
 <img
 className='min-w-[45px] max-w-[45px]  object-contain'
 src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
 alt={movie.title}
-
+loading='lazy'
 />
 
 }
