@@ -1,16 +1,9 @@
 'use client'
 
 // External Libraries
-import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import axios from 'axios';
 import Link from 'next/link';
-import  {Drawer} from 'vaul'
 
-// Font Awesome Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 //Images
 import star from '../../Images/star.png'
@@ -32,7 +25,7 @@ interface PopularMoviesProps {
 
 const PopularMovies = ({ id }: { id: number }) => {
    
-
+  //get the values of the fetched data from the API
   const {Movies, isLoading } = PopularMoviesAPI (`/person/${id}/movie_credits`);
 
 

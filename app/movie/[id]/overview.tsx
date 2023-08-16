@@ -16,7 +16,6 @@ import tmdbicon from '../../Images/tmdb.png';
 
 
 //Components
-
 import Header from '../../components/Header';
 import HomeLoading from '../../components/Loaders/HomeLoading';
 import Modal from './Random-Trailer_Modal';

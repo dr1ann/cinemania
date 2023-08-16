@@ -1,13 +1,22 @@
 'use client'
+
+//External Libraries
 import React from 'react'
 import Image from 'next/image';
 import { useState, Fragment, useEffect } from 'react';
-import PersonMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI';
-import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 import Link from 'next/link';
-import star from '../../Images/star.png'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
+//Components
+import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
+
+//API Component
+import PersonMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI';
+
+//Images
+import star from '../../Images/star.png'
+
 //type
 interface MoviesProps {
   id: number;
@@ -21,6 +30,7 @@ interface MoviesProps {
 }
 
 const AllMovies = ({ id }: { id: number }) => {
+
     //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
 
@@ -244,7 +254,7 @@ alt={movie.title}
 {selected === ProductionDept &&
  <>
  {sortedProductionMovies.map((movie:MoviesProps) => (
- <li key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+ <li  key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 
   <div className='flex flex-row gap-2'>
@@ -267,7 +277,7 @@ alt={movie.title}
 
 }
   
-   <div className='flex flex-col justify-center max-w-[131px] collectionscreen:max-w-full'>
+   <div  className='flex flex-col justify-center max-w-[131px] collectionscreen:max-w-full'>
    {movie.title ?
 <Link
 className=' text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold hover:text-[#e2b616]'
