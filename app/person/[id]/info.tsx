@@ -8,6 +8,9 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
+//Components
+import HomeLoading from '@/app/components/Loaders/HomeLoading';
+import Header from '@/app/components/Header';
 
 //API Component
 import InfoAPI from '../../components/API/PersonDetails/InfoAPI';
@@ -93,8 +96,11 @@ const renderReadButton = () => {
   return (
    
     <> 
- 
-    
+ {isPersonLoading ?
+  < HomeLoading />
+  :
+  <> 
+  < Header />
     <div className='flex flex-col lg:flex-row items-center  justify-center lg:items-start  p-2 lg:p-10'>
 {personDetails.profile_path
 ?
@@ -286,8 +292,9 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
       </div>
       
       </div>
-     
-     
+      </>
+    
+    }
     
     </>
   )
