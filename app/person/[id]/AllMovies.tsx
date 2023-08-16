@@ -6,7 +6,6 @@ import PersonMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI'
 import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 import Link from 'next/link';
 import star from '../../Images/star.png'
-
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 //type
@@ -18,35 +17,33 @@ interface MoviesProps {
   poster_path: string;
   character?: string;
   job?:string;
+  randomId?: number;
 }
-const people = [
-  { name: 'Wade Cooper' },
-  { name: 'Arlene Mccoy' },
-  { name: 'Devon Webb' },
-  { name: 'Tom Cook' },
-  { name: 'Tanya Fox' },
-  { name: 'Hellen Schmidt' },
-]
-const AllMovies = ({ id }: { id: number }) => {
 
+const AllMovies = ({ id }: { id: number }) => {
+    //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
+
+
+  //use states
   const [selected, setSelected] = useState('')
   const [sortMethod, setsortMethod] = useState(true);
-  // const [sortNewest, setsortNewest] = useState(true);
   let ActingDept:any = null;
   let ProductionDept:any = null;
 
+
+  //Getting the values/length for every movie department
   Object.keys(Movies).forEach((key) => {
     if (key === 'cast') {
-      ActingDept = `Acting (${Movies[key].length}) `;
+      ActingDept = `Acting (${Movies[key]?.length > 0 ? Movies[key]?.length : '0' }) `;
     }
      else if (key === 'crew'){
-      ProductionDept = `Production (${Movies[key].length}) `;
+      ProductionDept = `Production (${Movies[key]?.length > 0 ? Movies[key]?.length : '0' }) `;
     }
   });
 
 
-
+  //Setting the default value of the Selection 
   useEffect(() => {
     if(ActingDept !== null) {
       setSelected(ActingDept);
@@ -56,30 +53,42 @@ const AllMovies = ({ id }: { id: number }) => {
  
   }, [ActingDept, ProductionDept ]);
 
+
+  //Put the two Values of 2 departments in an array
   const DepartmentArray = [];
   DepartmentArray.push(ActingDept, ProductionDept);
+  
+// Helper function to generate random IDs
+const generateRandomId = () => Math.random().toString(36).substring(7);
 
-  const sortedActingMovies = Movies?.cast?.sort((a:any, b:any) => {
-    const releaseDateA = new Date(a.release_date).getTime();
-    const releaseDateB = new Date(b.release_date).getTime();
-    if(sortMethod) {
-      return releaseDateB - releaseDateA;
-    } else {
-      return releaseDateA - releaseDateB;
-    }
-   
-  });
-  const sortedProductionMovies = Movies?.crew?.sort((a:any, b:any) => {
-    const releaseDateA = new Date(a.release_date).getTime();
-    const releaseDateB = new Date(b.release_date).getTime();
-    if(sortMethod) {
-      return releaseDateB - releaseDateA;
-    } else {
-      return releaseDateA - releaseDateB;
-    }
-   
-  });
+   // Generate random IDs and sort movies based on release dates for both cast and crew
+   const sortedProductionMovies = Movies?.crew?.map((crewMember:any) => ({
+     ...crewMember,
+     randomId: generateRandomId(),
+   }))?.sort((a:any, b:any) => {
+    const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0; // Use 0 for null/undefined dates
+  const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0; // Use 0 for null/undefined dates
+     if (sortMethod) {
+       return releaseDateB - releaseDateA;
+     } else {
+       return releaseDateA - releaseDateB;
+     }
+   });
 
+ const sortedActingMovies = Movies?.cast?.map((castMember:any) => ({
+     ...castMember,
+     randomId: generateRandomId(),
+   }))?.sort((a:any, b:any) => {
+    const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0; // Use 0 for null/undefined dates
+  const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0; // Use 0 for null/undefined dates
+     if (sortMethod) {
+       return releaseDateB - releaseDateA;
+     } else {
+       return releaseDateA - releaseDateB;
+     }
+   });
+
+  //Toggle the buttons Sortation method
 const Sort = () => {
   return (
     
@@ -91,7 +100,8 @@ const Sort = () => {
 </button>
 )
 }
-console.log('wew')
+
+console.log(Movies)
   return (
   <>
   <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Movies</h1>
@@ -162,7 +172,7 @@ console.log('wew')
 
       {sortedActingMovies.map((movie:MoviesProps) => (
         
-      <li key={movie.id} className='animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+      <li key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
      
        <div className='flex flex-row gap-2'>
@@ -224,7 +234,7 @@ console.log('wew')
 {selected === ProductionDept &&
  <>
  {sortedProductionMovies.map((movie:MoviesProps) => (
- <li key={movie.id} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+ <li key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 
   <div className='flex flex-row gap-2'>

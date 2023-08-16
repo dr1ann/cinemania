@@ -19,6 +19,7 @@ const Info = ({ id }: { id: number }) => {
   const elementRef  = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
+    //get the values of the fetched data from the API
   const {personDetails, PersonSocMedia, isPersonLoading } =
    InfoAPI (`/person/${id}`,
            `/person/${id}/external_ids`
