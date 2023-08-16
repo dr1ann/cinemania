@@ -101,7 +101,7 @@ const renderReadButton = () => {
   :
   <> 
   < Header />
-    <div className='flex flex-col lg:flex-row items-center  justify-center lg:items-start  p-2 lg:p-10'>
+    <div className='flex flex-col lg:flex-row items-center  justify-center lg:items-start home-animate pop p-2 lg:p-10'>
 {personDetails.profile_path
 ?
     <img className='rounded-xl max-w-[50%]' 
