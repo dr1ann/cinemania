@@ -176,14 +176,24 @@ console.log(Movies)
       
      
        <div className='flex flex-row gap-2'>
-       <Image
+       {movie.poster_path ? 
+       <img
        className='min-w-[45px] max-w-[45px] object-contain rounded-md'
-       src={movie.poster_path ? `https://image.tmdb.org/t/p/w45${movie.poster_path}` : 'https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A' }
+       src={`https://image.tmdb.org/t/p/w45${movie.poster_path}` }
+       srcSet={`https://image.tmdb.org/t/p/w45${movie.poster_path} 1x,
+       https://image.tmdb.org/t/p/w92${movie.poster_path} 2x`}
        alt={movie.title}
-       width={1}
-       height={1}
+      
        />
-       
+:
+<img
+className='min-w-[45px] max-w-[45px] object-contain rounded-md'
+src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
+alt={movie.title}
+
+/>
+
+}
         <div className='flex flex-col justify-center max-w-[131px] collectionscreen:max-w-full'>
         {movie.title ?
     <Link
