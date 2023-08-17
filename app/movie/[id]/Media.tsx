@@ -119,7 +119,7 @@ const Media = ({ id }: { id: number }) => {
        {selectedOption === 'Videos' && 
        <div>
         {!movieVidsReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll items-center  p-6 sm:py-6 sm:px-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth items-center  p-6 sm:py-6 sm:px-10 gap-4'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <VideosLoading key={index} />
@@ -128,7 +128,7 @@ const Media = ({ id }: { id: number }) => {
        </div> 
        
     :
-       <ul className='flex flex-row overflow-x-scroll  p-6 sm:py-6 sm:px-10 gap-4 relative'>
+       <ul className='flex flex-row overflow-x-scroll scroll-smooth  p-6 sm:py-6 sm:px-10 gap-4 relative'>
       {MovieVids?.results?.length  > 0 ? (
       
    
@@ -166,7 +166,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
   {selectedOption === 'Posters' && 
        <div>
           {!movieImagesReady ? 
-   <div className='flex flex-row justify-start overflow-x-scroll  items-center p-6 sm:py-6 sm:px-10 gap-4'>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth  items-center p-6 sm:py-6 sm:px-10 gap-4'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <PostersLoading key={index} />
@@ -176,7 +176,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
        
     :
     
-    <ul className='flex flex-row overflow-x-scroll p-6 sm:py-6 sm:px-10 gap-4 relative'>
+    <ul className='flex flex-row overflow-x-scroll scroll-smooth p-6 sm:py-6 sm:px-10 gap-4 relative'>
   {randomPostersSubset?.length > 0 ? (
     <>
       {randomPostersSubset?.slice(0, 15).map((posters: MovieImgs) => (
@@ -190,7 +190,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
               className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
               srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${posters.file_path} 1x,
                https://image.tmdb.org/t/p/w300_and_h450_bestv2${posters.file_path} 2x`}
-              loading='eager'
+              loading='lazy'
               alt={posters.file_path}
               onClick={() =>
                 window.open(`https://image.tmdb.org/t/p/original${posters.file_path}`, '_blank')
@@ -201,7 +201,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
               <Image
                 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
                 className='w-full h-full'
-                loading='eager'
+                loading='lazy'
                 alt='movie poster'
               />
             </div>
@@ -221,7 +221,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
           <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Posters</h1>
             <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
             sm:grid  sm:grid-cols-morePosters px-2
-             mx-auto sm:w-[95%] gap-2   overflow-y-scroll py-4 ">
+             mx-auto sm:w-[95%] gap-2   overflow-y-scroll scroll-smooth py-4 ">
             {randomPostersSubset?.slice(15).map((other_posters: MovieImgs) => (
                <li
                key={other_posters.file_path}

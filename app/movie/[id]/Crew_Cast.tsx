@@ -61,7 +61,7 @@ const Crew_Cast = ({ id }: { id: number }) => {
          <div>
     <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Billed Cast</h1>
     {isPeopleLoading ? 
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <PersonLoading key={index} />
@@ -73,7 +73,7 @@ const Crew_Cast = ({ id }: { id: number }) => {
 <div className='relative'>
       {credits?.cast?.length > 0
       ?
-    <ul className='flex flex-row overflow-x-scroll  bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
+    <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
 {credits?.cast?.slice(0, 15).map((cast: MovieCredits) => (
 
@@ -90,7 +90,7 @@ src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast['profile_path']}`}
 className='w-full h-full'
 srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${cast['profile_path']} 1x,
  https://image.tmdb.org/t/p/w276_and_h350_face${cast['profile_path']} 2x`}
-loading='eager'
+loading='lazy'
 alt={cast['original_name']} />
 
 </div>
@@ -102,7 +102,7 @@ alt={cast['original_name']} />
  src={noprofile}
     className='w-full h-full'
     
-    loading='eager'
+    loading='lazy'
     alt={cast['original_name']} />
     
     </div>
@@ -147,7 +147,7 @@ alt={cast['original_name']} />
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
         <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Cast</h1>
           <ul className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]  sm:grid  sm:grid-cols-moreCast
-           mx-auto sm:w-[95%]  px-2   sm:gap-4  gap-6  overflow-y-scroll py-4 ">
+           mx-auto sm:w-[95%]  px-2   sm:gap-4  gap-6  overflow-y-scroll scroll-smooth py-4 ">
           {credits?.cast?.slice(15).map((other_cast: MovieCredits) => (
             <li key={other_cast.credit_id} className='bg-[#1a1a1a] mx-auto  drop-shadow-2xl customized-shadow
              shadow-sm rounded-md flex flex-col 
@@ -232,7 +232,7 @@ alt={other_cast['original_name']} />
     {isPeopleLoading ? 
 
 
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 5 }).map((_, index) => (
      <PersonLoading key={index} />
@@ -244,7 +244,7 @@ alt={other_cast['original_name']} />
     <div className='relative'>
       {credits?.crew?.length > 0
       ?
-    <ul className=' flex flex-row overflow-x-scroll bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
+    <ul className=' flex flex-row overflow-x-scroll scroll-smooth bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
 {importantCrewMembers?.map((crew: MovieCredits) => (
 

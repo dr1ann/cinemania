@@ -208,7 +208,7 @@ const renderReadButton = () => {
      {!readMore
      ?
        //show only less content when read more is not clicked 
-        <div className='relative max-h-[210px]    overflow-y-hidden'  >
+        <div className='relative max-h-[210px]    overflow-y-hidden '  >
     {formatBiographyText(personDetails.biography)}
 
       {/* put a fade effect on it */}

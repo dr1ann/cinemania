@@ -43,7 +43,7 @@ const PopularMovies = sortedMovies?.slice(0, 15);
 
         <>
         <h1 className='px-6 sm:px-10 pt-4 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular Movies</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6 '>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -59,7 +59,7 @@ const PopularMovies = sortedMovies?.slice(0, 15);
       <>
        <h1 className='px-6 sm:px-10 pt-4 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular Movies</h1>
    
-    <ul className='flex flex-row overflow-x-scroll   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
+    <ul className='flex flex-row overflow-x-scroll scroll-smooth   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
 {PopularMovies?.map((movie:PopularMoviesProps) => (
     <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
@@ -76,7 +76,7 @@ className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md
  hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
  https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
-loading='eager'
+loading='lazy'
 alt={movie['title']} />
 </Link>
 :
@@ -91,7 +91,7 @@ src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
  hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
-loading='eager'
+loading='lazy'
 alt={movie['title']} />
 </Link>
 }

@@ -125,14 +125,14 @@ const axiosInstance = axios.create({
     
 <h1 className='font-bold animate pop text-[1.5rem] 2xl:text-[2.3rem]'>{collection.name ? collection.name : 'Collection Name N/A'}</h1>
 
-<p className='text-[0.85rem] animate pop xl:text-[1rem] 2xl:text-[1.1rem] pr-2 max-h-[220px] sm:max-h-[320px] overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
+<p className='text-[0.85rem] animate pop xl:text-[1rem] 2xl:text-[1.1rem] pr-2 max-h-[220px] sm:max-h-[320px] scroll-smooth overflow-y-scroll  text-gray-300'>➠ {collection.overview  ? collection.overview : 'No overview available'}</p>
 
 </div>
 </div>
 <ul className={`grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${
 collection?.parts?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px] 
- lg:max-h-[500px]  lg:overflow-y-scroll lg:overflow-x-hidden lg:pr-4`}>
+ lg:max-h-[500px]  lg:overflow-y-scroll scroll-smooth lg:overflow-x-hidden lg:pr-4`}>
      
     {collection?.parts?.map((movie: movieCollection) => (
       
