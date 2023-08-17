@@ -239,7 +239,7 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
       
         
         // show something if person has no biography
-       <p className='text-[0.85rem] text-center lg:text-left lg:text-[0.95rem] 2xl:text-[1.1rem]'>Biography N/A</p>
+       <p className='text-[0.85rem] text-center lg:text-left lg:text-[0.95rem] 2xl:text-[1.1rem] mt-4'>Biography N/A</p>
 
        
         
