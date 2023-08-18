@@ -7,7 +7,7 @@ import Link from 'next/link';
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
 
 //API Component
-import PopularPeopleAPI from './API/HomePage/PopularPeopleAPI';
+import { PopularPeopleAPI } from './API/HomePageAPI';
 
 //type
 interface PopularPeopleProps {

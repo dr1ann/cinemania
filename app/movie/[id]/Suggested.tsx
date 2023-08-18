@@ -6,13 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 //Images
-import star from '../../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API component
-import SuggestedAPI from '../../components/API/MovieDetails/SuggestedAPI';
+import { SuggestedMoviesAPI } from '@/app/components/API/MovieDetailsAPI';
 
 //type
 interface SuggestedMoviesProps {
@@ -28,7 +28,7 @@ interface SuggestedMoviesProps {
 const Suggested = ({ id }: { id: number }) => {
  
     //get the values of the fetched data from the API
-    const {suggestedMovies, isLoading } = SuggestedAPI(`/movie/${id}/recommendations`)
+    const {suggestedMovies, isLoading } = SuggestedMoviesAPI(`/movie/${id}/recommendations`)
 
   return (
     <>

@@ -1,9 +1,9 @@
 'use client'
-import React from 'react'
 
 //External Libraries
 import Image from 'next/image'
 import Link from 'next/link';
+
 // Images
 import icon from '../Images/icon.png';
 

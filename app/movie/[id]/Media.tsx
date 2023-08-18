@@ -7,11 +7,11 @@ import  {Drawer} from 'vaul'
 
 //Components
 import VidTrailer from './Videos'
-import VideosLoading from '../../components/Loaders/VideosLoading'
-import PostersLoading from '../../components/Loaders/PosterLoading'
+import VideosLoading from '@/app/components/Loaders/VideosLoading'
+import PostersLoading from '@/app/components/Loaders/PosterLoading'
 
 //API component
-import MediaAPI from '../../components/API/MovieDetails/MediaAPI';
+import { MediaAPI } from '@/app/components/API/MovieDetailsAPI';
 
 //types
 interface MovieVideos {

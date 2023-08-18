@@ -6,13 +6,13 @@ import Link from 'next/link';
 import  {Drawer} from 'vaul'
 
 //Images
-import noprofile from '../../Images/noprofile.png'
+import noprofile from '@/app/Images/noprofile.png'
 
 //Components
-import PersonLoading from '../../components/Loaders/PersonLoading';
+import PersonLoading from '@/app/components/Loaders/PersonLoading';
 
 //API component
-import Crew_CastAPI from '../../components/API/MovieDetails/Crew_CastAPI';
+import { Crew_CastAPI } from '@/app/components/API/MovieDetailsAPI';
 
 //type
 type MovieCredits = {

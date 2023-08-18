@@ -12,7 +12,7 @@ import star from '../Images/star.png'
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
 
 //API Component
-import TopRatedMoviesAPI from './API/HomePage/TopRatedMoviesAPI';
+import { TopRatedMoviesAPI }  from './API/HomePageAPI';
 
 //type
 interface TopRatedMoviesProps {

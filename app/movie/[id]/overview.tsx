@@ -11,17 +11,17 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 
 // Images
-import star from '../../Images/star.png';
-import tmdbicon from '../../Images/tmdb.png';
+import star from '@/app/Images/star.png';
+import tmdbicon from '@/app/Images/tmdb.png';
 
 
 //Components
-import Header from '../../components/Header';
-import HomeLoading from '../../components/Loaders/HomeLoading';
+import Header from '@/app/components/Header';
+import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Modal from './Random-Trailer_Modal';
 
 //API component
-import OverviewAPI from '../../components/API/MovieDetails/OverviewAPI'; 
+import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI'; 
 
 
 

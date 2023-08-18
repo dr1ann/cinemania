@@ -12,10 +12,10 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 
 //API Component
-import PersonMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI';
+import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 
 //Images
-import star from '../../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //type
 interface MoviesProps {

@@ -11,7 +11,7 @@ import star from '../Images/star.png'
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
 
 //API Component
-import TrendingMoviesAPI from './API/HomePage/TrendingMoviesAPI';
+import {TrendingMoviesAPI} from './API/HomePageAPI';
 
 //type
 interface TrendingMoviesProps {

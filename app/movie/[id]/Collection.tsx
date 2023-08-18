@@ -7,15 +7,14 @@ import Link from 'next/link';
 
 
 // Images
-
-import star from '../../Images/star.png';
-import blackscreen from '../../Images/black-screen.png';
+import star from '@/app/Images/star.png';
+import blackscreen from '@/app/Images/black-screen.png';
 
 //components
-import CollectionLoading from '../../components/Loaders/CollectionLoading';
+import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 
 //API component
-import CollectionAPI from '../../components/API/MovieDetails/CollectionAPI';
+import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI' // get the Overview API to get the current collection id
 
 //type
 type movieCollection = {
@@ -43,8 +42,9 @@ const axiosInstance = axios.create({
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
   },
 });
+
   //only fetched movie details on the API folder to access id of its collection from its movie id
-  const {movieDetails } = CollectionAPI(
+  const { movieDetails } = OverviewAPI(
     `/movie/${id}?language=en-US`,
     
 

@@ -7,13 +7,13 @@ import Link from 'next/link';
 
 
 //Images
-import star from '../../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API component
-import SimilarAPI from '../../components/API/MovieDetails/SimilarAPI';
+import  { SimilarMoviesAPI }  from '@/app/components/API/MovieDetailsAPI';
 
 //type
 interface SimilarMoviesProps {
@@ -29,7 +29,7 @@ interface SimilarMoviesProps {
 const Similar = ({ id }: { id: number }) => {
  
   //get the values of the fetched data from the API
-  const { similarMovies, isLoading } = SimilarAPI(`/movie/${id}/similar`);
+  const { similarMovies, isLoading } = SimilarMoviesAPI(`/movie/${id}/similar`);
 
   return (
     <>

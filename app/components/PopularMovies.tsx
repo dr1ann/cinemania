@@ -11,7 +11,7 @@ import star from '../Images/star.png'
 import MoviePosterLoading from './Loaders/MoviePosterLoading';
 
 //API Component
-import PopularMoviesAPI from './API/HomePage/PopularMoviesAPI';
+import { PopularMoviesAPI }from './API/HomePageAPI';
 
 //type
 interface PopularMoviesProps {

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import loadingbar from '../../Images/loading-11.gif';
+import loadingbar from '@/app/Images/loading-11.gif';
 
 const Loading = () => {
   const [isVisible, setIsVisible] = useState(true);

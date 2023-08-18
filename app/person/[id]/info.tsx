@@ -2,7 +2,7 @@
 
 
 // External Libraries
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Header from '@/app/components/Header';
 
 //API Component
-import InfoAPI from '../../components/API/PersonDetails/InfoAPI';
+import { InfoAPI } from '@/app/components/API/PersonDetailsAPI';
 
 const Info = ({ id }: { id: number }) => {
 
@@ -105,18 +105,22 @@ const renderReadButton = () => {
 {personDetails.profile_path
 ?
     <img className='rounded-xl max-w-[50%]' 
+    loading='eager'
      src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${personDetails.profile_path}`}
     data-src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${personDetails.profile_path}`}
     data-srcset={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${personDetails.profile_path} 1x,
     https://image.tmdb.org/t/p/w600_and_h900_bestv2/${personDetails.profile_path} 2x`}
      alt={`${personDetails.name}`}
       srcSet={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${personDetails.profile_path} 1x,
-      https://image.tmdb.org/t/p/w600_and_h900_bestv2/${personDetails.profile_path}2x`} ></img>
-
+      https://image.tmdb.org/t/p/w600_and_h900_bestv2/${personDetails.profile_path}2x`} >
+        
+      </img>
+    
       :
       <img
       className='  max-w-[50%] rounded-xl'
       src='https://via.placeholder.com/300x450/3F3F3F/FFFFFF/?text=PROFILE N/A'
+      loading='eager'
        />
     }
    

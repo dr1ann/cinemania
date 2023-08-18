@@ -12,7 +12,7 @@ import HomeLoading from './Loaders/HomeLoading';
 import Header from './Header';
 
 //API Component
-import TrendingMoviesAPI from './API/HomePage/TrendingMoviesAPI';
+import { TrendingMoviesAPI } from './API/HomePageAPI';
 
 const MainPage = () => {
 

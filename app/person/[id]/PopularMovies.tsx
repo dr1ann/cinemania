@@ -6,13 +6,13 @@ import Link from 'next/link';
 
 
 //Images
-import star from '../../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from '../../components/Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import PopularMoviesAPI from '@/app/components/API/PersonDetails/PersonMoviesAPI';
+import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 
 //type
 interface PopularMoviesProps {
@@ -26,7 +26,7 @@ interface PopularMoviesProps {
 const PopularMovies = ({ id }: { id: number }) => {
    
   //get the values of the fetched data from the API
-  const {Movies, isLoading } = PopularMoviesAPI (`/person/${id}/movie_credits`);
+  const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
 
 
   //sort all movies by highest popularity
