@@ -37,20 +37,22 @@ const Info = ({ id }: { id: number }) => {
       setHeight(elementRef?.current?.offsetHeight);
     }
 
-  
+    //re renders if the height of the biography is changed
   }, [elementRef.current]);
 console.log(height)
 
 
 const formatBiographyText = (text: string) =>  {
   return (
-    <div  ref={elementRef} className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'> {/* Wrap the generated <p> elements in a <div> */}
+    <div  ref={elementRef} className='w-full sm:w-[80%] lg:w-full  sm:mx-auto lg:mx-0'> 
+    {/* Wrap the generated <p> elements in a <div> */}
       {text.split('\n').map((paragraph, index) => (
         <p key={index} className='my-2  text-[0.85rem] lg:text-[0.95rem] 2xl:text-[1.1rem]'>{paragraph}</p>
       ))}
     </div>
   );
 }
+
 const  calculateAge = (birthdate:number) => {
   const birthYear = new Date(birthdate).getFullYear();
   const currentYear = new Date().getFullYear();
