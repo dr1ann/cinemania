@@ -29,7 +29,7 @@ interface MoviesProps {
   randomId?: number;
 }
 
-const AllMovies = ({ id }: { id: number }) => {
+const AllMovies = async ({ id }: { id: number }) => {
 
     //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
@@ -99,7 +99,7 @@ const generateRandomId = () => Math.random().toString(36).substring(7);
    });
 
   //Toggle the buttons Sortation method
-const Sort = () => {
+const Sort =  () => {
   return (
     
   <button
@@ -175,7 +175,7 @@ console.log(Movies)
       </Listbox>
       </div>
       </div>
-    <ul className='relative grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 animate pop'>
+    <ul className='relative grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 home-animate pop'>
 
       {selected === ActingDept &&
       <>
@@ -185,7 +185,7 @@ console.log(Movies)
      <>
       {sortedActingMovies.map((movie:MoviesProps) => (
         
-      <li key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+      <li key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
      
        <div className='flex flex-row gap-2'>
@@ -255,7 +255,7 @@ alt={movie.title}
   }
   </>
   :
-  <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
+  <p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
       No movies available
     </p>
 }
@@ -270,7 +270,7 @@ alt={movie.title}
         ?
      <>
  {sortedProductionMovies.map((movie:MoviesProps) => (
- <li  key={movie.randomId} className='animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+ <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 
   <div className='flex flex-row gap-2'>
@@ -338,7 +338,7 @@ href={`/movie/${movie.id}`}
 }
 </>
 :
-<p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
+<p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
       No movies available
     </p>
       }
@@ -351,7 +351,7 @@ href={`/movie/${movie.id}`}
     </ul>
     </>
     :
-    <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] pt-6  centered-text'>
+    <p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] pt-6  centered-text'>
       No movies available
     </p>
      }
