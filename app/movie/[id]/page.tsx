@@ -10,10 +10,11 @@ import CollectionLoading from '@/app/components/Loaders/CollectionLoading'
 import VideosLoading from '@/app/components/Loaders/VideosLoading'
 import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
-//Client Components that are dynamically rendered
-const Overview =  dynamic(() => import ('./overview'),
-{ loading: () => < HomeLoading />, })
+//Normal import of a component
+import Overview from './overview'
 
+
+//Client Components that are dynamically rendered
 const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
 { loading: () => < PersonLoading />, })
 

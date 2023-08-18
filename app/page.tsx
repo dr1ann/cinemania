@@ -3,14 +3,14 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-//Loaders
+//Loader Components
 import MoviePosterLoading from './components/Loaders/MoviePosterLoading'
 import HomeLoading from './components/Loaders/HomeLoading'
 
-//Client Components that are dynamically rendered
-const MainPage =  dynamic(() => import ('./components/MainPage'),
-{ loading: () => < HomeLoading />, })
+//Normal import of a component
+import MainPage from './components/MainPage'
 
+//Client Components that are dynamically rendered
 const TrendingMovies =  dynamic(() => import ('./components/TrendingMovies'),
 { loading: () => < MoviePosterLoading />, })
 

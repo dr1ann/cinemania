@@ -8,9 +8,10 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 import CollectionLoading from '@/app/components/Loaders/CollectionLoading'
 import HomeLoading from '@/app/components/Loaders/HomeLoading'
 
+//Normal import of a component
+import Info from './info'
+
 //Client Components that are dynamically rendered
-const Info =  dynamic(() => import ('./info'),
-{ loading: () => < HomeLoading />, })
 const PopularMovies =  dynamic(() => import ('./PopularMovies'),
 { loading: () => < MoviePosterLoading />, })
 
