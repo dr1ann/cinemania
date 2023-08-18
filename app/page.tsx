@@ -3,28 +3,27 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-//Loader Components
+//Loader Component(s)
 import MoviePosterLoading from './components/Loaders/MoviePosterLoading'
-import HomeLoading from './components/Loaders/HomeLoading'
 
 //Normal import of a component
 import MainPage from './components/MainPage'
+import TrendingMovies from './components/TrendingMovies'
+import PopularMovies from './components/PopularMovies'
+import PopularPeople from './components/PopularPeople'
 
 //Client Components that are dynamically rendered
-const TrendingMovies =  dynamic(() => import ('./components/TrendingMovies'),
-{ loading: () => < MoviePosterLoading />, })
-
-const PopularMovies =  dynamic(() => import ('./components/PopularMovies'),
-{ loading: () => < MoviePosterLoading />, })
-
-const PopularPeople =  dynamic(() => import ('./components/PopularPeople'),
-{ loading: () => < MoviePosterLoading />, })
-
 const InTheatersMovies =  dynamic(() => import ('./components/In_TheatersMovies'),
-{ loading: () => < MoviePosterLoading />, })
+{loading: () =>   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
+{Array.from({ length: 15 }).map((_, index) => (
+<MoviePosterLoading key={index} />
+))}</div> })
 
 const TopRatedMovies =  dynamic(() => import ('./components/TopRatedMovies'),
-{ loading: () => < MoviePosterLoading />, })
+{loading: () =>   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
+{Array.from({ length: 15 }).map((_, index) => (
+<MoviePosterLoading key={index} />
+))}</div> })
 
 
 //Foter Client Component

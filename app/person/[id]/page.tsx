@@ -10,13 +10,12 @@ import HomeLoading from '@/app/components/Loaders/HomeLoading'
 
 //Normal import of a component
 import Info from './info'
+import PopularMovies from './PopularMovies'
+// import AllMovies from './AllMovies'
 
 //Client Components that are dynamically rendered
-const PopularMovies =  dynamic(() => import ('./PopularMovies'),
-{ loading: () => < MoviePosterLoading />, })
-
 const AllMovies =  dynamic(() => import ('./AllMovies'),
-{ loading: () => < CollectionLoading />, })
+{ loading: () => < CollectionLoading /> })
 
 //Client Footer Component
 import Footer from '@/app/components/Footer'
