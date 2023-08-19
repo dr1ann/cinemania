@@ -3,7 +3,7 @@
 //External Libraries
 import React from 'react'
 import Image from 'next/image';
-import { useState, Fragment, useEffect, Suspense, useMemo } from 'react';
+import { useState, Fragment, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -29,7 +29,7 @@ interface MoviesProps {
   randomId?: number;
 }
 
-const AllMovies =  ({ id }: { id: number }) => {
+const AllMovies = async ({ id }: { id: number }) => {
 
     //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
@@ -72,35 +72,44 @@ const AllMovies =  ({ id }: { id: number }) => {
 // Helper function to generate random IDs
 const generateRandomId = () => Math.random().toString(36).substring(7);
 
-   // Generate random IDs and sort movies based on release dates for both cast and crew
-   const sortedProductionMovies = Movies?.crew?.map((crewMember:any) => ({
-     ...crewMember,
-     randomId: generateRandomId(),
-   }))?.sort((a:any, b:any) => {
-    const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0; // Use 0 for null/undefined dates
-  const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0; // Use 0 for null/undefined dates
-     if (sortMethod) {
-       return releaseDateB - releaseDateA;
-     } else {
-       return releaseDateA - releaseDateB;
-     }
-   });
+const sortedProductionMovies = useMemo(() => {
+  // Generate random IDs and sort movies based on release dates for both cast and crew
+  return Movies?.crew
+    ?.map((crewMember: any) => ({
+      ...crewMember,
+      randomId: generateRandomId(),
+    }))
+    ?.sort((a: any, b: any) => {
+      const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
+      const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
+      if (sortMethod) {
+        return releaseDateB - releaseDateA;
+      } else {
+        return releaseDateA - releaseDateB;
+      }
+    });
+}, [Movies, sortMethod]);
 
- const sortedActingMovies = Movies?.cast?.map((castMember:any) => ({
-     ...castMember,
-     randomId: generateRandomId(),
-   }))?.sort((a:any, b:any) => {
-    const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0; // Use 0 for null/undefined dates
-  const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0; // Use 0 for null/undefined dates
-     if (sortMethod) {
-       return releaseDateB - releaseDateA;
-     } else {
-       return releaseDateA - releaseDateB;
-     }
-   });
+const sortedActingMovies = useMemo(() => {
+  return Movies?.cast
+    ?.map((castMember: any) => ({
+      ...castMember,
+      randomId: generateRandomId(),
+    }))
+    ?.sort((a: any, b: any) => {
+      const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
+      const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
+      if (sortMethod) {
+        return releaseDateB - releaseDateA;
+      } else {
+        return releaseDateA - releaseDateB;
+      }
+    });
+}, [Movies, sortMethod]);
+
 
   //Toggle the buttons Sortation method
-const Sort = async () => {
+const Sort =  () => {
   return (
     
   <button
@@ -126,7 +135,7 @@ console.log(Movies)
       ?
     <>
     <div className='flex flex-row justify-between'>
-      <Suspense fallback={<CollectionLoading/>}>
+     
       {Sort()}
      
   
@@ -178,7 +187,7 @@ console.log(Movies)
         </div>
       </Listbox>
       </div>
-      </Suspense>
+    
       </div>
     <ul className='relative grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 home-animate pop'>
 
