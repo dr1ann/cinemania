@@ -14,8 +14,8 @@ import PopularMovies from './PopularMovies'
 // import AllMovies from './AllMovies'
 
 //Client Components that are dynamically rendered
-const AllMovies =  dynamic(() => import ('./AllMovies'),
-{ loading: () => < CollectionLoading /> })
+const AllMovies =  dynamic(() => import ('./AllMovies'))
+
 
 //Client Footer Component
 import Footer from '@/app/components/Footer'

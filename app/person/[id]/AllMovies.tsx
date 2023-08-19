@@ -3,7 +3,7 @@
 //External Libraries
 import React from 'react'
 import Image from 'next/image';
-import { useState, Fragment, useEffect } from 'react';
+import { useState, Fragment, useEffect, Suspense, useMemo } from 'react';
 import Link from 'next/link';
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -29,7 +29,7 @@ interface MoviesProps {
   randomId?: number;
 }
 
-const AllMovies = async ({ id }: { id: number }) => {
+const AllMovies =  ({ id }: { id: number }) => {
 
     //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
@@ -38,6 +38,7 @@ const AllMovies = async ({ id }: { id: number }) => {
   //use states
   const [selected, setSelected] = useState('')
   const [sortMethod, setsortMethod] = useState(true);
+  
   let ActingDept:any = null;
   let ProductionDept:any = null;
 
@@ -99,7 +100,7 @@ const generateRandomId = () => Math.random().toString(36).substring(7);
    });
 
   //Toggle the buttons Sortation method
-const Sort =  () => {
+const Sort = async () => {
   return (
     
   <button
@@ -125,7 +126,10 @@ console.log(Movies)
       ?
     <>
     <div className='flex flex-row justify-between'>
-   {Sort()}
+      <Suspense fallback={<CollectionLoading/>}>
+      {Sort()}
+     
+  
      <div className="w-[170px] md:w-72   px-6">
     <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1  z-[999] ">
@@ -174,6 +178,7 @@ console.log(Movies)
         </div>
       </Listbox>
       </div>
+      </Suspense>
       </div>
     <ul className='relative grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 bigscreens:grid-cols-4  gap-4 p-6 home-animate pop'>
 
