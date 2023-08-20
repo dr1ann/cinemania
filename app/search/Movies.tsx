@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import star from '@/app/Images/star.png'
+import { useState } from 'react';
 //type
 interface MoviesProps {
     id: number;
@@ -12,13 +13,17 @@ interface MoviesProps {
 }
 
 const Movies = ({ KeywordResults }: { KeywordResults: any }) => {
+  const [ MovieNum, setMovieNum] = useState(10);
+  function handleLoadMore() {
+    setMovieNum(prevPostNum => prevPostNum + 10) // 3 is the number of posts you want to load per click
+  }
   return (
    <>
  <ul className={`mt-8 grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${
 KeywordResults?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth`}>
-  {KeywordResults?.map((movie:MoviesProps) => (
+  {KeywordResults?.slice(0, MovieNum)?.map((movie:MoviesProps) => (
 <li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 {movie['poster_path']
@@ -106,6 +111,16 @@ alt={movie['title']} />
 ))
 }
 </ul>
+{KeywordResults?.length > 10 && MovieNum <= KeywordResults?.length
+?
+
+
+<button className='bg-[#1a1a1a] text-center m-auto flex justify-center rounded-md mt-4 pb-[4px] pt-1  px-[10px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.1rem]' 
+onClick={handleLoadMore}>Load More...</button>
+:
+''
+}
+
    </>
   )
 }
