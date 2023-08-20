@@ -25,6 +25,7 @@ module.exports = {
         'personalInfo': 'repeat(4, minmax(0, 150px))',
         'smallscreenpersonal_info': 'repeat(1, minmax(0, 150px))',
         'allmovies': 'repeat(auto-fit, minmax(250px, 1fr))',
+        'searchresults': 'repeat(auto-fill, minmax(150px, 1fr))',
         // Complex site-specific row configuration
        
       },

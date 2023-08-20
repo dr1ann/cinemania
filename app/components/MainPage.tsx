@@ -2,7 +2,7 @@
 // External Libraries
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation'
 
 //Images
 import icon from '../Images/icon.png'
@@ -15,11 +15,12 @@ import Header from './Header';
 import { TrendingMoviesAPI } from './API/HomePageAPI';
 
 const MainPage = () => {
-
+  const router = useRouter()
     
     const [isHomeLoading, setIsHomeLoading] = useState(true);
     const [randomImage, setRandomImage] = useState<string>('');
-  
+    const [inputWord, setInputWord] = useState('');
+    
   
   
     //get the values of the fetched data from the API
@@ -43,7 +44,15 @@ const MainPage = () => {
       setIsHomeLoading(false) //remove the skeleton loader
     }
   };
+//   const handleSearch = (e:any) => {
+//     e.preventDefault(); // Prevent the default form submission
+// <Link href={{
+//   pathname: '/search',
+//   query: {keyword: inputWord}
+// }} >
 
+// </Link>
+//   };
   return (
  <>
 {isHomeLoading ?
@@ -70,10 +79,10 @@ const MainPage = () => {
 <label className="sr-only">Search</label>
 <div className="relative w-full active">
   
-   <input type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] input placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
- disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none " placeholder="Search Movies, TV shows, People, etc..." required />
+   <input value={inputWord}  onChange={(e) => setInputWord(e.target.value)} type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] input placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
+ disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none " placeholder="Search for a movie, person..." required />
 </div>
-<button type="submit" className="p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
+<button type="button" onClick={() => router.push(`/search?keyword=${inputWord}`)} className="p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
    </svg>

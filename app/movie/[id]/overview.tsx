@@ -237,7 +237,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
 
 {movieSoc.facebook_id || movieSoc.instagram_id || movieSoc.twitter_id ?
-    <div className='flex flex-row justify-center items-center gap-6  md:w-full  pt-6'>
+    <div className='flex flex-row flex-wrap justify-center items-center gap-6  md:w-full  pt-6'>
  
  <p className='block text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] whitespace-nowrap'>Discover More ➨</p>
 

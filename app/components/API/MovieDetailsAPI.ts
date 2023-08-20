@@ -195,3 +195,33 @@ export const Crew_CastAPI = ( CreditsData: any  ) => {
     }, []);
   return {suggestedMovies, isLoading}
   };
+
+  export const SearchedMoviesAPI = ( SearchedMoviesData: any  ) => {
+    
+    //use states
+    const [SearchResults, setSearchResults] = useState<any>({})
+    const [isLoading, setIsLoading] = useState(true);
+  
+   const DataFromAPI = async () => {
+        
+    try {
+  
+      const response =  await axiosInstance.get(SearchedMoviesData) //Similar Movies
+     
+      setSearchResults(response.data);
+      setIsLoading(false) // Skeleton loader is disabled
+  
+    } catch (error) {
+      console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    }
+    
+  };
+  
+  //call the function to get the data from the api
+    useEffect(() => {
+  
+      DataFromAPI();
+  
+    }, []);
+  return {SearchResults, isLoading}
+  };

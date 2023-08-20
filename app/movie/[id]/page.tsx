@@ -12,7 +12,7 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 //Normal import of a component
 import Overview from './overview'
 import Similar from './Similar'
-import Suggested from './Similar'
+import Suggested from './Suggested'
 
 //Client Components that are dynamically rendered
 const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
