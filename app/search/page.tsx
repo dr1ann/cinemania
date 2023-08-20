@@ -17,7 +17,7 @@ import People from './People'
     media_type: string
    }
 
-const page = () =>{
+const Page = () =>{
 
   const router = useRouter() // Instantiating a new router for navigating 
 
@@ -26,7 +26,11 @@ const page = () =>{
 
     // Retrieve the keyword entered by the user from the search parameters.
     const SearchedKeyword = searchParams.get('keyword')
+    const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
 
+
+    //handler when the option is changed
+    const [selectedOption, setSelectedOption] = useState<string>('Movies');
  //get the values of the fetched data from the API
  const {SearchResults, isLoading} = SearchedMoviesAPI(
 `https://api.themoviedb.org/3/search/multi?query=${SearchedKeyword}`
@@ -34,12 +38,7 @@ const page = () =>{
   );
 
 
-  const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
 
-console.log(SearchResults)
-
- //handler when the option is changed
- const [selectedOption, setSelectedOption] = useState<string>('Movies');
 
  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
    setSelectedOption(e.target.value);
@@ -173,4 +172,4 @@ const handleButtonClick = () => {
     </>
   )
 }
-export default page
+export default Page
