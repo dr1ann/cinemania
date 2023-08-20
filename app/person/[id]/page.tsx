@@ -20,7 +20,7 @@ const AllMovies =  dynamic(() => import ('./AllMovies'),
 //Client Footer Component
 import Footer from '@/app/components/Footer'
 
-const page = ({ params }: { params: { id: number } }) => {
+const Page = ({ params }: { params: { id: number } }) => {
   return (
     <>
      
@@ -32,4 +32,4 @@ const page = ({ params }: { params: { id: number } }) => {
    </>
   )
 }
-export default page
+export default Page

@@ -37,7 +37,7 @@ const Media =  dynamic(() => import ('./Media'),
 //Client Footer Component
 import Footer from '../../components/Footer'
 
-const page = ({ params }: { params: { id: number } }) => {
+const Page = ({ params }: { params: { id: number } }) => {
 
   return (
     <>
@@ -52,4 +52,4 @@ const page = ({ params }: { params: { id: number } }) => {
   )
 }
 
-export default page
+export default Page

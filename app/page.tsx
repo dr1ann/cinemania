@@ -30,7 +30,7 @@ const TopRatedMovies =  dynamic(() => import ('./components/TopRatedMovies'),
 import Footer from './components/Footer'
 
 
-const page = () => {
+const Page = () => {
   return (
    <>
     <MainPage /> 
@@ -45,4 +45,4 @@ const page = () => {
    </>
   )
 }
-export default page
+export default Page
