@@ -17,7 +17,7 @@ import People from './People'
     media_type: string
    }
 
-const Page = () =>{
+const page = () =>{
 
   const router = useRouter() // Instantiating a new router for navigating 
 
@@ -172,4 +172,4 @@ const handleButtonClick = () => {
     </>
   )
 }
-export default Page
+export default page
