@@ -2,7 +2,10 @@ import React from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import star from '@/app/Images/star.png'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSearchParams } from 'next/navigation';
+import CollectionLoading from '../components/Loaders/CollectionLoading';
 //type
 interface MoviesProps {
     id: number;
@@ -11,19 +14,76 @@ interface MoviesProps {
     release_date: string;
     poster_path: string;
 }
+ //Authorization to fetch data from the API with its base url
+ const axiosInstance = axios.create({
+  baseURL: 'https://api.themoviedb.org/3', 
+  headers: {
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
+  },
+});
+ const Movies = () => {
 
-const Movies = ({ KeywordResults }: { KeywordResults: any }) => {
-  const [ MovieNum, setMovieNum] = useState(10);
-  function handleLoadMore() {
-    setMovieNum(prevPostNum => prevPostNum + 10) // 3 is the number of posts you want to load per click
+  const [MovieResults, setMovieResults] = useState<any>({})
+  const [isLoading, setIsLoading] = useState(true);
+  const [PageNum, SetPageNum] = useState(1);
+ 
+ // Instantiate a new search parameters object to access and manipulate the query parameters of the current URL.
+ const searchParams = useSearchParams()
+
+ // Retrieve the keyword entered by the user from the search parameters.
+ const SearchedKeyword = searchParams.get('keyword')
+ const DataFromAPI = async () => {
+      
+  try {
+
+    const response =  await axiosInstance.get(`https://api.themoviedb.org/3/search/movie?query=${SearchedKeyword}&page=${PageNum}`)
+   
+    setMovieResults(response.data);
+    setIsLoading(false) // Skeleton loader is disabled
+
+  } catch (error) {
+    console.error('Error fetching data:', error); // Catch errors if data is not fetched
   }
+  
+
+
+
+};
+
+//call the function to get the data from the api
+useEffect(() => {
+
+  DataFromAPI();
+
+}, [PageNum]);
+console.log(MovieResults?.results?.length)
+
+
   return (
    <>
+
+
+
+{isLoading ?
+   < CollectionLoading />
+
+   :
+<>
+{MovieResults?.results?.length > 0
+
+?
+<>
+
+<p className='text-[0.85rem] md:text-[1rem] mt-8  px-2'>Total Results: <span className='font-bold'> {MovieResults?.total_results?.toLocaleString()}</span></p>
+<p className='text-[0.85rem] md:text-[1rem] mt-4  px-2'> Pages: {PageNum +  '/' +  MovieResults?.total_pages?.toLocaleString()}</p> 
+ 
+     
+      
  <ul className={`mt-8 grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${
-KeywordResults?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
+MovieResults?.results?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth`}>
-  {KeywordResults?.slice(0, MovieNum)?.map((movie:MoviesProps) => (
+  {MovieResults.results?.map((movie:MoviesProps) => (
 <li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 {movie['poster_path']
@@ -111,17 +171,42 @@ alt={movie['title']} />
 ))
 }
 </ul>
-{KeywordResults?.length > 10 && MovieNum <= KeywordResults?.length
-?
+{ MovieResults?.total_pages > 0 
+      ?
+  
+      <div className='items-center justify-center px-2 flex gap-6 mt-6'>
+        {PageNum !== 1 
+        ?
+        <button className='bg-[#1a1a1a] rounded-md pb-[2px]  px-2 text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum - 1) }>{'< Previous Page'}</button>
+        :
+        ''
+        }
+      {PageNum !== MovieResults?.total_pages 
+        ?
+      <button className='bg-[#1a1a1a] rounded-md pb-[2px]  px-2 text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum + 1) }>{'Next Page >'}</button>
+      :
+      ''
+      }
+      </div>
+    
+       
+     
+ :
+ ''
+}
 
-
-<button className='bg-[#1a1a1a] text-center m-auto flex justify-center rounded-md mt-4 pb-[4px] pt-1  px-[10px] text-[0.85rem] md:text-[1rem] 2xl:text-[1.1rem]' 
-onClick={handleLoadMore}>Load More...</button>
-:
-''
+        </>
+        
+        :
+        <p className='text-[1rem] md:text-[1.2rem] 2xl:text-[1.5rem] text-center mt-20'>{`No results found for "${SearchedKeyword}" as a movie.`}</p>
+    }
+    </>
+      
+        
 }
 
    </>
+   
   )
 }
 export default Movies

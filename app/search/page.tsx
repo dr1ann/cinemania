@@ -3,19 +3,17 @@
 import { useState, ChangeEvent, Suspense, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
-//API Component
-import { SearchedResultsAPI } from '../components/API/MovieDetailsAPI'
 
 //Client Components
 import Header from '../components/Header'
 import CollectionLoading from '../components/Loaders/CollectionLoading'
 import Movies from './Movies'
 import People from './People'
-  //types
-  interface SearchResultProps {
-    media_type: string
-   }
+import Footer from '../components/Footer'
+
+
 
 const Page = () =>{
 
@@ -28,26 +26,8 @@ const Page = () =>{
     const SearchedKeyword = searchParams.get('keyword')
     const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
     const [selectedOption, setSelectedOption] = useState<string>('Movies');
- //get the values of the fetched data from the API
- const {SearchResults, isLoading} = SearchedResultsAPI(
-`https://api.themoviedb.org/3/search/multi?query=${SearchedKeyword}&page=1`
    
-  );
-
-
-
- //handler when the option is changed
- const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-   setSelectedOption(e.target.value);
- };
-
- //Filter results based on the prefered media type
- const MovieResults  = SearchResults?.results?.filter((movie: SearchResultProps) => movie?.media_type === 'movie')
-  const Peopleresults  = SearchResults?.results?.filter((person: SearchResultProps) => person?.media_type === 'person')
-
-  //put the 2 results for specfying a condition
- let combinedResults=[]
- combinedResults.push(MovieResults, Peopleresults)
+  
 
 
 //handler of the button in search bar
@@ -61,7 +41,11 @@ const handleButtonClick = () => {
  }
   
 };
-console.log(SearchResults?.page)
+
+ //handler when the option is changed
+ const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+  setSelectedOption(e.target.value);
+};
 
   return (
     <>
@@ -84,21 +68,14 @@ console.log(SearchResults?.page)
 </button>
 </form>
 <>
-{isLoading
-?
-<CollectionLoading />
-:
+
    <div className='home-animate pop'>
-     {SearchResults?.results?.length >0 && combinedResults?.length > 0
-           ?
-           <>
+    
            
-    <h1 className='bg-[#1a1a1a] rounded-md mt-8 pb-[2px]  px-2 text-[0.85rem] md:text-[1rem] w-fit'>Search results for: "{SearchedKeyword}"</h1>
+    <h1 className=' mt-8 pb-[2px] text-center px-2 text-[1rem] md:text-[1.2rem] 2xl:text-[1.3rem] '>Search results for: "{SearchedKeyword}"</h1>
  
-           
-        <div className='inline-flex items-center   pt-8  justify-start gap-4 rounded-xl'>
-        {MovieResults?.length > 0
-       ?
+    <div className='inline-flex items-center   pt-8  justify-start gap-4 rounded-xl'>
+        
        
        <div className='selector-item '>
        <label id='radiolabel' className={selectedOption === 'Movies' ? 'active1' : 'notactive'}>
@@ -110,15 +87,10 @@ console.log(SearchResults?.page)
              onChange={handleOptionChange}
            />
             
-            { `Movies  ${MovieResults?.length}`}
+            Movies
          </label>
        </div>
-      
-       :
-       ''
-      }
-       {Peopleresults?.length > 0
-       ?
+  
        
        <div className='selector-item '>
        <label id='radiolabel' className={selectedOption === 'People' ? 'active1' : 'notactive'} >
@@ -131,41 +103,26 @@ console.log(SearchResults?.page)
              onChange={handleOptionChange}
            />
         
-        { `People  ${Peopleresults?.length}`}
+        People
          </label>
        </div>
-       :
-       ''
-     }
+    
        </div>
-      
-       {selectedOption === 'Movies' && MovieResults.length > 0
-       ?
-       <Suspense fallback={<CollectionLoading />}>
-       <Movies KeywordResults={MovieResults} />
-       </Suspense>
-       :
-       ''
+      {selectedOption === 'Movies' &&
+    < Movies />
+  }
+
+{selectedOption === 'People' &&
+       <People /> 
       }
-      {selectedOption === 'People' && Peopleresults.length > 0
-       ?
-       <Suspense fallback={<CollectionLoading />}>
-       <People KeywordResults={Peopleresults} />
-         </Suspense>
-       :
-       ''
-      }
-      
-       </>
-       :
-       <p className='text-[1rem] md:text-[1.2rem] 2xl:text[1.5rem] text-center mt-20'>{`No Search results for "${SearchedKeyword}" `}</p>
-         }
+       
+    
          </div>
-        }
+        
          </>
          
    </div>
-
+< Footer />
     </>
   )
 }
