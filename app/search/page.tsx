@@ -72,7 +72,7 @@ const handleButtonClick = () => {
    <div className='home-animate pop'>
     
            
-    <h1 className=' mt-8 pb-[2px] text-center px-2 text-[1rem] md:text-[1.2rem] 2xl:text-[1.3rem] '>Search results for: "{SearchedKeyword}"</h1>
+    <h1 className=' mt-8 pb-[2px] text-center px-4 text-[1rem] md:text-[1.2rem] 2xl:text-[1.3rem] '>Search results for: "{SearchedKeyword}"</h1>
  
     <div className='inline-flex items-center   pt-8  justify-start gap-4 rounded-xl'>
         

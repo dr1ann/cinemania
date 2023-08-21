@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
+import ErrorImage from '@/app/Images/errorimg.webp'
 //type
 interface MoviesProps {
     id: number;
@@ -73,10 +74,10 @@ console.log(MovieResults?.results?.length)
 
 ?
 <>
-
-<p className='text-[0.85rem] md:text-[1rem] mt-8  px-2'>Total Results: <span className='font-bold'> {MovieResults?.total_results?.toLocaleString()}</span></p>
-<p className='text-[0.85rem] md:text-[1rem] mt-4  px-2'> Pages: {PageNum +  '/' +  MovieResults?.total_pages?.toLocaleString()}</p> 
- 
+<div className='flex justify-between mt-8'>
+<p className='text-[0.85rem] md:text-[1rem]   px-2'>Total Results: <span className='font-bold'> {MovieResults?.total_results?.toLocaleString()}</span></p>
+<p className='text-[0.85rem] md:text-[1rem] mt-4 px-2'> Pages: {PageNum +  '/' +  MovieResults?.total_pages?.toLocaleString()}</p> 
+</div>
      
       
  <ul className={`mt-8 grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-${
@@ -177,13 +178,13 @@ alt={movie['title']} />
       <div className='items-center justify-center px-2 flex gap-6 mt-6'>
         {PageNum !== 1 
         ?
-        <button className='bg-[#1a1a1a] rounded-md pb-[2px]  px-2 text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum - 1) }>{'< Previous Page'}</button>
+        <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum - 1) }>{'< Previous Page'}</button>
         :
         ''
         }
       {PageNum !== MovieResults?.total_pages 
         ?
-      <button className='bg-[#1a1a1a] rounded-md pb-[2px]  px-2 text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum + 1) }>{'Next Page >'}</button>
+      <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum + 1) }>{'Next Page >'}</button>
       :
       ''
       }
@@ -198,7 +199,17 @@ alt={movie['title']} />
         </>
         
         :
-        <p className='text-[1rem] md:text-[1.2rem] 2xl:text-[1.5rem] text-center mt-20'>{`No results found for "${SearchedKeyword}" as a movie.`}</p>
+        <div className='flex flex-col px-8 gap-10 mt-14 justify-center items-center'>
+          <Image 
+        
+          src={ErrorImage}
+          width={300}
+          height={300}
+          alt='error image'
+          />
+     
+        <p className='  text-[1rem] md:text-[1.2rem] 2xl:text-[1.5rem] text-center '>{`No results found for "${SearchedKeyword}" as a movie.`}</p>
+        </div>
     }
     </>
       
