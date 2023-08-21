@@ -103,7 +103,7 @@ const axiosInstance = axios.create({
    
 <div style={{backgroundPosition: 'center bottom 50%', backgroundAttachment:'fixed',
  backgroundImage: `linear-gradient(to top, rgba(7, 15, 21, 0.98), rgba(7, 15, 21, 0.85)),
- url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/original${collection['backdrop_path']}` 
+ url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/w1280${collection['backdrop_path']}` 
  : blackscreen })` }}
   className="relative flex flex-col  gap-0 sm:gap-10  lg:grid lg:grid-cols-2 lg:gap-0 place-content-center mt-16" >
     <div className="fade-effect-top-collection"></div>
