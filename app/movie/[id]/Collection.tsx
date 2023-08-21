@@ -101,7 +101,7 @@ const axiosInstance = axios.create({
   
   
    
-<div style={{backgroundPosition: 'center bottom 50%', backgroundAttachment:'fixed',
+<div style={{backgroundPosition: 'center bottom 50%',
  backgroundImage: `linear-gradient(to top, rgba(7, 15, 21, 0.98), rgba(7, 15, 21, 0.85)),
  url(${collection['backdrop_path'] ? `https://image.tmdb.org/t/p/w1280${collection['backdrop_path']}` 
  : blackscreen })` }}

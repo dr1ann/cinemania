@@ -208,7 +208,7 @@ alt={person['name']} />
         alt='error image'
         />
    
-      <p className='  text-[1rem] md:text-[1.2rem] 2xl:text-[1.5rem] text-center '>{`No results found for "${SearchedKeyword}" as a person.`}</p>
+      <p className='  text-[1rem] md:text-[1.2rem] 2xl:text-[1.4rem] text-center '>{`No results found for "${SearchedKeyword}" as a person.`}</p>
       </div>
     }
     </>
