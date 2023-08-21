@@ -196,7 +196,7 @@ export const Crew_CastAPI = ( CreditsData: any  ) => {
   return {suggestedMovies, isLoading}
   };
 
-  export const SearchedMoviesAPI = ( SearchedMoviesData: any  ) => {
+  export const SearchedResultsAPI = ( SearchedResultsData: any  ) => {
     
     //use states
     const [SearchResults, setSearchResults] = useState<any>({})
@@ -206,7 +206,7 @@ export const Crew_CastAPI = ( CreditsData: any  ) => {
         
     try {
   
-      const response =  await axiosInstance.get(SearchedMoviesData) //Similar Movies
+      const response =  await axiosInstance.get(SearchedResultsData) //Similar Movies
      
       setSearchResults(response.data);
       setIsLoading(false) // Skeleton loader is disabled

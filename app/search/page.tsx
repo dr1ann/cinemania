@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 
 //API Component
-import { SearchedMoviesAPI } from '../components/API/MovieDetailsAPI'
+import { SearchedResultsAPI } from '../components/API/MovieDetailsAPI'
 
 //Client Components
 import Header from '../components/Header'
@@ -29,8 +29,8 @@ const Page = () =>{
     const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
     const [selectedOption, setSelectedOption] = useState<string>('Movies');
  //get the values of the fetched data from the API
- const {SearchResults, isLoading} = SearchedMoviesAPI(
-`https://api.themoviedb.org/3/search/multi?query=${SearchedKeyword}`
+ const {SearchResults, isLoading} = SearchedResultsAPI(
+`https://api.themoviedb.org/3/search/multi?query=${SearchedKeyword}&page=1`
    
   );
 
@@ -61,7 +61,7 @@ const handleButtonClick = () => {
  }
   
 };
-console.log(SearchResults)
+console.log(SearchResults?.page)
 
   return (
     <>
