@@ -16,7 +16,7 @@ import { Crew_CastAPI } from '@/app/components/API/MovieDetailsAPI';
 
 //type
 type MovieCredits = {
-  credit_id: number;
+  credit_id?: string;
   id: number;
   cast_id: number;
  character: string;
@@ -54,7 +54,7 @@ const Crew_Cast = ({ id }: { id: number }) => {
   )
   
 });
-
+console.log(credits)
   return (
     
     <>

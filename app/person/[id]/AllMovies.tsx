@@ -26,7 +26,7 @@ interface MoviesProps {
   poster_path: string;
   character?: string;
   job?:string;
-  randomId?: number;
+  randomId: number;
 }
 
 const AllMovies = async ({ id }: { id: number }) => {
@@ -70,7 +70,7 @@ const AllMovies = async ({ id }: { id: number }) => {
   DepartmentArray.push(ActingDept, ProductionDept);
   
 // Helper function to generate random IDs
-const generateRandomId = () => Math.random().toString(36).substring(7);
+const generateRandomId = () => Math.floor(10000000 + Math.random() * 90000000);
 
 const sortedProductionMovies = useMemo(() => {
   // Generate random IDs and sort movies based on release dates for both cast and crew
@@ -121,7 +121,7 @@ const Sort =  () => {
 )
 }
 
-console.log(Movies)
+console.log(sortedActingMovies)
   return (
   <>
   <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Movies</h1>
@@ -197,7 +197,7 @@ console.log(Movies)
         Movies?.cast?.length > 0
         ?
      <>
-      {sortedActingMovies.map((movie:MoviesProps) => (
+      {sortedActingMovies?.map((movie:MoviesProps) => (
         
       <li key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
@@ -283,7 +283,7 @@ alt={movie.title}
         Movies?.crew?.length > 0
         ?
      <>
- {sortedProductionMovies.map((movie:MoviesProps) => (
+ {sortedProductionMovies?.map((movie:MoviesProps) => (
  <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 

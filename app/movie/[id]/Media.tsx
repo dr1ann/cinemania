@@ -22,6 +22,7 @@ interface MovieVideos {
 interface MovieImgs {
   file_path?:string
   id?: number
+  randomId: number
 }
 
 
@@ -48,7 +49,7 @@ const Media = ({ id }: { id: number }) => {
   
   // Check if movieImages.posters is available and has a length greater than 0
   const postersArray = movieImages?.posters || [];
-  const postersCount = postersArray.length;
+  const postersCount = postersArray?.length;
   
   // Calculate the startIndex, making sure it is within the bounds of the array
   const startIndex = seededRandom(0, Math.max(0, postersCount - 50), id);
@@ -69,9 +70,6 @@ const Media = ({ id }: { id: number }) => {
 
 
 
-  //get the length of vid and img
-  let vidLength =MovieVids?.results?.length 
-  let ImgLength = randomPostersSubset?.length
 
   //handler when the option is changed
   const [selectedOption, setSelectedOption] = useState<string>('Videos');
@@ -79,6 +77,18 @@ const Media = ({ id }: { id: number }) => {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
+
+//give each poster a random id
+const randomPosters = 
+   randomPostersSubset?.map((randomPoster: any) => ({
+    ...randomPoster,
+    randomId: Math.floor(10000000 + Math.random() * 90000000)
+
+  }))
+
+  //get the length of vid and img
+  let vidLength =MovieVids?.results?.length 
+  let ImgLength = randomPosters?.length
 
   return (
     <div className='relative'>
@@ -177,11 +187,10 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
     :
     
     <ul className='flex flex-row overflow-x-scroll scroll-smooth p-6 sm:py-6 sm:px-10 gap-4 relative'>
-  {randomPostersSubset?.length > 0 ? (
+  {randomPosters?.length > 0 ? (
     <>
-      {randomPostersSubset?.slice(0, 15).map((posters: MovieImgs) => (
-        <li
-          key={posters.file_path}
+      {randomPosters?.slice(0, 15).map((posters: MovieImgs) => (
+        <li key={posters.randomId}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
           {posters.file_path ? (
@@ -209,7 +218,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
         </li>
       ))}
    
-      {randomPostersSubset?.length >= 19 ? (
+      {randomPosters?.length >= 19 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>
         <button className='w-fit whitespace-nowrap  h-fit flex self-center hover:text-[#e2b616]'>View More ➠</button>
@@ -222,9 +231,8 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
             <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
             sm:grid  sm:grid-cols-morePosters px-2
              mx-auto sm:w-[95%] gap-2   overflow-y-scroll scroll-smooth py-4 ">
-            {randomPostersSubset?.slice(15).map((other_posters: MovieImgs) => (
-               <li
-               key={other_posters.file_path}
+            {randomPosters?.slice(15).map((other_posters: MovieImgs) => (
+               <li key={other_posters.randomId}
                className=' animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]
                xsmallcpsize:max-w-[9.375rem]  xsmallcpsize:min-w-[9.375rem] xsmallcpsize:min-h-[225px] xsmallcpsize:max-h-[225px] 
                relative flex justify-center items-center'
@@ -267,7 +275,7 @@ MovieVids?.results?.map((movieVid: MovieVideos) => (
       )}
     </>
   ) : (
-    // Fallback content to display when randomPostersSubset is empty
+    // Fallback content to display when randomPosters is empty
     <p className='animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
       No posters available
     </p>

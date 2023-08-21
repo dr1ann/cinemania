@@ -38,8 +38,8 @@ const Info = ({ id }: { id: number }) => {
     }
 
     //re renders if the height of the biography is changed
-  }, [elementRef.current]);
-console.log(height)
+  }, [elementRef?.current]);
+
 
 
 const formatBiographyText = (text: string) =>  {
