@@ -27,12 +27,14 @@ interface MoviesProps {
   const [MovieResults, setMovieResults] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
   const [PageNum, SetPageNum] = useState(1);
- 
+  const [error, setError] = useState(false);
  // Instantiate a new search parameters object to access and manipulate the query parameters of the current URL.
  const searchParams = useSearchParams()
 
  // Retrieve the keyword entered by the user from the search parameters.
  const SearchedKeyword = searchParams.get('keyword')
+
+ //fetching the data from the api
  const DataFromAPI = async () => {
       
   try {
@@ -41,9 +43,10 @@ interface MoviesProps {
    
     setMovieResults(response.data);
     setIsLoading(false) // Skeleton loader is disabled
-
+    setError(false); // set error to false whenever the fetching is success
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setError(true) // set error to true whenever the fetching is failed
   }
   
 
@@ -55,9 +58,16 @@ interface MoviesProps {
 useEffect(() => {
 
   DataFromAPI();
+  return () => {
+   setIsLoading(true) // Clean up: Set isLoading to true before next fetch
+  };
+}, [PageNum, SearchedKeyword]);
 
-}, [PageNum]);
-console.log(MovieResults?.results?.length)
+
+//return an error statement whenever the fetching of data is failed
+if(error) {
+  return <p>Opps something went wrong</p>
+}
 
 
   return (
@@ -178,13 +188,15 @@ alt={movie['title']} />
       <div className='items-center justify-center px-2 flex gap-6 mt-6'>
         {PageNum !== 1 
         ?
-        <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum - 1) }>{'< Previous Page'}</button>
+        <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]' 
+         onClick={() =>SetPageNum(prev => prev - 1) }>{'< Previous Page'}</button>
         :
         ''
         }
       {PageNum !== MovieResults?.total_pages 
         ?
-      <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]'  onClick={() =>SetPageNum(PageNum + 1) }>{'Next Page >'}</button>
+      <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.85rem] md:text-[1rem]' 
+       onClick={() =>SetPageNum(prev => prev + 1) }>{'Next Page >'}</button>
       :
       ''
       }

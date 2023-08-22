@@ -3,14 +3,20 @@
 import { useState, ChangeEvent, Suspense, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
 
+import dynamic from 'next/dynamic'
 
 //Client Components
 import Header from '../components/Header'
 import CollectionLoading from '../components/Loaders/CollectionLoading'
-import Movies from './Movies'
-import People from './People'
+
+
+const Movies =  dynamic(() => import ('./Movies'),
+{ loading: () => < CollectionLoading /> })
+
+const People =  dynamic(() => import ('./People'),
+{ loading: () => < CollectionLoading /> })
+
 import Footer from '../components/Footer'
 
 
@@ -25,27 +31,16 @@ const Page = () =>{
     // Retrieve the keyword entered by the user from the search parameters.
     const SearchedKeyword = searchParams.get('keyword')
     const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
-    const [selectedOption, setSelectedOption] = useState<string>('Movies');
-   
-  
+    const [selectedOption, setSelectedOption] = useState<string>('Movies'); 
 
 
-//handler of the button in search bar
-const handleButtonClick = () => {
-  router.push(`/search?keyword=${inputWord}`)
- if(inputWord !== SearchedKeyword){
-  
-  setTimeout(() => {
-    window.location.reload();
-  }, 500);
- }
-  
-};
 
  //handler when the option is changed
  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
   setSelectedOption(e.target.value);
 };
+
+
 
   return (
     <>
@@ -59,7 +54,7 @@ const handleButtonClick = () => {
 <input value={inputWord}  onChange={(e) => setInputWord(e.target.value)} autoComplete='off' type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] input placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none " placeholder="Search for a movie, person..."  />
 </div>
-<button type="button" onClick={handleButtonClick} className="p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
+<button type="button" onClick={() => router.push(`/search?keyword=${inputWord}`)} className="p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
    </svg>
