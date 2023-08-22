@@ -75,8 +75,8 @@ console.log(MovieResults?.results?.length)
 ?
 <>
 <div className='flex justify-between mt-8'>
-<p className='text-[0.85rem] md:text-[1rem]   px-2'>Total Results: <span className='font-bold'> {MovieResults?.total_results?.toLocaleString()}</span></p>
-<p className='text-[0.85rem] md:text-[1rem] mt-4 px-2'> Pages: {PageNum +  '/' +  MovieResults?.total_pages?.toLocaleString()}</p> 
+<p className='text-[0.95rem] md:text-[1.1rem] 2xl:text-[1.3rem]   px-2'>Total Results: <span className='font-bold'> {MovieResults?.total_results?.toLocaleString()}</span></p>
+<p className='text-[0.95rem] md:text-[1.1rem] 2xl:text-[1.3rem] mt-4 bg-[#1a1a1a] rounded-md px-[.8em]  pt-[0.3em] pb-[0.4em]'> Page: {PageNum +  '/' +  MovieResults?.total_pages?.toLocaleString()}</p> 
 </div>
      
       
