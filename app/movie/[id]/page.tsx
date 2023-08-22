@@ -11,8 +11,7 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
 //Normal import of a component
 import Overview from './overview'
-import Similar from './Similar'
-import Suggested from './Suggested'
+
 
 //Client Components that are dynamically rendered
 const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
@@ -30,9 +29,17 @@ const Media =  dynamic(() => import ('./Media'),
 <VideosLoading key={index} />
 ))}</div> })
 
+const Similar =  dynamic(() => import ('./Similar'),
+{ loading: () =>   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
+{Array.from({ length: 15 }).map((_, index) => (
+<MoviePosterLoading key={index} />
+))}</div> })
 
-
-
+const Suggested =  dynamic(() => import ('./Suggested'),
+{ loading: () =>   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center p-6 sm:py-6 sm:px-10 gap-6'>
+{Array.from({ length: 15 }).map((_, index) => (
+<MoviePosterLoading key={index} />
+))}</div> })
 
 //Client Footer Component
 import Footer from '../../components/Footer'
