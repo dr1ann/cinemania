@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import CollectionLoading from '../components/Loaders/CollectionLoading';
+import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
 //type
 interface MoviesProps {
@@ -66,7 +67,19 @@ useEffect(() => {
 
 //return an error statement whenever the fetching of data is failed
 if(error) {
-  return <p>Opps something went wrong</p>
+  return (
+  <div className='flex flex-col px-8  mt-14 justify-center items-center'>
+          <Image 
+        
+          src={ErrorImage}
+          width={400}
+          height={400}
+          alt='error image'
+          />
+     
+        <p className='text-[1rem] md:text-[1.2rem] 2xl:text-[1.4rem] text-center '>Please refresh the page or try again later.</p>
+        </div>
+        )
 }
 
 
@@ -214,7 +227,7 @@ alt={movie['title']} />
         <div className='flex flex-col px-8 gap-10 mt-14 justify-center items-center'>
           <Image 
         
-          src={ErrorImage}
+          src={SearchErrorImage}
           width={300}
           height={300}
           alt='error image'
