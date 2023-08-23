@@ -53,13 +53,13 @@ const formatBiographyText = (text: string) =>  {
   );
 }
 
-const  calculateAge = (birthdate:number) => {
+const  calculateAge = (birthdate:number | string) => {
   const birthYear = new Date(birthdate).getFullYear();
   const currentYear = new Date().getFullYear();
   return currentYear - birthYear;
 }
 
-const calculateDeathAge = (deathdate: number, birthdate: string) => {
+const calculateDeathAge = (deathdate: number | string, birthdate:  number | string) => {
   const DeathYear = new Date(deathdate).getFullYear();
   const DeathMonth = new Date(deathdate).getMonth();
   const BirthYear = new Date(birthdate).getFullYear();
@@ -93,8 +93,8 @@ const renderReadButton = () => {
 };
 
 
-
-
+console.log(personDetails)
+console.log(PersonSocMedia)
   return (
    
     <> 

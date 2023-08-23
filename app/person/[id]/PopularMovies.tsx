@@ -16,12 +16,14 @@ import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 
 //type
 interface PopularMoviesProps {
-    id: number;
-    title: string;
-    vote_average: number;
-    release_date: string;
-    poster_path: string;
+    id?:number;
+    title?: string;
+    vote_average?: number;
+    release_date?: string;
+    poster_path?: string;
+    popularity?: number ;
 }
+
 
 const PopularMovies = ({ id }: { id: number }) => {
    
@@ -30,11 +32,17 @@ const PopularMovies = ({ id }: { id: number }) => {
 
 
   //sort all movies by highest popularity
- const sortedMovies = Movies?.cast?.sort((a:any, b:any) => b.popularity - a.popularity);
+  const sortedMovies = Movies?.cast?.sort((a: PopularMoviesProps, b: PopularMoviesProps) => {
+    if (a.popularity === undefined || b.popularity === undefined) {
+      return 0; // You can choose how to handle the case when popularity is undefined
+    }
+    return b.popularity - a.popularity;
+  });
+  
  
 // Get the top 15 most popular movies
 const PopularMovies = sortedMovies?.slice(0, 15);
-
+console.log(PopularMovies)
 
   return (
     <>

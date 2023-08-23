@@ -34,7 +34,6 @@ interface PeopleProps {
 
  const People = () => {
 
-  
   const [PersonResults, setPersonResults] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
   const [PageNum, SetPageNum] = useState(1);
@@ -96,7 +95,7 @@ if(error) {
   return (
 
    <>
-   
+
 {isLoading ?
    < CollectionLoading />
 

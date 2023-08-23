@@ -18,15 +18,15 @@ import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 import star from '@/app/Images/star.png'
 
 //type
-interface MoviesProps {
-  id: number;
-  title: string;
-  vote_average: number;
-  release_date: string;
-  poster_path: string;
+interface MovieProps {
+  id?: number;
+  title?: string;
+  vote_average?: number;
+  release_date?: string;
+  poster_path?: string;
   character?: string;
   job?:string;
-  randomId: number;
+  randomId?: number;
 }
 
 const AllMovies = async ({ id }: { id: number }) => {
@@ -39,8 +39,8 @@ const AllMovies = async ({ id }: { id: number }) => {
   const [selected, setSelected] = useState('')
   const [sortMethod, setsortMethod] = useState(true);
   
-  let ActingDept:any = null;
-  let ProductionDept:any = null;
+  let ActingDept: string = '';
+  let ProductionDept: string  = '';
 
 
   //Getting the values/length for every movie department
@@ -75,11 +75,11 @@ const generateRandomId = () => Math.floor(10000000 + Math.random() * 90000000);
 const sortedProductionMovies = useMemo(() => {
   // Generate random IDs and sort movies based on release dates for both cast and crew
   return Movies?.crew
-    ?.map((crewMember: any) => ({
+    ?.map((crewMember: MovieProps) => ({
       ...crewMember,
       randomId: generateRandomId(),
     }))
-    ?.sort((a: any, b: any) => {
+    ?.sort((a: MovieProps, b: MovieProps) => {
       const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
       const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
       if (sortMethod) {
@@ -92,11 +92,11 @@ const sortedProductionMovies = useMemo(() => {
 
 const sortedActingMovies = useMemo(() => {
   return Movies?.cast
-    ?.map((castMember: any) => ({
+    ?.map((castMember: MovieProps) => ({
       ...castMember,
       randomId: generateRandomId(),
     }))
-    ?.sort((a: any, b: any) => {
+    ?.sort((a: MovieProps, b: MovieProps) => {
       const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
       const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
       if (sortMethod) {
@@ -121,7 +121,7 @@ const Sort =  () => {
 )
 }
 
-console.log(sortedActingMovies)
+console.log(Movies)
   return (
   <>
   <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Movies</h1>
@@ -197,7 +197,7 @@ console.log(sortedActingMovies)
         Movies?.cast?.length > 0
         ?
      <>
-      {sortedActingMovies?.map((movie:MoviesProps) => (
+      {sortedActingMovies?.map((movie:MovieProps) => (
         
       <li key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
@@ -283,7 +283,7 @@ alt={movie.title}
         Movies?.crew?.length > 0
         ?
      <>
- {sortedProductionMovies?.map((movie:MoviesProps) => (
+ {sortedProductionMovies?.map((movie:MovieProps) => (
  <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 

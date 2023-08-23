@@ -11,11 +11,51 @@ const axiosInstance = axios.create({
     },
   });
 
-export const PersonMoviesAPI = ( PersonMovies: any  ) => {
+  //types
+  interface PersonDetailsProps {
+    name: string
+    profile_path: string
+    biography: string
+    deathday: string | number
+    birthday: string | number
+    popularity: number
+    known_for_department: string
+    place_of_birth: string
+   
+  }
+
+interface PersonSocMediaProps {
+  facebook_id: number | string
+  instagram_id: number | string
+  twitter_id: number | string
+
+}
+
+interface PersonMoviesProps {
+  cast: Array<{
+    id: number;
+    title: string;
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+  }>;
+  crew: Array<{
+    id: number;
+    title: string;
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+  }>;
+}
+
+export const PersonMoviesAPI = ( PersonMovies: string) : {
+  Movies: PersonMoviesProps ;
+  isLoading: boolean;
+} => {
     
   //use states
   const [isLoading, setIsLoading] = useState(true);
-  const [Movies, setMovies] = useState<any>({})
+  const [Movies, setMovies] = useState<PersonMoviesProps>({} as PersonMoviesProps);
 
  const DataFromAPI = async () => {
 
@@ -44,11 +84,18 @@ return { Movies, isLoading }
 };
 
 
-export const InfoAPI = ( PersonInfoData: any, PersonSocMediaData:any  ) => {
+export const InfoAPI = (
+  PersonInfoData: string,
+  PersonSocMediaData: string
+): {
+  personDetails: PersonDetailsProps;
+  PersonSocMedia: PersonSocMediaProps;
+  isPersonLoading: boolean;
+} => {
     
     //use states
-    const [personDetails, setPersonDetails] = useState<any>({})
-    const [PersonSocMedia, setPersonSocMedia] = useState<any>({})
+    const [personDetails, setPersonDetails] = useState<PersonDetailsProps>({} as PersonDetailsProps);
+    const [PersonSocMedia, setPersonSocMedia] = useState<PersonSocMediaProps>({} as PersonSocMediaProps);
     const [isPersonLoading, setIsPersonLoading] = useState(true);
   
    const DataFromAPI = async () => {
