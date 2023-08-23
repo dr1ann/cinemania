@@ -51,11 +51,13 @@ interface PersonMoviesProps {
 export const PersonMoviesAPI = ( PersonMovies: string) : {
   Movies: PersonMoviesProps ;
   isLoading: boolean;
+ 
 } => {
     
   //use states
   const [isLoading, setIsLoading] = useState(true);
-  const [Movies, setMovies] = useState<PersonMoviesProps>({} as PersonMoviesProps);
+  const [Movies, setMovies] = useState<PersonMoviesProps>({cast: [],crew: [] });
+  
 
  const DataFromAPI = async () => {
 
@@ -77,7 +79,7 @@ export const PersonMoviesAPI = ( PersonMovies: string) : {
  
     //call the function to get the data from the api
     DataFromAPI();
-
+    
   }, []);
   
 return { Movies, isLoading }

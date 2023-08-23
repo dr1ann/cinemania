@@ -102,13 +102,7 @@ const Page = () =>{
        </div>
     
        </div>
-      {selectedOption === 'Movies' &&
-    < Movies />
-  }
-
-{selectedOption === 'People' &&
-       <People /> 
-      }
+       {selectedOption === 'Movies' ? <Movies /> : <People />}
        
     
          </div>

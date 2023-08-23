@@ -17,6 +17,7 @@ import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 //Images
 import star from '@/app/Images/star.png'
 
+
 //type
 interface MovieProps {
   id?: number;
@@ -29,7 +30,7 @@ interface MovieProps {
   randomId?: number;
 }
 
-const AllMovies = async ({ id }: { id: number }) => {
+const AllMovies =  ({ id }: { id: number }) => {
 
     //get the values of the fetched data from the API
   const {Movies, isLoading } = PersonMoviesAPI (`/person/${id}/movie_credits`);
@@ -38,7 +39,8 @@ const AllMovies = async ({ id }: { id: number }) => {
   //use states
   const [selected, setSelected] = useState('')
   const [sortMethod, setsortMethod] = useState(true);
-  
+  const [ActingLoadMore, setActingLoadMore] = useState(15)
+  const [ProductionLoadMore, setProductionLoadMore] = useState(15)
   let ActingDept: string = '';
   let ProductionDept: string  = '';
 
@@ -61,7 +63,7 @@ const AllMovies = async ({ id }: { id: number }) => {
     } else {
       setSelected(ProductionDept);
     } 
- 
+    
   }, [ActingDept, ProductionDept ]);
 
 
@@ -106,6 +108,8 @@ const sortedActingMovies = useMemo(() => {
       }
     });
 }, [Movies, sortMethod]);
+
+
 
 
   //Toggle the buttons Sortation method
@@ -197,7 +201,7 @@ console.log(Movies)
         Movies?.cast?.length > 0
         ?
      <>
-      {sortedActingMovies?.map((movie:MovieProps) => (
+      {sortedActingMovies?.slice(0,ActingLoadMore).map((movie:MovieProps) => (
         
       <li key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
@@ -267,6 +271,15 @@ alt={movie.title}
       
       ))
   }
+  {sortedActingMovies?.length > 15
+  ?
+   <div className='items-center justify-center px-2 flex mt-6'>
+    <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
+       onClick={() =>setActingLoadMore(prev => prev + 15) }>{'Load more...'}</button>
+       </div>
+:
+''
+}
   </>
   :
   <p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
@@ -283,7 +296,7 @@ alt={movie.title}
         Movies?.crew?.length > 0
         ?
      <>
- {sortedProductionMovies?.map((movie:MovieProps) => (
+ {sortedProductionMovies?.slice(0,15).map((movie:MovieProps) => (
  <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 
@@ -350,6 +363,15 @@ href={`/movie/${movie.id}`}
  </li>
  ))
 }
+{sortedProductionMovies?.length > 15
+  ?
+   <div className='items-center justify-center px-2 flex mt-6'>
+    <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
+       onClick={() =>setProductionLoadMore(prev => prev + 15) }>{'Load more...'}</button>
+       </div>
+:
+''
+}
 </>
 :
 <p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] centered-text'>
@@ -363,6 +385,8 @@ href={`/movie/${movie.id}`}
   }
 
     </ul>
+    
+   
     </>
     :
     <p className='home-animate pop text-center text-[1rem] sm:text-[1.2rem] 2xl:text-[1.5rem] pt-6  centered-text'>
