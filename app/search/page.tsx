@@ -3,20 +3,20 @@
 import { useState, ChangeEvent, Suspense, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-
 import dynamic from 'next/dynamic'
 
 //Client Components
 import Header from '../components/Header'
 import CollectionLoading from '../components/Loaders/CollectionLoading'
 
-
+//Client Components that are dynamically rendered
 const Movies =  dynamic(() => import ('./Movies'),
 { loading: () => < CollectionLoading /> })
 
 const People =  dynamic(() => import ('./People'),
 { loading: () => < CollectionLoading /> })
 
+//Footer Client Component
 import Footer from '../components/Footer'
 
 
@@ -28,18 +28,17 @@ const Page = () =>{
   // Instantiate a new search parameters object to access and manipulate the query parameters of the current URL.
     const searchParams = useSearchParams()
 
-    // Retrieve the keyword entered by the user from the search parameters.
-    const SearchedKeyword = searchParams.get('keyword')
+  
+    const SearchedKeyword = searchParams.get('keyword')   // Retrieve the keyword entered by the user from the search parameters.
     const [inputWord, setInputWord] = useState(''); // state used to get the keyword entered by the user
-    const [selectedOption, setSelectedOption] = useState<string>('Movies'); 
-
+    const [selectedOption, setSelectedOption] = useState<string>('Movies');
+    
 
 
  //handler when the option is changed
  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
   setSelectedOption(e.target.value);
 };
-
 
 
   return (

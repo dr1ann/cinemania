@@ -1,13 +1,20 @@
+
+//External Libraries
 import React from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
-import star from '@/app/Images/star.png'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
+
+//Loader(s)
 import CollectionLoading from '../components/Loaders/CollectionLoading';
+
+//Images
 import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
+
+
 //type
 interface PeopleProps {
   id: number;
@@ -24,12 +31,15 @@ interface PeopleProps {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc4ZmYxMDZlNmJlZTcwY2U4MjkzMjQyMTcwYzc1ZCIsInN1YiI6IjY0YTU2MTA2ZGExMGYwMDBlMjI1YjBlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rMSflTYcWOov1VQW3hjVgPDE3XQ00c1nSB0sujN_bfY',
   },
 });
+
  const People = () => {
 
+  
   const [PersonResults, setPersonResults] = useState<any>({})
   const [isLoading, setIsLoading] = useState(true);
   const [PageNum, SetPageNum] = useState(1);
   const [error, setError] = useState(false);
+
  // Instantiate a new search parameters object to access and manipulate the query parameters of the current URL.
  const searchParams = useSearchParams()
 
@@ -61,9 +71,9 @@ useEffect(() => {
 
   DataFromAPI();
   return () => {
-    setIsLoading(true) // Clean up: Set isLoading to true before next fetch
+    setIsLoading(true) //Clean up: Set isLoading to true before next fetch
    };
-}, [PageNum, SearchedKeyword]);
+}, [PageNum, SearchedKeyword]); //re render the component whenever there are changes to the dependencies
 
 //return an error statement whenever the fetching of data is failed
 if(error) {
@@ -82,11 +92,11 @@ if(error) {
         )
 }
 
+
   return (
+
    <>
-
-
-
+   
 {isLoading ?
    < CollectionLoading />
 
