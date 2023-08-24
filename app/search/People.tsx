@@ -74,6 +74,14 @@ useEffect(() => {
    };
 }, [PageNum, SearchedKeyword]); //re render the component whenever there are changes to the dependencies
 
+
+//make the page go back to 1 whenever the value of the searchkeyword changes
+useEffect(() => {
+  SetPageNum(1)
+  },[SearchedKeyword])
+
+
+
 //return an error statement whenever the fetching of data is failed
 if(error) {
   return (

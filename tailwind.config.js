@@ -21,7 +21,7 @@ module.exports = {
         'collectiontablet': 'repeat(3,1fr)',
         'cp': 'repeat(2, minmax(0, 1fr))',
         'moreCast': 'repeat(auto-fit, minmax(138px, 1fr))',
-        'morePosters': 'repeat(auto-fit, minmax(150px, 1fr))',
+        'morePosters': 'repeat(auto-fill, minmax(150px, 1fr))',
         'personalInfo': 'repeat(4, minmax(0, 150px))',
         'smallscreenpersonal_info': 'repeat(1, minmax(0, 150px))',
         'allmovies': 'repeat(auto-fit, minmax(250px, 1fr))',
