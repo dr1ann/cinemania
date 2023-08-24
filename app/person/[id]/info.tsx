@@ -11,7 +11,7 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 //Components
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Header from '@/app/components/Header';
-
+import SideSearchbar from '@/app/components/SideSearchbar'
 //API Component
 import { InfoAPI } from '@/app/components/API/PersonDetailsAPI';
 
@@ -102,7 +102,7 @@ console.log(PersonSocMedia)
   < HomeLoading />
   :
   <> 
-  < Header />
+  < SideSearchbar />
     <div className='flex flex-col lg:flex-row items-center  justify-center lg:items-start home-animate pop p-2 lg:p-10'>
 {personDetails.profile_path
 ?

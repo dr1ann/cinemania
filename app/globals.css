@@ -198,6 +198,13 @@ word-spacing: 8px;
   animation-delay: 1s;
   animation-fill-mode: backwards;
 }
+
+.search-animate {
+  animation-duration: 0.2s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
 @keyframes animate-fade {
   0% {
     opacity: 0;

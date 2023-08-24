@@ -19,7 +19,7 @@ import tmdbicon from '@/app/Images/tmdb.png';
 import Header from '@/app/components/Header';
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Modal from './Random-Trailer_Modal';
-
+import SideSearchbar from '@/app/components/SideSearchbar'
 //API component
 import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI'; 
 
@@ -83,7 +83,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <div className="fade-effect3 hidden md:block"></div>
  
     <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={id} />
- <Header/>
+ <SideSearchbar/>
    
 
     
