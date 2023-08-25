@@ -146,58 +146,59 @@ alt={cast['original_name']} />
         <Drawer.Content className="bg-[#141414] z-[99999999] flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[10px]">
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
         <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Cast</h1>
-          <ul className="grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]  sm:grid  sm:grid-cols-moreCast
-           mx-auto sm:w-[95%]  px-2   sm:gap-4  gap-6  overflow-y-scroll scroll-smooth py-4 ">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 bigscreens:grid-cols-4  gap-4 p-6 animate pop overflow-y-scroll scroll-smooth">
           {credits?.cast?.slice(15).map((other_cast: MovieCredits) => (
-            <li key={other_cast.credit_id} className='bg-[#1a1a1a] mx-auto  drop-shadow-2xl customized-shadow
-             shadow-sm rounded-md flex flex-col 
-             animate pop max-w-[8rem] min-w-[8rem] xsmallcpsize:max-w-[8.625rem] xsmallcpsize:min-w-[8.625rem]'>
-  {other_cast['profile_path'] ?
-
-<div className='max-w-full min-w-fullmax-h-[175px] min-h-[175px]  flex self-center rounded-t-md overflow-hidden'>
-<img  
-src={`https://image.tmdb.org/t/p/w138_and_h175_face${other_cast['profile_path']}`}
-className='w-full h-full'
-srcSet={`https://image.tmdb.org/t/p/w138_and_h175_face${other_cast['profile_path']} 1x,
- https://image.tmdb.org/t/p/w276_and_h350_face${other_cast['profile_path']} 2x`}
-loading='lazy'
-alt={other_cast['original_name']} />
-
-</div>
-
-
-    :
-    <div className='max-w-full min-w-full  rounded-t-md max-h-[175px] min-h-[175px] flex self-center  overflow-hidden'>
-    <Image  
- src={noprofile}
-    className='w-full h-full'
-    
-    loading='lazy'
-    alt={other_cast['original_name']} />
-    
-    </div>
-  }
-
- 
-    <Link className='pt-2 px-2 text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold white   hover:text-[#e2b616]'
-       href={{
-        pathname: `/person/${other_cast.id}`,
-      }}
-    
-    >
-
-    {other_cast['original_name'] ?
-     other_cast['original_name'] : 'N/A'}
+           <li key={other_cast.credit_id} className=' animate pop flex flex-row px-2 py-2 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
+      
      
-     </Link>
-    {other_cast.character ?
-        <p className=' text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]   text-gray-300'>{other_cast['character']}</p> 
-        :
-        <p className='text-[0.78rem]  px-2 pb-2 sm:text-[0.813rem]'>N/A</p> 
-  }
-
+           <div className='flex flex-row gap-2'>
+           {other_cast.profile_path ? 
+           <img
+           className='w-[66px] h-[66px] rounded-md'
+           src={`https://image.tmdb.org/t/p/w66_and_h66_face${other_cast.profile_path }` }
+           srcSet={`https://image.tmdb.org/t/p/w66_and_h66_face${other_cast.profile_path } 1x,
+           https://image.tmdb.org/t/p/w132_and_h132_face${other_cast.profile_path } 2x`}
+           loading='lazy'
+           alt={other_cast.original_name}
+          
+           />
+    :
+    <img
+    className='w-[66px] h-[66px] rounded-md'
+    src='https://via.placeholder.com/66x66/3F3F3F/FFFFFF/?text=N/A'
+    loading='lazy'
+    alt={other_cast.original_name}
     
-    </li>
+    />
+    
+    }
+            <div className='flex flex-col justify-center max-w-[131px] collectionscreen:max-w-full'>
+            {other_cast.original_name ?
+        <Link
+        className=' text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold hover:text-[#e2b616]'
+        href={`/person/${other_cast.id}`}
+      >
+        {other_cast.original_name}
+        
+      </Link>
+      
+              :
+              <Link
+              className='text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold  hover:text-[#e2b616]'
+              href={`/person/${other_cast.id}`}
+            
+              >
+               N/A
+                  </Link>
+    }
+          
+            <span className=' text-[0.78rem]   sm:text-[0.813rem]   text-gray-300'>{other_cast.character ? `as ${other_cast.character}` : 'N/A' }</span>
+            </div>
+              
+            </div>
+          
+          </li>
+          
 ))
 
 }
