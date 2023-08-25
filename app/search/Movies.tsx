@@ -17,12 +17,17 @@ import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
 
 //type
-interface MoviesProps {
+interface MovieResultsProps {
+  page: number;
+  results: Array<{
     id: number;
     title: string;
     vote_average: number;
     release_date: string;
     poster_path: string;
+  }>
+  total_pages: number
+  total_results: number
 }
 
  //Authorization to fetch data from the API with its base url
@@ -35,7 +40,8 @@ interface MoviesProps {
 
  const Movies = () => {
 
-  const [MovieResults, setMovieResults] = useState<any>({})
+  //use states
+  const [MovieResults, setMovieResults] = useState<MovieResultsProps>({} as MovieResultsProps)
   const [isLoading, setIsLoading] = useState(true);
   const [PageNum, SetPageNum] = useState(1);
   const [error, setError] = useState(false);
@@ -62,8 +68,6 @@ interface MoviesProps {
   }
   
 
-
-
 };
 
 //call the function to get the data from the api
@@ -79,7 +83,6 @@ useEffect(() => {
 useEffect(() => {
 SetPageNum(1)
 },[SearchedKeyword])
-
 
 //return an error statement whenever the fetching of data is failed
 if(error) {
@@ -122,7 +125,7 @@ if(error) {
 MovieResults?.results?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth`}>
-  {MovieResults.results?.map((movie:MoviesProps) => (
+  {MovieResults.results?.map((movie) => (
 <li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 {movie['poster_path']

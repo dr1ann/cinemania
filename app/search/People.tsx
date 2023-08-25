@@ -16,12 +16,17 @@ import ErrorImage from '@/app/Images/errorimg.webp'
 
 
 //type
-interface PeopleProps {
-  id: number;
-  known_for_department: string;
-  name: string;
-  popularity: number;
-  profile_path: string;
+interface PeopleResultsProps {
+  page: number;
+  results: Array<{
+    id: number;
+    known_for_department: string;
+    name: string;
+    popularity: number;
+    profile_path: string;
+  }>
+  total_pages: number
+  total_results: number
 }
 
  //Authorization to fetch data from the API with its base url
@@ -34,7 +39,8 @@ interface PeopleProps {
 
  const People = () => {
 
-  const [PersonResults, setPersonResults] = useState<any>({})
+  //use states
+  const [PersonResults, setPersonResults] = useState<PeopleResultsProps>({} as PeopleResultsProps)
   const [isLoading, setIsLoading] = useState(true);
   const [PageNum, SetPageNum] = useState(1);
   const [error, setError] = useState(false);
@@ -60,8 +66,6 @@ interface PeopleProps {
     setError(true); // set error to true whenever the fetching is failed
   }
   
-
-
 
 };
 
@@ -124,7 +128,7 @@ if(error) {
 PersonResults?.results.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'} 
 sm:grid-cols-searchresults sm:w-[95%] mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth`}>
-  {PersonResults?.results?.map((person:PeopleProps) => (
+  {PersonResults?.results?.map((person) => (
 <li key={person['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 {person['profile_path']
