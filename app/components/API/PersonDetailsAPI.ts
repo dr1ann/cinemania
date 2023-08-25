@@ -52,6 +52,7 @@ interface PersonMoviesProps {
   }>;
 }
 
+//All API request functions 
 export const PersonMoviesAPI = ( PersonMovies: string) : 
 {
   Movies: PersonMoviesProps,

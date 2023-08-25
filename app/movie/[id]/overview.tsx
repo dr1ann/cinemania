@@ -77,7 +77,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
  
-    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} getMovieID={id} />
+    <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} MovieData={movieVid?.results} />
  <SideSearchbar/>
    
 
