@@ -17,7 +17,13 @@ import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI' // get the Overview API to get the current collection id
 
 //type
-type movieCollection = {
+interface CollectionProps {
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  parts: Array<{
+    media_type: string;
     id: number;
     name: string;
     title: string;
@@ -25,14 +31,16 @@ type movieCollection = {
     release_date: string;
     vote_average: number;
     overview: string;
-  }
+  }>
+}
+
 
   
   const Collection = ({ id }: { id: number }) => {
   
   //use states
   const [isCollectionLoading, setIsCollectionLoading] = useState(true)
-  const [collection, setCollection] = useState<any>({})
+  const [collection, setCollection] = useState<CollectionProps>({} as CollectionProps)
 
 
 //Authorization to fetch data from the API with its base url
@@ -83,8 +91,6 @@ const axiosInstance = axios.create({
 //call only the id value of the moviedetails object to prevent infinite loop when it re-renders
   }, [ movieDetails.id]);
 
- 
-    console.log('yawa')
 
  
   return (
@@ -136,7 +142,7 @@ collection?.parts?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'}
 sm:grid-cols-collection sm:w-[95%] lg:w-[90%] mx-auto lg:ml-0 lg:mr-auto gap-6 px-4 sm:px-0 sm:gap-[20px] 
  lg:max-h-[500px]  lg:overflow-y-scroll scroll-smooth lg:overflow-x-hidden lg:pr-4`}>
      
-    {collection?.parts?.map((movie: movieCollection) => (
+     {collection?.parts?.filter((item) => item.media_type === 'movie').map((movie) => (
       
 
 

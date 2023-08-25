@@ -38,6 +38,8 @@ interface PersonMoviesProps {
     vote_average: number;
     release_date: string;
     poster_path: string;
+    character?: string;
+    popularity: number
   }>;
   crew: Array<{
     id: number;
@@ -45,13 +47,15 @@ interface PersonMoviesProps {
     vote_average: number;
     release_date: string;
     poster_path: string;
+    job?: string;
+    popularity: number
   }>;
 }
 
-export const PersonMoviesAPI = ( PersonMovies: string) : {
-  Movies: PersonMoviesProps ;
-  isLoading: boolean;
- 
+export const PersonMoviesAPI = ( PersonMovies: string) : 
+{
+  Movies: PersonMoviesProps,
+  isLoading: boolean
 } => {
     
   //use states
@@ -90,9 +94,9 @@ export const InfoAPI = (
   PersonInfoData: string,
   PersonSocMediaData: string
 ): {
-  personDetails: PersonDetailsProps;
-  PersonSocMedia: PersonSocMediaProps;
-  isPersonLoading: boolean;
+  personDetails: PersonDetailsProps,
+  PersonSocMedia: PersonSocMediaProps,
+  isPersonLoading: boolean
 } => {
     
     //use states

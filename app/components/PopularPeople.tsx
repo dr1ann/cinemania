@@ -9,14 +9,6 @@ import MoviePosterLoading from './Loaders/MoviePosterLoading';
 //API Component
 import { PopularPeopleAPI } from './API/HomePageAPI';
 
-//type
-interface PopularPeopleProps {
-    id: number;
-    known_for_department: string;
-    name: string;
-    popularity: number;
-    profile_path: string;
-}
 
 const PopularPeople = () => {
 
@@ -48,7 +40,7 @@ const PopularPeople = () => {
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top People</h1>
    
     <ul className='flex flex-row overflow-x-scroll scroll-smooth bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6'>
-{PopularPeople?.results?.slice(0, 15).map((person: PopularPeopleProps) => (
+{PopularPeople?.results?.slice(0, 15).map((person) => (
 <li key={person.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {person.profile_path

@@ -18,18 +18,6 @@ import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 import star from '@/app/Images/star.png'
 
 
-//type
-interface MovieProps {
-  id?: number;
-  title?: string;
-  vote_average?: number;
-  release_date?: string;
-  poster_path?: string;
-  character?: string;
-  job?:string;
-  randomId?: number;
-}
-
 const AllMovies =  ({ id }: { id: number }) => {
 
     //get the values of the fetched data from the API
@@ -77,11 +65,11 @@ const generateRandomId = () => Math.floor(10000000 + Math.random() * 90000000);
 const sortedProductionMovies = useMemo(() => {
   // Generate random IDs and sort movies based on release dates for both cast and crew
   return Movies?.crew
-    ?.map((crewMember: MovieProps) => ({
+    ?.map((crewMember) => ({
       ...crewMember,
       randomId: generateRandomId(),
     }))
-    ?.sort((a: MovieProps, b: MovieProps) => {
+    ?.sort((a, b) => {
       const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
       const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
       if (sortMethod) {
@@ -94,11 +82,11 @@ const sortedProductionMovies = useMemo(() => {
 
 const sortedActingMovies = useMemo(() => {
   return Movies?.cast
-    ?.map((castMember: MovieProps) => ({
+    ?.map((castMember) => ({
       ...castMember,
       randomId: generateRandomId(),
     }))
-    ?.sort((a: MovieProps, b: MovieProps) => {
+    ?.sort((a, b) => {
       const releaseDateA = a.release_date ? new Date(a.release_date).getTime() : 0;
       const releaseDateB = b.release_date ? new Date(b.release_date).getTime() : 0;
       if (sortMethod) {
@@ -201,7 +189,7 @@ const Sort =  () => {
         Movies?.cast?.length > 0
         ?
      <>
-      {sortedActingMovies?.slice(0,ActingLoadMore).map((movie:MovieProps) => (
+      {sortedActingMovies?.slice(0,ActingLoadMore).map((movie) => (
         
       <li key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
@@ -296,7 +284,7 @@ alt={movie.title}
         Movies?.crew?.length > 0
         ?
      <>
- {sortedProductionMovies?.slice(0, ProductionLoadMore).map((movie:MovieProps) => (
+ {sortedProductionMovies?.slice(0, ProductionLoadMore).map((movie) => (
  <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 

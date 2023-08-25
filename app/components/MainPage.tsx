@@ -24,9 +24,9 @@ const MainPage = () => {
   
   
     //get the values of the fetched data from the API
-    const {TrendingMovies } = TrendingMoviesAPI(`trending/movie/day?language=en-US`)
+    const { TrendingMovies } = TrendingMoviesAPI(`trending/movie/day?language=en-US`)
    
-    console.log(randomImage)
+
     useEffect(() => {
 
       generateRandomImage(TrendingMovies?.results)

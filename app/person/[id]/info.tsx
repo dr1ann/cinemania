@@ -10,10 +10,11 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 
 //Components
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
-import Header from '@/app/components/Header';
 import SideSearchbar from '@/app/components/SideSearchbar'
+
 //API Component
 import { InfoAPI } from '@/app/components/API/PersonDetailsAPI';
+
 
 const Info = ({ id }: { id: number }) => {
 
@@ -29,7 +30,6 @@ const Info = ({ id }: { id: number }) => {
            )
           
 
- 
   
   useLayoutEffect(() => {
           
@@ -92,9 +92,6 @@ const renderReadButton = () => {
   return null;
 };
 
-
-console.log(personDetails)
-console.log(PersonSocMedia)
   return (
    
     <> 

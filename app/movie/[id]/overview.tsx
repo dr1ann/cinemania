@@ -20,6 +20,7 @@ import Header from '@/app/components/Header';
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Modal from './Random-Trailer_Modal';
 import SideSearchbar from '@/app/components/SideSearchbar'
+
 //API component
 import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI'; 
 
@@ -37,12 +38,6 @@ const Overview = ({ id }: { id: number }) => {
     `/movie/${id}/images`,
     `/movie/${id}/external_ids`
   );
-
-
- 
-
-
-
 
 
   //convert the number to hours and minutes ex.2h 7m

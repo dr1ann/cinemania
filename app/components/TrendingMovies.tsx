@@ -13,14 +13,6 @@ import MoviePosterLoading from './Loaders/MoviePosterLoading';
 //API Component
 import {TrendingMoviesAPI} from './API/HomePageAPI';
 
-//type
-interface TrendingMoviesProps {
-    id: number;
-    title: string;
-    vote_average: number;
-    release_date: string;
-    poster_path: string;
-}
 
 const TrendingMovies = () => {
     
@@ -52,7 +44,7 @@ const TrendingMovies = () => {
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
    
     <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
-{TrendingMovies?.results?.slice(0, 15).map((movie: TrendingMoviesProps) => (
+{TrendingMovies?.results?.slice(0, 15).map((movie) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']

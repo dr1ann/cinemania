@@ -14,16 +14,6 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 //API Component
 import { PersonMoviesAPI } from '@/app/components/API/PersonDetailsAPI';
 
-//type
-interface PopularMoviesProps {
-    id?:number;
-    title?: string;
-    vote_average?: number;
-    release_date?: string;
-    poster_path?: string;
-    popularity?: number ;
-}
-
 
 const PopularMovies = ({ id }: { id: number }) => {
    
@@ -32,7 +22,7 @@ const PopularMovies = ({ id }: { id: number }) => {
 
 
   //sort all movies by highest popularity
-  const sortedMovies = Movies?.cast?.sort((a: PopularMoviesProps, b: PopularMoviesProps) => {
+  const sortedMovies = Movies?.cast?.sort((a, b) => {
     if (a.popularity === undefined || b.popularity === undefined) {
       return 0; // You can choose how to handle the case when popularity is undefined
     }
@@ -42,7 +32,7 @@ const PopularMovies = ({ id }: { id: number }) => {
  
 // Get the top 15 most popular movies
 const PopularMovies = sortedMovies?.slice(0, 15);
-console.log(PopularMovies)
+
 
   return (
     <>
@@ -69,7 +59,7 @@ console.log(PopularMovies)
        <h1 className='px-6 sm:px-10 pt-4 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular Movies</h1>
    
     <ul className='flex flex-row overflow-x-scroll scroll-smooth   bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
-{PopularMovies?.map((movie:PopularMoviesProps) => (
+{PopularMovies?.map((movie) => (
     <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']

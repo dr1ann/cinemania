@@ -12,12 +12,37 @@ import axios from 'axios';
   },
 });
 
+//types
+interface MovieProps {
+  results:Array<{
+    id: number;
+    title: string;
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+    backdrop_path?: string;
+  }>
+
+}
+
+interface PersonProps {
+  results: Array<{
+    id: number;
+    known_for_department: string;
+    name: string;
+    popularity: number;
+    profile_path: string;
+  }>
+}
 //All API request functions 
 
- export const In_TheatersMoviesAPI = (In_TheatersMoviesData: any  ) => {
+ export const In_TheatersMoviesAPI = ( In_TheatersMoviesData: string ) :
+ { InTheatersMovies: MovieProps,
+   isLoading: boolean
+ } => {
     
   //use states
-  const [InTheatersMovies, SetInTheatersMovies] = useState<any>({})
+  const [InTheatersMovies, SetInTheatersMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -47,10 +72,13 @@ return {InTheatersMovies, isLoading}
 };
 
 
-export const PopularMoviesAPI = ( PopularMoviesData: any  ) => {
+export const PopularMoviesAPI = ( PopularMoviesData: string  ) :
+{ PopularMovies: MovieProps,
+  isLoading: boolean
+} => {
     
   //use states
-  const [PopularMovies, setPopularMovies] = useState<any>({})
+  const [PopularMovies, setPopularMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
 
  const DataFromAPI = async () => {
@@ -78,10 +106,12 @@ return {PopularMovies, isLoading}
 };
 
 
-export const TrendingMoviesAPI = ( TrendingMoviesData: any  ) => {
-    
+export const TrendingMoviesAPI = ( TrendingMoviesData: string ) :
+{ TrendingMovies: MovieProps,
+  isLoading: boolean
+} => {
   //use states
-  const [TrendingMovies, setTrendingMovies] = useState<any>({})
+  const [TrendingMovies, setTrendingMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
     
  const DataFromAPI = async () => {
@@ -109,10 +139,12 @@ return {TrendingMovies, isLoading}
 };
 
 
-export const PopularPeopleAPI = ( PopularPeopleData: any  ) => {
-    
+export const PopularPeopleAPI = ( PopularPeopleData: string  ) :
+{ PopularPeople: PersonProps,
+  isLoading: boolean
+} => {
   //use states
-  const [PopularPeople, setPopularPeople] = useState<any>({})
+  const [PopularPeople, setPopularPeople] = useState<PersonProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
 
  const DataFromAPI = async () => {
@@ -140,10 +172,13 @@ return {PopularPeople, isLoading}
 };
 
 
-export const TopRatedMoviesAPI = ( TopRatedMoviesData: any  ) => {
+export const TopRatedMoviesAPI = ( TopRatedMoviesData: string  ) :
+{ TopRatedMovies: MovieProps,
+  isLoading: boolean
+} => {
     
   //use states
-  const [TopRatedMovies, setTopRatedMovies] = useState<any>({})
+  const [TopRatedMovies, setTopRatedMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
 
  const DataFromAPI = async () => {

@@ -14,38 +14,15 @@ import PersonLoading from '@/app/components/Loaders/PersonLoading';
 //API component
 import { Crew_CastAPI } from '@/app/components/API/MovieDetailsAPI';
 
-//type
-type MovieCredits = {
-  credit_id?: string;
-  id: number;
-  cast_id: number;
- character: string;
-  original_name: string ;
-  
-  profile_path: string ;
-  known_for_department: string;
-  job: string;
-  
-};
-
-
 
 const Crew_Cast = ({ id }: { id: number }) => {
-
-
 
   //get the values of the fetched data from the API
   const { credits, isPeopleLoading } = Crew_CastAPI(`/movie/${id}/credits?language=en-US`);
  
 
- 
-
-
- 
-
-
  //get only the important crew members from the movie 
- const importantCrewMembers = credits?.crew?.filter((movie:MovieCredits) => {
+ const importantCrewMembers = credits?.crew?.filter((movie) => {
   return (
     movie.job === 'Director' || 
      movie.job === 'Writer' ||
@@ -54,7 +31,7 @@ const Crew_Cast = ({ id }: { id: number }) => {
   )
   
 });
-console.log(credits)
+
   return (
     
     <>
@@ -75,7 +52,7 @@ console.log(credits)
       ?
     <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
-{credits?.cast?.slice(0, 15).map((cast: MovieCredits) => (
+{credits?.cast?.slice(0, 15).map((cast) => (
 
 <li key={cast['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 
 
@@ -147,7 +124,7 @@ alt={cast['original_name']} />
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-[#3F3F3F] mb-4 mt-2"  />
         <h1 className=' font-bold text-center text-[1.3rem] sm:text-[1.7rem]'>Cast</h1>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 bigscreens:grid-cols-4  gap-4 p-6 animate pop overflow-y-scroll scroll-smooth">
-          {credits?.cast?.slice(15).map((other_cast: MovieCredits) => (
+          {credits?.cast?.slice(15).map((other_cast) => (
            <li key={other_cast.credit_id} className=' animate pop flex flex-row px-2 py-2 bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
       
      
@@ -247,7 +224,7 @@ alt={cast['original_name']} />
       ?
     <ul className=' flex flex-row overflow-x-scroll scroll-smooth bigscreens:justify-center  p-6 sm:py-6 sm:px-10 gap-6 '>
 
-{importantCrewMembers?.map((crew: MovieCredits) => (
+{importantCrewMembers?.map((crew) => (
 
 
 <li key={crew['credit_id']} className='bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-md'> 

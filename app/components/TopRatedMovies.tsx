@@ -14,14 +14,6 @@ import MoviePosterLoading from './Loaders/MoviePosterLoading';
 //API Component
 import { TopRatedMoviesAPI }  from './API/HomePageAPI';
 
-//type
-interface TopRatedMoviesProps {
-    id: number;
-    title: string;
-    vote_average: number;
-    release_date: string;
-    poster_path: string;
-}
 
 const TopRatedMovies = () => {
 
@@ -53,7 +45,7 @@ const TopRatedMovies = () => {
        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
    
     <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
-{TopRatedMovies?.results?.slice(0, 15).map((movie: TopRatedMoviesProps) => (
+{TopRatedMovies?.results?.slice(0, 15).map((movie) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
