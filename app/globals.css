@@ -193,9 +193,9 @@ word-spacing: 8px;
   animation-fill-mode: backwards;
 }
 .home-animate {
-  animation-duration: 0.5s;
+  animation-duration: 0.4s;
   animation-name: animate-fade;
-  animation-delay: 1s;
+  animation-delay: 0.4s;
   animation-fill-mode: backwards;
 }
 

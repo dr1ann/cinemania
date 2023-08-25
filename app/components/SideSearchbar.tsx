@@ -53,7 +53,7 @@ const Header = () => {
      </svg>
      </div>
      :
-     <p className='text-[.90rem] md:text-xl bg-[#1a1a1a] px-2 rounded-full search-animate pop'>✕</p>
+     <p className='text-[.90rem] md:text-xl bg-[#1a1a1a] px-2 pb-[2px] rounded-full search-animate pop'>✕</p>
       }
      
      </button>
@@ -61,14 +61,14 @@ const Header = () => {
   
     </div>
     {isSearchBarOpen ?
-    <form onSubmit={handleFormSubmit} className="search-animate pop flex items-center w-[90%] mx-auto my-2 z-[99999]">   
+    <form onSubmit={handleFormSubmit} className="bg-[#1a1a1a] p-4 rounded-xl drop-shadow-2xl customized-shadow shadow-sm  search-animate pop flex items-center w-[90%] mx-auto  z-30">   
 <label className="sr-only">Search</label>
 <div className="relative w-full active">
   
-<input value={inputWord}  onChange={(e) => setInputWord(e.target.value)} autoComplete='off' type="text" id="simple-search" className="bg-[#1a1a1a] input placeholder-[#e6e6e6] text-[1rem]  text-white text-sm rounded-lg block w-full  p-[12px] sm:p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
+<input value={inputWord}  onChange={(e) => setInputWord(e.target.value)} autoComplete='off' type="text" id="simple-search" className="bg-[hsla(0,0%,94.9%,.14)] input placeholder-[#e6e6e6] text-[1rem] rounded-full  text-white text-sm block w-full  p-[12px] sm:p-4  focus:outline-none focus:border-[#e2b616] focus:ring-1 focus:ring-[#e2b616]
 " placeholder="Search for a movie, person..."  />
 </div>
-<button type="submit" className="p-[12px] sm:p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-lg border border-[#e2b616]">
+<button type="submit" className="p-[12px] sm:p-4 ml-2 text-sm font-medium text-white bg-[#e2b616] rounded-full border border-[#e2b616]">
    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
    </svg>

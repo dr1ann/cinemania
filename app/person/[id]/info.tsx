@@ -128,7 +128,7 @@ console.log(PersonSocMedia)
    
     
       <div className='flex flex-col px-4 lg:px-6'>
-      <h1 className='text-[1.5rem] font-bold  text-center lg:text-left md:text-[2rem]  2xl:text-[2.3rem]  z-10'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
+      <h1 className='text-[1.5rem] font-bold  text-center lg:text-left md:text-[2rem]  2xl:text-[2.3rem]'>{personDetails.name ? personDetails.name : 'N/A' }</h1>
       <>
       {personDetails.deathday ? 
       <span className='text-center lg:text-left text-[0.78rem] pb-2 sm:text-[0.813rem]   text-gray-300'>
@@ -252,7 +252,7 @@ formatBiographyText(personDetails.biography) //show all content without fade eff
     }
   
   
-    <div className=' mt-6 grid grid-cols-2 md:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit md:w-[80%] lg:w-fit  z-20'>
+    <div className=' mt-6 grid grid-cols-2 md:grid-cols-4 gap-6 px-4 mx-auto py-2 bg-[#1a1a1a] drop-shadow-2xl customized-shadow shadow-sm rounded-xl w-fit md:w-[80%] lg:w-fit'>
   
   <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.1rem]'>
     <p className='text-gray-400 '>Popularity</p>

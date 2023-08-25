@@ -125,7 +125,7 @@ const Sort =  () => {
 )
 }
 
-console.log(Movies)
+
   return (
   <>
   <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Movies</h1>
@@ -271,14 +271,14 @@ alt={movie.title}
       
       ))
   }
-  {sortedActingMovies?.length > 15
+  {ActingLoadMore >= sortedActingMovies?.length
   ?
-   <div className='items-center justify-center px-2 flex mt-6'>
-    <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
-       onClick={() =>setActingLoadMore(prev => prev + 15) }>{'Load more...'}</button>
-       </div>
+  ''
 :
-''
+<div className='items-center justify-center px-2 flex mt-6'>
+<button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
+   onClick={() =>setActingLoadMore(prev => prev + 15) }>{'Load more...'}</button>
+   </div>
 }
   </>
   :
@@ -296,7 +296,7 @@ alt={movie.title}
         Movies?.crew?.length > 0
         ?
      <>
- {sortedProductionMovies?.slice(0,15).map((movie:MovieProps) => (
+ {sortedProductionMovies?.slice(0, ProductionLoadMore).map((movie:MovieProps) => (
  <li  key={movie.randomId} className='home-animate pop flex flex-row justify-between px-2 py-2 gap-6  bg-[#1a1a1a]  drop-shadow-2xl customized-shadow shadow-sm rounded-md'>
  
 
@@ -363,14 +363,14 @@ href={`/movie/${movie.id}`}
  </li>
  ))
 }
-{sortedProductionMovies?.length > 15
+{ProductionLoadMore  >= sortedProductionMovies?.length 
   ?
-   <div className='items-center justify-center px-2 flex mt-6'>
-    <button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
-       onClick={() =>setProductionLoadMore(prev => prev + 15) }>{'Load more...'}</button>
-       </div>
+  ''
 :
-''
+<div className='items-center justify-center px-2 flex mt-6'>
+<button className='bg-[#1a1a1a] rounded-md px-[1em]  py-[0.4em] text-[0.90rem] md:text-[1.1rem]' 
+   onClick={() =>setProductionLoadMore(prev => prev + 15) }>{'Load more...'}</button>
+   </div>
 }
 </>
 :
