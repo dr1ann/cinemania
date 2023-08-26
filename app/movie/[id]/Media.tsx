@@ -11,7 +11,7 @@ import VideosLoading from '@/app/components/Loaders/VideosLoading'
 import PostersLoading from '@/app/components/Loaders/PosterLoading'
 
 //API component
-import { MediaAPI } from '@/app/components/API/MovieDetailsAPI';
+import { OverviewAPI } from '@/app/components/API/MovieDetailsAPI';
 
 
 
@@ -22,13 +22,14 @@ const Media = ({ id }: { id: number }) => {
     const [selectedMovieKey, setSelectedMovieKey] =useState<string>('')
 
   //get the values of the fetched data from the API
-  const {MovieVids, movieImages, movieVidsReady, movieImagesReady } = MediaAPI(
+  const { movieVid, movieImages, movieVidsReady, movieImagesReady } = OverviewAPI(
+    '',
     `/movie/${id}/videos?language=en-US`,
     `/movie/${id}/images`,
    
   );
 
-
+console.log(movieImages)
   const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
     const scaledRandom = min + (random / 233280) * (max - min);
@@ -75,7 +76,7 @@ const randomPosters =
 
 
   //get the length of vid and img
-  let vidLength =MovieVids?.results?.length 
+  let vidLength =movieVid?.results?.length 
   let ImgLength = randomPosters?.length
 
 
@@ -116,7 +117,7 @@ const randomPosters =
      
        </div>
        {selectedOption === 'Videos' && 
-       <div>
+       <>
         {!movieVidsReady ? 
    <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth items-center  p-6 sm:py-6 sm:px-10 gap-4'>
 
@@ -128,10 +129,10 @@ const randomPosters =
        
     :
        <ul className='flex flex-row overflow-x-scroll scroll-smooth  p-6 sm:py-6 sm:px-10 gap-4 relative'>
-      {MovieVids?.results?.length  > 0 ? (
+      {movieVid?.results?.length  > 0 ? (
       
    
-MovieVids?.results?.map((movieVid) => (
+      movieVid?.results?.map((movieVid) => (
 
         <li key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] 
         max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl'
@@ -160,10 +161,10 @@ MovieVids?.results?.map((movieVid) => (
 
 </ul>
 }
-</div>
+</>
   }
   {selectedOption === 'Posters' && 
-       <div>
+       <>
           {!movieImagesReady ? 
    <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth  items-center p-6 sm:py-6 sm:px-10 gap-4'>
 
@@ -178,7 +179,7 @@ MovieVids?.results?.map((movieVid) => (
     <ul className='flex flex-row overflow-x-scroll scroll-smooth p-6 sm:py-6 sm:px-10 gap-4 relative'>
   {randomPosters?.length > 0 ? (
     <>
-      {randomPosters?.slice(0, 15).map((posters) => (
+      {randomPosters?.slice(0, 10).map((posters) => (
         <li key={posters.randomId}
           className='animate pop rounded-xl max-w-[9.375rem]  min-w-[9.375rem] min-h-[225px] max-h-[225px] relative flex justify-center items-center'
         >
@@ -188,7 +189,7 @@ MovieVids?.results?.map((movieVid) => (
               className='w-full h-full rounded-xl cursor-pointer hover:rotate-[0deg] transform transition duration-250 hover:scale-110 hover:z-10'
               srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${posters.file_path} 1x,
                https://image.tmdb.org/t/p/w300_and_h450_bestv2${posters.file_path} 2x`}
-              loading='lazy'
+              loading='eager'
               alt={posters.file_path}
               onClick={() =>
                 window.open(`https://image.tmdb.org/t/p/original${posters.file_path}`, '_blank')
@@ -199,7 +200,7 @@ MovieVids?.results?.map((movieVid) => (
               <Image
                 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
                 className='w-full h-full'
-                loading='lazy'
+                loading='eager'
                 alt='movie poster'
               />
             </div>
@@ -207,7 +208,7 @@ MovieVids?.results?.map((movieVid) => (
         </li>
       ))}
    
-      {randomPosters?.length >= 19 ? (
+      {randomPosters?.length >= 12 ? (
         <Drawer.Root shouldScaleBackground>
         <Drawer.Trigger asChild>
         <button className='w-fit whitespace-nowrap  h-fit flex self-center hover:text-[#e2b616]'>View More ➠</button>
@@ -220,7 +221,7 @@ MovieVids?.results?.map((movieVid) => (
             <ul className="grid grid-cols-[repeat(2,1fr)] place-items-center tabletcollectionscreen:grid-cols-[repeat(3,1fr)] 
             sm:grid  sm:grid-cols-morePosters px-2
              mx-auto sm:w-[95%] gap-2   overflow-y-scroll scroll-smooth py-4 ">
-            {randomPosters?.slice(15).map((other_posters) => (
+            {randomPosters?.slice(10).map((other_posters) => (
                <li key={other_posters.randomId}
                className=' animate pop rounded-xl max-w-[8rem]  min-w-[8rem] min-h-[190px] max-h-[190px]
                xsmallcpsize:max-w-[9.375rem]  xsmallcpsize:min-w-[9.375rem] xsmallcpsize:min-h-[225px] xsmallcpsize:max-h-[225px] 
@@ -275,7 +276,7 @@ MovieVids?.results?.map((movieVid) => (
 
 }
 
-</div>
+</>
 
   }
   

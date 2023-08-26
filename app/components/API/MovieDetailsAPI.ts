@@ -42,12 +42,7 @@ interface VideoProps {
     key:string;
   }>
 }
-interface ImageProps {
-  posters: Array<{
-    file_path:string
-    id?: number
-  }>
-}
+
 
 interface MovieDetailsProps {
   backdrop_path: string;
@@ -78,9 +73,13 @@ instagram_id: string
 twitter_id: string
 }
 
-interface MovieLogoProps {
-  logos: Array<{
+interface MovieImagesProps {
+  logos?: Array<{
     file_path: string;
+  }>,
+  posters?: Array<{
+    file_path:string
+    id?: number
   }>
 }
 interface Suggested_SimilarProps {
@@ -128,73 +127,30 @@ export const Crew_CastAPI = ( CreditsData:string ) :
   return {credits, isPeopleLoading}
   };
 
-  export const MediaAPI = ( MovieVideosData: string, MovieImagesData: string  ) :
-  { MovieVids: VideoProps,
-    movieImages: ImageProps,
-    movieVidsReady: boolean,
-    movieImagesReady: boolean
-  } => {
-    
-    //use states
-      const [movieImages, setMovieImages] = useState<ImageProps>({posters: []});
-      const [MovieVids, setMovieVids] = useState<VideoProps>({results: []});
-      const [movieVidsReady, setMovieVidsReady] = useState(false);
-    const [movieImagesReady, setMovieImagesReady] = useState(false);
-   
-    const DataFromAPI = async () => {
-        
-      try {
   
-        const apiPromises = [
-     
-          axiosInstance.get(MovieVideosData), //Movie Videos
-          axiosInstance.get(MovieImagesData), //Movie Images
-      
-        ];
-
-      //getting the data from the API and put values on to its assigned variables
-        const [MovieVids, MovieImages] = await Promise.all(apiPromises);
-  
-        setMovieVids(MovieVids.data);
-        setMovieImages(MovieImages.data)
-
-        //Skeleton Loders Now disabled
-        setMovieVidsReady(true);
-        setMovieImagesReady(true);
-       
-      } catch (error) {
-        console.error('Error fetching data:', error); // Catch errors if data is not fetched
-      } 
-      
-    };
-    useEffect(() => {
-  
-        //call the function to get all the data from the api
-        DataFromAPI();
-    },[] );
-  
-  return {MovieVids, movieImages, movieVidsReady, movieImagesReady }
-  };
   
   export const OverviewAPI = (  MovieDetailsData: string = '',
   MovieVidsData: string = '',
-  MovieLogoData: string = '',
+  MovieImagesData: string = '',
   MovieSocMedData: string = '' ) :
   { movieDetails: MovieDetailsProps,
     movieVid: VideoProps,
-    movielogo: MovieLogoProps,
+    movieImages: MovieImagesProps,
     movieSoc: MovieSocMediaProps,
-    isLoading: boolean
+    isLoading: boolean,
+    movieVidsReady: boolean,
+    movieImagesReady: boolean,
   } => {
     
     //use states
     const [movieDetails, setMovieDetails] = useState<MovieDetailsProps>({} as MovieDetailsProps);
     const [movieVid, setMovieVid] = useState<VideoProps>({results: []});
-    const [movielogo, setmovieLogo] = useState<MovieLogoProps>({logos: []});
+    const [movieImages, setmovieImages] = useState<MovieImagesProps>({logos: [], posters: []});
     const [movieSoc, setMovieSoc] = useState<MovieSocMediaProps>({} as MovieSocMediaProps);
-   
+    
     const [isLoading, setisLoading] = useState(true); // Skeleton Loader now disabled
- 
+    const [movieVidsReady, setMovieVidsReady] = useState(false);
+    const [movieImagesReady, setMovieImagesReady] = useState(false);
       const DataFromAPI = async () => {
 
         try {
@@ -202,20 +158,23 @@ export const Crew_CastAPI = ( CreditsData:string ) :
           const apiPromises = [
              axiosInstance.get(MovieDetailsData),
              axiosInstance.get(MovieVidsData),
-             axiosInstance.get(MovieLogoData),
+             axiosInstance.get(MovieImagesData),
              axiosInstance.get(MovieSocMedData),
           ];
       
           const [MovDetails, MovVids, MovLogo, MovSocMed   ] = await Promise.all(apiPromises);
       
           //getting the data from the API and put values on to its assigned variables
-          setMovieDetails(MovDetails.data);
+          if (MovDetails) {
+            setMovieDetails(MovDetails.data);
+          }
           setMovieVid(MovVids.data);
-          setmovieLogo(MovLogo.data);
+          setmovieImages(MovLogo.data);
           setMovieSoc(MovSocMed.data);
 
           setisLoading(false); //Skeleton Loader is disabled
-      
+          setMovieVidsReady(true);
+          setMovieImagesReady(true);
          
         } catch (error) {
           console.error('Error fetching data:', error); // Catch errors if data is not fetched
@@ -231,7 +190,7 @@ export const Crew_CastAPI = ( CreditsData:string ) :
     
         }, []);
      
-    return { movieDetails, movieVid,movielogo, movieSoc ,isLoading };
+    return { movieDetails, movieVid, movieImages, movieSoc ,isLoading, movieVidsReady, movieImagesReady   };
   };
   
   export const SimilarMoviesAPI = ( SimilarMoviesData: string  ) :

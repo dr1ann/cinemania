@@ -32,7 +32,7 @@ const Overview = ({ id }: { id: number }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   //get the values of the fetched data from the API
-  const { movieDetails, movieVid, movielogo, movieSoc, isLoading } = OverviewAPI(
+  const { movieDetails, movieVid, movieImages, movieSoc, isLoading } = OverviewAPI(
     `/movie/${id}?language=en-US`,
     `/movie/${id}/videos?language=en-US`,
     `/movie/${id}/images`,
@@ -53,7 +53,7 @@ const Overview = ({ id }: { id: number }) => {
 const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
   //get only the first movie logo
-  const firstLogo = movielogo?.logos?.[0];
+  const firstLogo = movieImages?.logos?.[0];
  
 
   //get the bg image of the movie
@@ -120,7 +120,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
    
 <h1 className='text-[1.5rem] font-bold  mt-[10px] md:mt-[30px] md:text-[2rem]  2xl:text-[2.5rem] px-4 md:px-0 z-10'>{movieDetails.title ? movieDetails.title : 'N/A' }</h1>
 <div className='flex flex-row items-center justify-start px-4 md:px-0'>
-  <div className='flex flex-row flex-wrap gap-2 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] z-10'>
+  <div className='flex flex-row flex-wrap gap-1 text-[0.85rem] md:text-[1rem] 2xl:text-[1.2rem] z-10'>
     {movieDetails['release_date'] ?
   <p className=''>{new Date(movieDetails['release_date']).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
   :
@@ -128,9 +128,9 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
   }
 
  {separtedNames ?
-  <span className=''>│ {separtedNames} </span>
+  <span >│ {separtedNames}</span>
   :
-  '│N/A'
+  '│ N/A'
   }
    {movieDetails.runtime?
  <span>│ {time_convert(movieDetails.runtime)}</span>
@@ -219,7 +219,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400'>Popularity</p>
-    <span className='text-center'>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') : 'N/A'}</span>
+    <span className='text-center'>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') + '%' : 'N/A'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
