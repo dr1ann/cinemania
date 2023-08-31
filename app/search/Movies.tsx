@@ -87,7 +87,7 @@ SetPageNum(1)
 //return an error statement whenever the fetching of data is failed
 if(error) {
   return (
-  <div className='flex flex-col px-8  mt-14 justify-center items-center'>
+  <div className='flex flex-col px-2  mt-8 justify-center items-center'>
           <Image 
         
           src={ErrorImage}
@@ -96,7 +96,7 @@ if(error) {
           alt='error image'
           />
      
-        <p className='text-[1rem] md:text-[1.2rem] 2xl:text-[1.4rem] text-center '>Please refresh the page or try again later.</p>
+       
         </div>
         )
 }
@@ -242,7 +242,7 @@ alt={movie['title']} />
         </>
         
         :
-        <div className='flex flex-col px-8 gap-10 mt-14 justify-center items-center'>
+        <div className='flex flex-col px-10 gap-10 mt-14 justify-center items-center'>
           <Image 
         
           src={SearchErrorImage}

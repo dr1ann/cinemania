@@ -1,7 +1,8 @@
+'use client'
 //External Libraries
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
- 
+import  { ErrorContext }  from './ErrorContextProvider';
 
  //Authorization to fetch data from the API with its base url
  const axiosInstance = axios.create({
@@ -92,43 +93,45 @@ interface Suggested_SimilarProps {
   }>
 }
 
-//All API request functions 
-export const Crew_CastAPI = ( CreditsData:string ) :
-  { credits: CreditsProps,
-    isPeopleLoading: boolean
-  } => {
-    
-    //use states
-    const [credits, setCredits] = useState<CreditsProps>({cast: [],crew: [] })
-    const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+
+
+
+
+// All API request functions
+export const Crew_CastAPI = (CreditsData: string): {
+  credits: CreditsProps;
+  isPeopleLoading: boolean;
   
-  
-   const DataFromAPI = async () => {
-      
+} => {
+  // use states
+  const [credits, setCredits] = useState<CreditsProps>({ cast: [], crew: [] });
+  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+  const [isError, setisError]  = useContext(ErrorContext);
+
+  const DataFromAPI = async () => {
     try {
-  
-      const response =  await axiosInstance.get(CreditsData) //Movie Credits 
-  
+      const response = await axiosInstance.get(CreditsData); // Movie Credits
       setCredits(response.data);
-      setIsPeopleLoading(false) // Skeleton loader is disabled
-  
-     
+      setIsPeopleLoading(false); // Skeleton loader is disabled
+      setisError(false) // set error to false whenever fetching of data is success
     } catch (error) {
-      console.error('Error fetching data:', error); // Catch errors if data is not fetched
+      console.error('Error fetching data:', error);
+      // Set isError to true on error
+       setisError(true) // set error to true whenever fetching of data is failed
     }
-    
-  };
-    useEffect(() => {
-   
-      //call the function to get the data from the api
-      DataFromAPI();
-  
-    }, []);
-  return {credits, isPeopleLoading}
   };
 
+  useEffect(() => {
+    // call the function to get the data from the api
+    DataFromAPI();
+  }, []);
+
+  return { credits, isPeopleLoading };
+};
+
+
   
-  
+
   export const OverviewAPI = (  MovieDetailsData: string = '',
   MovieVidsData: string = '',
   MovieImagesData: string = '',
@@ -140,9 +143,11 @@ export const Crew_CastAPI = ( CreditsData:string ) :
     isLoading: boolean,
     movieVidsReady: boolean,
     movieImagesReady: boolean,
+    
   } => {
     
     //use states
+    const [isError, setisError]  = useContext(ErrorContext);
     const [movieDetails, setMovieDetails] = useState<MovieDetailsProps>({} as MovieDetailsProps);
     const [movieVid, setMovieVid] = useState<VideoProps>({results: []});
     const [movieImages, setmovieImages] = useState<MovieImagesProps>({logos: [], posters: []});
@@ -175,10 +180,10 @@ export const Crew_CastAPI = ( CreditsData:string ) :
           setisLoading(false); //Skeleton Loader is disabled
           setMovieVidsReady(true);
           setMovieImagesReady(true);
-         
+          setisError(false) // set error to false whenever fetching of data is success
         } catch (error) {
           console.error('Error fetching data:', error); // Catch errors if data is not fetched
-         
+          setisError(true) // set error to true whenever fetching of data is failed
         }
         
         
@@ -196,12 +201,13 @@ export const Crew_CastAPI = ( CreditsData:string ) :
   export const SimilarMoviesAPI = ( SimilarMoviesData: string  ) :
   {  similarMovies: Suggested_SimilarProps,
      isLoading: boolean;
+    
   } => {
     
     //use states
     const [similarMovies, setSimilarMovies] = useState<Suggested_SimilarProps>({results: []})
     const [isLoading, setIsLoading] = useState(true);
-  
+    const [isError, setisError]  = useContext(ErrorContext);
    const DataFromAPI = async () => {
         
     try {
@@ -210,9 +216,10 @@ export const Crew_CastAPI = ( CreditsData:string ) :
      
       setSimilarMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
-   
+      setisError(false) // set error to false whenever fetching of data is success
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
+      setisError(true) // set error to true whenever fetching of data is failed
     }
     
   };
@@ -229,12 +236,13 @@ export const Crew_CastAPI = ( CreditsData:string ) :
   export const SuggestedMoviesAPI = ( SuggestedMoviesData: string  ) :
   {  suggestedMovies: Suggested_SimilarProps,
      isLoading: boolean;
+   
   } => {
     
     //use states
     const [suggestedMovies, setSuggestedMovies] = useState<Suggested_SimilarProps>({results: []})
     const [isLoading, setIsLoading] = useState(true);
-  
+    const [isError, setisError]  = useContext(ErrorContext);
    const DataFromAPI = async () => {
         
     try {
@@ -243,9 +251,10 @@ export const Crew_CastAPI = ( CreditsData:string ) :
      
       setSuggestedMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
-  
+      setisError(false) // set error to false whenever fetching of data is success
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
+      setisError(true) // set error to true whenever fetching of data is failed
     }
     
   };

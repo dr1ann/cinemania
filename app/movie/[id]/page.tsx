@@ -1,5 +1,5 @@
 
-
+"use client"
 //External Libraries
 import dynamic from 'next/dynamic'
 
@@ -11,7 +11,7 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
 //Normal import of a component
 import Overview from './overview'
-
+import ContextProvider from '@/app/components/API/ErrorContextProvider'
 
 //Client Components that are dynamically rendered
 const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
@@ -48,13 +48,27 @@ const Page = ({ params }: { params: { id: number } }) => {
 
   return (
     <>
+
+
+<>
+ <ContextProvider>
+ 
+
   <Overview id={params.id} />
+
   <Crew_Cast id={params.id} />
     <Collection id={params.id} />
     <Media id={params.id}/>
     <Similar id={params.id} />
     <Suggested id={params.id} />
+    </ContextProvider>
+ 
     <Footer />
+    </>
+
+  
+
+
     </>
   )
 }
