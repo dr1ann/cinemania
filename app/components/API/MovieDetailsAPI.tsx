@@ -113,7 +113,7 @@ export const Crew_CastAPI = (CreditsData: string): {
       const response = await axiosInstance.get(CreditsData); // Movie Credits
       setCredits(response.data);
       setIsPeopleLoading(false); // Skeleton loader is disabled
-      setisError(false) // set error to false whenever fetching of data is success
+       
     } catch (error) {
       console.error('Error fetching data:', error);
       // Set isError to true on error
@@ -180,7 +180,7 @@ export const Crew_CastAPI = (CreditsData: string): {
           setisLoading(false); //Skeleton Loader is disabled
           setMovieVidsReady(true);
           setMovieImagesReady(true);
-          setisError(false) // set error to false whenever fetching of data is success
+           
         } catch (error) {
           console.error('Error fetching data:', error); // Catch errors if data is not fetched
           setisError(true) // set error to true whenever fetching of data is failed
@@ -216,7 +216,7 @@ export const Crew_CastAPI = (CreditsData: string): {
      
       setSimilarMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
-      setisError(false) // set error to false whenever fetching of data is success
+      
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
       setisError(true) // set error to true whenever fetching of data is failed
@@ -251,7 +251,7 @@ export const Crew_CastAPI = (CreditsData: string): {
      
       setSuggestedMovies(response.data);
       setIsLoading(false) // Skeleton loader is disabled
-      setisError(false) // set error to false whenever fetching of data is success
+     
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
       setisError(true) // set error to true whenever fetching of data is failed

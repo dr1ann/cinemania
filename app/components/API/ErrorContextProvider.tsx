@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import Image from 'next/image';
 import ErrorImage from '@/app/Images/errorimg.webp'
 import SideSearchBar from '@/app/components/SideSearchbar'
@@ -16,8 +16,11 @@ export const ErrorContext = createContext<useError>([false, () => {}]);
 // Create a component that provides the state
 export default function ErrorContextProvider({children} : {children: React.ReactNode}) {
   const [isError, setisError] = useState(false);
+console.log(isError)
 
- 
+
+
+
   return (
     <ErrorContext.Provider value={[isError, setisError]}>
       
