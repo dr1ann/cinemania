@@ -4,10 +4,10 @@
 import Link from 'next/link';
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import { PopularPeopleAPI } from './API/HomePageAPI';
+import { PopularPeopleAPI } from '@/app/components/API/HomePageAPI';
 
 
 const PopularPeople = () => {

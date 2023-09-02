@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import Image from 'next/image';
 import ErrorImage from '@/app/Images/errorimg.webp'
 import SideSearchBar from '@/app/components/SideSearchbar'

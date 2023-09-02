@@ -1,8 +1,8 @@
 
 //External Libraries
-import { useState, useEffect } from 'react';
+import  { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
- 
+import  { ErrorContext }  from '@/app/homepage/ErrorContextProvider';
 
  //Authorization to fetch data from the API with its base url
  const axiosInstance = axios.create({
@@ -44,6 +44,7 @@ interface PersonProps {
   //use states
   const [InTheatersMovies, SetInTheatersMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setisError]  = useContext(ErrorContext);
 
 
  const DataFromAPI = async () => {
@@ -58,6 +59,7 @@ interface PersonProps {
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };
@@ -80,7 +82,8 @@ export const PopularMoviesAPI = ( PopularMoviesData: string  ) :
   //use states
   const [PopularMovies, setPopularMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isError, setisError]  = useContext(ErrorContext);
+  
  const DataFromAPI = async () => {
     
   try {
@@ -92,6 +95,7 @@ export const PopularMoviesAPI = ( PopularMoviesData: string  ) :
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };
@@ -113,6 +117,7 @@ export const TrendingMoviesAPI = ( TrendingMoviesData: string ) :
   //use states
   const [TrendingMovies, setTrendingMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setisError]  = useContext(ErrorContext);
     
  const DataFromAPI = async () => {
       
@@ -125,6 +130,7 @@ export const TrendingMoviesAPI = ( TrendingMoviesData: string ) :
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };
@@ -146,6 +152,7 @@ export const PopularPeopleAPI = ( PopularPeopleData: string  ) :
   //use states
   const [PopularPeople, setPopularPeople] = useState<PersonProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setisError]  = useContext(ErrorContext);
 
  const DataFromAPI = async () => {
       
@@ -158,6 +165,7 @@ export const PopularPeopleAPI = ( PopularPeopleData: string  ) :
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };
@@ -180,6 +188,7 @@ export const TopRatedMoviesAPI = ( TopRatedMoviesData: string  ) :
   //use states
   const [TopRatedMovies, setTopRatedMovies] = useState<MovieProps>({results: []})
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setisError]  = useContext(ErrorContext);
 
  const DataFromAPI = async () => {
       
@@ -192,6 +201,7 @@ export const TopRatedMoviesAPI = ( TopRatedMoviesData: string  ) :
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };

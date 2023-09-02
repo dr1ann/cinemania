@@ -5,19 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 //Images
-import star from '../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import {TrendingMoviesAPI} from './API/HomePageAPI';
+import { PopularMoviesAPI }from '@/app/components/API/HomePageAPI';
 
 
-const TrendingMovies = () => {
-    
+const PopularMovies = () => {
+
     //get the values of the fetched data from the API
-    const {TrendingMovies, isLoading } = TrendingMoviesAPI(`trending/movie/day?language=en-US`)
+    const {PopularMovies, isLoading } = PopularMoviesAPI(`movie/popular?language=en-US&page=1`)
 
   return (
     <>
@@ -26,7 +26,7 @@ const TrendingMovies = () => {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
    <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
@@ -38,28 +38,28 @@ const TrendingMovies = () => {
     :
     
 <div className='relative'>
-      {TrendingMovies?.results?.length > 0
+      {PopularMovies?.results?.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
    
-    <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
-{TrendingMovies?.results?.slice(0, 15).map((movie) => (
+    <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
+{PopularMovies?.results?.slice(0, 15).map((movie) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
          ?
          <Link
-      
-         href={
-         `/movie/${movie.id}`
-        }
+   
+         href={{
+          pathname: `/movie/${movie.id}`,
+        }}
        
-         >
+         > 
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
 className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md
-hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
  https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='lazy'
@@ -68,15 +68,16 @@ alt={movie['title']} />
 :
 <Link
    
-   href={
-    `/movie/${movie.id}`
-   }
+   href={{
+    pathname: `/movie/${movie.id}`,
+  }}
 
->
+> 
+
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
-hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+ hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='lazy'
 alt={movie['title']} />
@@ -85,20 +86,20 @@ alt={movie['title']} />
      {movie['title'] ?
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={
-        `/movie/${movie.id}`
-       }
+      href={{
+        pathname: `/movie/${movie.id}`,
+      }}
     
       >
        {movie['title']}
           </Link>
           :
           <Link
-         
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={
-            `/movie/${movie.id}`
-           }
+          href={{
+            pathname: `/movie/${movie.id}`,
+          }}
+        
           >
            N/A
               </Link>
@@ -147,4 +148,5 @@ alt={movie['title']} />
    </>
   )
 }
-export default TrendingMovies
+
+export default PopularMovies

@@ -5,14 +5,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 
 //Images
-import icon from '../Images/icon.png'
+import icon from '@/app/Images/icon.png'
 
 //Components
-import HomeLoading from './Loaders/HomeLoading';
-import Header from './Header';
+import HomeLoading from '@/app/components/Loaders/HomeLoading';
+import Header from '@/app/components/Header';
 
 //API Component
-import { TrendingMoviesAPI } from './API/HomePageAPI';
+import { TrendingMoviesAPI } from '@/app/components/API/HomePageAPI';
 
 const MainPage = () => {
   const router = useRouter()

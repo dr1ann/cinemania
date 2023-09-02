@@ -1,7 +1,7 @@
 
-
-import { useState, useEffect } from 'react';
+import  { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import  { ErrorContext }  from '@/app/person/[id]/ErrorContextProvier';
 
 //Authorization to fetch data from the API with its base url
 const axiosInstance = axios.create({
@@ -62,7 +62,7 @@ export const PersonMoviesAPI = ( PersonMovies: string) :
   //use states
   const [isLoading, setIsLoading] = useState(true);
   const [Movies, setMovies] = useState<PersonMoviesProps>({cast: [],crew: [] });
-  
+  const [isError, setisError]  = useContext(ErrorContext);
 
  const DataFromAPI = async () => {
 
@@ -76,6 +76,7 @@ export const PersonMoviesAPI = ( PersonMovies: string) :
 
   } catch (error) {
     console.error('Error fetching data:', error); // Catch errors if data is not fetched
+    setisError(true) // set error to true whenever fetching of data is failed
   }
   
 };
@@ -104,7 +105,8 @@ export const InfoAPI = (
     const [personDetails, setPersonDetails] = useState<PersonDetailsProps>({} as PersonDetailsProps);
     const [PersonSocMedia, setPersonSocMedia] = useState<PersonSocMediaProps>({} as PersonSocMediaProps);
     const [isPersonLoading, setIsPersonLoading] = useState(true);
-  
+    const [isError, setisError]  = useContext(ErrorContext);
+
    const DataFromAPI = async () => {
         
     try {
@@ -124,6 +126,7 @@ export const InfoAPI = (
      
     } catch (error) {
       console.error('Error fetching data:', error); // Catch errors if data is not fetched
+      setisError(true) // set error to true whenever fetching of data is failed
     }
     
   };

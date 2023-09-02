@@ -2,23 +2,22 @@
 'use client'
 // External Libraries
 import Image from 'next/image';
-
 import Link from 'next/link';
 
 //Images
-import star from '../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import { TopRatedMoviesAPI }  from './API/HomePageAPI';
+import { TrendingMoviesAPI } from '@/app/components/API/HomePageAPI';
 
 
-const TopRatedMovies = () => {
-
-     //get the values of the fetched data from the API
-     const {TopRatedMovies, isLoading } = TopRatedMoviesAPI(`movie/top_rated?language=en-US&page=1`)
+const TrendingMovies = () => {
+    
+    //get the values of the fetched data from the API
+    const {TrendingMovies, isLoading } = TrendingMoviesAPI(`trending/movie/day?language=en-US`)
 
   return (
     <>
@@ -27,8 +26,8 @@ const TopRatedMovies = () => {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth  bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6'>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -39,22 +38,22 @@ const TopRatedMovies = () => {
     :
     
 <div className='relative'>
-      {TopRatedMovies?.results?.length > 0
+      {TrendingMovies?.results?.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>What's Trending Today?</h1>
    
-    <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
-{TopRatedMovies?.results?.slice(0, 15).map((movie) => (
+    <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6 '>
+{TrendingMovies?.results?.slice(0, 15).map((movie) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
          ?
          <Link
-   
-         href={{
-          pathname: `/movie/${movie.id}`,
-        }}
+      
+         href={
+         `/movie/${movie.id}`
+        }
        
          >
 <img  
@@ -69,9 +68,9 @@ alt={movie['title']} />
 :
 <Link
    
-   href={{
-    pathname: `/movie/${movie.id}`,
-  }}
+   href={
+    `/movie/${movie.id}`
+   }
 
 >
 <img  
@@ -86,20 +85,20 @@ alt={movie['title']} />
      {movie['title'] ?
       <Link
       className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-      href={{
-        pathname: `/movie/${movie.id}`,
-      }}
+      href={
+        `/movie/${movie.id}`
+       }
     
       >
        {movie['title']}
           </Link>
           :
           <Link
+         
           className='truncate   text-[0.85rem] sm:text-[0.90rem] 2xl:text-[1rem] font-bold mt-4 white   hover:text-[#e2b616]'
-          href={{
-            pathname: `/movie/${movie.id}`,
-          }}
-        
+          href={
+            `/movie/${movie.id}`
+           }
           >
            N/A
               </Link>
@@ -148,4 +147,4 @@ alt={movie['title']} />
    </>
   )
 }
-export default TopRatedMovies
+export default TrendingMovies

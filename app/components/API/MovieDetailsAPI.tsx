@@ -1,8 +1,8 @@
-'use client'
+
 //External Libraries
-import React, { useState, useEffect, useContext } from 'react';
+import  { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import  { ErrorContext }  from './ErrorContextProvider';
+import  { ErrorContext }  from '@/app/movie/[id]/ErrorContextProvider';
 
  //Authorization to fetch data from the API with its base url
  const axiosInstance = axios.create({
@@ -156,6 +156,7 @@ export const Crew_CastAPI = (CreditsData: string): {
     const [isLoading, setisLoading] = useState(true); // Skeleton Loader now disabled
     const [movieVidsReady, setMovieVidsReady] = useState(false);
     const [movieImagesReady, setMovieImagesReady] = useState(false);
+    
       const DataFromAPI = async () => {
 
         try {
@@ -208,6 +209,7 @@ export const Crew_CastAPI = (CreditsData: string): {
     const [similarMovies, setSimilarMovies] = useState<Suggested_SimilarProps>({results: []})
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setisError]  = useContext(ErrorContext);
+
    const DataFromAPI = async () => {
         
     try {
@@ -243,6 +245,7 @@ export const Crew_CastAPI = (CreditsData: string): {
     const [suggestedMovies, setSuggestedMovies] = useState<Suggested_SimilarProps>({results: []})
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setisError]  = useContext(ErrorContext);
+
    const DataFromAPI = async () => {
         
     try {

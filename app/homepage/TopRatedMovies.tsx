@@ -2,22 +2,23 @@
 'use client'
 // External Libraries
 import Image from 'next/image';
+
 import Link from 'next/link';
 
 //Images
-import star from '../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import { PopularMoviesAPI }from './API/HomePageAPI';
+import { TopRatedMoviesAPI }  from '@/app/components/API/HomePageAPI';
 
 
-const PopularMovies = () => {
+const TopRatedMovies = () => {
 
-    //get the values of the fetched data from the API
-    const {PopularMovies, isLoading } = PopularMoviesAPI(`movie/popular?language=en-US&page=1`)
+     //get the values of the fetched data from the API
+     const {TopRatedMovies, isLoading } = TopRatedMoviesAPI(`movie/top_rated?language=en-US&page=1`)
 
   return (
     <>
@@ -26,8 +27,8 @@ const PopularMovies = () => {
     {isLoading ? 
 
         <>
-        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
-   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth bigscreens:justify-center items-center   p-6 sm:py-6 sm:px-10 gap-6'>
+        <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
+   <div className='flex flex-row justify-start overflow-x-scroll scroll-smooth  bigscreens:justify-center items-center  p-6 sm:py-6 sm:px-10 gap-6'>
 
    {Array.from({ length: 15 }).map((_, index) => (
      <MoviePosterLoading key={index} />
@@ -38,13 +39,13 @@ const PopularMovies = () => {
     :
     
 <div className='relative'>
-      {PopularMovies?.results?.length > 0
+      {TopRatedMovies?.results?.length > 0
       ?
       <>
-       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Popular</h1>
+       <h1 className='px-6 sm:px-10 pt-10 text-[1.2rem] sm:text-2xl font-bold bigscreens:text-center'>Top Rated</h1>
    
     <ul className='flex flex-row overflow-x-scroll scroll-smooth  bigscreens:justify-center p-6 sm:py-6 sm:px-10 gap-6'>
-{PopularMovies?.results?.slice(0, 15).map((movie) => (
+{TopRatedMovies?.results?.slice(0, 15).map((movie) => (
 <li key={movie.id}>
     <div className='flex flex-col justify-center animate pop max-w-[9.375rem] min-w-[9.375rem]'>
 {movie['poster_path']
@@ -55,11 +56,11 @@ const PopularMovies = () => {
           pathname: `/movie/${movie.id}`,
         }}
        
-         > 
+         >
 <img  
 src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']}`}
 className='w-full  min-h-[225px] max-h-[225px]  flex self-center rounded-md
- hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 srcSet={`https://image.tmdb.org/t/p/w220_and_h330_bestv2${movie['poster_path']} 1x,
  https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie['poster_path']} 2x`}
 loading='lazy'
@@ -72,12 +73,11 @@ alt={movie['title']} />
     pathname: `/movie/${movie.id}`,
   }}
 
-> 
-
+>
 <img  
 src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
 className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
- hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='lazy'
 alt={movie['title']} />
@@ -148,5 +148,4 @@ alt={movie['title']} />
    </>
   )
 }
-
-export default PopularMovies
+export default TopRatedMovies

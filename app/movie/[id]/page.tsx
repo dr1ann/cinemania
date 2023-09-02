@@ -11,7 +11,9 @@ import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading'
 
 //Normal import of a component
 import Overview from './overview'
-import ContextProvider from '@/app/components/API/ErrorContextProvider'
+
+//Error Component
+import ErrorContextProvider from './ErrorContextProvider'
 
 //Client Components that are dynamically rendered
 const Crew_Cast =  dynamic(() => import ('./Crew_Cast'),
@@ -49,9 +51,7 @@ const Page = ({ params }: { params: { id: number } }) => {
   return (
     <>
 
-
-<>
- <ContextProvider>
+ <ErrorContextProvider>
  
 
   <Overview id={params.id} />
@@ -61,15 +61,12 @@ const Page = ({ params }: { params: { id: number } }) => {
     <Media id={params.id}/>
     <Similar id={params.id} />
     <Suggested id={params.id} />
-    </ContextProvider>
+    </ErrorContextProvider>
  
     <Footer />
     </>
 
   
-
-
-    </>
   )
 }
 

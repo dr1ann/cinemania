@@ -6,13 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 //Images
-import star from '../Images/star.png'
+import star from '@/app/Images/star.png'
 
 //Components
-import MoviePosterLoading from './Loaders/MoviePosterLoading';
+import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
 //API Component
-import { In_TheatersMoviesAPI }from './API/HomePageAPI';
+import { In_TheatersMoviesAPI }from '@/app/components/API/HomePageAPI';
 
 
 const InTheatersMovies = () => {
