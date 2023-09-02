@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 
 //Loader(s)
-import CollectionLoading from '../components/Loaders/CollectionLoading';
+import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
 
 //Images
 import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
@@ -109,7 +109,13 @@ if(error) {
    <>
 
 {isLoading ?
-   < CollectionLoading />
+    <ul className='mt-8 grid grid-cols-[repeat(2,1fr)] tabletcollectionscreen:grid-cols-[repeat(3,1fr)]
+    sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
+      scroll-smooth '>
+  {Array.from({ length: 10 }).map((_, index) => (
+       <MoviePosterLoading key={index} />
+     ))}
+  </ul>
 
    :
 <>

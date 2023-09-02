@@ -22,7 +22,7 @@ export default function MoviePosterLoading() {
           
       <div className='mt-[3px]'>
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
-    <Skeleton count={2} />
+    <Skeleton count={2} className='max-w-[9.375rem] min-w-[9.375rem]' />
     </SkeletonTheme>
     </div>
     
