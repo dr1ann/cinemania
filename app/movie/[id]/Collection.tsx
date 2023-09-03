@@ -9,7 +9,7 @@ import Link from 'next/link';
 // Images
 import star from '@/app/Images/star.png';
 import blackscreen from '@/app/Images/black-screen.png';
-
+import posterplaceholder from '@/app/Images/movieplaceholder.png'
 //components
 import CollectionLoading from '@/app/components/Loaders/CollectionLoading';
 
@@ -119,8 +119,8 @@ const axiosInstance = axios.create({
   <div className='mt-4 sm:mt-0 z-[9999] flex flex-row items-center justify-center  gap-4  w-[95%] mx-auto lg:pr-4 lg:mr-0 lg:ml-auto'>
   <div className='hidden z-[9999] animate pop relative  max-w-[17rem] min-w-[17rem]  max-h-[400px] min-h-[400px] ml-4  sm:flex self-center   '>
     <Image
-        className='max-w-full min-w-full rounded-md max-h-full min-h-full'
-        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A"}
+        className='max-w-full min-w-full bg-[#3f3f3f] rounded-md max-h-full min-h-full'
+        src={collection['poster_path'] ? `https://image.tmdb.org/t/p/w440_and_h660_bestv2${collection['poster_path']}` : "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"}
        
         alt={collection['poster_path']}
       loading='lazy'
@@ -178,11 +178,12 @@ className='truncate   text-[0.85rem] md:text-[1rem] font-bold mt-4 white   hover
 href={`${movie.id}`}
 
 >
-<img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
+<Image  
+src={posterplaceholder}
+className='w-full  sm:min-h-[225px] sm:max-h-[225px] bg-[#3f3f3f] flex self-center rounded-md
 hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 '
-
+width={220}
+height={330}
 loading='lazy'
 alt={movie['title']} />
  </Link>

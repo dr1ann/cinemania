@@ -16,7 +16,6 @@ import tmdbicon from '@/app/Images/tmdb.png';
 
 
 //Components
-import Header from '@/app/components/Header';
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Modal from './Random-Trailer_Modal';
 import SideSearchbar from '@/app/components/SideSearchbar'
@@ -91,12 +90,19 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
   
    :
    
-   <div className='nobackdrop relative home-animate pop' style={{ backgroundImage: `linear-gradient(180deg,transparent,#141414),url('https://via.placeholder.com/220x330/141414/808080/?text=BACKDROP N/A')` }}>
+   <div
+  className='nobackdrop relative home-animate pop'
+  style={{
+    backgroundImage: `linear-gradient(180deg,transparent,#141414),url('https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg')`,
+    backgroundSize: '40%', 
+    backgroundPosition: 'center', 
+  }}
+>
  <div className="fade-effectcp md:hidden"></div>
   <div className="fade-effect2 hidden md:block"></div>
     <div className="fade-effect1"></div>
     <div className="fade-effect3 hidden md:block"></div>
- <Header/>
+    <SideSearchbar/>
    
 
     

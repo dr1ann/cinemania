@@ -13,7 +13,7 @@ import SearchPosterLoading from '../components/Loaders/SearchPageLoading';
 //Images
 import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
-
+import personplaceholder from '@/app/Images/personplaceholder.png'
 
 
 //type
@@ -164,11 +164,12 @@ href={{
 }}
 
 > 
-<img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=PROFILE N/A'
+<Image  
+src={personplaceholder}
 className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
 hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 '
-
+width={220}
+height={330}
 loading='lazy'
 alt={person['name']} />
  </Link>

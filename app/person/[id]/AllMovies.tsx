@@ -149,7 +149,7 @@ const Sort =  () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="mt-1 absolute left-[-10px] md:left-0  max-h-60 w-fit md:w-full overflow-auto scroll-smooth rounded-md bg-[#1a1a1a]  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="mt-1 absolute left-[-20px] md:left-0  max-h-60 w-fit md:w-full overflow-auto scroll-smooth rounded-md bg-[#1a1a1a]  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {DepartmentArray.map((dept, index) => (
                 <Listbox.Option
                   key={index}
@@ -206,9 +206,11 @@ const Sort =  () => {
       
        />
 :
-<img
-className='min-w-[45px] max-w-[45px] object-contain'
-src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
+<Image
+className='object-contain'
+src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+width={45}
+height={45}
 loading='lazy'
 alt={movie.title}
 
@@ -299,9 +301,11 @@ alt={movie.title}
        loading='lazy'
        />
 :
-<img
-className='min-w-[45px] max-w-[45px]  object-contain'
-src='https://via.placeholder.com/45x72/3F3F3F/FFFFFF/?text=N/A'
+<Image
+className= 'object-contain'
+src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+width={45}
+height={45}
 alt={movie.title}
 loading='lazy'
 />

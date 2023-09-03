@@ -71,8 +71,8 @@ alt={person.name} />
 
 >
 <img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=PROFILE N/A'
-className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
+src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+className='w-full min-h-[225px] max-h-[225px] bg-[#3f3f3f] flex self-center rounded-md
 hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='lazy'

@@ -5,8 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import  {Drawer} from 'vaul'
 
-//Images
-import noprofile from '@/app/Images/noprofile.png'
 
 //Components
 import PersonLoading from '@/app/components/Loaders/PersonLoading';
@@ -74,15 +72,12 @@ alt={cast['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  rounded-t-md max-h-[175px] min-h-[175px] flex self-center  overflow-hidden'>
-    <Image  
- src={noprofile}
-    className='w-full h-full'
-    
+    <img  
+    className='max-w-full min-w-full bg-[#3f3f3f] max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden '
+ src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+   
     loading='lazy'
     alt={cast['original_name']} />
-    
-    </div>
   }
 
  
@@ -140,12 +135,13 @@ alt={cast['original_name']} />
           
            />
     :
-    <img
-    className='w-[66px] h-[66px] rounded-md'
-    src='https://via.placeholder.com/66x66/3F3F3F/FFFFFF/?text=N/A'
+    <Image
+    className='rounded-md'
+    src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
     loading='lazy'
     alt={other_cast.original_name}
-    
+    width={66}
+    height={66}
     />
     
     }
@@ -246,14 +242,15 @@ alt={crew['original_name']} />
 
 
     :
-    <div className='max-w-full min-w-full  max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden '>
-    <Image  
- src={noprofile}
-    className='w-full h-full'
+   
+    <img  
+    className='max-w-full min-w-full bg-[#3f3f3f] max-h-[175px] min-h-[175px] flex self-center rounded-t-md overflow-hidden '
+ src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+   
     loading='lazy'
     alt={crew['original_name']} />
     
-    </div>
+    
   }
 
  

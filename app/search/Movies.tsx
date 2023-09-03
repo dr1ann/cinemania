@@ -15,7 +15,7 @@ import SearchPosterLoading from '../components/Loaders/SearchPageLoading';
 //Images
 import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
-
+import posterplaceholder from '@/app/Images/movieplaceholder.png'
 //type
 interface MovieResultsProps {
   page: number;
@@ -131,7 +131,7 @@ MovieResults?.results?.length >= 3 ? '[repeat(3,1fr)]' : '[repeat(2,1fr)]'}
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth`}>
   {MovieResults.results?.map((movie) => (
-<li key={movie['id']} className='z-[9999] flex flex-col mx-auto  justify-center relative min-w-full max-w-full 
+<li key={movie['id']} className='z-[9999] flex flex-col mx-auto   relative min-w-full max-w-full 
    animate pop  sm:min-w-[9.375rem] sm:max-w-[9.375rem]'>
 {movie['poster_path']
          ?
@@ -159,11 +159,12 @@ href={{
 }}
 
 > 
-<img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
+<Image  
+src={posterplaceholder}
 className='w-full  sm:min-h-[225px] sm:max-h-[225px]  flex self-center rounded-md
 hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10 '
-
+width={220}
+height={330}
 loading='lazy'
 alt={movie['title']} />
  </Link>

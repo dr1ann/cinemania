@@ -136,7 +136,11 @@ const randomPosters =
 
         <li key={movieVid.id} className='animate pop max-w-[20rem] min-w-[20rem] min-h-[11.25rem] 
         max-h-[11.25rem] vids relative flex justify-center items-center  rounded-xl'
-         style={{ backgroundImage: `url(https://i.ytimg.com/vi/${movieVid.key}/hqdefault.jpg)` }}>
+         style={{ backgroundImage: movieVid.key ? `url(https://i.ytimg.com/vi/${movieVid.key}/hqdefault.jpg)`
+        :
+`linear-gradient(180deg,transparent,#3f3f3f), 
+url(https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg)`
+        }}>
            <button className='trailer-button' onClick={() => { 
             if(movieVid.key !== undefined) {
              setSelectedMovieKey(movieVid.key); setIsOpen(true); }}
@@ -196,14 +200,15 @@ const randomPosters =
               }
             />
           ) : (
-            <div className='max-w-full min-w-full rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
-              <Image
-                src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-                className='w-full h-full'
-                loading='eager'
-                alt='movie poster'
-              />
-            </div>
+            <div className='max-w-full min-w-full  max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
+            <Image
+              src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+              className='w-full h-full rounded-xl bg-[#3f3f3f]'
+              loading='eager'
+              fill
+              alt='movie poster'
+            />
+          </div>
           )}
         </li>
       ))}
@@ -242,14 +247,15 @@ const randomPosters =
                    }
                  />
                ) : (
-                 <div className='max-w-full min-w-full rounded-t-xl max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
-                   <Image
-                     src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-                     className='w-full h-full'
-                     loading='lazy'
-                     alt='movie poster'
-                   />
-                 </div>
+                <div className='max-w-full min-w-full  max-h-[225px] min-h-[225px] flex self-center  overflow-hidden'>
+              <Image
+                src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+                className='w-full h-full rounded-xl bg-[#3f3f3f]'
+                loading='eager'
+                fill
+                alt='movie poster'
+              />
+            </div>
                )}
              </li>
   ))

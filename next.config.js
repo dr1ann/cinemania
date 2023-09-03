@@ -3,7 +3,7 @@ const nextConfig = {
 
   images: {
     unoptimized: true,
-    domains: ["image.tmdb.org"],
+    domains: ["image.tmdb.org", "via.placeholder.com"],
   },
   
   experimental: {

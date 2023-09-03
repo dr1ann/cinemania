@@ -8,6 +8,7 @@ import Link from 'next/link';
 //Images
 import star from '@/app/Images/star.png'
 
+
 //Components
 import MoviePosterLoading from '@/app/components/Loaders/MoviePosterLoading';
 
@@ -71,9 +72,9 @@ alt={movie['title']} />
   }}
 >
 <img  
-src='https://via.placeholder.com/220x330/3F3F3F/FFFFFF/?text=POSTER N/A'
-className='w-full min-h-[225px] max-h-[225px]  flex self-center rounded-md
- hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
+src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+className='w-full min-h-[225px] max-h-[225px] bg-[#3f3f3f] flex self-center rounded-md
+hover:rotate-[-2deg] transform transition duration-250 hover:scale-110 hover:z-10'
 
 loading='lazy'
 alt={movie['title']} />

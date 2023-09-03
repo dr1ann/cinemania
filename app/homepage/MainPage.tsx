@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 //Images
 import icon from '@/app/Images/icon.png'
-
+import blackscreen from '@/app/Images/black-screen.png'
 //Components
 import HomeLoading from '@/app/components/Loaders/HomeLoading';
 import Header from '@/app/components/Header';
@@ -38,7 +38,7 @@ const MainPage = () => {
     if (movies?.length > 0) {
       const randomIndex = Math.floor(Math.random() * movies.length);
       const movie = movies[randomIndex];
-      const imageUrl = TrendingMovies ? ` https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`  : "https://via.placeholder.com/220x330/3F3F3F/FFFFFF/" ;
+      const imageUrl = TrendingMovies ? ` https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`  : "" ;
 
       setRandomImage(imageUrl);
       setIsHomeLoading(false) //remove the skeleton loader

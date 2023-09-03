@@ -3,7 +3,7 @@
 
 // External Libraries
 import React, { useState, useRef, useLayoutEffect } from 'react';
-
+import Image from 'next/image';
 // Font Awesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -116,10 +116,13 @@ const renderReadButton = () => {
       </img>
     
       :
-      <img
-      className='  max-w-[50%] rounded-xl'
-      src='https://via.placeholder.com/300x450/3F3F3F/FFFFFF/?text=PROFILE N/A'
+      <Image
+      className='  max-w-[50%] rounded-xl bg-[#3f3f3f]'
+      width={300}
+      height={450}
+      src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
       loading='eager'
+      alt='no profile'
        />
     }
    
