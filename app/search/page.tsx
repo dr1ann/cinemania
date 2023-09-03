@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 //Client Components
 import Header from '../components/Header'
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading'
+import SearchPosterLoading from '../components/Loaders/SearchPageLoading'
 
 //Client Components that are dynamically rendered
 const Movies =  dynamic(() => import ('./Movies'),
@@ -15,7 +15,7 @@ const Movies =  dynamic(() => import ('./Movies'),
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth '>
 {Array.from({ length: 10 }).map((_, index) => (
-   <MoviePosterLoading key={index} />
+   <SearchPosterLoading key={index} />
  ))}
 </ul> })
 
@@ -24,7 +24,7 @@ const People =  dynamic(() => import ('./People'),
 sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
   scroll-smooth '>
 {Array.from({ length: 10 }).map((_, index) => (
-   <MoviePosterLoading key={index} />
+   <SearchPosterLoading key={index} />
  ))}
 </ul> })
 

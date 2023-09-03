@@ -8,11 +8,12 @@ import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 
 //Loader(s)
-import MoviePosterLoading from '../components/Loaders/MoviePosterLoading';
+import SearchPosterLoading from '../components/Loaders/SearchPageLoading';
 
 //Images
 import SearchErrorImage from '@/app/Images/searcherrorimg.webp'
 import ErrorImage from '@/app/Images/errorimg.webp'
+
 
 
 //type
@@ -113,7 +114,7 @@ if(error) {
     sm:grid-cols-searchresults  mx-auto gap-6 px-2 sm:px-0 sm:gap-[20px] 
       scroll-smooth '>
   {Array.from({ length: 10 }).map((_, index) => (
-       <MoviePosterLoading key={index} />
+       <SearchPosterLoading key={index} />
      ))}
   </ul>
 
