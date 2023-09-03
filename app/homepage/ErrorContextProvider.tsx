@@ -16,7 +16,7 @@ export const ErrorContext = createContext<useError>([false, () => {}]);
 // Create a component that provides the state
 export default function ErrorContextProvider({children} : {children: React.ReactNode}) {
   const [isError, setisError] = useState(false);
-console.log(isError)
+
 
 
 

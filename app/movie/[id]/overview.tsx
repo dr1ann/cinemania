@@ -60,6 +60,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
   const bgImage = movieDetails.backdrop_path ? `https://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}` : ''
   //get the logo image of the movie
   const logoImage = firstLogo?.file_path ? `https://image.tmdb.org/t/p/w500${firstLogo.file_path}` : ''
+  
   return (
     
      
@@ -219,7 +220,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>
   <p className='text-gray-400'>Popularity</p>
-    <span className='text-center'>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '') + '%' : 'N/A'}</span>
+    <span className='text-center'>{movieDetails.popularity ? movieDetails.popularity.toFixed(2).replace(/\.0$/, '')  : 'N/A'}</span>
     </div>
 
     <div className='flex flex-col items-center text-[0.85rem]  md:text-[1rem] 2xl:text-[1.2rem]'>

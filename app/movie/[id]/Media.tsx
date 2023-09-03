@@ -29,7 +29,7 @@ const Media = ({ id }: { id: number }) => {
    
   );
 
-console.log(movieImages)
+
   const seededRandom = (min: number, max: number, seed: number) => {
     const random = (seed * 9301 + 49297) % 233280;
     const scaledRandom = min + (random / 233280) * (max - min);
