@@ -112,7 +112,7 @@ const separtedNames = genreNames?.join( ' ' + '•' + ' ')
   }
     <div className='home-animate pop flex flex-col  justify-center items-start  sm:items-center md:items-start py-10  md:px-6 pt-[40vh]  md:min-h-screen   md:max-w-[50%] md:pt-0 md:mt-10 z-10'>
 {logoImage ? 
-  <Image className='w-[70%] lg:w-[65%]  max-h-[200px] min-h-[100px] object-contain flex self-center md:self-start px-2 z-10 md:mt-10' 
+  <Image className='w-[70%] lg:w-[65%] max-h-[120px] min-h-[70px] sm:max-h-[200px] sm:min-h-[200px] object-contain flex self-center md:self-start px-2 z-10 md:mt-10' 
   src={logoImage}
   alt='logo'
         width={1}
